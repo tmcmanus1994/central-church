@@ -17,11 +17,14 @@ export const site = {
   phoneHref: "tel:+15013742039",
   email: "office@arcentralchurch.org",
   giveUrl: "https://pushpay.com/g/arcentralchurch",
+  /** Embeddable map for the address — keyless Google Maps embed. */
+  mapEmbedUrl:
+    "https://www.google.com/maps?q=823+W+6th+St,+Little+Rock,+AR+72201&output=embed",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Central+Church+of+Christ+823+W+6th+St+Little+Rock+AR+72201",
   socials: {
     instagram: "https://www.instagram.com/lrcentralchurch",
-    facebook: "https://www.facebook.com/CentralChurchLittleRock",
+    facebook: "https://www.facebook.com/profile.php?id=61590750088497",
     youtube: "https://www.youtube.com/@CentralChurchLR",
   },
   serviceTimes: [

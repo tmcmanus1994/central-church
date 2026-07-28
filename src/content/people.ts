@@ -74,9 +74,18 @@ export const missionaries: Missionary[] = [
       "Jenni is principal of Team Bills Academy, the homeschool bonanza enrolling four wonderful students. The family lives on campus and is deeply involved in the campus church.",
     ],
     links: [
-      { label: "Heritage Christian University", href: "https://www.hcu.edu" },
-      { label: "HCCF-USA", href: "https://www.hcu.edu" },
-      { label: "Bills' Newsletter", href: "https://www.hcu.edu" },
+      {
+        label: "Learn More About Heritage Christian University",
+        href: "https://hcuc.edu.gh/",
+      },
+      {
+        label: "HCCF-USA",
+        href: "https://hccf.networkforgood.com/projects/69796-bills-family-fundraiser_ongoing",
+      },
+      {
+        label: "Bills' Newsletter",
+        href: "https://us19.campaign-archive.com/home/?u=7f2d442a1d0cadf9559791b71&id=4ed2ea3493",
+      },
     ],
   },
   {
@@ -87,13 +96,19 @@ export const missionaries: Missionary[] = [
       "Jeremy serves with the Christian Urban Development Association, a faith-based nonprofit empowering communities through education, small-business coaching, and community building. Katie ministers with the church and with marginalized groups. Together they direct Harding University Latin America, giving students immersive cross-cultural faith experiences.",
     ],
     links: [
-      { label: "Team Arequipa", href: "https://teamarequipa.net" },
+      { label: "Learn More about Team Arequipa", href: "http://teamarequipa.net/" },
       {
-        label: "Christian Urban Development Association",
-        href: "https://teamarequipa.net",
+        label: "Learn more about the Christian Urban Development Association",
+        href: "http://cudaperu.org/",
       },
-      { label: "Harding University Latin America", href: "https://www.harding.edu" },
-      { label: "Daggetts' Newsletter", href: "https://teamarequipa.net" },
+      {
+        label: "Learn more about Harding University Latin America",
+        href: "http://harding.edu/hula",
+      },
+      {
+        label: "Daggetts' Newsletter",
+        href: "https://us2.campaign-archive.com/home/?u=e215b79214f050690b805e451&id=584e1af41d",
+      },
     ],
   },
 ];

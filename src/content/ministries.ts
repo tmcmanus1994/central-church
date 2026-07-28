@@ -37,6 +37,8 @@ export interface Ministry {
     phone?: string;
   }[];
   contact?: MinistryContact;
+  /** Vimeo embed shown in place of the photo gallery. */
+  video?: { embedUrl: string; url: string; caption: string };
   related?: { label: string; href: string }[];
   utilities?: { label: string; href: string }[];
   cta: { title: string; body: string; label: string; href: string };
@@ -276,6 +278,11 @@ export const ministries: Ministry[] = [
       { label: "Learn More", href: "/plan-a-visit#contact" },
       { label: "Sign Up", href: "/plan-a-visit#contact" },
     ],
+    video: {
+      embedUrl: "https://player.vimeo.com/video/811893313",
+      url: "https://vimeo.com/811893313",
+      caption: "What Freedom Prayer looks like at Central",
+    },
     cta: {
       title: "Ready to go deeper in prayer?",
       body: "Sign up for a Freedom Prayer session or ask any Sunday — we'd love to pray with you.",
@@ -311,6 +318,39 @@ export const ministries: Ministry[] = [
     },
   },
 ];
+
+/**
+ * English rendering of the Iglesia page. Same shape as the Spanish entry so
+ * the shared template can swap between them.
+ */
+export const iglesiaEnglish: Ministry = {
+  ...getMinistryOrThrow("iglesia"),
+  lang: undefined,
+  name: "Iglesia de Cristo Central — Spanish Worship",
+  eyebrow: "Ministries · En Español",
+  intro:
+    "We know meeting someone for the first time can be daunting, and visiting a new church can make anyone nervous. We want to help make your first experience at Central, in downtown Little Rock, a great one!",
+  listHeading: "What to expect",
+  list: [
+    "A Spanish-language service that begins at 1:30 PM and runs about an hour.",
+    "We sing meaningful songs, pray for specific needs, learn from God's Word, and share communion.",
+    "We look after one another and meet needs through the week. An offering supports that work — giving is voluntary.",
+    "We join our English-speaking brothers and sisters at Central to worship together as one united family of God.",
+    "We share other times of celebration, study, and recreation.",
+  ],
+  cta: {
+    title: "Let us know you're coming!",
+    body: "If you're curious about this family of believers, come and see for yourself that the Lord is good and His people are blessed. 823 W 6th St, Little Rock, AR 72201 · (501) 374-2039",
+    label: "Plan your visit",
+    href: "/plan-a-visit",
+  },
+};
+
+function getMinistryOrThrow(slug: string): Ministry {
+  const found = ministries.find((m) => m.slug === slug);
+  if (!found) throw new Error(`Unknown ministry: ${slug}`);
+  return found;
+}
 
 export function getMinistry(slug: string) {
   return ministries.find((m) => m.slug === slug);

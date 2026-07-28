@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { allEvents } from "@/content/events";
 import { ministries } from "@/content/ministries";
-import { blogPosts } from "@/content/media";
+import { blogPosts } from "@/content/blog";
 import { site } from "@/lib/site";
 
 /** Every indexable route. `/give` is a redirect and is deliberately excluded. */
@@ -19,7 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/about/missionaries", 0.5, "yearly"],
     ["/bulletin", 0.7, "weekly"],
     ["/media", 0.6, "weekly"],
-    ["/media/podcast", 0.6, "weekly"],
+    ["/media/photos", 0.6, "monthly"],
+    ["/media/camp-caudle", 0.6, "yearly"],
     ["/media/live", 0.5, "weekly"],
     ["/blog", 0.6, "weekly"],
   ];
@@ -47,7 +48,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...blogPosts.map((p) => ({
       url: url(`/blog/${p.slug}`),
-      lastModified: new Date(p.date),
+      // A few CMS rows came across without a date — fall back to today.
+      lastModified: p.date ? new Date(p.date) : new Date(),
       changeFrequency: "yearly" as const,
       priority: 0.4,
     })),

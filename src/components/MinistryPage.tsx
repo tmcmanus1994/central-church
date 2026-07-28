@@ -261,7 +261,32 @@ export function MinistryPage({ ministry }: { ministry: Ministry }) {
         </aside>
       </div>
 
-      {/* Gallery slot */}
+      {/* A ministry supplies either a video or a photo gallery, never both. */}
+      {ministry.video ? (
+        <section className="mx-auto max-w-[1100px] px-5 pb-10 lg:px-14 lg:pb-16">
+          <h2 className="m-0 mb-5 font-display text-[24px] tracking-[-.025em] lg:text-[32px]">
+            {ministry.video.caption}
+          </h2>
+          <div className="aspect-video overflow-hidden rounded-2xl border border-line bg-coal">
+            <iframe
+              title={ministry.video.caption}
+              src={ministry.video.embedUrl}
+              loading="lazy"
+              allow="fullscreen; picture-in-picture"
+              allowFullScreen
+              className="size-full border-0"
+            />
+          </div>
+          <a
+            href={ministry.video.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-block text-[15px] font-bold text-primary no-underline"
+          >
+            Watch on Vimeo →
+          </a>
+        </section>
+      ) : (
       <section className="mx-auto max-w-[1440px] px-5 pb-10 lg:px-14 lg:pb-16">
         <div className="mb-5 flex items-baseline justify-between">
           <h2 className="m-0 font-display text-[24px] tracking-[-.025em] lg:text-[32px]">
@@ -287,6 +312,7 @@ export function MinistryPage({ ministry }: { ministry: Ministry }) {
           ))}
         </div>
       </section>
+      )}
 
       {/* CTA band */}
       <section className="bg-primary-deep px-5 py-10 text-white lg:px-14 lg:py-16">

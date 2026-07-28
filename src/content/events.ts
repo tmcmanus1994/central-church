@@ -113,6 +113,7 @@ export const upcomingEvents: ChurchEvent[] = [
     start: "2026-08-08T09:00:00-05:00",
     end: "2026-08-08T11:00:00-05:00",
     location: "Central's west parking lot",
+    image: "/photos/event-backpack-giveaway.webp",
     description:
       "Every August, Central hands out free backpacks and school supplies to families across downtown Little Rock. Students pick their own bag and fill it with the supplies on their grade's list — no paperwork, no requirements. Come early; we serve until supplies run out.\n\nVolunteers meet in the west lot at 8:15 AM to set up tables and sort supplies by grade. If you can bring a folding table or a canopy, let Matt know when you sign up.",
     tag: "Outreach",

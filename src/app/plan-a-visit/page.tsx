@@ -143,7 +143,7 @@ export default function PlanAVisitPage() {
               alt="Diagram of parking around the Central building"
               label="parking diagram (keep current)"
               variant="teal"
-              className="h-[150px] rounded-xl"
+              className="aspect-square w-full rounded-xl"
             />
             <p className="m-0 text-[15.5px] leading-[1.6] text-teal-ink">
               Free lot on the west side of the building off W 6th St, plus
@@ -155,10 +155,13 @@ export default function PlanAVisitPage() {
             <span className="text-[11px] font-bold tracking-[.16em] uppercase text-muted">
               Find us
             </span>
-            <ImageSlot
-              alt={`Map showing ${fullAddress}`}
-              label="map embed"
-              className="h-[150px] rounded-xl"
+            <iframe
+              title={`Map showing ${fullAddress}`}
+              src={site.mapEmbedUrl}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              className="aspect-square w-full rounded-xl border-0"
             />
             <p className="m-0 text-[16.5px] leading-[1.6]">
               {site.address.street}

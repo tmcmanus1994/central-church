@@ -7,7 +7,8 @@ import { SpotlightBanner } from "@/components/SpotlightBanner";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
 import { getSpotlightEvent, upcomingEvents } from "@/content/events";
 import { ministries } from "@/content/ministries";
-import { blogPosts, podcastEpisodes } from "@/content/media";
+import { blogPosts } from "@/content/blog";
+import { latestSermon } from "@/content/media";
 import { site } from "@/lib/site";
 
 const ministryTiles = [
@@ -22,25 +23,27 @@ const ministryTiles = [
 export default function HomePage() {
   const spotlight = getSpotlightEvent();
   const thisWeek = upcomingEvents.filter((e) => !e.spotlight).slice(0, 4);
-  const latestEpisode = podcastEpisodes[0];
   const latestPost = blogPosts[0];
 
   return (
     <>
       {/* Hero — service times above the fold is non-negotiable */}
-      <section className="relative flex min-h-[470px] items-end lg:min-h-[660px]">
+      <section className="relative flex min-h-[560px] items-end lg:min-h-[780px]">
         <ImageSlot
           photoKey="home.hero"
           priority
+          focus="top"
           sizes="100vw"
           alt="The Central congregation gathered for worship"
           label="hero photo or 8s loop · congregation, wide, warm light"
           variant="dark"
           className="absolute inset-0"
         />
-        <div className="relative w-full bg-gradient-to-t from-[#101315]/85 via-[#101315]/25 to-[#101315]/10 px-5 pt-24 pb-6 lg:px-14 lg:pb-14">
-          <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-8 lg:flex-row lg:items-end lg:gap-14">
-            <div className="flex max-w-[760px] flex-col gap-4 lg:gap-[22px]">
+        <div className="relative w-full bg-gradient-to-t from-[#101315]/85 via-[#101315]/25 to-[#101315]/10 px-5 pt-24 pb-6 lg:px-14 lg:pb-14 xl:px-20">
+          {/* Headline centres in the hero; the service-times card keeps its
+              bottom-right position, so it never shifts the text off-centre. */}
+          <div className="relative mx-auto flex max-w-[1440px] flex-col items-center gap-8 text-center lg:gap-14">
+            <div className="flex max-w-[760px] flex-col items-center gap-4 lg:gap-[22px]">
               <p className="m-0 text-[11px] font-bold tracking-[.16em] uppercase text-teal-light lg:text-xs">
                 Downtown Little Rock, Arkansas
               </p>
@@ -58,7 +61,7 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
-            <div className="hidden min-w-[288px] flex-col gap-3.5 rounded-[14px] border border-white/20 bg-white/10 p-6 backdrop-blur-sm lg:flex">
+            <div className="hidden min-w-[288px] flex-col gap-3.5 rounded-[14px] border border-white/20 bg-white/10 p-6 text-left backdrop-blur-sm lg:absolute lg:right-0 lg:bottom-0 lg:flex">
               <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teal-light">
                 This Sunday
               </span>
@@ -257,16 +260,16 @@ export default function HomePage() {
             />
             <div className="flex flex-col gap-2.5">
               <span className="text-[11px] font-bold tracking-[.1em] uppercase text-primary lg:text-xs">
-                Latest sermon · July 26
+                Latest service · July 26
               </span>
               <h3 className="m-0 font-display text-[21px] leading-[1.15] tracking-[-.02em] lg:text-[26px]">
-                {latestEpisode.title}
+                {latestSermon.title}
               </h3>
               <span className="text-[14.5px] text-muted lg:text-[15px]">
-                {latestEpisode.speaker} · {latestEpisode.duration}
+                {latestSermon.speaker} · {latestSermon.duration}
               </span>
               <div className="mt-auto flex flex-col gap-2.5 pt-2 sm:flex-row">
-                <Button href="/media/podcast" size="md">
+                <Button href={site.socials.youtube} size="md">
                   Listen
                 </Button>
                 <Button href={site.socials.youtube} variant="outline" size="md">

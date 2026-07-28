@@ -20,11 +20,11 @@ export const photos = {
   /** Congregation in worship — wide, warm. Headline sits over the left half. */
   "home.hero": "/photos/home-hero.webp",
   /** Lobby welcome — a greeter meeting a first-time visitor. */
-  "home.welcome": null,
+  "home.welcome": "/photos/home-welcome.webp",
   /** Ministry tiles. Title sits bottom-left over a dark gradient. */
-  "home.tile.children": null,
-  "home.tile.teens": null,
-  "home.tile.life-groups": null,
+  "home.tile.children": "/photos/home-tile-children.webp",
+  "home.tile.teens": "/photos/home-tile-teens.webp",
+  "home.tile.life-groups": "/photos/home-tile-life-groups.webp",
   /** Latest sermon thumbnail — a YouTube still is fine. */
   "home.sermon": null,
 
@@ -36,7 +36,7 @@ export const photos = {
   /** Parking diagram — re-export of the current site's diagram. */
   "visit.parking": "/photos/visit-where-to-park.webp",
   /** A kids' Bible class. Portrait crop. */
-  "visit.kids": null,
+  "visit.kids": "/photos/visit-kids.webp",
   /** The accessible entrance. Portrait crop. */
   "visit.accessibility": "/photos/visit-accessibility.webp",
 
@@ -45,16 +45,16 @@ export const photos = {
   "about.congregation": "/photos/about-story.webp",
 
   // ── Missionaries ────────────────────────────────────────────────────────
-  "missionaries.bills": null,
-  "missionaries.daggetts": null,
+  "missionaries.bills": "/photos/missionaries-bills.webp",
+  "missionaries.daggetts": "/photos/missionaries-daggetts.webp",
 
   // ── Ministry pages (one per ministry slug) ──────────────────────────────
   /** Ultra-wide banner. Ministry name sits bottom-left in white. */
-  "ministry.children.hero": null,
-  "ministry.teens.hero": null,
+  "ministry.children.hero": "/photos/ministry-children-hero.webp",
+  "ministry.teens.hero": "/photos/ministry-teens-hero.webp",
   "ministry.life-groups.hero": null,
   "ministry.kids-closet.hero": null,
-  "ministry.freedom-prayer.hero": null,
+  "ministry.freedom-prayer.hero": "/photos/ministry-freedom-prayer-hero.webp",
   "ministry.iglesia.hero": null,
   /** Square headshot for the ministry contact block. */
   "ministry.children.contact": "/photos/leadership-tammy-beck.webp",
@@ -78,9 +78,18 @@ export const galleries: Record<string, string[]> = {
     "/photos/kids-gallery-3.webp",
     "/photos/kids-gallery-4.webp",
   ],
-  teens: [],
-  "life-groups": [],
-  "kids-closet": [],
+  teens: [
+    "/photos/teens-gallery-1.webp",
+    "/photos/teens-gallery-2.webp",
+    "/photos/teens-gallery-3.webp",
+    "/photos/teens-gallery-4.webp",
+  ],
+  "life-groups": [
+    "/photos/life-groups-gallery-1.webp",
+    "/photos/life-groups-gallery-2.webp",
+    "/photos/life-groups-gallery-3.webp",
+  ],
+  "kids-closet": ["/photos/kids-closet-gallery-1.webp"],
   "freedom-prayer": [],
   iglesia: [
     "/photos/iglesia-gallery-1.webp",
@@ -97,7 +106,11 @@ export const annualPhotos: Record<string, Record<string, string>> = {
     "Kids Week": "/photos/kids-week.webp",
     "Trunk or Treat": "/photos/kids-trunk-or-treat.webp",
   },
-  teens: {},
+  teens: {
+    "Camp Caudle": "/photos/teens-camp-caudle.webp",
+    Winterfest: "/photos/teens-winterfest.webp",
+    Uplift: "/photos/teens-uplift.webp",
+  },
 };
 
 /** Returns the photo path for a key, or undefined to keep the placeholder. */

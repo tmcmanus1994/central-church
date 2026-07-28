@@ -33,6 +33,34 @@ const LOGOS = {
 /** uploaded filename (without extension) → [output name, role] */
 const MAP = {
   "Hero - Wallpaper": ["home-hero", "hero"],
+  "Hero - New to Central": ["home-welcome", "wide"],
+  "Hero - Central Kids": ["home-tile-children", "card"],
+  "Hero - Central Teens": ["home-tile-teens", "card"],
+  "Hero - Life Groups": ["home-tile-life-groups", "card"],
+  "Hero - Back School Drive": ["event-backpack-giveaway", "card"],
+
+  "Plan Visit - What about kids": ["visit-kids", "card"],
+
+  "Kids - Banner": ["ministry-children-hero", "hero"],
+  "Teens - Banner": ["ministry-teens-hero", "hero"],
+  "Freedom Prayer - banner": ["ministry-freedom-prayer-hero", "hero"],
+
+  "Teens - Photos 1": ["teens-gallery-1", "card"],
+  "Teens - Photos 2": ["teens-gallery-2", "card"],
+  "Teens - Photos 3": ["teens-gallery-3", "card"],
+  "Teens - Photos 4": ["teens-gallery-4", "card"],
+  "Teens - CampCaudle": ["teens-camp-caudle", "thumb"],
+  "Teens - Winterfest": ["teens-winterfest", "thumb"],
+  "Teens - uplift": ["teens-uplift", "thumb"],
+
+  "Life Groups - photos 1": ["life-groups-gallery-1", "card"],
+  "Life Groups - photos 2": ["life-groups-gallery-2", "card"],
+  "Life Groups - photos 3": ["life-groups-gallery-3", "card"],
+
+  "Kids Closet - Photos 1": ["kids-closet-gallery-1", "card"],
+
+  "Missionaries - Bills": ["missionaries-bills", "card"],
+  "Missionaries - Daggetts": ["missionaries-daggetts", "card"],
 
   "about - story": ["about-story", "hero"],
 
@@ -79,13 +107,13 @@ const MAP = {
   "Leadership - Jessica": ["leadership-jessica-ward", "portrait"],
 };
 
-const stemOf = (f) => f.replace(/\.(jpe?g|png|webp)$/i, "");
+const stemOf = (f) => f.replace(/\.(jpe?g|png|webp|avif)$/i, "");
 
 // Uploads occasionally arrive with no file extension, so accept anything the
 // maps know about as well as the usual image suffixes.
 const files = readdirSync(SRC).filter(
   (f) =>
-    /\.(jpe?g|png|webp)$/i.test(f) || MAP[stemOf(f)] || LOGOS[stemOf(f)],
+    /\.(jpe?g|png|webp|avif)$/i.test(f) || MAP[stemOf(f)] || LOGOS[stemOf(f)],
 );
 
 let done = 0;

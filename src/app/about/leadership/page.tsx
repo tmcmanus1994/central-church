@@ -40,7 +40,7 @@ export default function LeadershipPage() {
           <p className="m-0 max-w-[680px] text-[15.5px] leading-[1.65] text-body text-pretty-wrap lg:text-[17.5px] lg:leading-[1.7]">
             {leadMinister.bio}
           </p>
-          <ArrowLink href="/media/podcast">Listen to recent sermons</ArrowLink>
+          <ArrowLink href="/media/live">Watch recent services</ArrowLink>
         </div>
       </div>
 

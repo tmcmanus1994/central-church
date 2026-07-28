@@ -14,6 +14,7 @@ const navItems = [
 ];
 
 const sheetItems = [
+  { label: "Hub", href: "/hub" },
   { label: "Plan a Visit", href: "/plan-a-visit" },
   ...navItems,
   { label: "Bulletin", href: "/bulletin" },

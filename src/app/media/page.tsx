@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
-import { blogPosts, podcastEpisodes } from "@/content/media";
+import { blogPosts } from "@/content/blog";
 
 export const metadata: Metadata = {
   title: "Media",
@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function MediaHubPage() {
-  const latest = podcastEpisodes[0];
   return (
     <div className="mx-auto max-w-[1440px] px-5 py-8 lg:px-14 lg:py-16">
       <span className="text-xs font-bold tracking-[.14em] uppercase text-primary">
@@ -27,23 +26,23 @@ export default function MediaHubPage() {
       <div className="mt-8 grid grid-cols-1 gap-4 lg:mt-12 lg:grid-cols-3 lg:gap-6">
         <div className="flex flex-col gap-3 rounded-2xl border border-line p-6">
           <ImageSlot
-            photoKey="media.sermon"
+            src="/photos/kids-trunk-or-treat.webp"
             sizes="(min-width: 1024px) 33vw, 100vw"
             alt=""
-            label="sermon thumbnail"
+            label="album cover"
             className="h-[160px] rounded-xl"
           />
           <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
-            Podcast · Latest sermon
+            Photo Gallery
           </span>
           <h2 className="m-0 font-display text-[22px] leading-[1.15] tracking-[-.02em]">
-            {latest.title}
+            Albums from life at Central
           </h2>
           <span className="text-[14.5px] text-muted">
-            {latest.speaker} · {latest.duration}
+            Trunk or Treat · Easter · Camp Caudle
           </span>
-          <ArrowLink href="/media/podcast" className="mt-auto text-[15px]">
-            All episodes
+          <ArrowLink href="/media/photos" className="mt-auto text-[15px]">
+            Browse albums
           </ArrowLink>
         </div>
         <div className="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6">

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { MinistryPage } from "@/components/MinistryPage";
-import { getMinistry } from "@/content/ministries";
+import { getMinistry, iglesiaEnglish } from "@/content/ministries";
+import { IglesiaPage } from "./IglesiaPage";
 import { site } from "@/lib/site";
 
 const ministry = getMinistry("iglesia")!;
@@ -17,6 +17,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function IglesiaPage() {
-  return <MinistryPage ministry={ministry} />;
+export default function IglesiaRoute() {
+  return <IglesiaPage es={ministry} en={iglesiaEnglish} />;
 }
