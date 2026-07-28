@@ -18,7 +18,7 @@ export type PhotoKey = keyof typeof photos;
 export const photos = {
   // ── Homepage ────────────────────────────────────────────────────────────
   /** Congregation in worship — wide, warm. Headline sits over the left half. */
-  "home.hero": null,
+  "home.hero": "/photos/home-hero.webp",
   /** Lobby welcome — a greeter meeting a first-time visitor. */
   "home.welcome": null,
   /** Ministry tiles. Title sits bottom-left over a dark gradient. */

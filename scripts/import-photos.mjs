@@ -22,6 +22,8 @@ const WIDTH = { hero: 2560, wide: 1920, card: 1600, thumb: 1200, portrait: 900 }
 
 /** uploaded filename (without extension) → [output name, role] */
 const MAP = {
+  "Hero - Wallpaper": ["home-hero", "hero"],
+
   "about - story": ["about-story", "hero"],
 
   "visit - accessibility": ["visit-accessibility", "thumb"],

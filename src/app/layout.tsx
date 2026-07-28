@@ -5,7 +5,10 @@ import { MobileTabBar } from "@/components/MobileTabBar";
 import { ChurchJsonLd } from "@/components/JsonLd";
 import { site } from "@/lib/site";
 // Self-hosted fonts (fontsource) — no external font requests at runtime.
-import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
 import "@fontsource-variable/manrope";
 import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";

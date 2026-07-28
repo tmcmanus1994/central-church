@@ -11,14 +11,14 @@ import { readFileSync } from "node:fs";
 
 const b64 = (p) => readFileSync(p).toString("base64");
 const display = b64(
-  "node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2",
+  "node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2",
 );
 const body = b64(
   "node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2",
 );
 
 const html = `<!doctype html><meta charset="utf-8"><style>
-@font-face{font-family:B;src:url(data:font/woff2;base64,${display}) format("woff2");font-weight:200 800}
+@font-face{font-family:B;src:url(data:font/woff2;base64,${display}) format("woff2");font-weight:700}
 @font-face{font-family:M;src:url(data:font/woff2;base64,${body}) format("woff2");font-weight:200 800}
 *{margin:0;box-sizing:border-box}
 body{width:1200px;height:630px;background:#235568;color:#fff;font-family:M,sans-serif;

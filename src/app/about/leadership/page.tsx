@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
-import { PersonCard, PersonChip } from "@/components/PersonCard";
+import { PersonCard, PersonTile } from "@/components/PersonCard";
 import { elders, leadMinister, ministryLeaders, staff } from "@/content/people";
 
 export const metadata: Metadata = {
@@ -21,14 +21,14 @@ export default function LeadershipPage() {
       </h1>
 
       {/* Lead Minister feature */}
-      <div className="flex flex-col gap-6 rounded-[18px] border border-line bg-surface p-5 lg:flex-row lg:items-center lg:gap-10 lg:p-8">
+      <div className="flex flex-col gap-6 rounded-[18px] border border-line bg-surface p-5 lg:flex-row lg:items-center lg:gap-12 lg:p-8">
         <ImageSlot
           src={leadMinister.photo}
-          sizes="(min-width: 1024px) 300px, 100vw"
+          sizes="(min-width: 1024px) 360px, 100vw"
           focus="top"
           alt="Portrait of Steven Hovater"
-          label="portrait 3:4"
-          className="h-[240px] w-full shrink-0 rounded-[14px] lg:h-[340px] lg:w-[300px]"
+          label="portrait 4:5"
+          className="aspect-[4/5] w-full shrink-0 rounded-[14px] sm:max-w-[320px] lg:w-[360px] lg:max-w-none"
         />
         <div className="flex flex-col gap-3 lg:gap-3.5">
           <span className="text-xs font-bold tracking-[.12em] uppercase text-primary">
@@ -54,28 +54,24 @@ export default function LeadershipPage() {
         ))}
       </div>
 
-      {/* Elders + staff */}
-      <div className="mt-10 grid grid-cols-1 gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-12">
-        <div>
-          <h2 className="m-0 mb-[18px] font-display text-[24px] tracking-[-.025em] lg:text-[28px]">
-            Elders
-          </h2>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {elders.map((person) => (
-              <PersonChip key={person.name} person={person} />
-            ))}
-          </div>
-        </div>
-        <div>
-          <h2 className="m-0 mb-[18px] font-display text-[24px] tracking-[-.025em] lg:text-[28px]">
-            Staff
-          </h2>
-          <div className="flex flex-col gap-3">
-            {staff.map((person) => (
-              <PersonChip key={person.name} person={person} showRole />
-            ))}
-          </div>
-        </div>
+      {/* Elders */}
+      <h2 className="mt-10 mb-5 font-display text-[24px] tracking-[-.025em] lg:mt-14 lg:text-[28px]">
+        Elders
+      </h2>
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6">
+        {elders.map((person) => (
+          <PersonTile key={person.name} person={person} showRole={false} />
+        ))}
+      </div>
+
+      {/* Staff */}
+      <h2 className="mt-10 mb-5 font-display text-[24px] tracking-[-.025em] lg:mt-14 lg:text-[28px]">
+        Staff
+      </h2>
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6">
+        {staff.map((person) => (
+          <PersonTile key={person.name} person={person} />
+        ))}
       </div>
     </div>
   );

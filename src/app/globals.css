@@ -27,8 +27,7 @@
   --color-surface: #f7f4ef;
   --color-sand: #f1ede6;
 
-  --font-display: "Bricolage Grotesque Variable", "Bricolage Grotesque",
-    sans-serif;
+  --font-display: "Poppins", ui-sans-serif, sans-serif;
   --font-sans: "Manrope Variable", "Manrope", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }

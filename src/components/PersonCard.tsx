@@ -2,17 +2,27 @@ import type { Person } from "@/content/people";
 import { ArrowLink } from "./Button";
 import { ImageSlot } from "./ImageSlot";
 
+/**
+ * Portraits are shot vertically, so every person image uses a 4:5 frame —
+ * portrait enough to suit the source photos, forgiving enough that the
+ * square-cropped headshots don't lose much. Crops anchor to the top so faces
+ * stay in frame.
+ */
+const PORTRAIT =
+  "aspect-[4/5] w-full rounded-xl bg-surface border border-line";
+
+/** Full card with bio — ministry leaders. */
 export function PersonCard({ person }: { person: Person }) {
   return (
-    <div className="flex flex-col gap-3 rounded-2xl border border-line p-5 lg:p-6">
+    <div className="flex flex-col gap-3 rounded-2xl border border-line p-4 lg:p-5">
       <ImageSlot
         src={person.photo}
-        sizes="(min-width: 1024px) 33vw, 100vw"
+        sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw"
         focus="top"
         alt={`Portrait of ${person.name}`}
-        className="h-[220px] rounded-xl"
+        className={PORTRAIT}
       />
-      <span className="font-display text-[22px] tracking-[-.02em]">
+      <span className="font-display text-[22px] tracking-[-.015em]">
         {person.name}
       </span>
       <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
@@ -21,35 +31,41 @@ export function PersonCard({ person }: { person: Person }) {
       {person.bio ? (
         <p className="m-0 text-[15.5px] leading-[1.6] text-body">{person.bio}</p>
       ) : null}
-      <ArrowLink href="/plan-a-visit#contact" className="text-[15px]">
+      <ArrowLink href="/plan-a-visit#contact" className="mt-auto text-[15px]">
         Contact
       </ArrowLink>
     </div>
   );
 }
 
-/** Compact row used for the elder and staff grids. */
-export function PersonChip({
+/**
+ * Photo-forward tile for the elder and staff grids — the portrait leads and
+ * the name sits under it, so faces are actually legible.
+ */
+export function PersonTile({
   person,
-  showRole = false,
+  showRole = true,
 }: {
   person: Person;
   showRole?: boolean;
 }) {
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-line p-3">
+    <div className="flex flex-col gap-2.5">
       <ImageSlot
         src={person.photo}
-        sizes="48px"
+        sizes="(min-width: 1024px) 18vw, (min-width: 640px) 30vw, 45vw"
         focus="top"
         alt={`Portrait of ${person.name}`}
-        variant="teal"
-        className="size-11 shrink-0 rounded-full"
+        className={PORTRAIT}
       />
-      <div className="flex min-w-0 flex-col">
-        <span className="truncate text-base font-semibold">{person.name}</span>
+      <div className="flex flex-col">
+        <span className="font-display text-[17px] leading-tight tracking-[-.01em] text-ink">
+          {person.name}
+        </span>
         {showRole ? (
-          <span className="truncate text-[14.5px] text-muted">{person.role}</span>
+          <span className="text-[13.5px] leading-snug text-muted">
+            {person.role}
+          </span>
         ) : null}
       </div>
     </div>

@@ -38,7 +38,7 @@ export default function HomePage() {
           variant="dark"
           className="absolute inset-0"
         />
-        <div className="relative w-full bg-gradient-to-t from-[#101315]/90 via-[#101315]/35 to-transparent px-5 pt-24 pb-6 lg:px-14 lg:pb-14">
+        <div className="relative w-full bg-gradient-to-t from-[#101315]/85 via-[#101315]/25 to-[#101315]/10 px-5 pt-24 pb-6 lg:px-14 lg:pb-14">
           <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-8 lg:flex-row lg:items-end lg:gap-14">
             <div className="flex max-w-[760px] flex-col gap-4 lg:gap-[22px]">
               <p className="m-0 text-[11px] font-bold tracking-[.16em] uppercase text-teal-light lg:text-xs">

@@ -205,9 +205,10 @@ export function MinistryPage({ ministry }: { ministry: Ministry }) {
             <div className="flex flex-col gap-3.5 rounded-[18px] border border-line p-6 lg:p-7">
               <ImageSlot
                 photoKey={key(`ministry.${ministry.slug}.contact`)}
-                sizes="96px"
-                alt=""
-                className="size-20 rounded-full lg:size-24"
+                sizes="(min-width: 1024px) 200px, 40vw"
+                focus="top"
+                alt={`Portrait of ${ministry.contact.name}`}
+                className="aspect-[4/5] w-full max-w-[180px] rounded-xl"
               />
               <div className="flex flex-col gap-1">
                 <span className="text-[11px] font-bold tracking-[.16em] uppercase text-muted">
