@@ -63,9 +63,29 @@ fields, `PersonCard`, `SiteHeader` (info bar + nav + mobile sheet),
 (with a note describing the intended shot) otherwise — photography drops in
 without layout changes.
 
+## Seeing what photos are still needed
+
+```bash
+npm run build
+npm start -- -p 3311 &
+npm run shots        # → ./photo-slots/*.png + inventory.json
+```
+
+Renders every page at desktop (1440) and mobile (390) with each empty photo
+slot outlined in red and numbered, so the remaining photography is visible at
+a glance. Nothing in `src/` is touched — the highlighting is injected at
+capture time. Re-run it as photos land to see what's left.
+
+Env overrides: `BASE_URL`, `OUT_DIR`, `CHROME_PATH`.
+
+There are **62 slots**, but far fewer distinct photographs — many repeat the
+same shot, and 15 fill in automatically as events and blog posts bring their
+own images.
+
 ## Still to wire up
 
-- **Photography** — every `ImageSlot` placeholder names its intended shot.
+- **Photography** — every `ImageSlot` placeholder names its intended shot;
+  run `npm run shots` to see them all in context.
 - **Visit form backend** — markup/validation is final; submission endpoint TBD.
 - **Automation feeds** — events JSON, bulletin summary + PDF archive, podcast
   RSS, and the real calendar-subscribe (.ics) URL.
