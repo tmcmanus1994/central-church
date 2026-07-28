@@ -1,0 +1,61 @@
+import Link from "next/link";
+import type { ChurchEvent } from "@/content/events";
+import { eventWhen } from "@/lib/format";
+import { ImageSlot } from "./ImageSlot";
+import { Tag } from "./Tag";
+
+/**
+ * The most reused component in the system — homepage grid, events spotlight,
+ * mobile carousel, and eventually the app. Layout-portable: flex column, no
+ * web-only tricks. Falls back to a text-only card when no image is supplied.
+ */
+export function EventCard({
+  event,
+  showImage = true,
+}: {
+  event: ChurchEvent;
+  showImage?: boolean;
+}) {
+  const withImage = showImage && event.image !== null;
+  return (
+    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white">
+      {withImage ? (
+        <div className="relative">
+          <ImageSlot
+            src={event.image}
+            alt=""
+            label="event photo 16:10"
+            className="aspect-[16/10] w-full"
+            sizes="(min-width: 1024px) 25vw, 80vw"
+          />
+          {event.tag ? (
+            <span className="absolute top-3 left-3">
+              <Tag onImage>{event.tag}</Tag>
+            </span>
+          ) : null}
+        </div>
+      ) : null}
+      <div className="flex flex-1 flex-col gap-2.5 p-5 pb-6">
+        {!withImage && event.tag ? <Tag>{event.tag}</Tag> : null}
+        <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
+          {eventWhen(event)}
+        </span>
+        <h3 className="font-display text-[21px] leading-[1.2] tracking-[-.015em] text-ink text-pretty-wrap">
+          {event.title}
+        </h3>
+        <span className="text-[14.5px] text-muted">{event.location}</span>
+        {event.description ? (
+          <p className="text-[14.5px] leading-[1.55] text-body text-pretty-wrap">
+            {event.description.split("\n")[0]}
+          </p>
+        ) : null}
+        <Link
+          href={`/events/${event.slug}`}
+          className="mt-auto pt-3.5 text-[14.5px] font-bold text-primary no-underline hover:text-primary-deep"
+        >
+          Event details →
+        </Link>
+      </div>
+    </article>
+  );
+}

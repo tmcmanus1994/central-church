@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+/*
+  Central Church design tokens — from the redesign handoff.
+  Warm neutrals + confident teal; green reserved for event/spotlight
+  signals and Give. Muted text never lighter than #6E6862 on white (AA).
+*/
+@theme {
+  --color-primary: #2f6e89;
+  --color-primary-deep: #235568;
+  --color-teal-50: #eaf1f4;
+  --color-teal-200: #cfe0e7;
+  --color-teal-border: #d8e3e8;
+  --color-teal-muted: #4e6772;
+  --color-teal-light: #9fc3d1;
+  --color-teal-pale: #d5e2e8;
+  --color-teal-ink: #28414b;
+  --color-accent: #3e7d49;
+  --color-accent-tint: #e7f0e8;
+  --color-accent-deep: #2f6237;
+  --color-ink: #14110f;
+  --color-coal: #16130f;
+  --color-body: #4a443d;
+  --color-muted: #6e6862;
+  --color-line: #e5dfd6;
+  --color-line-dark: #d8d1c6;
+  --color-surface: #f7f4ef;
+  --color-sand: #f1ede6;
+
+  --font-display: "Bricolage Grotesque Variable", "Bricolage Grotesque",
+    sans-serif;
+  --font-sans: "Manrope Variable", "Manrope", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+body {
+  @apply bg-white font-sans text-ink antialiased;
+}
+
+/* Visible focus everywhere — accessibility is a build constraint. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgb(47 110 137 / 0.16);
+  outline: none;
+}
+
+.text-pretty-wrap {
+  text-wrap: pretty;
+}
+
+/* Photo slots awaiting real photography — striped placeholder from the mockup. */
+.img-slot {
+  background-image: repeating-linear-gradient(
+    135deg,
+    #e5dfd6 0 10px,
+    #f1ede6 10px 20px
+  );
+}
+.img-slot-dark {
+  background-image: repeating-linear-gradient(
+    135deg,
+    #1d2b32 0 12px,
+    #182429 12px 24px
+  );
+}
+.img-slot-teal {
+  background-image: repeating-linear-gradient(
+    135deg,
+    #dce7eb 0 8px,
+    #eaf1f4 8px 16px
+  );
+}
+.img-slot-navy {
+  background-image: repeating-linear-gradient(
+    135deg,
+    #1b4453 0 12px,
+    #1f4c5c 12px 24px
+  );
+}
+
+/* Horizontal snap carousels (mobile event rows) */
+.snap-row {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.snap-row > * {
+  scroll-snap-align: start;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Accordion marker */
+details.faq summary::-webkit-details-marker {
+  display: none;
+}
+details.faq summary .faq-icon::after {
+  content: "+";
+}
+details.faq[open] summary .faq-icon::after {
+  content: "–";
+}
