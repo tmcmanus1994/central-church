@@ -63,6 +63,23 @@ fields, `PersonCard`, `SiteHeader` (info bar + nav + mobile sheet),
 (with a note describing the intended shot) otherwise — photography drops in
 without layout changes.
 
+## Photos
+
+`src/content/photos.ts` is the single place to point page slots at real
+images. Any key left `null` keeps its placeholder and stays correctly laid
+out, so photos land one at a time without breaking a page.
+
+```bash
+# 1. drop the uploads anywhere in the repo root, named "<page> - <section>.jpg"
+# 2. add a line to MAP in scripts/import-photos.mjs
+node scripts/import-photos.mjs      # resizes by role, converts to WebP, writes public/photos/
+# 3. fill in the matching key in src/content/photos.ts
+```
+
+Photos that belong to a *thing* rather than a page live with that thing:
+`image` on each event in `events.ts`, `photo` on each person in `people.ts`,
+and `galleries` / `annualPhotos` in `photos.ts` for the ministry pages.
+
 ## Seeing what photos are still needed
 
 ```bash
@@ -78,23 +95,39 @@ capture time. Re-run it as photos land to see what's left.
 
 Env overrides: `BASE_URL`, `OUT_DIR`, `CHROME_PATH`.
 
-There are **62 slots**, but far fewer distinct photographs — many repeat the
-same shot, and 15 fill in automatically as events and blog posts bring their
-own images.
+**21 of 62 slots are filled.** Of the 41 remaining, 15 fill in automatically
+as events and blog posts bring their own images — so the real outstanding
+list is short. See `npm run shots` output for the current state.
 
 ## Still to wire up
 
-- **Photography** — every `ImageSlot` placeholder names its intended shot;
-  run `npm run shots` to see them all in context.
+- **Photography** — the big ones still open: homepage hero (congregation in
+  worship), the lobby-welcome and greeter shots, six ministry banners, and
+  Tammy Beck's portrait. Run `npm run shots` to see them all in context.
 - **Visit form backend** — markup/validation is final; submission endpoint TBD.
 - **Automation feeds** — events JSON, bulletin summary + PDF archive, podcast
   RSS, and the real calendar-subscribe (.ics) URL.
 - **Blog migration** — ~30 posts from the current site, existing URLs preserved.
 - **Map embeds** — placeholder slots on Plan a Visit, event detail, footer.
 
+## Deploying
+
+Standard Next.js app — no adapter or extra config needed. On Vercel: import
+the repo, accept the detected settings, deploy. `npm run build` must pass
+first, which it does.
+
+Two generated assets are committed rather than built at request time:
+`src/app/opengraph-image.png` (regenerate with
+`node scripts/generate-og-image.mjs`) and `src/app/icon.svg`.
+
+Before going live, set `site.url` in `src/lib/site.ts` to the real domain —
+it feeds canonical URLs, the sitemap, and JSON-LD.
+
 ## SEO
 
 - Per-page meta titles/descriptions from the handoff copy deck
 - `Church` JSON-LD (NAP + service times) on every page
+- `sitemap.xml` and `robots.txt` generated from the content files
+- Open Graph / Twitter card metadata with a generated share image
 - AA contrast (muted text ≥ `#6E6862` on white), visible focus rings,
   semantic heading order
