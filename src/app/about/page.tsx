@@ -58,6 +58,8 @@ export default function AboutPage() {
             was built on: coming together in the uniting love of Jesus Christ.
           </p>
           <ImageSlot
+            photoKey="about.congregation"
+            sizes="(min-width: 1024px) 60vw, 100vw"
             alt="The Central congregation gathered together"
             label="congregation photo · archival or current"
             className="mt-2 h-[200px] rounded-2xl lg:mt-3 lg:h-[340px]"

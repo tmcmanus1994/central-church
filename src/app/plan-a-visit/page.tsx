@@ -43,6 +43,8 @@ export default function PlanAVisitPage() {
       {/* Hero — image first on mobile, split on desktop */}
       <section className="grid grid-cols-1 lg:grid-cols-2 lg:items-stretch">
         <ImageSlot
+          photoKey="visit.hero"
+          sizes="(min-width: 1024px) 50vw, 100vw"
           alt="Greeters welcoming visitors at the 6th Street entrance"
           label="greeters at the 6th St entrance"
           className="order-first h-[230px] lg:order-last lg:h-auto lg:min-h-[540px]"
@@ -96,6 +98,8 @@ export default function PlanAVisitPage() {
             </div>
           </div>
           <ImageSlot
+            photoKey="visit.worship"
+            sizes="(min-width: 1024px) 50vw, 100vw"
             alt="The congregation singing during Sunday worship"
             label="worship photo · wide, warm"
             className="h-[220px] rounded-2xl lg:h-[400px]"
@@ -134,6 +138,8 @@ export default function PlanAVisitPage() {
               Where to park
             </span>
             <ImageSlot
+              photoKey="visit.parking"
+              sizes="(min-width: 1024px) 25vw, 100vw"
               alt="Diagram of parking around the Central building"
               label="parking diagram (keep current)"
               variant="teal"
@@ -173,6 +179,8 @@ export default function PlanAVisitPage() {
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
           <div className="flex flex-col gap-5 rounded-2xl border border-line bg-surface p-6 sm:flex-row lg:p-8">
             <ImageSlot
+              photoKey="visit.kids"
+              sizes="160px"
               alt="A kids' Bible class in the Central Kids wing"
               label="kids class"
               className="h-[140px] w-full shrink-0 rounded-xl sm:h-[180px] sm:w-[160px]"
@@ -193,6 +201,8 @@ export default function PlanAVisitPage() {
           </div>
           <div className="flex flex-col gap-5 rounded-2xl border border-line bg-surface p-6 sm:flex-row lg:p-8">
             <ImageSlot
+              photoKey="visit.accessibility"
+              sizes="160px"
               alt="The accessible entrance to the building"
               label="accessible entry"
               className="h-[140px] w-full shrink-0 rounded-xl sm:h-[180px] sm:w-[160px]"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ImageSlot } from "@/components/ImageSlot";
+import type { PhotoKey } from "@/content/photos";
 import { missionaries } from "@/content/people";
 
 export const metadata: Metadata = {
@@ -32,6 +33,8 @@ export default function MissionariesPage() {
             }`}
           >
             <ImageSlot
+              photoKey={`missionaries.${team.slug}` as PhotoKey}
+              sizes="(min-width: 1024px) 50vw, 100vw"
               alt={`The ${team.heading.replace("Meet the ", "")} family`}
               label="family photo"
               className={`h-[220px] rounded-2xl lg:h-[360px] ${

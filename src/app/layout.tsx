@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { MobileTabBar } from "@/components/MobileTabBar";
@@ -11,14 +11,39 @@ import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "./globals.css";
 
+const DESCRIPTION =
+  "Follow Jesus together at Central Church of Christ in downtown Little Rock. Worship Sundays at 10:15 AM, classes Wednesdays at 6:30 PM. Everyone is welcome.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: "Central Church of Christ | Downtown Little Rock, AR",
     template: "%s | Central Church of Christ",
   },
-  description:
-    "Follow Jesus together at Central Church of Christ in downtown Little Rock. Worship Sundays at 10:15 AM, classes Wednesdays at 6:30 PM. Everyone is welcome.",
+  description: DESCRIPTION,
+  applicationName: site.name,
+  keywords: [
+    "church in Little Rock",
+    "downtown Little Rock church",
+    "Church of Christ Little Rock",
+    "Little Rock AR church",
+    "iglesia en Little Rock",
+  ],
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    locale: "en_US",
+    url: site.url,
+    title: "Central Church of Christ | Downtown Little Rock, AR",
+    description: DESCRIPTION,
+  },
+  twitter: { card: "summary_large_image", title: site.name, description: DESCRIPTION },
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#2F6E89",
 };
 
 export default function RootLayout({

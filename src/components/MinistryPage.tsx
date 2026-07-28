@@ -1,9 +1,15 @@
 import Link from "next/link";
 import type { Ministry } from "@/content/ministries";
 import { getRecurringForMinistry } from "@/content/events";
+import { annualPhotos, galleries, photos, type PhotoKey } from "@/content/photos";
 import { recurringWhen } from "@/lib/format";
 import { ArrowLink, Button } from "./Button";
 import { ImageSlot } from "./ImageSlot";
+
+/** Narrows a built-up string to a PhotoKey only when the registry has it. */
+function key(candidate: string): PhotoKey | undefined {
+  return candidate in photos ? (candidate as PhotoKey) : undefined;
+}
 
 /**
  * The single flexible template behind every ministry page. Sections render
@@ -34,6 +40,9 @@ export function MinistryPage({ ministry }: { ministry: Ministry }) {
       {/* Hero */}
       <section className="relative flex h-[250px] items-end lg:h-[420px]">
         <ImageSlot
+          photoKey={key(`ministry.${ministry.slug}.hero`)}
+          priority
+          sizes="100vw"
           alt=""
           label="ministry hero photo · slot"
           variant="dark"
@@ -102,6 +111,8 @@ export function MinistryPage({ ministry }: { ministry: Ministry }) {
                     }`}
                   >
                     <ImageSlot
+                      src={annualPhotos[ministry.slug]?.[item.title]}
+                      sizes="(min-width: 640px) 170px, 100vw"
                       alt=""
                       className="h-[140px] w-full shrink-0 rounded-xl sm:h-[110px] sm:w-[170px]"
                     />
@@ -192,9 +203,11 @@ export function MinistryPage({ ministry }: { ministry: Ministry }) {
         <aside className="flex flex-col gap-5">
           {ministry.contact ? (
             <div className="flex flex-col gap-3.5 rounded-[18px] border border-line p-6 lg:p-7">
-              <span
-                aria-hidden
-                className="img-slot size-20 rounded-full lg:size-24"
+              <ImageSlot
+                photoKey={key(`ministry.${ministry.slug}.contact`)}
+                sizes="96px"
+                alt=""
+                className="size-20 rounded-full lg:size-24"
               />
               <div className="flex flex-col gap-1">
                 <span className="text-[11px] font-bold tracking-[.16em] uppercase text-muted">
@@ -258,8 +271,18 @@ export function MinistryPage({ ministry }: { ministry: Ministry }) {
           </span>
         </div>
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-3.5">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <ImageSlot key={i} alt="" className="h-[120px] rounded-[14px] lg:h-[200px]" />
+          {/* Real gallery images once supplied; four placeholders until then. */}
+          {(galleries[ministry.slug]?.length
+            ? galleries[ministry.slug]
+            : Array.from({ length: 4 }, () => undefined)
+          ).map((src, i) => (
+            <ImageSlot
+              key={src ?? i}
+              src={src}
+              sizes="(min-width: 1024px) 25vw, 50vw"
+              alt=""
+              className="h-[120px] rounded-[14px] lg:h-[200px]"
+            />
           ))}
         </div>
       </section>

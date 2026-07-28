@@ -11,13 +11,13 @@ import { blogPosts, podcastEpisodes } from "@/content/media";
 import { site } from "@/lib/site";
 
 const ministryTiles = [
-  { slug: "children", photo: true },
-  { slug: "teens", photo: true },
-  { slug: "life-groups", photo: true },
+  { slug: "children", photo: true, photoKey: "home.tile.children" },
+  { slug: "teens", photo: true, photoKey: "home.tile.teens" },
+  { slug: "life-groups", photo: true, photoKey: "home.tile.life-groups" },
   { slug: "iglesia", photo: false },
   { slug: "kids-closet", photo: false },
   { slug: "freedom-prayer", photo: false },
-];
+] as const;
 
 export default function HomePage() {
   const spotlight = getSpotlightEvent();
@@ -30,6 +30,9 @@ export default function HomePage() {
       {/* Hero — service times above the fold is non-negotiable */}
       <section className="relative flex min-h-[470px] items-end lg:min-h-[660px]">
         <ImageSlot
+          photoKey="home.hero"
+          priority
+          sizes="100vw"
           alt="The Central congregation gathered for worship"
           label="hero photo or 8s loop · congregation, wide, warm light"
           variant="dark"
@@ -152,6 +155,8 @@ export default function HomePage() {
       {/* New here? */}
       <section className="grid grid-cols-1 bg-primary-deep text-white lg:grid-cols-2">
         <ImageSlot
+          photoKey="home.welcome"
+          sizes="(min-width: 1024px) 50vw, 100vw"
           alt="A greeter welcoming a first-time visitor in the lobby"
           label="first-time visitor photo · lobby welcome"
           variant="navy"
@@ -192,8 +197,14 @@ export default function HomePage() {
               <Link
                 key={ministry.slug}
                 href={href}
-                className="img-slot relative flex h-[120px] items-end overflow-hidden rounded-[14px] p-3.5 no-underline lg:h-[260px] lg:rounded-2xl lg:p-6"
+                className="relative flex h-[120px] items-end overflow-hidden rounded-[14px] p-3.5 no-underline lg:h-[260px] lg:rounded-2xl lg:p-6"
               >
+                <ImageSlot
+                  photoKey={tile.photoKey}
+                  sizes="(min-width: 1024px) 33vw, 50vw"
+                  alt=""
+                  className="absolute inset-0"
+                />
                 <span
                   aria-hidden
                   className="absolute inset-0 bg-gradient-to-t from-coal/70 to-transparent"
@@ -238,6 +249,8 @@ export default function HomePage() {
         <div className="mt-6 grid grid-cols-1 gap-4 lg:mt-8 lg:grid-cols-[1.6fr_1fr] lg:gap-6">
           <div className="flex flex-col gap-4 rounded-2xl border border-line p-4 lg:flex-row lg:gap-6 lg:p-6">
             <ImageSlot
+              photoKey="home.sermon"
+              sizes="(min-width: 1024px) 300px, 100vw"
               alt=""
               label="sermon thumbnail"
               className="h-[150px] w-full shrink-0 rounded-xl lg:h-[190px] lg:w-[300px]"

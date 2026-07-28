@@ -26,7 +26,13 @@ export default function MediaHubPage() {
 
       <div className="mt-8 grid grid-cols-1 gap-4 lg:mt-12 lg:grid-cols-3 lg:gap-6">
         <div className="flex flex-col gap-3 rounded-2xl border border-line p-6">
-          <ImageSlot alt="" label="sermon thumbnail" className="h-[160px] rounded-xl" />
+          <ImageSlot
+            photoKey="media.sermon"
+            sizes="(min-width: 1024px) 33vw, 100vw"
+            alt=""
+            label="sermon thumbnail"
+            className="h-[160px] rounded-xl"
+          />
           <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
             Podcast · Latest sermon
           </span>
@@ -41,7 +47,14 @@ export default function MediaHubPage() {
           </ArrowLink>
         </div>
         <div className="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6">
-          <ImageSlot alt="" label="live stream still" variant="dark" className="h-[160px] rounded-xl" />
+          <ImageSlot
+            photoKey="media.live"
+            sizes="(min-width: 1024px) 33vw, 100vw"
+            alt=""
+            label="live stream still"
+            variant="dark"
+            className="h-[160px] rounded-xl"
+          />
           <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
             Live Stream
           </span>
@@ -56,7 +69,13 @@ export default function MediaHubPage() {
           </ArrowLink>
         </div>
         <div className="flex flex-col gap-3 rounded-2xl border border-line p-6">
-          <ImageSlot alt="" label="blog photo" className="h-[160px] rounded-xl" />
+          <ImageSlot
+            photoKey="media.blog"
+            sizes="(min-width: 1024px) 33vw, 100vw"
+            alt=""
+            label="blog photo"
+            className="h-[160px] rounded-xl"
+          />
           <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
             Blog
           </span>

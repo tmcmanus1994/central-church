@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
-import { PersonCard, PersonChip, StaffRow } from "@/components/PersonCard";
+import { PersonCard, PersonChip } from "@/components/PersonCard";
 import { elders, leadMinister, ministryLeaders, staff } from "@/content/people";
 
 export const metadata: Metadata = {
@@ -23,6 +23,9 @@ export default function LeadershipPage() {
       {/* Lead Minister feature */}
       <div className="flex flex-col gap-6 rounded-[18px] border border-line bg-surface p-5 lg:flex-row lg:items-center lg:gap-10 lg:p-8">
         <ImageSlot
+          src={leadMinister.photo}
+          sizes="(min-width: 1024px) 300px, 100vw"
+          focus="top"
           alt="Portrait of Steven Hovater"
           label="portrait 3:4"
           className="h-[240px] w-full shrink-0 rounded-[14px] lg:h-[340px] lg:w-[300px]"
@@ -58,8 +61,8 @@ export default function LeadershipPage() {
             Elders
           </h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {elders.map((name) => (
-              <PersonChip key={name} name={name} />
+            {elders.map((person) => (
+              <PersonChip key={person.name} person={person} />
             ))}
           </div>
         </div>
@@ -69,7 +72,7 @@ export default function LeadershipPage() {
           </h2>
           <div className="flex flex-col gap-3">
             {staff.map((person) => (
-              <StaffRow key={person.name} person={person} />
+              <PersonChip key={person.name} person={person} showRole />
             ))}
           </div>
         </div>

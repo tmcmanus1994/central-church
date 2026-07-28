@@ -126,6 +126,7 @@ export const upcomingEvents: ChurchEvent[] = [
     start: "2026-08-09T18:00:00-05:00",
     end: "2026-08-09T19:30:00-05:00",
     location: "Fellowship Hall",
+    image: "/photos/event-ice-cream-social.webp",
     description:
       "Cold treats and good company as we kick off the school year together. Bring the whole family — we'll have the freezers full.",
     tag: "All Church",
@@ -171,6 +172,7 @@ export const upcomingEvents: ChurchEvent[] = [
     end: "2026-09-21T23:59:00-05:00",
     allDay: true,
     location: "St. Louis, MO",
+    image: "/photos/event-st-louis-trip.webp",
     description:
       "A weekend away for Central Teens — service, sightseeing, and time together on the road.",
     tag: "Central Teens",

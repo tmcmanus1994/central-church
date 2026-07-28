@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { photo, type PhotoKey } from "@/content/photos";
 
 type Variant = "warm" | "dark" | "teal" | "navy";
 
@@ -16,33 +17,60 @@ const labelClass: Record<Variant, string> = {
   navy: "text-[#8FB3C2]",
 };
 
+/** `fill` needs a positioned box. Callers that place the slot themselves
+ *  (`absolute inset-0` heroes) already have one — adding `relative` on top
+ *  would collide, since Tailwind resolves position utilities by stylesheet
+ *  order, not class order. */
+const POSITIONED = /(^|\s)(absolute|fixed|sticky|relative)(\s|$)/;
+
 /**
- * A photo slot. Renders next/image when a src is supplied (the automation or
- * CMS provides photos); otherwise a striped placeholder with a note about the
- * intended shot, so layouts read correctly before photography lands.
+ * A photo slot. Renders next/image once a photo exists — passed directly as
+ * `src`, or looked up in the photo registry by `photoKey`. Until then it draws
+ * a striped placeholder with a note about the intended shot, so every layout
+ * reads correctly before photography lands.
  */
 export function ImageSlot({
   src,
+  photoKey,
   alt = "",
   label,
   variant = "warm",
   className = "",
   sizes,
+  priority = false,
+  focus = "center",
 }: {
   src?: string | null;
+  /** Key into src/content/photos.ts — the normal way to fill a fixed slot. */
+  photoKey?: PhotoKey;
   alt?: string;
   label?: string;
   variant?: Variant;
   className?: string;
   sizes?: string;
+  /** Set on above-the-fold images (hero) to preload them. */
+  priority?: boolean;
+  /** Where to anchor the crop. Portraits want "top" so faces stay in frame. */
+  focus?: "center" | "top";
 }) {
-  if (src) {
+  const resolved = src ?? (photoKey ? photo(photoKey) : undefined);
+
+  if (resolved) {
+    const position = POSITIONED.test(className) ? "" : "relative";
     return (
-      <div className={`relative overflow-hidden ${className}`}>
-        <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
+      <div className={`${position} overflow-hidden ${className}`}>
+        <Image
+          src={resolved}
+          alt={alt}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className={focus === "top" ? "object-cover object-top" : "object-cover"}
+        />
       </div>
     );
   }
+
   return (
     <div
       role="img"
