@@ -36,6 +36,20 @@ body {
   @apply bg-white font-sans text-ink antialiased;
 }
 
+/*
+  Poppins reads lighter than the previous display face, so headings carry
+  semibold by default. Targets the elements rather than `.font-display`, which
+  Tailwind already generates as a font-family utility. Sitting in the base
+  layer lets a `font-bold` utility (the hero) still win.
+*/
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-weight: 600;
+  }
+}
+
 /* Visible focus everywhere — accessibility is a build constraint. */
 a:focus-visible,
 button:focus-visible,

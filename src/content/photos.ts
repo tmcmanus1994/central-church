@@ -57,9 +57,9 @@ export const photos = {
   "ministry.freedom-prayer.hero": null,
   "ministry.iglesia.hero": null,
   /** Square headshot for the ministry contact block. */
-  "ministry.children.contact": null,
-  "ministry.teens.contact": null,
-  "ministry.kids-closet.contact": null,
+  "ministry.children.contact": "/photos/leadership-tammy-beck.webp",
+  "ministry.teens.contact": "/photos/leadership-james-mosley.webp",
+  "ministry.kids-closet.contact": "/photos/leadership-tammy-beck.webp",
 
   // ── Media hub ───────────────────────────────────────────────────────────
   "media.sermon": null,

@@ -44,7 +44,7 @@ export default function HomePage() {
               <p className="m-0 text-[11px] font-bold tracking-[.16em] uppercase text-teal-light lg:text-xs">
                 Downtown Little Rock, Arkansas
               </p>
-              <h1 className="m-0 font-display text-[42px] leading-[.98] tracking-[-.035em] text-white lg:text-[82px] lg:tracking-[-.04em]">
+              <h1 className="m-0 font-display text-[42px] leading-[.98] font-bold tracking-[-.035em] text-white lg:text-[82px] lg:tracking-[-.04em]">
                 {site.tagline}
               </h1>
               <p className="m-0 max-w-[600px] text-base leading-[1.5] text-[#DCE4E7] text-pretty-wrap lg:text-xl">

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site, fullAddress } from "@/lib/site";
 
@@ -46,14 +47,13 @@ export function SiteFooter() {
     <footer className="bg-coal px-5 pt-12 pb-24 text-[#D9D3CA] lg:px-14 lg:pt-[72px] lg:pb-9">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr_1.1fr] lg:gap-12">
         <div className="flex flex-col gap-[18px]">
-          <div className="flex items-center gap-3">
-            <span className="flex size-[38px] items-center justify-center rounded-full bg-primary font-display text-lg font-bold text-white">
-              C
-            </span>
-            <span className="font-display text-lg font-bold text-white">
-              {site.name}
-            </span>
-          </div>
+          <Image
+            src="/brand/logo-white.webp"
+            alt={site.name}
+            width={720}
+            height={186}
+            className="h-11 w-auto self-start"
+          />
           <p className="m-0 max-w-[280px] text-[14.5px] leading-[1.6] text-[#9C958B]">
             A Church of Christ in downtown Little Rock, Arkansas, following
             Jesus together since our founding.

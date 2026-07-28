@@ -18,7 +18,7 @@ export const ministryLeaders: Person[] = [
   {
     name: "Tammy Beck",
     role: "Children's Minister",
-    // No headshot supplied yet — renders the placeholder.
+    photo: "/photos/leadership-tammy-beck.webp",
     bio: "Tammy has served at Central for 20 years, joyfully helping kids see God with childlike clarity. She is passionate about guiding children and families closer to Jesus and equipping parents to lead their kids to Him. Her vision: every child learns to trust Jesus and knows they are deeply loved by God.",
   },
   {
@@ -54,6 +54,8 @@ export const staff: Person[] = [
   { name: "Lacey Hines", role: "Kids Closet Lead", photo: "/photos/leadership-lacey-hines.webp" },
   { name: "Travelle McManus", role: "Communication Director", photo: "/photos/leadership-travelle-mcmanus.webp" },
   { name: "Ian Miller", role: "Apprentice", photo: "/photos/leadership-ian-miller.webp" },
+  { name: "Chad Tappe", role: "Worship Leader", photo: "/photos/leadership-chad-tappe.webp" },
+  { name: "Jessica Ward", role: "Administrator", photo: "/photos/leadership-jessica-ward.webp" },
 ];
 
 export interface Missionary {

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -21,18 +22,15 @@ const sheetItems = [
 
 function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-3 no-underline">
-      <span className="flex size-9 items-center justify-center rounded-full bg-primary font-display text-[17px] font-bold text-white lg:size-10 lg:text-[19px]">
-        C
-      </span>
-      <span className="flex flex-col gap-[2px]">
-        <span className="font-display text-[17px] leading-none font-bold tracking-[-.01em] text-ink lg:text-[19px]">
-          Central
-        </span>
-        <span className="hidden text-[10.5px] leading-none tracking-[.18em] uppercase text-muted sm:block">
-          Church of Christ
-        </span>
-      </span>
+    <Link href="/" className="flex items-center no-underline" aria-label={`${site.name} — home`}>
+      <Image
+        src="/brand/logo-color.webp"
+        alt={site.name}
+        width={720}
+        height={186}
+        priority
+        className="h-9 w-auto lg:h-11"
+      />
     </Link>
   );
 }

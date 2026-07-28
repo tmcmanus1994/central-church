@@ -20,6 +20,16 @@ mkdirSync(OUT, { recursive: true });
 /** Max width by role — every slot displays far smaller than the originals. */
 const WIDTH = { hero: 2560, wide: 1920, card: 1600, thumb: 1200, portrait: 900 };
 
+/**
+ * Brand assets — logos need crisp edges and transparency, so they're written
+ * as lossless WebP rather than going through the lossy photo path.
+ * uploaded filename → output name under public/brand/
+ */
+const LOGOS = {
+  "Central logo color": "logo-color",
+  "Central logo white": "logo-white",
+};
+
 /** uploaded filename (without extension) → [output name, role] */
 const MAP = {
   "Hero - Wallpaper": ["home-hero", "hero"],
@@ -46,6 +56,7 @@ const MAP = {
   "igelsia - photo 4": ["iglesia-gallery-4", "card"],
 
   // Leadership headshots — first names as uploaded, mapped to full names.
+  "Leadership - Tammy": ["leadership-tammy-beck", "portrait"],
   "Leadership - Steven": ["leadership-steven-hovater", "portrait"],
   "Leadership - James": ["leadership-james-mosley", "portrait"],
   "Leadership - Matt": ["leadership-matt-thomas", "portrait"],
@@ -65,19 +76,41 @@ const MAP = {
   "Leadership - Travelle": ["leadership-travelle-mcmanus", "portrait"],
   "Leadership - Ian.png": ["leadership-ian-miller", "portrait"],
   "Leadership - Chad": ["leadership-chad-tappe", "portrait"],
-  "Leadership - Jessica": ["leadership-jessica", "portrait"],
+  "Leadership - Jessica": ["leadership-jessica-ward", "portrait"],
 };
 
-const files = readdirSync(SRC).filter((f) =>
-  /\.(jpe?g|png|webp)$/i.test(f),
+const stemOf = (f) => f.replace(/\.(jpe?g|png|webp)$/i, "");
+
+// Uploads occasionally arrive with no file extension, so accept anything the
+// maps know about as well as the usual image suffixes.
+const files = readdirSync(SRC).filter(
+  (f) =>
+    /\.(jpe?g|png|webp)$/i.test(f) || MAP[stemOf(f)] || LOGOS[stemOf(f)],
 );
 
 let done = 0;
 let savedBytes = 0;
 const unmapped = [];
 
+mkdirSync("public/brand", { recursive: true });
+
 for (const file of files) {
-  const stem = file.replace(/\.(jpe?g|png|webp)$/i, "");
+  const stem = stemOf(file);
+
+  if (LOGOS[stem]) {
+    const dest = `public/brand/${LOGOS[stem]}.webp`;
+    await sharp(join(SRC, file))
+      .resize({ width: 720, withoutEnlargement: true })
+      .webp({ lossless: true })
+      .toFile(dest);
+    console.log(
+      `${LOGOS[stem]}.webp`.padEnd(34),
+      `${(statSync(join(SRC, file)).size / 1024).toFixed(0)}KB → ${(statSync(dest).size / 1024).toFixed(0)}KB`,
+    );
+    done += 1;
+    continue;
+  }
+
   const entry = MAP[stem];
   if (!entry) {
     unmapped.push(file);
