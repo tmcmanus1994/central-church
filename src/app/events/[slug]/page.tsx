@@ -73,12 +73,11 @@ export default async function EventDetailPage({
 
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-8 px-5 py-7 lg:grid-cols-[1.45fr_1fr] lg:gap-14 lg:px-14 lg:py-14 lg:pb-[88px]">
         <div className="flex flex-col gap-4 lg:gap-6">
-          {event.image !== null ? (
+          {event.image ? (
             <ImageSlot
               src={event.image}
               alt=""
-              label="event hero photo 16:9"
-              className="h-[210px] rounded-[18px] lg:h-[420px]"
+              className="aspect-[16/9] w-full rounded-[18px]"
               sizes="(min-width: 1024px) 60vw, 100vw"
             />
           ) : null}
@@ -172,7 +171,13 @@ export default async function EventDetailPage({
               <span className="text-[17px] font-semibold">{event.location}</span>
               <span className="text-base text-body">{fullAddress}</span>
             </div>
-            <ImageSlot alt={`Map showing ${fullAddress}`} label="map embed" className="h-[150px] rounded-xl" />
+            <iframe
+              title={`Map showing ${fullAddress}`}
+              src={site.mapEmbedUrl}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="aspect-square w-full rounded-xl border-0"
+            />
             <div className="flex flex-col gap-2.5">
               {event.ctaLabel ? (
                 <Button href={event.ctaHref ?? "/plan-a-visit#contact"} variant="give" full>

@@ -19,6 +19,12 @@ const albums: {
   cover?: string;
 }[] = [
   {
+    title: "Camp Caudle",
+    blurb:
+      "A week in Hector, Arkansas with Central Teens. Videos live on their own page.",
+    cover: "/photos/teens-camp-caudle.webp",
+  },
+  {
     title: "Trunk or Treat",
     blurb:
       "Decorated cars, candy, and the whole neighbourhood in the parking lot the Sunday before Halloween.",
@@ -29,12 +35,6 @@ const albums: {
     blurb:
       "The Easter Egg Hunt and Easter Sunday together — one of the biggest weekends on the calendar.",
     cover: "/photos/kids-easter-egg-hunt.webp",
-  },
-  {
-    title: "Camp Caudle",
-    blurb:
-      "A week in Hector, Arkansas with Central Teens. Videos live on their own page.",
-    cover: "/photos/teens-camp-caudle.webp",
   },
 ];
 

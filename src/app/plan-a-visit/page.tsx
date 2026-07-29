@@ -102,7 +102,7 @@ export default function PlanAVisitPage() {
             sizes="(min-width: 1024px) 50vw, 100vw"
             alt="The congregation singing during Sunday worship"
             label="worship photo · wide, warm"
-            className="h-[220px] rounded-2xl lg:h-[400px]"
+            className="aspect-[16/10] w-full rounded-2xl"
           />
         </div>
       </section>
@@ -186,7 +186,7 @@ export default function PlanAVisitPage() {
               sizes="160px"
               alt="A kids' Bible class in the Central Kids wing"
               label="kids class"
-              className="h-[140px] w-full shrink-0 rounded-xl sm:h-[180px] sm:w-[160px]"
+              className="aspect-[4/5] w-full shrink-0 rounded-xl sm:w-[160px]"
             />
             <div className="flex flex-col gap-2.5">
               <h3 className="m-0 font-display text-[21px] tracking-[-.02em] lg:text-[26px]">
@@ -208,7 +208,7 @@ export default function PlanAVisitPage() {
               sizes="160px"
               alt="The accessible entrance to the building"
               label="accessible entry"
-              className="h-[140px] w-full shrink-0 rounded-xl sm:h-[180px] sm:w-[160px]"
+              className="aspect-[4/5] w-full shrink-0 rounded-xl sm:w-[160px]"
             />
             <div className="flex flex-col gap-2.5">
               <h3 className="m-0 font-display text-[21px] tracking-[-.02em] lg:text-[26px]">

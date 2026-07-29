@@ -22,11 +22,11 @@ export function EventRow({ event }: { event: ChurchEvent }) {
           {dayOfMonth(event.start)}
         </div>
       </div>
-      {event.image !== null ? (
+      {event.image ? (
         <ImageSlot
           src={event.image}
           alt=""
-          className="hidden h-24 w-[150px] shrink-0 rounded-[10px] lg:block"
+          className="hidden aspect-[16/10] w-[150px] shrink-0 rounded-[10px] lg:block"
           sizes="150px"
         />
       ) : null}

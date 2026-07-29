@@ -38,7 +38,7 @@ export function MinistryPage({ ministry }: { ministry: Ministry }) {
   return (
     <article lang={ministry.lang}>
       {/* Hero */}
-      <section className="relative flex h-[250px] items-end lg:h-[420px]">
+      <section className="relative flex aspect-[16/9] max-h-[420px] min-h-[250px] items-end sm:aspect-[21/9]">
         <ImageSlot
           photoKey={key(`ministry.${ministry.slug}.hero`)}
           priority
@@ -114,7 +114,7 @@ export function MinistryPage({ ministry }: { ministry: Ministry }) {
                       src={annualPhotos[ministry.slug]?.[item.title]}
                       sizes="(min-width: 640px) 170px, 100vw"
                       alt=""
-                      className="h-[140px] w-full shrink-0 rounded-xl sm:h-[110px] sm:w-[170px]"
+                      className="aspect-[16/10] w-full shrink-0 rounded-xl sm:w-[170px]"
                     />
                     <div className="flex flex-col gap-1.5">
                       <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
@@ -307,7 +307,7 @@ export function MinistryPage({ ministry }: { ministry: Ministry }) {
               src={src}
               sizes="(min-width: 1024px) 25vw, 50vw"
               alt=""
-              className="h-[120px] rounded-[14px] lg:h-[200px]"
+              className="aspect-[4/3] w-full rounded-[14px]"
             />
           ))}
         </div>

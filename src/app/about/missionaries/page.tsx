@@ -37,7 +37,7 @@ export default function MissionariesPage() {
               sizes="(min-width: 1024px) 50vw, 100vw"
               alt={`The ${team.heading.replace("Meet the ", "")} family`}
               label="family photo"
-              className={`h-[220px] rounded-2xl lg:h-[360px] ${
+              className={`aspect-[5/3] w-full rounded-2xl ${
                 i % 2 === 1 ? "lg:order-last" : ""
               }`}
             />

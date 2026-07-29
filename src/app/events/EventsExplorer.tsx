@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { EventCard } from "@/components/EventCard";
+import { ImageSlot } from "@/components/ImageSlot";
 import { EventRow } from "@/components/EventRow";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
 import type { ChurchEvent, EventTag } from "@/content/events";
@@ -82,11 +83,14 @@ export function EventsExplorer({
           </span>
           <div className="mt-4 grid grid-cols-1 gap-5 lg:mt-5 lg:grid-cols-[1.45fr_1fr] lg:gap-6">
             <div className="flex flex-col overflow-hidden rounded-[18px] border border-line bg-white">
-              <div className="img-slot flex h-[180px] items-center justify-center lg:h-[300px]">
-                <span className="font-mono text-[11px] tracking-[.08em] uppercase text-muted">
-                  featured event photo
-                </span>
-              </div>
+              {spotlight.image ? (
+                <ImageSlot
+                  src={spotlight.image}
+                  alt=""
+                  className="aspect-[16/9] w-full"
+                  sizes="(min-width: 1024px) 60vw, 100vw"
+                />
+              ) : null}
               <div className="flex flex-col gap-3 p-5 lg:p-7">
                 <span className="inline-flex w-fit items-center rounded-full bg-accent-tint px-3 py-[6px] text-[11px] font-bold tracking-[.1em] uppercase text-accent-deep">
                   {spotlight.tag} · {eventWhen(spotlight)}

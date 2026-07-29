@@ -13,14 +13,14 @@ export function SpotlightBanner({ event }: { event?: ChurchEvent }) {
   return (
     <div className="border-b border-teal-border bg-teal-50 px-5 py-6 lg:px-14 lg:py-7">
       <div className="mx-auto flex max-w-[1328px] flex-col gap-5 rounded-2xl border border-teal-border bg-white p-4 lg:flex-row lg:items-center lg:gap-8 lg:py-3 lg:pr-7 lg:pl-3">
-        <ImageSlot
-          src={event.image}
-          alt=""
-          label="spotlight image"
-          variant="teal"
-          className="h-[150px] w-full shrink-0 rounded-xl lg:w-[260px]"
-          sizes="(min-width: 1024px) 260px, 100vw"
-        />
+        {event.image ? (
+          <ImageSlot
+            src={event.image}
+            alt=""
+            className="aspect-[16/10] w-full shrink-0 rounded-xl lg:w-[260px]"
+            sizes="(min-width: 1024px) 260px, 100vw"
+          />
+        ) : null}
         <div className="flex flex-1 flex-col gap-2">
           <span className="inline-flex w-fit items-center rounded-full bg-accent-tint px-3 py-[6px] text-[11px] font-bold tracking-[.1em] uppercase text-accent-deep">
             Featured · {eventWhen(event)}

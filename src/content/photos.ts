@@ -30,7 +30,8 @@ export const photos = {
 
   // ── Plan a Visit ────────────────────────────────────────────────────────
   /** Greeters at the 6th Street entrance. */
-  "visit.hero": null,
+  /** Shares the New to Central photo — same welcome, same face. */
+  "visit.hero": "/photos/home-welcome.webp",
   /** Congregation singing — wide. */
   "visit.worship": null,
   /** Parking diagram — re-export of the current site's diagram. */

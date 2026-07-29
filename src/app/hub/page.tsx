@@ -1,28 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/Button";
-import { EventCard } from "@/components/EventCard";
+import { ArrowLink, Button } from "@/components/Button";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
+import { bulletin } from "@/content/bulletin";
 import { getSpotlightEvent, upcomingEvents } from "@/content/events";
 import { blogPosts } from "@/content/blog";
+import { eventWhen } from "@/lib/format";
 import { site, fullAddress } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Hub",
   description:
-    "Everything at Central in one place — this week's events, service times, giving, ministries, and media.",
+    "This week at Central — announcements, events, prayer requests, service times, and quick links.",
   robots: { index: false, follow: true },
 };
 
 /**
- * The member-facing quick-access screen: one tap to anything, sized for a
- * phone. This is the layout the companion app's home tab will inherit, so it
- * stays a single column of large targets rather than a marketing page.
+ * The member-facing weekly screen. Reads like the bulletin: what's happening
+ * comes first, links come last. Single column of large targets, sized for a
+ * phone — this is the layout the companion app's home tab inherits.
  */
-const tiles = [
+const links = [
   { label: "Plan a Visit", href: "/plan-a-visit", note: "First time here?" },
-  { label: "This Week", href: "/events", note: "Events & calendar" },
-  { label: "Bulletin", href: "/bulletin", note: "This week's announcements" },
+  { label: "All Events", href: "/events", note: "Full calendar" },
+  { label: "Full Bulletin", href: "/bulletin", note: "PDF & archive" },
   { label: "Watch Live", href: "/media/live", note: "Sundays 10:15 AM" },
   { label: "Photo Gallery", href: "/media/photos", note: "Albums" },
   { label: "Camp Caudle", href: "/media/camp-caudle", note: "Every video by year" },
@@ -36,7 +37,9 @@ const tiles = [
 
 export default function HubPage() {
   const spotlight = getSpotlightEvent();
-  const next = upcomingEvents.filter((e) => !e.spotlight).slice(0, 2);
+  const thisWeek = [spotlight, ...upcomingEvents.filter((e) => !e.spotlight)]
+    .filter(Boolean)
+    .slice(0, 4);
   const latestPost = blogPosts[0];
 
   return (
@@ -44,15 +47,71 @@ export default function HubPage() {
       <span className="text-xs font-bold tracking-[.14em] uppercase text-primary">
         Central Hub
       </span>
-      <h1 className="mt-2.5 mb-4 font-display text-[34px] leading-[1.04] tracking-[-.035em] lg:text-[44px]">
-        Everything in one place
+      <h1 className="mt-2.5 mb-1 font-display text-[34px] leading-[1.04] tracking-[-.035em] lg:text-[44px]">
+        This week at Central
       </h1>
+      <p className="m-0 text-[15.5px] text-muted">Week of {bulletin.weekOf}</p>
 
-      {/* Service times + directions */}
-      <div className="flex flex-col gap-3 rounded-2xl border border-teal-border bg-teal-50 p-5">
-        <span className="text-[11px] font-bold tracking-[.14em] uppercase text-primary-deep">
-          This Sunday
-        </span>
+      {/* Announcements lead — same content as the bulletin */}
+      <section className="mt-7 rounded-2xl border border-line p-5 lg:p-6">
+        <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
+          Announcements
+        </h2>
+        <ul className="m-0 flex list-none flex-col gap-3 p-0">
+          {bulletin.announcements.map((a) => (
+            <li
+              key={a.slice(0, 32)}
+              className="border-b border-line pb-3 text-[15.5px] leading-[1.6] text-body last:border-0 last:pb-0"
+            >
+              {a}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* What's on */}
+      <section className="mt-4 rounded-2xl border border-line p-5 lg:p-6">
+        <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
+          What&rsquo;s on
+        </h2>
+        <div className="flex flex-col">
+          {thisWeek.map((event) => (
+            <Link
+              key={event!.slug}
+              href={`/events/${event!.slug}`}
+              className="flex justify-between gap-4 border-b border-line py-3 text-[15.5px] text-ink no-underline first:pt-0 last:border-0 last:pb-0 hover:text-primary"
+            >
+              <span className="font-semibold">{event!.title}</span>
+              <span className="shrink-0 text-right text-muted">
+                {eventWhen(event!).split(" · ")[0]}
+              </span>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-4">
+          <ArrowLink href="/events">See the full calendar</ArrowLink>
+        </div>
+      </section>
+
+      {/* Prayer */}
+      <section className="mt-4 rounded-2xl border border-teal-border bg-teal-50 p-5 lg:p-6">
+        <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
+          Prayer requests
+        </h2>
+        <ul className="m-0 flex list-none flex-col gap-3 p-0">
+          {bulletin.prayerRequests.map((r) => (
+            <li key={r.slice(0, 32)} className="text-[15.5px] leading-[1.6] text-teal-ink">
+              {r}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Times, directions, giving */}
+      <section className="mt-4 rounded-2xl border border-line p-5 lg:p-6">
+        <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
+          Service times
+        </h2>
         <div className="flex flex-col gap-2 text-[15.5px] text-ink">
           {site.serviceTimes.map((t) => (
             <div key={t.label} className="flex justify-between gap-4">
@@ -61,7 +120,8 @@ export default function HubPage() {
             </div>
           ))}
         </div>
-        <div className="mt-1 flex flex-col gap-2.5 sm:flex-row">
+        <p className="mt-3.5 mb-3 text-[14.5px] text-muted">{fullAddress}</p>
+        <div className="flex flex-col gap-2.5 sm:flex-row">
           <Button href={site.mapsUrl} size="md" full>
             Directions
           </Button>
@@ -69,57 +129,38 @@ export default function HubPage() {
             Call the office
           </Button>
         </div>
-        <span className="text-[14px] text-teal-ink">{fullAddress}</span>
-      </div>
-
-      {/* Give */}
-      <div className="mt-4">
-        <Button href={site.giveUrl} variant="give" full>
-          Give
-        </Button>
-      </div>
-
-      {/* Coming up */}
-      <h2 className="mt-8 mb-4 font-display text-[24px] tracking-[-.025em]">
-        Coming up
-      </h2>
-      <div className="flex flex-col gap-4">
-        {[spotlight, ...next].filter(Boolean).map((event) => (
-          <EventCard key={event!.slug} event={event!} />
-        ))}
-      </div>
-      <div className="mt-4">
-        <Button href="/events" variant="outline" size="md" full>
-          See all events
-        </Button>
-      </div>
-
-      {/* Quick links */}
-      <h2 className="mt-10 mb-4 font-display text-[24px] tracking-[-.025em]">
-        Quick links
-      </h2>
-      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-        {tiles.map((tile) => (
-          <Link
-            key={tile.href}
-            href={tile.href}
-            className="flex min-h-[64px] flex-col justify-center rounded-xl border border-line px-4 py-3 no-underline transition-colors hover:border-teal-border hover:bg-teal-50/50"
-          >
-            <span className="font-display text-[17px] tracking-[-.01em] text-ink">
-              {tile.label}
-            </span>
-            <span className="text-[13.5px] text-muted">{tile.note}</span>
-          </Link>
-        ))}
-      </div>
+        <div className="mt-2.5">
+          <Button href={site.giveUrl} variant="give" full>
+            Give
+          </Button>
+        </div>
+      </section>
 
       {/* Weekly rhythm */}
-      <h2 className="mt-10 mb-4 font-display text-[24px] tracking-[-.025em]">
+      <h2 className="mt-9 mb-4 font-display text-[24px] tracking-[-.025em]">
         Every week
       </h2>
       <WeeklyRhythm />
 
-      {/* Latest read */}
+      {/* Quick links last */}
+      <h2 className="mt-9 mb-4 font-display text-[24px] tracking-[-.025em]">
+        Quick links
+      </h2>
+      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+        {links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="flex min-h-[64px] flex-col justify-center rounded-xl border border-line px-4 py-3 no-underline transition-colors hover:border-teal-border hover:bg-teal-50/50"
+          >
+            <span className="font-display text-[17px] tracking-[-.01em] text-ink">
+              {link.label}
+            </span>
+            <span className="text-[13.5px] text-muted">{link.note}</span>
+          </Link>
+        ))}
+      </div>
+
       <Link
         href={`/blog/${latestPost.slug}`}
         className="mt-8 flex flex-col gap-1.5 rounded-2xl border border-line bg-surface p-5 no-underline"

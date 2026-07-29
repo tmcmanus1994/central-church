@@ -16,7 +16,9 @@ export function EventCard({
   event: ChurchEvent;
   showImage?: boolean;
 }) {
-  const withImage = showImage && event.image !== null;
+  // Events show an image only when one exists — never a placeholder, so a
+  // photo-less event reads as a deliberate text card rather than a gap.
+  const withImage = showImage && Boolean(event.image);
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white">
       {withImage ? (
@@ -24,7 +26,6 @@ export function EventCard({
           <ImageSlot
             src={event.image}
             alt=""
-            label="event photo 16:10"
             className="aspect-[16/10] w-full"
             sizes="(min-width: 1024px) 25vw, 80vw"
           />

@@ -62,7 +62,7 @@ export default function AboutPage() {
             sizes="(min-width: 1024px) 60vw, 100vw"
             alt="The Central congregation gathered together"
             label="congregation photo · archival or current"
-            className="mt-2 h-[200px] rounded-2xl lg:mt-3 lg:h-[340px]"
+            className="mt-2 aspect-[16/9] w-full rounded-2xl lg:mt-3"
           />
         </div>
       </section>

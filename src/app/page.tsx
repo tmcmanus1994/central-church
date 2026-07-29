@@ -28,7 +28,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero — service times above the fold is non-negotiable */}
-      <section className="relative flex min-h-[560px] items-end lg:min-h-[780px]">
+      <section className="relative flex min-h-[540px] items-stretch lg:min-h-[700px]">
         <ImageSlot
           photoKey="home.hero"
           priority
@@ -39,10 +39,9 @@ export default function HomePage() {
           variant="dark"
           className="absolute inset-0"
         />
-        <div className="relative w-full bg-gradient-to-t from-[#101315]/85 via-[#101315]/25 to-[#101315]/10 px-5 pt-24 pb-6 lg:px-14 lg:pb-14 xl:px-20">
-          {/* Headline centres in the hero; the service-times card keeps its
-              bottom-right position, so it never shifts the text off-centre. */}
-          <div className="relative mx-auto flex max-w-[1440px] flex-col items-center gap-8 text-center lg:gap-14">
+        <div className="relative flex w-full flex-1 items-center justify-center bg-gradient-to-t from-[#101315]/85 via-[#101315]/25 to-[#101315]/10 px-5 py-14 lg:px-14 lg:py-16">
+          {/* Headline and service times stack, centred on both axes. */}
+          <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-7 text-center lg:gap-8">
             <div className="flex max-w-[760px] flex-col items-center gap-4 lg:gap-[22px]">
               <p className="m-0 text-[11px] font-bold tracking-[.16em] uppercase text-teal-light lg:text-xs">
                 Downtown Little Rock, Arkansas
@@ -61,7 +60,7 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
-            <div className="hidden min-w-[288px] flex-col gap-3.5 rounded-[14px] border border-white/20 bg-white/10 p-6 text-left backdrop-blur-sm lg:absolute lg:right-0 lg:bottom-0 lg:flex">
+            <div className="hidden w-full max-w-[400px] flex-col gap-3 rounded-[14px] border border-white/20 bg-white/10 px-6 py-5 text-left backdrop-blur-sm lg:flex">
               <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teal-light">
                 This Sunday
               </span>
@@ -163,7 +162,7 @@ export default function HomePage() {
           alt="A greeter welcoming a first-time visitor in the lobby"
           label="first-time visitor photo · lobby welcome"
           variant="navy"
-          className="h-[220px] lg:h-[520px]"
+          className="aspect-[4/3] w-full lg:aspect-auto lg:h-full"
         />
         <div className="flex flex-col justify-center gap-3.5 px-5 py-8 lg:gap-[22px] lg:px-16 lg:py-[72px]">
           <span className="text-[11px] font-bold tracking-[.14em] uppercase text-teal-light lg:text-xs">
@@ -256,7 +255,7 @@ export default function HomePage() {
               sizes="(min-width: 1024px) 300px, 100vw"
               alt=""
               label="sermon thumbnail"
-              className="h-[150px] w-full shrink-0 rounded-xl lg:h-[190px] lg:w-[300px]"
+              className="aspect-[16/10] w-full shrink-0 rounded-xl lg:w-[300px]"
             />
             <div className="flex flex-col gap-2.5">
               <span className="text-[11px] font-bold tracking-[.1em] uppercase text-primary lg:text-xs">

@@ -30,7 +30,7 @@ export default function MediaHubPage() {
             sizes="(min-width: 1024px) 33vw, 100vw"
             alt=""
             label="album cover"
-            className="h-[160px] rounded-xl"
+            className="aspect-[16/10] w-full rounded-xl"
           />
           <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
             Photo Gallery
@@ -52,7 +52,7 @@ export default function MediaHubPage() {
             alt=""
             label="live stream still"
             variant="dark"
-            className="h-[160px] rounded-xl"
+            className="aspect-[16/10] w-full rounded-xl"
           />
           <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
             Live Stream
@@ -73,7 +73,7 @@ export default function MediaHubPage() {
             sizes="(min-width: 1024px) 33vw, 100vw"
             alt=""
             label="blog photo"
-            className="h-[160px] rounded-xl"
+            className="aspect-[16/10] w-full rounded-xl"
           />
           <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
             Blog
