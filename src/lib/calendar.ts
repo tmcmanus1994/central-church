@@ -4,14 +4,23 @@ import {
   upcomingEvents as seedUpcoming,
 } from "@/content/events";
 import { eventPhotos } from "@/content/event-photos";
+import {
+  ALWAYS_PRIVATE,
+  ALWAYS_PUBLIC,
+  CENTRAL_LOCATIONS,
+  LOCATION_OVERRIDES,
+  PRIVATE_PATTERNS,
+  TITLE_CLEANUP,
+} from "@/content/calendar-rules";
 import { parseIcs, type IcsEvent } from "./ics";
 
 /**
  * Pulls events from the church's Google Calendars.
  *
- * Each ministry keeps its own calendar and only public events go on them, so
- * the calendar itself is the filter — there's no allow-list to maintain here,
- * and nothing private is ever fetched.
+ * Each ministry keeps its own calendar, and those calendars run the building
+ * as well as the congregation — so what arrives here needs filtering, tidying,
+ * and de-duplicating before it's an events list. The rules live in
+ * content/calendar-rules.ts; this file applies them.
  *
  * Feeds are configured by environment variable so calendar URLs stay out of
  * the repo. With none set, the site falls back to the seed data in
@@ -34,6 +43,49 @@ const HORIZON_DAYS = 240;
 
 export function calendarConfigured(): boolean {
   return FEEDS.some((f) => Boolean(process.env[f.env]));
+}
+
+/** Strips the prefixes and room notes staff calendars accumulate. */
+function cleanTitle(raw: string): string {
+  let title = raw.trim();
+  for (const { pattern, replace } of TITLE_CLEANUP) {
+    title = title.replace(pattern, replace);
+  }
+  return title.trim() || raw.trim();
+}
+
+/**
+ * Titles collapse to a comparison key so near-duplicates across calendars
+ * merge: "Kid's Closet" and "Kids Closet Open" both become "kids closet".
+ */
+function dedupeKey(title: string): string {
+  return cleanTitle(title)
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\b(open|opens|meeting|class|classes|group|time)\b/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+/** True when an event is office admin rather than something to publish. */
+export function isPrivateEvent(title: string): boolean {
+  const clean = cleanTitle(title);
+  const lower = clean.toLowerCase();
+  if (ALWAYS_PUBLIC.some((t) => lower === t.toLowerCase())) return false;
+  if (ALWAYS_PRIVATE.some((t) => lower === t.toLowerCase())) return true;
+  return PRIVATE_PATTERNS.some((re) => re.test(clean));
+}
+
+/**
+ * Whether a location is somewhere other than the church building. Off-site
+ * events show their own address instead of Central's — a trip to Silver
+ * Dollar City shouldn't list 823 W 6th St.
+ */
+export function isOffsite(location?: string): boolean {
+  if (!location) return false;
+  const lower = location.toLowerCase();
+  return !CENTRAL_LOCATIONS.some((known) => lower.includes(known));
 }
 
 /** "Back to School Backpack Giveaway" → "back-to-school-backpack-giveaway" */
@@ -73,14 +125,19 @@ function toChurchEvent(
   tag: EventTag,
   ministrySlug: string | undefined,
 ): ChurchEvent {
-  const slug = slugify(ics.summary);
+  const title = cleanTitle(ics.summary);
+  const slug = slugify(title);
+  const rawLocation = LOCATION_OVERRIDES[slug] ?? ics.location?.trim() ?? "";
+  const offsite = isOffsite(rawLocation);
+
   return {
     slug,
-    title: ics.summary,
+    title,
     start: ics.start,
     end: ics.end,
     allDay: ics.allDay || undefined,
-    location: ics.location?.trim() || "823 W 6th St, Little Rock",
+    location: rawLocation || "823 W 6th St, Little Rock",
+    offsite,
     description: toPlainText(ics.description),
     // Calendar entries carry no artwork, so photos come from the local map.
     image: eventPhotos[slug],
@@ -138,12 +195,38 @@ export async function getCalendar(): Promise<CalendarData> {
     return { recurring: seedRecurring, upcoming: seedUpcoming, live: false };
   }
 
-  // Same event on two calendars: keep the first, so feed order decides.
-  const bySlug = new Map<string, ChurchEvent>();
-  for (const event of all) {
-    if (!bySlug.has(event.slug)) bySlug.set(event.slug, event);
+  // Drop office admin — meetings, time off, room bookings.
+  const hidden: string[] = [];
+  const publicEvents = all.filter((e) => {
+    if (isPrivateEvent(e.title)) {
+      hidden.push(e.title);
+      return false;
+    }
+    return true;
+  });
+  if (hidden.length) {
+    console.log(
+      `Calendar: hid ${hidden.length} internal event(s): ${[...new Set(hidden)].join(", ")}`,
+    );
   }
-  const merged = [...bySlug.values()];
+
+  /**
+   * Merge near-duplicates. The same thing often sits on two calendars, or
+   * exists as a weekly series *and* as individually created entries. A
+   * recurring entry always wins, so the weekly rhythm stays authoritative
+   * and its one-off copies don't clutter the Upcoming list.
+   */
+  const byKey = new Map<string, ChurchEvent>();
+  for (const event of publicEvents) {
+    const key = dedupeKey(event.title);
+    const existing = byKey.get(key);
+    if (!existing) {
+      byKey.set(key, event);
+      continue;
+    }
+    if (event.recurring && !existing.recurring) byKey.set(key, event);
+  }
+  const merged = [...byKey.values()];
 
   const now = Date.now();
   const horizon = now + HORIZON_DAYS * 86_400_000;

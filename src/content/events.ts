@@ -20,6 +20,8 @@ export interface ChurchEvent {
   end?: string;
   allDay?: boolean;
   location: string;
+  /** True when the event happens somewhere other than the church building. */
+  offsite?: boolean;
   description?: string;
   /**
    * Path under /public when the automation supplies a photo; `null` means the

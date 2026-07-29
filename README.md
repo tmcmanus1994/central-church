@@ -34,9 +34,7 @@ npm run build  # static production build
 
 ## Events come from Google Calendar
 
-Four public ministry calendars feed the site. Only public events go on them,
-so the calendar itself is the filter — there's no allow-list in code, and
-nothing private is ever fetched.
+Four ministry calendars feed the site.
 
 ```bash
 cp .env.example .env.local   # then paste in the four iCal URLs
@@ -66,6 +64,40 @@ project builds out of the box.
 derived from the event title — Google Calendar carries no artwork. Annual
 events keep their photo year to year automatically, since the title (and so
 the slug) stays the same. An event with no entry renders without an image.
+
+### What reaches the site — `src/content/calendar-rules.ts`
+
+A working church calendar carries more than the congregation needs: staff
+meetings, time off, room bookings, the same event entered twice. One file
+decides what gets through, and it's the only file to edit when the rules need
+adjusting.
+
+- **`PRIVATE_PATTERNS`** — titles that never publish. Meetings that aren't
+  gatherings, time off ("Tammy out of office"), room bookings ("Taurus gym
+  reservation"), set-up and cleaning, private weddings and memorials.
+  Deliberately specific: a rule that's too broad silently hides a real event,
+  which is worse than an admin entry slipping through. Every hidden event is
+  logged at build time (`Calendar: hid 4 internal event(s): …`) so mistakes
+  surface instead of disappearing.
+- **`ALWAYS_PUBLIC` / `ALWAYS_PRIVATE`** — exact-title escape hatches, for
+  when a real event happens to contain a flagged word ("Volunteer Set-Up
+  Party") or a one-off needs hiding without writing a pattern.
+- **`TITLE_CLEANUP`** — strips the noise staff titles accumulate: leading
+  ministry prefixes (`CC - `), trailing room notes (`(Fellowship Hall)`),
+  trailing organiser initials.
+- **`CENTRAL_LOCATIONS`** — the rooms and addresses that mean "at the
+  building". Anything else counts as **off-site**, and an off-site event
+  shows its own address, map, and directions rather than 823 W 6th St — so a
+  trip to Silver Dollar City points at Branson.
+- **`LOCATION_OVERRIDES`** — a location per event slug, for entries whose
+  destination lives in the title and whose location field is blank.
+
+**Duplicates merge.** Titles collapse to a comparison key — case, accents,
+punctuation, and filler words (`open`, `meeting`, `class`, `group`, `time`)
+all drop out — so "Kid's Closet Open" and "Kids Closet" become one entry. When
+an event exists both as a weekly series and as individually created copies,
+**the recurring entry wins**, keeping the weekly rhythm authoritative and the
+Upcoming list clear.
 
 ## Content & data
 

@@ -65,6 +65,16 @@ export default async function EventDetailPage({
   const paragraphs = event.description?.split("\n").filter(Boolean) ?? [];
   const isRecurring = Boolean(event.recurring);
 
+  // An off-site event points at its own address, not the church's — a trip to
+  // Silver Dollar City should never list 823 W 6th St.
+  const mapQuery = event.offsite ? event.location : fullAddress;
+  const mapEmbed = event.offsite
+    ? `https://www.google.com/maps?q=${encodeURIComponent(event.location)}&output=embed`
+    : site.mapEmbedUrl;
+  const directionsUrl = event.offsite
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`
+    : site.mapsUrl;
+
   return (
     <>
       {/* Breadcrumb */}
@@ -176,11 +186,13 @@ export default async function EventDetailPage({
                 Where
               </span>
               <span className="text-[17px] font-semibold">{event.location}</span>
-              <span className="text-base text-body">{fullAddress}</span>
+              {event.offsite ? null : (
+                <span className="text-base text-body">{fullAddress}</span>
+              )}
             </div>
             <iframe
-              title={`Map showing ${fullAddress}`}
-              src={site.mapEmbedUrl}
+              title={`Map showing ${mapQuery}`}
+              src={mapEmbed}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="aspect-square w-full rounded-xl border-0"
@@ -194,7 +206,7 @@ export default async function EventDetailPage({
               <Button href={addToCalendarUrl(event)} variant="outline" full>
                 Add to calendar
               </Button>
-              <Button href={site.mapsUrl} variant="neutral" full>
+              <Button href={directionsUrl} variant="neutral" full>
                 Get directions
               </Button>
             </div>
