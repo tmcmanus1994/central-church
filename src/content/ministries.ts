@@ -12,6 +12,10 @@
 export const REMIND_JOIN_URL =
   "https://www.remind.com/join/ymcentral?utm_medium=ios";
 
+/** Freedom Prayer sessions are booked through Breeze. */
+export const FREEDOM_PRAYER_SIGNUP_URL =
+  "https://lrcentralchurch.breezechms.com/form/e4c59c";
+
 /** Parents book a Friday slot at Kids Closet through the form on its page. */
 export const KIDS_CLOSET_SCHEDULE_HREF = "/ministries/kids-closet#schedule";
 
@@ -308,8 +312,8 @@ export const ministries: Ministry[] = [
     intro:
       "Freedom Prayer is a personal prayer ministry committed to equipping the local church with tools for prayer. With a lens toward recognizing and resolving anything that hinders a mature, abiding prayer life, Freedom Prayer trains congregations to meet the spiritual and emotional needs of their community.",
     utilities: [
-      { label: "Learn More", href: "/plan-a-visit#contact" },
-      { label: "Sign Up", href: "/plan-a-visit#contact" },
+      { label: "Learn More", href: "https://freedomprayer.org" },
+      { label: "Sign Up", href: FREEDOM_PRAYER_SIGNUP_URL },
     ],
     video: {
       embedUrl: "https://player.vimeo.com/video/811893313",
@@ -320,7 +324,7 @@ export const ministries: Ministry[] = [
       title: "Ready to go deeper in prayer?",
       body: "Sign up for a Freedom Prayer session or ask any Sunday — we'd love to pray with you.",
       label: "Sign up",
-      href: "/plan-a-visit#contact",
+      href: FREEDOM_PRAYER_SIGNUP_URL,
     },
   },
   {

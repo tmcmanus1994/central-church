@@ -55,7 +55,7 @@ export default function MediaHubPage() {
         </div>
         <div className="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6">
           <ImageSlot
-            src={mediaPlaceholder}
+            photoKey="media.live"
             sizes="(min-width: 1024px) 33vw, 100vw"
             alt=""
             label="live stream still"

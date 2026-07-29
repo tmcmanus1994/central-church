@@ -55,11 +55,11 @@ export function MinistryPage({
           variant="dark"
           className="absolute inset-0"
         />
-        <div className="relative flex w-full flex-col gap-2 bg-gradient-to-t from-[#101315]/90 to-transparent px-5 pt-16 pb-5 lg:gap-3 lg:px-14 lg:pb-12">
-          <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teal-light lg:text-xs">
+        <div className="relative flex w-full flex-col gap-2 bg-gradient-to-t from-[#101315]/90 via-[#101315]/55 to-transparent px-5 pt-20 pb-5 lg:gap-3 lg:px-14 lg:pb-12">
+          <span className="on-photo text-[11px] font-bold tracking-[.16em] uppercase text-white/90 lg:text-xs">
             {ministry.eyebrow}
           </span>
-          <h1 className="m-0 max-w-[1000px] font-display text-[34px] leading-[1] tracking-[-.035em] text-white text-pretty-wrap lg:text-[64px] lg:tracking-[-.04em]">
+          <h1 className="on-photo m-0 max-w-[1000px] font-display text-[34px] leading-[1] tracking-[-.035em] text-white text-pretty-wrap lg:text-[64px] lg:tracking-[-.04em]">
             {ministry.name}
           </h1>
         </div>

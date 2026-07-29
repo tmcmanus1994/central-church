@@ -25,8 +25,8 @@ export const photos = {
   "home.tile.children": "/photos/home-tile-children.webp",
   "home.tile.teens": "/photos/home-tile-teens.webp",
   "home.tile.life-groups": "/photos/home-tile-life-groups.webp",
-  /** Latest sermon thumbnail — a YouTube still is fine. */
-  "home.sermon": null,
+  /** Latest sermon thumbnail. Falls back to the branded placeholder. */
+  "home.sermon": "/photos/media-placeholder.webp",
 
   // ── Plan a Visit ────────────────────────────────────────────────────────
   /** Greeters at the 6th Street entrance. */
@@ -53,10 +53,11 @@ export const photos = {
   /** Ultra-wide banner. Ministry name sits bottom-left in white. */
   "ministry.children.hero": "/photos/ministry-children-hero.webp",
   "ministry.teens.hero": "/photos/ministry-teens-hero.webp",
-  "ministry.life-groups.hero": "/photos/ministry-life-groups-hero.webp",
+  /** The banner is the first gallery photo — no separate crop to maintain. */
+  "ministry.life-groups.hero": "/photos/life-groups-gallery-1.webp",
   "ministry.kids-closet.hero": "/photos/ministry-kids-closet-hero.webp",
   "ministry.freedom-prayer.hero": "/photos/ministry-freedom-prayer-hero.webp",
-  "ministry.iglesia.hero": "/photos/ministry-iglesia-hero.webp",
+  "ministry.iglesia.hero": "/photos/iglesia-gallery-2.webp",
   /** Square headshot for the ministry contact block. */
   "ministry.children.contact": "/photos/leadership-tammy-beck.webp",
   "ministry.teens.contact": "/photos/leadership-james-mosley.webp",
@@ -65,8 +66,8 @@ export const photos = {
   "ministry.life-groups.contact": "/photos/leadership-shannon-cooper.webp",
 
   // ── Media hub ───────────────────────────────────────────────────────────
-  "media.sermon": null,
-  "media.live": null,
+  "media.sermon": "/photos/media-placeholder.webp",
+  "media.live": "/photos/media-placeholder.webp",
   /** Falls back to the most recent post's thumbnail — see media.ts. */
   "media.blog": null,
 } satisfies Record<string, string | null>;
@@ -93,6 +94,7 @@ export const galleries: Record<string, string[]> = {
     "/photos/life-groups-gallery-2.webp",
     "/photos/life-groups-gallery-3.webp",
     "/photos/life-groups-gallery-4.webp",
+    "/photos/life-groups-gallery-5.webp",
   ],
   "kids-closet": [
     "/photos/kids-closet-gallery-1.webp",
@@ -106,6 +108,7 @@ export const galleries: Record<string, string[]> = {
     "/photos/iglesia-gallery-2.webp",
     "/photos/iglesia-gallery-3.webp",
     "/photos/iglesia-gallery-4.webp",
+    "/photos/iglesia-gallery-5.webp",
   ],
 };
 

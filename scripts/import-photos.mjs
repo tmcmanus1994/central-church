@@ -84,15 +84,16 @@ const MAP = {
   "Plan a vist - one big reunion": ["visit-what-to-expect", "card"],
   "Central Media Placeholder": ["media-placeholder", "wide"],
   "kids closet banner": ["ministry-kids-closet-hero", "hero"],
-  "Igelsia photo 2": ["ministry-iglesia-hero", "hero"],
+  "Igelsia photo 2": ["iglesia-gallery-5", "card"],
   "Freedom prayer banner": ["ministry-freedom-prayer-hero", "hero"],
   "kids closet photo 1": ["kids-closet-gallery-1", "card"],
   "Kids closet photo 2": ["kids-closet-gallery-2", "card"],
   "kids closet photo 3": ["kids-closet-gallery-3", "card"],
   "kids closet photo 4": ["kids-closet-gallery-4", "card"],
-  // Neither Life Groups upload is a wide shot; the landscape one takes the
-  // banner because its faces sit in the middle band a 21:9 crop keeps.
-  "life group photos 4": ["ministry-life-groups-hero", "hero"],
+  "Teens Banner": ["ministry-teens-hero", "hero"],
+  // The Life Groups and Iglesia banners are the gallery images themselves —
+  // see src/content/photos.ts, which points the hero keys straight at them.
+  "life group photos 4": ["life-groups-gallery-5", "card"],
   "life group photos 5": ["life-groups-gallery-4", "card"],
   // Replacement headshots, uploaded under bare first names.
   Tammy: ["leadership-tammy-beck", "portrait"],
