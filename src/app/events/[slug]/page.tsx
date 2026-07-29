@@ -5,11 +5,10 @@ import { ArrowLink, Button } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
 import { Tag } from "@/components/Tag";
 import {
-  allEvents,
-  getEvent,
-  recurringEvents,
-  upcomingEvents,
-} from "@/content/events";
+  getAllCalendarEvents,
+  getCalendar,
+  getCalendarEvent,
+} from "@/lib/calendar";
 import { getMinistry } from "@/content/ministries";
 import {
   addToCalendarUrl,
@@ -21,8 +20,13 @@ import {
 } from "@/lib/format";
 import { site, fullAddress } from "@/lib/site";
 
-export function generateStaticParams() {
-  return allEvents.map((e) => ({ slug: e.slug }));
+/** Events change between deploys, so pages regenerate on a 15-minute cycle
+ *  and a brand-new event renders on first request rather than 404ing. */
+export const revalidate = 900;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  return (await getAllCalendarEvents()).map((e) => ({ slug: e.slug }));
 }
 
 export async function generateMetadata({
@@ -30,7 +34,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const event = getEvent((await params).slug);
+  const event = await getCalendarEvent((await params).slug);
   if (!event) return {};
   return {
     title: `${event.title} | Events`,
@@ -45,9 +49,12 @@ export default async function EventDetailPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const event = getEvent((await params).slug);
+  const { recurring, upcoming } = await getCalendar();
+  const event = await getCalendarEvent((await params).slug);
   if (!event) notFound();
 
+  const recurringEvents = recurring;
+  const upcomingEvents = upcoming;
   const ministry = event.ministrySlug ? getMinistry(event.ministrySlug) : null;
   const alsoThisMonth = upcomingEvents
     .filter(

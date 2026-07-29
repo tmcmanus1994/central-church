@@ -32,9 +32,11 @@ function monthRangeLabel(events: ChurchEvent[]) {
 
 export function EventsExplorer({
   upcoming,
+  recurring,
   spotlight,
 }: {
   upcoming: ChurchEvent[];
+  recurring: ChurchEvent[];
   spotlight?: ChurchEvent;
 }) {
   const [active, setActive] = useState<EventTag | null>(null);
@@ -137,7 +139,7 @@ export function EventsExplorer({
           <p className="m-0 mb-5 text-[15px] leading-[1.6] text-muted lg:mb-6 lg:text-base">
             Our weekly rhythm. No sign-up needed — just come.
           </p>
-          <WeeklyRhythm />
+          <WeeklyRhythm events={recurring} />
         </div>
         <div>
           <h2 className="m-0 mb-1.5 font-display text-[24px] tracking-[-.025em] lg:text-[32px]">

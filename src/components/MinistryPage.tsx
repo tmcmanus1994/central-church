@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Ministry } from "@/content/ministries";
-import { getRecurringForMinistry } from "@/content/events";
+import type { ChurchEvent } from "@/content/events";
 import { annualPhotos, galleries, photos, type PhotoKey } from "@/content/photos";
 import { recurringWhen } from "@/lib/format";
 import { ArrowLink, Button } from "./Button";
@@ -16,8 +16,13 @@ function key(candidate: string): PhotoKey | undefined {
  * only when the ministry's content object supplies them; Iglesia renders the
  * whole page in Spanish via lang="es".
  */
-export function MinistryPage({ ministry }: { ministry: Ministry }) {
-  const recurring = getRecurringForMinistry(ministry.slug);
+export function MinistryPage({
+  ministry,
+  recurring = [],
+}: {
+  ministry: Ministry;
+  recurring?: ChurchEvent[];
+}) {
   const labels =
     ministry.lang === "es"
       ? {

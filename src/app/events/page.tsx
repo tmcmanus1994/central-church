@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
-import { getSpotlightEvent, upcomingEvents } from "@/content/events";
+import { getCalendar, getCalendarSpotlight } from "@/lib/calendar";
 import { EventsExplorer } from "./EventsExplorer";
 
 export const metadata: Metadata = {
@@ -9,8 +9,13 @@ export const metadata: Metadata = {
     "See what's happening at Central Church of Christ in downtown Little Rock — weekly worship and classes, ministry events, and community outreach.",
 };
 
-export default function EventsPage() {
-  const spotlight = getSpotlightEvent();
+export const revalidate = 900;
+
+export default async function EventsPage() {
+  const [{ recurring, upcoming }, spotlight] = await Promise.all([
+    getCalendar(),
+    getCalendarSpotlight(),
+  ]);
   return (
     <div className="mx-auto max-w-[1440px] px-5 pt-8 pb-12 lg:px-14 lg:pt-16 lg:pb-[88px]">
       <div className="flex items-start justify-between gap-8">
@@ -31,7 +36,7 @@ export default function EventsPage() {
           Subscribe to our calendar
         </ArrowLink>
       </div>
-      <EventsExplorer upcoming={upcomingEvents} spotlight={spotlight} />
+      <EventsExplorer upcoming={upcoming} recurring={recurring} spotlight={spotlight} />
     </div>
   );
 }

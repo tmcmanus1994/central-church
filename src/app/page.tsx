@@ -5,7 +5,7 @@ import { ImageSlot } from "@/components/ImageSlot";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SpotlightBanner } from "@/components/SpotlightBanner";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
-import { getSpotlightEvent, upcomingEvents } from "@/content/events";
+import { getCalendar, getCalendarSpotlight } from "@/lib/calendar";
 import { ministries } from "@/content/ministries";
 import { blogPosts } from "@/content/blog";
 import { latestSermon } from "@/content/media";
@@ -20,9 +20,15 @@ const ministryTiles = [
   { slug: "freedom-prayer", photo: false },
 ] as const;
 
-export default function HomePage() {
-  const spotlight = getSpotlightEvent();
-  const thisWeek = upcomingEvents.filter((e) => !e.spotlight).slice(0, 4);
+/** Events come from Google Calendar; re-checked every 15 minutes. */
+export const revalidate = 900;
+
+export default async function HomePage() {
+  const [{ recurring, upcoming }, spotlight] = await Promise.all([
+    getCalendar(),
+    getCalendarSpotlight(),
+  ]);
+  const thisWeek = upcoming.filter((e) => e.slug !== spotlight?.slug).slice(0, 4);
   const latestPost = blogPosts[0];
 
   return (
@@ -150,7 +156,7 @@ export default function HomePage() {
           ))}
         </div>
         <div className="mt-6 lg:mt-10">
-          <WeeklyRhythm columns />
+          <WeeklyRhythm events={recurring} columns />
         </div>
       </section>
 

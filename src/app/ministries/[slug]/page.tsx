@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MinistryPage } from "@/components/MinistryPage";
 import { getMinistry, ministries } from "@/content/ministries";
+import { getCalendar } from "@/lib/calendar";
+
+export const revalidate = 900;
 
 export function generateStaticParams() {
   // Iglesia lives at /iglesia (redirected in next.config.ts)
@@ -31,5 +34,11 @@ export default async function MinistryRoute({
   const { slug } = await params;
   const ministry = getMinistry(slug);
   if (!ministry || slug === "iglesia") notFound();
-  return <MinistryPage ministry={ministry} />;
+  const { recurring } = await getCalendar();
+  return (
+    <MinistryPage
+      ministry={ministry}
+      recurring={recurring.filter((e) => e.ministrySlug === slug)}
+    />
+  );
 }

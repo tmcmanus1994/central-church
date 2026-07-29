@@ -1,15 +1,18 @@
-import { recurringEvents } from "@/content/events";
+import type { ChurchEvent } from "@/content/events";
 import { recurringWhen } from "@/lib/format";
 import { ArrowLink } from "./Button";
 
 /** The seven-item weekly rhythm list, reused on the homepage and events page. */
 export function WeeklyRhythm({
+  events,
   columns = false,
   subscribeLink = true,
 }: {
+  events: ChurchEvent[];
   columns?: boolean;
   subscribeLink?: boolean;
 }) {
+  const recurringEvents = events;
   if (columns) {
     return (
       <div className="rounded-2xl border border-line bg-surface p-5 lg:p-8">

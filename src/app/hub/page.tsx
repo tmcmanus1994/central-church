@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLink, Button } from "@/components/Button";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
 import { bulletin } from "@/content/bulletin";
-import { getSpotlightEvent, upcomingEvents } from "@/content/events";
+import { getCalendar, getCalendarSpotlight } from "@/lib/calendar";
 import { blogPosts } from "@/content/blog";
 import { eventWhen } from "@/lib/format";
 import { site, fullAddress } from "@/lib/site";
@@ -35,9 +35,17 @@ const links = [
   { label: "Blog", href: "/blog", note: "Reflections & prayer" },
 ];
 
-export default function HubPage() {
-  const spotlight = getSpotlightEvent();
-  const thisWeek = [spotlight, ...upcomingEvents.filter((e) => !e.spotlight)]
+export const revalidate = 900;
+
+export default async function HubPage() {
+  const [{ recurring, upcoming }, spotlight] = await Promise.all([
+    getCalendar(),
+    getCalendarSpotlight(),
+  ]);
+  const thisWeek = [
+    spotlight,
+    ...upcoming.filter((e) => e.slug !== spotlight?.slug),
+  ]
     .filter(Boolean)
     .slice(0, 4);
   const latestPost = blogPosts[0];
@@ -140,7 +148,7 @@ export default function HubPage() {
       <h2 className="mt-9 mb-4 font-display text-[24px] tracking-[-.025em]">
         Every week
       </h2>
-      <WeeklyRhythm />
+      <WeeklyRhythm events={recurring} />
 
       {/* Quick links last */}
       <h2 className="mt-9 mb-4 font-display text-[24px] tracking-[-.025em]">

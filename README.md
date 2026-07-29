@@ -32,6 +32,41 @@ npm run build  # static production build
 | `/blog`, `/blog/[slug]` | Index + article template (~30 posts migrate with URLs preserved) |
 | `/give` | Redirects to Pushpay |
 
+## Events come from Google Calendar
+
+Four public ministry calendars feed the site. Only public events go on them,
+so the calendar itself is the filter — there's no allow-list in code, and
+nothing private is ever fetched.
+
+```bash
+cp .env.example .env.local   # then paste in the four iCal URLs
+```
+
+Each calendar maps to the tag its events wear on the site:
+
+| Calendar | Tag | Also links to |
+| --- | --- | --- |
+| Central Church | All Church | — |
+| Outreach | Outreach | — |
+| Central Teens | Central Teens | `/ministries/teens` |
+| Central Kids | Central Kids | `/ministries/children` |
+
+**How it behaves.** Pages revalidate every 15 minutes, so a calendar edit
+appears without a deploy. Events with an `RRULE` become the weekly rhythm
+list; one-off events become the chronological Upcoming list, filtered to the
+next 240 days. Cancelled events are dropped. A new event gets its page on
+first request rather than 404ing until the next build.
+
+**If a feed is unreachable** the site falls back to the seed events in
+`src/content/events.ts`, so a network blip never renders an empty calendar.
+With no feeds configured at all it uses that same seed data, which is why the
+project builds out of the box.
+
+**Event photos** live in `src/content/event-photos.ts`, keyed by the slug
+derived from the event title — Google Calendar carries no artwork. Annual
+events keep their photo year to year automatically, since the title (and so
+the slug) stays the same. An event with no entry renders without an image.
+
 ## Content & data
 
 - `src/lib/site.ts` — **the** source of NAP facts (name, address, phone,
@@ -105,8 +140,8 @@ list is short. See `npm run shots` output for the current state.
   worship), the lobby-welcome and greeter shots, six ministry banners, and
   Tammy Beck's portrait. Run `npm run shots` to see them all in context.
 - **Visit form backend** — markup/validation is final; submission endpoint TBD.
-- **Automation feeds** — events JSON, bulletin summary + PDF archive, podcast
-  RSS, and the real calendar-subscribe (.ics) URL.
+- **Bulletin automation** — `src/content/bulletin.ts` is hand-edited until
+  the weekly PDF parser is wired up; `/bulletin` and `/hub` both read it.
 - **Blog migration** — ~30 posts from the current site, existing URLs preserved.
 - **Map embeds** — placeholder slots on Plan a Visit, event detail, footer.
 

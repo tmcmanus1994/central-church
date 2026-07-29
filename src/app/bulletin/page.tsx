@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
 import { bulletin } from "@/content/bulletin";
-import { upcomingEvents } from "@/content/events";
+import { getCalendar } from "@/lib/calendar";
 import { eventWhen } from "@/lib/format";
 import Link from "next/link";
 
@@ -13,8 +13,11 @@ export const metadata: Metadata = {
 };
 
 
-export default function BulletinPage() {
-  const thisWeek = upcomingEvents.slice(0, 3);
+export const revalidate = 900;
+
+export default async function BulletinPage() {
+  const { recurring, upcoming } = await getCalendar();
+  const thisWeek = upcoming.slice(0, 3);
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-8 lg:px-14 lg:py-16">
       <span className="text-xs font-bold tracking-[.14em] uppercase text-primary">
@@ -101,7 +104,7 @@ export default function BulletinPage() {
               </span>
             ))}
           </div>
-          <WeeklyRhythm />
+          <WeeklyRhythm events={recurring} />
         </aside>
       </div>
     </div>
