@@ -57,6 +57,20 @@ export const PRIVATE_PATTERNS: RegExp[] = [
 ];
 
 /**
+ * Entries that read as unfinished rather than private — a title someone
+ * started and saved before typing the rest, like "with Stephen" sitting on
+ * the Teens calendar. A dangling connector can't begin a real event name.
+ *
+ * These are hidden but logged apart from the private ones, because the fix
+ * is on the calendar rather than in this file: give the entry a full title
+ * and it publishes on the next revalidate.
+ */
+export const INCOMPLETE_PATTERNS: RegExp[] = [
+  /^(with|w\/|and|&|plus|featuring|feat\.?)\b/i,
+  /^[-–—,:;·|]/,
+];
+
+/**
  * Escape hatch. A title matching one of these is always published, even if a
  * pattern above would have hidden it. Use this when a real event happens to
  * contain a flagged word — "Volunteer Set-Up Party", say.

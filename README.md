@@ -89,6 +89,11 @@ adjusting.
   which is worse than an admin entry slipping through. Every hidden event is
   logged at build time (`Calendar: hid 4 internal event(s): …`) so mistakes
   surface instead of disappearing.
+- **`INCOMPLETE_PATTERNS`** — entries that read as half-typed rather than
+  private, like a Teens entry titled just "with Stephen". A dangling
+  connector can't start a real event name. These are logged separately from
+  the private ones because the fix is on the calendar: give the entry a full
+  title and it publishes on the next revalidate.
 - **`ALWAYS_PUBLIC` / `ALWAYS_PRIVATE`** — exact-title escape hatches, for
   when a real event happens to contain a flagged word ("Volunteer Set-Up
   Party") or a one-off needs hiding without writing a pattern.

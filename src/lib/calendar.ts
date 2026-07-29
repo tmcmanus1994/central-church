@@ -8,6 +8,7 @@ import {
   ALWAYS_PRIVATE,
   ALWAYS_PUBLIC,
   CENTRAL_LOCATIONS,
+  INCOMPLETE_PATTERNS,
   LOCATION_OVERRIDES,
   PRIVATE_PATTERNS,
   TITLE_CLEANUP,
@@ -80,6 +81,15 @@ export function isPrivateEvent(title: string): boolean {
   if (ALWAYS_PUBLIC.some((t) => lower === t.toLowerCase())) return false;
   if (ALWAYS_PRIVATE.some((t) => lower === t.toLowerCase())) return true;
   return PRIVATE_PATTERNS.some((re) => re.test(clean));
+}
+
+/** True when a title reads as half-typed rather than finished. */
+export function isIncompleteTitle(title: string): boolean {
+  const clean = cleanTitle(title);
+  if (ALWAYS_PUBLIC.some((t) => clean.toLowerCase() === t.toLowerCase())) {
+    return false;
+  }
+  return INCOMPLETE_PATTERNS.some((re) => re.test(clean));
 }
 
 /**
@@ -201,11 +211,17 @@ export async function getCalendar(): Promise<CalendarData> {
     return { recurring: weeklyRhythm, upcoming: seedUpcoming, live: false };
   }
 
-  // Drop office admin — meetings, time off, room bookings.
+  // Drop office admin — meetings, time off, room bookings — and half-typed
+  // entries, which are logged apart because the fix is on the calendar.
   const hidden: string[] = [];
+  const unfinished: string[] = [];
   const publicEvents = all.filter((e) => {
     if (isPrivateEvent(e.title)) {
       hidden.push(e.title);
+      return false;
+    }
+    if (isIncompleteTitle(e.title)) {
+      unfinished.push(e.title);
       return false;
     }
     return true;
@@ -213,6 +229,11 @@ export async function getCalendar(): Promise<CalendarData> {
   if (hidden.length) {
     console.log(
       `Calendar: hid ${hidden.length} internal event(s): ${[...new Set(hidden)].join(", ")}`,
+    );
+  }
+  if (unfinished.length) {
+    console.warn(
+      `Calendar: hid ${unfinished.length} unfinished entr(ies) — give them a full title on the calendar and they publish: ${[...new Set(unfinished)].join(", ")}`,
     );
   }
 

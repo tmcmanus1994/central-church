@@ -125,6 +125,19 @@ function unfold(text: string): string[] {
   return out;
 }
 
+/** "20260808" → "20260807", month and year rollover included. */
+function previousDate(yyyymmdd: string): string {
+  const prev = new Date(
+    Date.UTC(
+      +yyyymmdd.slice(0, 4),
+      +yyyymmdd.slice(4, 6) - 1,
+      +yyyymmdd.slice(6, 8) - 1,
+    ),
+  );
+  const pad = (n: number, w = 2) => String(n).padStart(w, "0");
+  return `${pad(prev.getUTCFullYear(), 4)}${pad(prev.getUTCMonth() + 1)}${pad(prev.getUTCDate())}`;
+}
+
 export function parseIcs(text: string, defaultTz = "America/Chicago"): IcsEvent[] {
   const events: IcsEvent[] = [];
   let current: Partial<IcsEvent> | null = null;
@@ -138,6 +151,11 @@ export function parseIcs(text: string, defaultTz = "America/Chicago"): IcsEvent[
     }
     if (line === "END:VEVENT") {
       if (current?.uid && current.summary && current.start && !cancelled) {
+        // A malformed all-day entry can end before it starts once DTEND is
+        // made inclusive. Drop the end rather than render a negative range.
+        if (current.end && new Date(current.end) < new Date(current.start)) {
+          delete current.end;
+        }
         events.push(current as IcsEvent);
       }
       current = null;
@@ -185,7 +203,19 @@ export function parseIcs(text: string, defaultTz = "America/Chicago"): IcsEvent[
         break;
       }
       case "DTEND": {
-        const { iso } = parseDateValue(value, params, defaultTz);
+        const raw = value.trim();
+        const isDate = params.VALUE === "DATE" || /^\d{8}$/.test(raw);
+        /**
+         * RFC 5545 makes an all-day DTEND *exclusive*: an event on Aug 7 and
+         * nothing else carries DTEND 20260808. Step back a day so `end` is
+         * the last day the event actually runs, which is what the renderers
+         * assume — otherwise every all-day event reads a day long.
+         */
+        const { iso } = parseDateValue(
+          isDate ? previousDate(raw) : raw,
+          params,
+          defaultTz,
+        );
         current.end = iso;
         break;
       }

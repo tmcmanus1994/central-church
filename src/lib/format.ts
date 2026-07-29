@@ -65,14 +65,30 @@ export function eventWhen(event: ChurchEvent) {
   return `${fmt(event.start, { weekday: "short", month: "short", day: "numeric" })} · ${timeOf(event.start)}`;
 }
 
-/** "Saturday, August 8, 2026" */
+/** Calendar day in Chicago, for comparing two instants by date alone. */
+function dayKey(iso: string) {
+  return fmt(iso, { year: "numeric", month: "2-digit", day: "2-digit" });
+}
+
+/**
+ * "Saturday, August 8, 2026", or "Monday, August 31 – Tuesday, September 1,
+ * 2026" when the event spans days. A trip has to show both ends of itself.
+ */
 export function eventDateLong(event: ChurchEvent) {
-  return fmt(event.start, {
+  const long = {
     weekday: "long",
     month: "long",
     day: "numeric",
     year: "numeric",
-  });
+  } as const;
+
+  if (!event.end || dayKey(event.start) === dayKey(event.end)) {
+    return fmt(event.start, long);
+  }
+
+  const sameYear = fmt(event.start, { year: "numeric" }) === fmt(event.end, { year: "numeric" });
+  const { year: _drop, ...noYear } = long;
+  return `${fmt(event.start, sameYear ? noYear : long)} – ${fmt(event.end, long)}`;
 }
 
 /** "9:00 – 11:00 AM" */
@@ -89,10 +105,29 @@ export function addToCalendarUrl(event: ChurchEvent) {
       .toISOString()
       .replace(/[-:]/g, "")
       .replace(/\.\d{3}/, "");
+  /**
+   * All-day events use Google's bare YYYYMMDD form, where the end is
+   * exclusive — so the inclusive end we store gets a day added back.
+   */
+  const dayStamp = (iso: string, plusDays = 0) => {
+    // en-CA renders as YYYY-MM-DD, which parses unambiguously.
+    const ymd = new Intl.DateTimeFormat("en-CA", {
+      timeZone: TZ,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date(iso));
+    const d = new Date(`${ymd}T00:00:00Z`);
+    d.setUTCDate(d.getUTCDate() + plusDays);
+    return d.toISOString().slice(0, 10).replace(/-/g, "");
+  };
+
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: event.title,
-    dates: `${toStamp(event.start)}/${toStamp(event.end ?? event.start)}`,
+    dates: event.allDay
+      ? `${dayStamp(event.start)}/${dayStamp(event.end ?? event.start, 1)}`
+      : `${toStamp(event.start)}/${toStamp(event.end ?? event.start)}`,
     location: event.location,
     details: event.description ?? "",
   });
