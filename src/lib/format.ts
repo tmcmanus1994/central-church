@@ -53,13 +53,24 @@ export function recurringWhen(event: ChurchEvent) {
   return `${days} ${start}${end}`.trim();
 }
 
-/** "Sat Aug 8 · 9:00 AM" for one-day events, "Aug 15–17" for multi-day */
+/**
+ * "Sat Aug 8 · 9:00 AM" for a timed event, "Aug 15–17" across days, and just
+ * "Fri Aug 7" for an all-day one.
+ *
+ * An all-day event never shows a clock time. Bulletin entries carry a
+ * placeholder hour so they sort into the right day, and printing it would
+ * advertise a start time nobody agreed to.
+ */
 export function eventWhen(event: ChurchEvent) {
-  if (event.allDay && event.end) {
-    const sameMonth = monthShort(event.start) === monthShort(event.end);
+  if (event.allDay) {
+    const spansDays = event.end && dayKey(event.start) !== dayKey(event.end);
+    if (!spansDays) {
+      return fmt(event.start, { weekday: "short", month: "short", day: "numeric" });
+    }
+    const sameMonth = monthShort(event.start) === monthShort(event.end!);
     const endPart = sameMonth
-      ? fmt(event.end, { day: "numeric" })
-      : fmt(event.end, { month: "short", day: "numeric" });
+      ? fmt(event.end!, { day: "numeric" })
+      : fmt(event.end!, { month: "short", day: "numeric" });
     return `${fmt(event.start, { month: "short", day: "numeric" })}–${endPart}`;
   }
   return `${fmt(event.start, { weekday: "short", month: "short", day: "numeric" })} · ${timeOf(event.start)}`;

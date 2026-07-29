@@ -65,13 +65,14 @@ export default async function HubPage() {
         <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
           Announcements
         </h2>
-        <ul className="m-0 flex list-none flex-col gap-3 p-0">
+        <ul className="m-0 flex list-none flex-col gap-3.5 p-0">
           {bulletin.announcements.map((a) => (
             <li
-              key={a.slice(0, 32)}
-              className="border-b border-line pb-3 text-[15.5px] leading-[1.6] text-body last:border-0 last:pb-0"
+              key={a.title}
+              className="border-b border-line pb-3.5 text-[15.5px] leading-[1.6] last:border-0 last:pb-0"
             >
-              {a}
+              <span className="block font-semibold text-ink">{a.title}</span>
+              <span className="text-body">{a.body}</span>
             </li>
           ))}
         </ul>
@@ -101,18 +102,30 @@ export default async function HubPage() {
         </div>
       </section>
 
-      {/* Prayer */}
+      {/* Prayer — named requests stay in the printed bulletin, not on a public URL */}
       <section className="mt-4 rounded-2xl border border-teal-border bg-teal-50 p-5 lg:p-6">
         <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
-          Prayer requests
+          Prayer
         </h2>
-        <ul className="m-0 flex list-none flex-col gap-3 p-0">
-          {bulletin.prayerRequests.map((r) => (
-            <li key={r.slice(0, 32)} className="text-[15.5px] leading-[1.6] text-teal-ink">
-              {r}
-            </li>
+        <div className="flex flex-col gap-3">
+          {bulletin.prayer.map((s) => (
+            <div key={s.heading}>
+              <span className="mb-1 block text-[11px] font-bold tracking-[.14em] uppercase text-teal-ink">
+                {s.heading}
+              </span>
+              <ul className="m-0 flex list-none flex-col gap-2 p-0">
+                {s.items.map((p) => (
+                  <li
+                    key={p.slice(0, 32)}
+                    className="text-[15.5px] leading-[1.6] text-teal-ink"
+                  >
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
 
       {/* Times, directions, giving */}

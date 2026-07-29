@@ -26,3 +26,8 @@ next-env.d.ts
 
 # generated photo-slot screenshots (npm run shots)
 /photo-slots/
+
+# parsed bulletin drafts (npm run bulletin) — these carry the full prayer
+# list, member phone numbers, and giving figures straight out of the PDF.
+# Curated copy goes in src/content/bulletin.ts; the raw draft stays local.
+/content-drafts/

@@ -114,6 +114,57 @@ weekly rhythm's own titles are seeded into that key set first, so a one-off
 copy of something that already meets weekly (an "Encouragers Class" entry on
 a Thursday) drops out instead of appearing twice.
 
+## The bulletin is the source of truth
+
+The weekly PDF bulletin carries things the calendar doesn't: events nobody
+added, real names for entries someone abbreviated, and the standing
+information (classes, ongoing ministries, order of worship) that never
+appears on a calendar at all. It's cross-referenced against the feeds.
+
+```bash
+npm run bulletin -- Weekly_Bulletin_072626.pdf
+```
+
+That parses the PDF into `content-drafts/bulletin-<week>.json` and prints a
+report: every "Looking Ahead" event, which ones are **new** against
+`src/content/bulletin-events.ts`, and every line carrying information that
+shouldn't be published. It deliberately does *not* write
+`src/content/bulletin.ts` — bulletin shorthand ("30's potluck", "Chili and
+Pushups", "Shannabration") needs a human to turn it into copy a first-time
+visitor can read.
+
+**`src/content/bulletin-events.ts`** is where bulletin events live, and
+`lib/calendar.ts` folds them into the feeds three ways:
+
+- A calendar entry matching one takes the bulletin's **title, description,
+  and location** — that's where the bulletin is better. A Teens entry saved
+  as just "with Stephen" becomes "Fun with Stephen" with a description.
+- The calendar keeps its own **date and time**, because it's edited all week
+  while the bulletin is a Sunday snapshot.
+- Anything the calendar has no match for is **added outright**, so a
+  forgotten calendar entry doesn't mean a missing event on the site.
+
+Matching is by title, plus an `aliases` list for the shorthand the calendar
+actually uses. All three behaviors log at build time.
+
+### What stays off the site
+
+A printed bulletin handed to the congregation and a page a search engine
+indexes are different things. `bulletinPolicy` in `src/content/bulletin.ts`
+withholds three categories, all off by default:
+
+| | Why |
+| --- | --- |
+| Named prayer requests | health information about real people |
+| Weekly offering and budget | internal finances |
+| Wedding and baby showers | member-personal, not church programming |
+
+Member phone numbers and personal email addresses are never published —
+announcements route to a staff contact instead. `withheldFromBulletin` in
+`bulletin-events.ts` records what was held back and why, so nothing is
+silently lost. `content-drafts/` is gitignored for the same reason: the raw
+parse contains all of it.
+
 ## Content & data
 
 - `src/lib/site.ts` — **the** source of NAP facts (name, address, phone,
