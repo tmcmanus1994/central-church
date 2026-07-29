@@ -27,6 +27,33 @@
   --color-surface: #f7f4ef;
   --color-sand: #f1ede6;
 
+  /*
+    Ministry colors. A calendar full of one hue reads as a single undivided
+    list; giving each ministry its own makes the page scannable — you can find
+    the Kids events without reading a word. Every `deep` clears AA on both its
+    own tint and white (lowest is Kids at 5.3:1), so these carry text. `solid`
+    is for rules and dots only, never type.
+  */
+  --color-church-tint: #eaf1f4;
+  --color-church-deep: #235568;
+  --color-church-solid: #2f6e89;
+
+  --color-outreach-tint: #e7f0e8;
+  --color-outreach-deep: #2f6237;
+  --color-outreach-solid: #3e7d49;
+
+  --color-kids-tint: #faeeda;
+  --color-kids-deep: #8a5715;
+  --color-kids-solid: #b0711c;
+
+  --color-teens-tint: #edeaf8;
+  --color-teens-deep: #4d4090;
+  --color-teens-solid: #6355ad;
+
+  --color-groups-tint: #fae8e1;
+  --color-groups-deep: #8a3f27;
+  --color-groups-solid: #a64b30;
+
   --font-display: "Poppins", ui-sans-serif, sans-serif;
   --font-sans: "Manrope Variable", "Manrope", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;

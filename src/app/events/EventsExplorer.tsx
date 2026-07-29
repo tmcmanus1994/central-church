@@ -7,6 +7,7 @@ import { EventRow } from "@/components/EventRow";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
 import type { ChurchEvent, EventTag } from "@/content/events";
 import { eventWhen } from "@/lib/format";
+import { paletteFor } from "@/lib/ministry-colors";
 
 const FILTERS: { label: string; tag: EventTag | null }[] = [
   { label: "All Events", tag: null },
@@ -59,6 +60,9 @@ export function EventsExplorer({
       >
         {FILTERS.map((f) => {
           const isActive = active === f.tag;
+          // Each filter wears the color its events wear, so the chip row
+          // doubles as the legend for the list below it.
+          const c = paletteFor(f.tag ?? undefined);
           return (
             <button
               key={f.label}
@@ -67,8 +71,8 @@ export function EventsExplorer({
               onClick={() => setActive(f.tag)}
               className={`shrink-0 rounded-full px-[15px] py-[9px] text-[13.5px] font-semibold transition-colors lg:px-[18px] lg:py-[11px] lg:text-[14.5px] ${
                 isActive
-                  ? "bg-primary font-bold text-white"
-                  : "border border-line text-body hover:border-primary hover:text-primary"
+                  ? `font-bold ${c.solid}`
+                  : `border border-line hover:border-transparent ${c.text} ${c.hoverChip}`
               }`}
             >
               {f.label}
@@ -94,7 +98,9 @@ export function EventsExplorer({
                 />
               ) : null}
               <div className="flex flex-col gap-3 p-5 lg:p-7">
-                <span className="inline-flex w-fit items-center rounded-full bg-accent-tint px-3 py-[6px] text-[11px] font-bold tracking-[.1em] uppercase text-accent-deep">
+                <span
+                  className={`inline-flex w-fit items-center rounded-full px-3 py-[6px] text-[11px] font-bold tracking-[.1em] uppercase ${paletteFor(spotlight.tag).chip}`}
+                >
                   {spotlight.tag} · {eventWhen(spotlight)}
                 </span>
                 <h2 className="m-0 font-display text-[26px] leading-[1.1] tracking-[-.025em] text-pretty-wrap lg:text-[34px] lg:tracking-[-.03em]">

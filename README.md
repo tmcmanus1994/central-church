@@ -196,6 +196,31 @@ fields, `PersonCard`, `SiteHeader` (info bar + nav + mobile sheet),
 (with a note describing the intended shot) otherwise — photography drops in
 without layout changes.
 
+### Ministry colors
+
+A month of events all wearing the same teal reads as one undifferentiated
+column, so each ministry carries its own hue — you can find the Kids events
+without reading a word.
+
+| Ministry | Color |
+| --- | --- |
+| All Church | teal (the brand color) |
+| Outreach | green |
+| Central Kids | amber |
+| Central Teens | violet |
+| Life Groups | terracotta |
+
+`src/lib/ministry-colors.ts` maps a tag to the class strings for a chip, a
+date block, text, a card's top rule, row hover, and a filled filter chip.
+It's applied by `Tag`, `EventCard`, `EventRow`, and the events page filters,
+so the chip row doubles as the legend for the list under it.
+
+Every `deep` value clears AA on both its own tint and white — the tightest is
+Central Kids at 5.3:1. `solid` is for rules and dots only, never type. Class
+strings are written out in full rather than composed, because Tailwind scans
+for literal names and would never generate `bg-${key}-tint`. The color values
+and their contrast notes are in `globals.css`.
+
 ## Photos
 
 `src/content/photos.ts` is the single place to point page slots at real

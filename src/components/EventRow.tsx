@@ -3,22 +3,32 @@ import type { ChurchEvent } from "@/content/events";
 import { dayOfMonth, eventTimeRange, eventWhen, monthShort } from "@/lib/format";
 import { ImageSlot } from "./ImageSlot";
 import { Tag } from "./Tag";
+import { paletteFor } from "@/lib/ministry-colors";
 
 /** Date chip + optional thumb + title/time/tag — the chronological Upcoming list. */
 export function EventRow({ event }: { event: ChurchEvent }) {
   const timeLine = event.allDay
     ? `${eventWhen(event)} · ${event.location}`
     : `${eventTimeRange(event)} · ${event.location}`;
+  // The date block carries the ministry's color, so a long list is scannable
+  // by hue before a single title is read.
+  const c = paletteFor(event.tag);
   return (
     <Link
       href={`/events/${event.slug}`}
-      className="flex items-center gap-4 rounded-2xl border border-line p-3.5 text-ink no-underline transition-colors hover:border-teal-border hover:bg-teal-50/40 lg:gap-6 lg:p-[18px]"
+      className={`flex items-center gap-4 rounded-2xl border border-line p-3.5 text-ink no-underline transition-colors lg:gap-6 lg:p-[18px] ${c.hover}`}
     >
-      <div className="w-[58px] shrink-0 rounded-xl bg-teal-50 py-2.5 text-center lg:w-[78px] lg:py-3">
-        <div className="text-[10px] font-bold tracking-[.1em] uppercase text-teal-muted lg:text-[11px]">
+      <div
+        className={`w-[58px] shrink-0 rounded-xl py-2.5 text-center lg:w-[78px] lg:py-3 ${c.block}`}
+      >
+        <div
+          className={`text-[10px] font-bold tracking-[.1em] uppercase lg:text-[11px] ${c.textSoft}`}
+        >
           {monthShort(event.start)}
         </div>
-        <div className="font-display text-[22px] leading-[1.1] text-primary-deep lg:text-[28px]">
+        <div
+          className={`font-display text-[22px] leading-[1.1] lg:text-[28px] ${c.text}`}
+        >
           {dayOfMonth(event.start)}
         </div>
       </div>
@@ -43,7 +53,7 @@ export function EventRow({ event }: { event: ChurchEvent }) {
           {timeLine}
         </span>
       </div>
-      <span className="hidden shrink-0 text-[15px] font-bold text-primary lg:inline">
+      <span className={`hidden shrink-0 text-[15px] font-bold lg:inline ${c.text}`}>
         Details →
       </span>
     </Link>
