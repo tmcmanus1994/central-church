@@ -43,7 +43,7 @@ export function MinistryPage({
   return (
     <article lang={ministry.lang}>
       {/* Hero */}
-      <section className="relative flex aspect-[16/9] max-h-[420px] min-h-[250px] items-end sm:aspect-[21/9]">
+      <section className="relative flex w-full aspect-[16/9] max-h-[420px] min-h-[250px] items-end sm:aspect-[21/9]">
         <ImageSlot
           photoKey={key(`ministry.${ministry.slug}.hero`)}
           priority

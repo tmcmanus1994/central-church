@@ -50,10 +50,20 @@ Each calendar maps to the tag its events wear on the site:
 | Central Kids | Central Kids | `/ministries/children` |
 
 **How it behaves.** Pages revalidate every 15 minutes, so a calendar edit
-appears without a deploy. Events with an `RRULE` become the weekly rhythm
-list; one-off events become the chronological Upcoming list, filtered to the
-next 240 days. Cancelled events are dropped. A new event gets its page on
-first request rather than 404ing until the next build.
+appears without a deploy. Dated events become the chronological Upcoming
+list, filtered to the next 240 days. Cancelled events are dropped. A new
+event gets its page on first request rather than 404ing until the next build.
+
+**The weekly rhythm does not come from the calendar.** Seven things meet
+every week — Sunday Morning Class, Sunday Morning Worship, Iglesia, Wednesday
+Classes, Encouragers, Friday Story Time, Kids Closet — and they live in
+`recurringEvents` in `src/content/events.ts`. Edit that list to change what
+meets weekly or when.
+
+The calendars carry many more repeating entries than those seven, including
+series that overlap and duplicate each other, so **every repeating calendar
+entry is skipped** and logged at build time. Anything that should show up on
+the site needs a date; anything weekly belongs in the file.
 
 **If a feed is unreachable** the site falls back to the seed events in
 `src/content/events.ts`, so a network blip never renders an empty calendar.
@@ -94,10 +104,10 @@ adjusting.
 
 **Duplicates merge.** Titles collapse to a comparison key — case, accents,
 punctuation, and filler words (`open`, `meeting`, `class`, `group`, `time`)
-all drop out — so "Kid's Closet Open" and "Kids Closet" become one entry. When
-an event exists both as a weekly series and as individually created copies,
-**the recurring entry wins**, keeping the weekly rhythm authoritative and the
-Upcoming list clear.
+all drop out — so "Kid's Closet Open" and "Kids Closet" become one entry. The
+weekly rhythm's own titles are seeded into that key set first, so a one-off
+copy of something that already meets weekly (an "Encouragers Class" entry on
+a Thursday) drops out instead of appearing twice.
 
 ## Content & data
 

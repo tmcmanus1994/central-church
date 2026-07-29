@@ -39,10 +39,23 @@ export interface ChurchEvent {
   ministrySlug?: string;
 }
 
+/**
+ * The weekly rhythm — what meets at Central every week, edited here and not
+ * read from the calendar.
+ *
+ * This list is deliberately static. The ministry calendars carry every
+ * repeating entry the office needs, including series that overlap, duplicate
+ * each other, or exist only to hold a room, and none of that belongs on the
+ * page that tells someone when to show up. Seven things meet weekly; this is
+ * the list, and changing it means editing this file.
+ *
+ * The dates below are only carriers for the day and time — `rrule` decides
+ * the day of the week, and only the clock time is ever rendered.
+ */
 export const recurringEvents: ChurchEvent[] = [
   {
     slug: "sunday-classes",
-    title: "Sunday Classes",
+    title: "Sunday Morning Class",
     start: "2026-08-02T09:15:00-05:00",
     end: "2026-08-02T10:00:00-05:00",
     location: "823 W 6th St, Little Rock",
@@ -51,7 +64,7 @@ export const recurringEvents: ChurchEvent[] = [
   },
   {
     slug: "worship",
-    title: "Worship",
+    title: "Sunday Morning Worship",
     start: "2026-08-02T10:15:00-05:00",
     end: "2026-08-02T11:45:00-05:00",
     location: "Worship Center",
@@ -60,7 +73,7 @@ export const recurringEvents: ChurchEvent[] = [
   },
   {
     slug: "spanish-worship",
-    title: "Spanish Speaking Worship",
+    title: "Iglesia",
     start: "2026-08-02T13:30:00-05:00",
     end: "2026-08-02T14:30:00-05:00",
     location: "Worship Center",

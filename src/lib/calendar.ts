@@ -1,6 +1,6 @@
 import type { ChurchEvent, EventTag } from "@/content/events";
 import {
-  recurringEvents as seedRecurring,
+  recurringEvents as weeklyRhythm,
   upcomingEvents as seedUpcoming,
 } from "@/content/events";
 import { eventPhotos } from "@/content/event-photos";
@@ -16,6 +16,11 @@ import { parseIcs, type IcsEvent } from "./ics";
 
 /**
  * Pulls events from the church's Google Calendars.
+ *
+ * The calendars supply *dated* events only. The weekly rhythm — Sunday
+ * classes through Kids Closet — is the fixed list in content/events.ts,
+ * because the calendars carry far more repeating entries than the seven
+ * things that actually meet each week, and they overlap each other.
  *
  * Each ministry keeps its own calendar, and those calendars run the building
  * as well as the congregation — so what arrives here needs filtering, tidying,
@@ -163,6 +168,7 @@ async function fetchFeed(url: string): Promise<string | null> {
 }
 
 export interface CalendarData {
+  /** Always the fixed weekly list — never read from the feeds. */
   recurring: ChurchEvent[];
   upcoming: ChurchEvent[];
   /** False when no feed is configured or every feed failed. */
@@ -177,7 +183,7 @@ export interface CalendarData {
 export async function getCalendar(): Promise<CalendarData> {
   const configured = FEEDS.filter((f) => process.env[f.env]);
   if (configured.length === 0) {
-    return { recurring: seedRecurring, upcoming: seedUpcoming, live: false };
+    return { recurring: weeklyRhythm, upcoming: seedUpcoming, live: false };
   }
 
   const results = await Promise.all(
@@ -192,7 +198,7 @@ export async function getCalendar(): Promise<CalendarData> {
 
   const all = results.flat();
   if (all.length === 0) {
-    return { recurring: seedRecurring, upcoming: seedUpcoming, live: false };
+    return { recurring: weeklyRhythm, upcoming: seedUpcoming, live: false };
   }
 
   // Drop office admin — meetings, time off, room bookings.
@@ -211,32 +217,43 @@ export async function getCalendar(): Promise<CalendarData> {
   }
 
   /**
-   * Merge near-duplicates. The same thing often sits on two calendars, or
-   * exists as a weekly series *and* as individually created entries. A
-   * recurring entry always wins, so the weekly rhythm stays authoritative
-   * and its one-off copies don't clutter the Upcoming list.
+   * Repeating calendar entries never reach the site. The weekly rhythm is the
+   * fixed list above, and everything else that repeats — overlapping series,
+   * duplicate copies of the same class, standing holds — would only crowd it.
    */
-  const byKey = new Map<string, ChurchEvent>();
+  const dated: ChurchEvent[] = [];
+  const dropped: string[] = [];
   for (const event of publicEvents) {
-    const key = dedupeKey(event.title);
-    const existing = byKey.get(key);
-    if (!existing) {
-      byKey.set(key, event);
-      continue;
-    }
-    if (event.recurring && !existing.recurring) byKey.set(key, event);
+    if (event.recurring) dropped.push(event.title);
+    else dated.push(event);
   }
-  const merged = [...byKey.values()];
+  if (dropped.length) {
+    console.log(
+      `Calendar: skipped ${dropped.length} repeating entr(ies) — the weekly rhythm is fixed in content/events.ts: ${[...new Set(dropped)].join(", ")}`,
+    );
+  }
+
+  /**
+   * Merge near-duplicates among what's left: the same event sitting on two
+   * ministry calendars, or entered twice under slightly different names. The
+   * weekly rhythm's own keys are seeded first, so a one-off copy of something
+   * that already meets weekly — an "Encouragers" entry on a Thursday — drops
+   * out instead of appearing twice.
+   */
+  const byKey = new Map<string, ChurchEvent | null>(
+    weeklyRhythm.map((e) => [dedupeKey(e.title), null]),
+  );
+  for (const event of dated) {
+    const key = dedupeKey(event.title);
+    if (byKey.has(key)) continue;
+    byKey.set(key, event);
+  }
+  const merged = [...byKey.values()].filter((e): e is ChurchEvent => e !== null);
 
   const now = Date.now();
   const horizon = now + HORIZON_DAYS * 86_400_000;
 
-  const recurring = merged
-    .filter((e) => e.recurring)
-    .sort((a, b) => a.title.localeCompare(b.title));
-
   const upcoming = merged
-    .filter((e) => !e.recurring)
     .filter((e) => {
       const end = new Date(e.end ?? e.start).getTime();
       const start = new Date(e.start).getTime();
@@ -244,7 +261,7 @@ export async function getCalendar(): Promise<CalendarData> {
     })
     .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
 
-  return { recurring, upcoming, live: true };
+  return { recurring: weeklyRhythm, upcoming, live: true };
 }
 
 /** All events, for routes that need to resolve a single slug. */

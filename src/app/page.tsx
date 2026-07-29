@@ -168,7 +168,14 @@ export default async function HomePage() {
           alt="A greeter welcoming a first-time visitor in the lobby"
           label="first-time visitor photo · lobby welcome"
           variant="navy"
-          className="aspect-[4/3] w-full lg:aspect-auto lg:h-full"
+          /**
+           * Aspect-locked at every width. Left to stretch, the half-column
+           * grows as wide as the screen while the text beside it sets a short
+           * height, and the photo reads as a letterbox strip on large
+           * displays. `min-h-full` still lets it fill the row if the text
+           * happens to run taller.
+           */
+          className="aspect-[4/3] w-full lg:aspect-[3/2] lg:min-h-full lg:self-start"
         />
         <div className="flex flex-col justify-center gap-3.5 px-5 py-8 lg:gap-[22px] lg:px-16 lg:py-[72px]">
           <span className="text-[11px] font-bold tracking-[.14em] uppercase text-teal-light lg:text-xs">
