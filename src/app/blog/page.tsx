@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ImageSlot } from "@/components/ImageSlot";
+import { mediaPlaceholder } from "@/content/photos";
 import { blogPosts } from "@/content/blog";
 
 export const metadata: Metadata = {
@@ -41,7 +42,7 @@ export default function BlogIndexPage() {
         className="mt-8 flex flex-col gap-5 rounded-2xl border border-line p-4 text-ink no-underline transition-colors hover:border-teal-border hover:bg-teal-50/40 lg:mt-12 lg:flex-row lg:items-center lg:gap-8 lg:p-6"
       >
         <ImageSlot
-          src={lead.image}
+          src={lead.image ?? mediaPlaceholder}
           sizes="(min-width: 1024px) 45vw, 92vw"
           alt={lead.imageAlt}
           label="post photo"
@@ -71,7 +72,7 @@ export default function BlogIndexPage() {
             className="flex flex-col gap-2.5 rounded-2xl border border-line p-4 text-ink no-underline transition-colors hover:border-teal-border hover:bg-teal-50/40"
           >
             <ImageSlot
-              src={post.image}
+              src={post.image ?? mediaPlaceholder}
               sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 92vw"
               alt={post.imageAlt}
               label="post photo"

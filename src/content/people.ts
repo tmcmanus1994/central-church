@@ -1,6 +1,11 @@
 export interface Person {
   name: string;
   role: string;
+  /**
+   * Staff only. Elders are deliberately left without one — they're
+   * volunteers, and the office fields anything meant for them.
+   */
+  email?: string;
   bio?: string;
   /** Path under /public. Omit when no headshot exists — the card falls back
    *  to a neutral placeholder and still reads correctly. */
@@ -9,6 +14,7 @@ export interface Person {
 
 export const leadMinister: Person = {
   name: "Steven Hovater",
+  email: "steven@arcentralchurch.org",
   role: "Lead Minister",
   photo: "/photos/leadership-steven-hovater.webp",
   bio: "Steven has served as Lead Minister at Central for three years, guiding our church through preaching and teaching that invites us to listen for God's voice together. He is passionate about helping people grow a vibrant spirituality by connecting deeply with God and one another. His vision is for Central to be a Spirit-filled community where relationships flourish — reminding us that the most powerful truth is that we are loved by God.",
@@ -17,18 +23,21 @@ export const leadMinister: Person = {
 export const ministryLeaders: Person[] = [
   {
     name: "Tammy Beck",
+    email: "tammy@arcentralchurch.org",
     role: "Children's Minister",
     photo: "/photos/leadership-tammy-beck.webp",
     bio: "Tammy has served at Central for 20 years, joyfully helping kids see God with childlike clarity. She is passionate about guiding children and families closer to Jesus and equipping parents to lead their kids to Him. Her vision: every child learns to trust Jesus and knows they are deeply loved by God.",
   },
   {
     name: "James Mosley",
+    email: "james@arcentralchurch.org",
     role: "Student Minister",
     photo: "/photos/leadership-james-mosley.webp",
     bio: "James has served since June 2024, working alongside teens and volunteers to create a culture of love in a challenging world. He is passionate about helping every student know they are loved by God and have a place in His Kingdom — and he'll remind you that teens are truly awesome.",
   },
   {
     name: "Matt Thomas",
+    email: "matt@arcentralchurch.org",
     role: "Outreach Minister",
     photo: "/photos/leadership-matt-thomas.webp",
     bio: "Matt joined Central in September 2024. He is passionate about meeting people where they are and sharing the life-changing news of Jesus. His vision: uniting God's children from every walk of life into one Spirit-filled family, where all are welcome to serve and be served.",
@@ -49,13 +58,13 @@ export const elders: Person[] = [
 ];
 
 export const staff: Person[] = [
-  { name: "Shannon Cooper", role: "Executive Minister", photo: "/photos/leadership-shannon-cooper.webp" },
-  { name: "Meech Geter", role: "Youth Leader", photo: "/photos/leadership-meech-geter.webp" },
-  { name: "Lacey Hines", role: "Kids Closet Lead", photo: "/photos/leadership-lacey-hines.webp" },
-  { name: "Travelle McManus", role: "Communication Director", photo: "/photos/leadership-travelle-mcmanus.webp" },
-  { name: "Ian Miller", role: "Apprentice", photo: "/photos/leadership-ian-miller.webp" },
-  { name: "Chad Tappe", role: "Worship Leader", photo: "/photos/leadership-chad-tappe.webp" },
-  { name: "Jessica Ward", role: "Administrator", photo: "/photos/leadership-jessica-ward.webp" },
+  { name: "Shannon Cooper", email: "shannon@arcentralchurch.org", role: "Executive Minister", photo: "/photos/leadership-shannon-cooper.webp" },
+  { name: "Meech Geter", email: "meech@arcentralchurch.org", role: "Youth Leader", photo: "/photos/leadership-meech-geter.webp" },
+  { name: "Lacey Hines", email: "lacey@arcentralchurch.org", role: "Kids Closet Lead", photo: "/photos/leadership-lacey-hines.webp" },
+  { name: "Travelle McManus", email: "travelle@arcentralchurch.org", role: "Communication Director", photo: "/photos/leadership-travelle-mcmanus.webp" },
+  { name: "Ian Miller", email: "ian@arcentralchurch.org", role: "Apprentice", photo: "/photos/leadership-ian-miller.webp" },
+  { name: "Chad Tappe", email: "ctappe@cacmustangs.org", role: "Worship Leader", photo: "/photos/leadership-chad-tappe.webp" },
+  { name: "Jessica Ward", email: "jessica@arcentralchurch.org", role: "Administrator", photo: "/photos/leadership-jessica-ward.webp" },
 ];
 
 export interface Missionary {
@@ -112,3 +121,39 @@ export const missionaries: Missionary[] = [
     ],
   },
 ];
+
+/** Every staff member, in the order they appear on the leadership page. */
+export const allStaff: Person[] = [leadMinister, ...ministryLeaders, ...staff];
+
+/**
+ * Name → email, for turning a staff mention anywhere on the site into a
+ * contact button. Matches on the full name and on the first name alone,
+ * because bulletin copy and event descriptions say "Contact Matt".
+ */
+const CONTACTS: Map<string, Person> = new Map();
+for (const person of allStaff) {
+  if (!person.email) continue;
+  CONTACTS.set(person.name.toLowerCase(), person);
+  const first = person.name.split(" ")[0].toLowerCase();
+  // Skip a first name two people share — "James" is ambiguous against the
+  // elder James Meadors only, but guard the general case anyway.
+  if (!CONTACTS.has(first)) CONTACTS.set(first, person);
+}
+
+export function staffByName(name: string): Person | undefined {
+  return CONTACTS.get(name.trim().toLowerCase());
+}
+
+/**
+ * Who owns an event, by its tag.
+ *
+ * Most events resolve their contact through the hosting ministry page, but
+ * Outreach has no page of its own and All Church has no single owner. This
+ * fills the gap so an Outreach event still shows Matt.
+ */
+export const CONTACT_BY_TAG: Record<string, string> = {
+  "Central Teens": "James Mosley",
+  "Central Kids": "Tammy Beck",
+  Outreach: "Matt Thomas",
+  "Life Groups": "Shannon Cooper",
+};

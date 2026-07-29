@@ -32,8 +32,8 @@ export const photos = {
   /** Greeters at the 6th Street entrance. */
   /** Shares the New to Central photo — same welcome, same face. */
   "visit.hero": "/photos/home-welcome.webp",
-  /** Congregation singing — wide. */
-  "visit.worship": null,
+  /** What a first visit feels like — people, not architecture. */
+  "visit.what-to-expect": "/photos/visit-what-to-expect.webp",
   /** Parking diagram — re-export of the current site's diagram. */
   "visit.parking": "/photos/visit-where-to-park.webp",
   /** A kids' Bible class. Portrait crop. */
@@ -53,18 +53,21 @@ export const photos = {
   /** Ultra-wide banner. Ministry name sits bottom-left in white. */
   "ministry.children.hero": "/photos/ministry-children-hero.webp",
   "ministry.teens.hero": "/photos/ministry-teens-hero.webp",
-  "ministry.life-groups.hero": null,
-  "ministry.kids-closet.hero": null,
+  "ministry.life-groups.hero": "/photos/ministry-life-groups-hero.webp",
+  "ministry.kids-closet.hero": "/photos/ministry-kids-closet-hero.webp",
   "ministry.freedom-prayer.hero": "/photos/ministry-freedom-prayer-hero.webp",
-  "ministry.iglesia.hero": null,
+  "ministry.iglesia.hero": "/photos/ministry-iglesia-hero.webp",
   /** Square headshot for the ministry contact block. */
   "ministry.children.contact": "/photos/leadership-tammy-beck.webp",
   "ministry.teens.contact": "/photos/leadership-james-mosley.webp",
-  "ministry.kids-closet.contact": "/photos/leadership-tammy-beck.webp",
+  "ministry.kids-closet.contact": "/photos/leadership-lacey-hines.webp",
+  "ministry.iglesia.contact": "/photos/leadership-matt-thomas.webp",
+  "ministry.life-groups.contact": "/photos/leadership-shannon-cooper.webp",
 
   // ── Media hub ───────────────────────────────────────────────────────────
   "media.sermon": null,
   "media.live": null,
+  /** Falls back to the most recent post's thumbnail — see media.ts. */
   "media.blog": null,
 } satisfies Record<string, string | null>;
 
@@ -89,8 +92,14 @@ export const galleries: Record<string, string[]> = {
     "/photos/life-groups-gallery-1.webp",
     "/photos/life-groups-gallery-2.webp",
     "/photos/life-groups-gallery-3.webp",
+    "/photos/life-groups-gallery-4.webp",
   ],
-  "kids-closet": ["/photos/kids-closet-gallery-1.webp"],
+  "kids-closet": [
+    "/photos/kids-closet-gallery-1.webp",
+    "/photos/kids-closet-gallery-2.webp",
+    "/photos/kids-closet-gallery-3.webp",
+    "/photos/kids-closet-gallery-4.webp",
+  ],
   "freedom-prayer": [],
   iglesia: [
     "/photos/iglesia-gallery-1.webp",
@@ -118,3 +127,9 @@ export const annualPhotos: Record<string, Record<string, string>> = {
 export function photo(key: PhotoKey): string | undefined {
   return photos[key] ?? undefined;
 }
+
+/**
+ * Branded fallback for media that has no thumbnail of its own — the Central
+ * wordmark over the building. Better than an empty frame in a media grid.
+ */
+export const mediaPlaceholder = "/photos/media-placeholder.webp";

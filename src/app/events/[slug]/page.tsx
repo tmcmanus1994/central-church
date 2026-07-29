@@ -4,12 +4,14 @@ import { notFound } from "next/navigation";
 import { ArrowLink, Button } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
 import { Tag } from "@/components/Tag";
+import { ContactButton } from "@/components/ContactButton";
+import { CONTACT_BY_TAG, staffByName } from "@/content/people";
 import {
   getAllCalendarEvents,
   getCalendar,
   getCalendarEvent,
 } from "@/lib/calendar";
-import { getMinistry } from "@/content/ministries";
+import { getMinistry, REMIND_JOIN_URL } from "@/content/ministries";
 import {
   addToCalendarUrl,
   eventDateLong,
@@ -56,6 +58,14 @@ export default async function EventDetailPage({
   const recurringEvents = recurring;
   const upcomingEvents = upcoming;
   const ministry = event.ministrySlug ? getMinistry(event.ministrySlug) : null;
+  /**
+   * Who to ask about this event. The hosting ministry names its contact; for
+   * tags with no ministry page of their own — Outreach — the tag decides.
+   */
+  const hostName =
+    ministry?.contact?.name ??
+    (event.tag ? CONTACT_BY_TAG[event.tag] : undefined);
+  const host = hostName ? staffByName(hostName) : undefined;
   const alsoThisMonth = upcomingEvents
     .filter(
       (e) =>
@@ -134,27 +144,73 @@ export default async function EventDetailPage({
             </p>
           )}
 
-          {ministry ? (
-            <div className="flex items-center gap-4 rounded-2xl border border-line bg-surface p-4 lg:p-6">
-              <span aria-hidden className="img-slot size-14 shrink-0 rounded-full lg:size-16" />
+          {host || ministry ? (
+            <div className="flex flex-col gap-4 rounded-2xl border border-line bg-surface p-4 sm:flex-row sm:items-center lg:p-6">
+              {/*
+                The person to ask, with their face. Someone reading a Teens
+                event should recognise James before they turn up, and be able
+                to reach him without going through a general contact form.
+              */}
+              <ImageSlot
+                src={host?.photo}
+                sizes="80px"
+                focus="top"
+                alt={host ? `Portrait of ${host.name}` : ""}
+                className="size-16 shrink-0 rounded-full lg:size-20"
+              />
               <div className="flex flex-col gap-[3px]">
                 <span className="text-xs font-bold tracking-[.1em] uppercase text-muted">
                   Hosted by
                 </span>
                 <span className="font-display text-[17px] tracking-[-.015em] lg:text-xl">
-                  {ministry.shortName}
-                  {ministry.contact ? ` · ${ministry.contact.name}` : ""}
+                  {ministry?.shortName ?? event.tag}
+                  {host ? ` · ${host.name}` : ""}
                 </span>
-                <ArrowLink
-                  href={
-                    ministry.slug === "iglesia"
-                      ? "/iglesia"
-                      : `/ministries/${ministry.slug}`
-                  }
-                  className="text-[15px]"
-                >
-                  {ministry.shortName} ministry
-                </ArrowLink>
+                {ministry ? (
+                  <ArrowLink
+                    href={
+                      ministry.slug === "iglesia"
+                        ? "/iglesia"
+                        : `/ministries/${ministry.slug}`
+                    }
+                    className="text-[15px]"
+                  >
+                    {ministry.shortName} ministry
+                  </ArrowLink>
+                ) : host ? (
+                  <span className="text-[15px] text-muted">{host.role}</span>
+                ) : null}
+              </div>
+              {host ? (
+                <div className="sm:ml-auto">
+                  <ContactButton
+                    name={host.name}
+                    label={ministry?.contact?.ctaLabel}
+                    subject={`${event.title} — question from the website`}
+                    variant="outline"
+                  />
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+
+          {/*
+            Teens comms run through Remind, so every Teens event says so — a
+            parent finding a trip here is exactly who needs the join link.
+          */}
+          {ministry?.slug === "teens" ? (
+            <div className="flex flex-col gap-2.5 rounded-2xl border border-teens-solid/30 bg-teens-tint p-4 lg:p-6">
+              <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teens-deep">
+                Don&rsquo;t miss an update
+              </span>
+              <p className="m-0 text-[15.5px] leading-[1.6] text-teens-deep">
+                Central Teens sends class changes, trip details, and pickup
+                times through Remind before anywhere else.
+              </p>
+              <div className="mt-1">
+                <Button href={REMIND_JOIN_URL} size="md">
+                  Sign up for Remind alerts
+                </Button>
               </div>
             </div>
           ) : null}

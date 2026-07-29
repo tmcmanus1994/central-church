@@ -4,6 +4,17 @@
  * Iglesia renders fully in Spanish (lang="es") at /iglesia.
  */
 
+/**
+ * Central Teens runs its parent and student comms through Remind, so the join
+ * link appears on every Teens surface — the ministry page, its events, and the
+ * alert call-out.
+ */
+export const REMIND_JOIN_URL =
+  "https://www.remind.com/join/ymcentral?utm_medium=ios";
+
+/** Parents book a Friday slot at Kids Closet through the form on its page. */
+export const KIDS_CLOSET_SCHEDULE_HREF = "/ministries/kids-closet#schedule";
+
 export interface MinistryContact {
   name: string;
   role: string;
@@ -37,6 +48,8 @@ export interface Ministry {
     phone?: string;
   }[];
   contact?: MinistryContact;
+  /** Highlighted call-out above the utility buttons. */
+  notice?: { eyebrow: string; body: string; label: string; href: string };
   /** Vimeo embed shown in place of the photo gallery. */
   video?: { embedUrl: string; url: string; caption: string };
   related?: { label: string; href: string }[];
@@ -107,7 +120,7 @@ export const ministries: Ministry[] = [
       {
         label:
           "Resources for parents of children with additional needs and/or disabilities",
-        href: "/plan-a-visit",
+        href: "https://lrcentralchurch.breezechms.com/form/cb5875",
       },
     ],
     cta: {
@@ -151,9 +164,18 @@ export const ministries: Ministry[] = [
       },
     ],
     utilities: [
-      { label: "Update Info", href: "/plan-a-visit#contact" },
-      { label: "Sign Up for Alerts", href: "/plan-a-visit#contact" },
+      {
+        label: "Update Info",
+        href: "https://lrcentralchurch.breezechms.com/form/3b8ea469",
+      },
+      { label: "Sign Up for Alerts", href: REMIND_JOIN_URL },
     ],
+    notice: {
+      eyebrow: "Parents & students",
+      body: "Central Teens runs on Remind. Class changes, trip details, and pickup times all go out there first — join and you won't miss anything.",
+      label: "Sign up for Remind alerts",
+      href: REMIND_JOIN_URL,
+    },
     contact: {
       name: "James Mosley",
       role: "Student Minister",
@@ -213,6 +235,11 @@ export const ministries: Ministry[] = [
         phone: "501-515-7479",
       },
     ],
+    contact: {
+      name: "Shannon Cooper",
+      role: "Executive Minister",
+      ctaLabel: "Contact Shannon",
+    },
     cta: {
       title: "Not sure where you fit?",
       body: "Come to the Small Group Fair or just ask on a Sunday — we'll walk you to the right room.",
@@ -247,20 +274,26 @@ export const ministries: Ministry[] = [
     utilities: [
       {
         label: "Schedule a Time to Shop (always free)",
-        href: "/plan-a-visit#contact",
+        href: KIDS_CLOSET_SCHEDULE_HREF,
       },
-      { label: "Need Diapers?", href: "/plan-a-visit#contact" },
+      { label: "Need Diapers?", href: "http://kidscloset.zite.so" },
     ],
+    video: {
+      embedUrl: "https://player.vimeo.com/video/1012118138",
+      url: "https://vimeo.com/1012118138",
+      caption:
+        "A look inside Kids Closet — what it is, who it's for, and what to expect when you come.",
+    },
     contact: {
-      name: "Tammy Beck",
-      role: "Children's Minister",
-      ctaLabel: "Contact Tammy",
+      name: "Lacey Hines",
+      role: "Kids Closet Lead",
+      ctaLabel: "Contact Lacey",
     },
     cta: {
       title: "Come shop — it's always free",
       body: "Wednesday and Friday mornings, 9–11 AM at 823 W 6th St. No paperwork, no requirements.",
       label: "Schedule a time",
-      href: "/plan-a-visit#contact",
+      href: KIDS_CLOSET_SCHEDULE_HREF,
     },
   },
   {
@@ -310,6 +343,11 @@ export const ministries: Ministry[] = [
       "Nos integramos con nuestros hermanos de habla inglesa en Central Church para adorar juntos como una familia unida de Dios.",
       "Participamos en otros momentos de celebración, estudio y recreación.",
     ],
+    contact: {
+      name: "Matt Thomas",
+      role: "Ministro de Alcance",
+      ctaLabel: "Contactar a Matt",
+    },
     cta: {
       title: "¡Déjanos saber que vienes!",
       body: "Si sientes curiosidad por esta familia de creyentes, ven y comprueba por ti mismo que el Señor es bueno y que Su pueblo es bendecido. 823 W 6th St, Little Rock, AR 72201 · (501) 374-2039",

@@ -2,12 +2,20 @@ import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
 import { blogPosts } from "@/content/blog";
+import { mediaPlaceholder } from "@/content/photos";
 
 export const metadata: Metadata = {
   title: "Media",
   description:
     "Sermons, live stream, and stories from Central Church of Christ in downtown Little Rock — listen to the podcast, watch live, or read the blog.",
 };
+
+/**
+ * The blog card shows the newest post's own artwork rather than a fixed image,
+ * so the media hub refreshes itself whenever something is published. Anything
+ * without artwork of its own falls back to the branded placeholder.
+ */
+const latestPost = blogPosts[0];
 
 export default function MediaHubPage() {
   return (
@@ -47,7 +55,7 @@ export default function MediaHubPage() {
         </div>
         <div className="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6">
           <ImageSlot
-            photoKey="media.live"
+            src={mediaPlaceholder}
             sizes="(min-width: 1024px) 33vw, 100vw"
             alt=""
             label="live stream still"
@@ -69,7 +77,7 @@ export default function MediaHubPage() {
         </div>
         <div className="flex flex-col gap-3 rounded-2xl border border-line p-6">
           <ImageSlot
-            photoKey="media.blog"
+            src={latestPost.image ?? mediaPlaceholder}
             sizes="(min-width: 1024px) 33vw, 100vw"
             alt=""
             label="blog photo"
@@ -79,9 +87,9 @@ export default function MediaHubPage() {
             Blog
           </span>
           <h2 className="m-0 font-display text-[22px] leading-[1.15] tracking-[-.02em] text-pretty-wrap">
-            {blogPosts[0].title}
+            {latestPost.title}
           </h2>
-          <span className="text-[14.5px] text-muted">{blogPosts[0].author}</span>
+          <span className="text-[14.5px] text-muted">{latestPost.author}</span>
           <ArrowLink href="/blog" className="mt-auto text-[15px]">
             Read the blog
           </ArrowLink>

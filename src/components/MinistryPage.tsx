@@ -4,6 +4,8 @@ import type { ChurchEvent } from "@/content/events";
 import { annualPhotos, galleries, photos, type PhotoKey } from "@/content/photos";
 import { recurringWhen } from "@/lib/format";
 import { ArrowLink, Button } from "./Button";
+import { ContactButton } from "./ContactButton";
+import { KidsClosetForm } from "./KidsClosetForm";
 import { ImageSlot } from "./ImageSlot";
 
 /** Narrows a built-up string to a PhotoKey only when the registry has it. */
@@ -194,6 +196,22 @@ export function MinistryPage({
             </>
           ) : null}
 
+          {ministry.notice ? (
+            <div className="mt-5 flex flex-col gap-2.5 rounded-[18px] border border-teal-border bg-teal-50 p-5 lg:p-6">
+              <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teal-muted">
+                {ministry.notice.eyebrow}
+              </span>
+              <p className="m-0 text-[15.5px] leading-[1.6] text-teal-ink">
+                {ministry.notice.body}
+              </p>
+              <div className="mt-1">
+                <Button href={ministry.notice.href} size="md">
+                  {ministry.notice.label}
+                </Button>
+              </div>
+            </div>
+          ) : null}
+
           {ministry.utilities ? (
             <div className="mt-2 flex flex-wrap gap-3">
               {ministry.utilities.map((u) => (
@@ -224,9 +242,12 @@ export function MinistryPage({
                 </span>
                 <span className="text-base text-body">{ministry.contact.role}</span>
               </div>
-              <Button href="/plan-a-visit#contact" full>
-                {ministry.contact.ctaLabel}
-              </Button>
+              <ContactButton
+                name={ministry.contact.name}
+                label={ministry.contact.ctaLabel}
+                subject={`${ministry.shortName} — question from the website`}
+                full
+              />
             </div>
           ) : null}
 
@@ -266,7 +287,7 @@ export function MinistryPage({
         </aside>
       </div>
 
-      {/* A ministry supplies either a video or a photo gallery, never both. */}
+      {/* Video and gallery are independent — Kids Closet has both. */}
       {ministry.video ? (
         <section className="mx-auto max-w-[1100px] px-5 pb-10 lg:px-14 lg:pb-16">
           <h2 className="m-0 mb-5 font-display text-[24px] tracking-[-.025em] lg:text-[32px]">
@@ -291,16 +312,13 @@ export function MinistryPage({
             Watch on Vimeo →
           </a>
         </section>
-      ) : (
+      ) : null}
+
+      {galleries[ministry.slug]?.length || !ministry.video ? (
       <section className="mx-auto max-w-[1440px] px-5 pb-10 lg:px-14 lg:pb-16">
-        <div className="mb-5 flex items-baseline justify-between">
-          <h2 className="m-0 font-display text-[24px] tracking-[-.025em] lg:text-[32px]">
-            {labels.gallery}
-          </h2>
-          <span className="hidden font-mono text-[11px] tracking-[.08em] uppercase text-muted lg:block">
-            gallery slot · 4–12 images
-          </span>
-        </div>
+        <h2 className="mb-5 font-display text-[24px] tracking-[-.025em] lg:text-[32px]">
+          {labels.gallery}
+        </h2>
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-3.5">
           {/* Real gallery images once supplied; four placeholders until then. */}
           {(galleries[ministry.slug]?.length
@@ -317,7 +335,14 @@ export function MinistryPage({
           ))}
         </div>
       </section>
-      )}
+      ) : null}
+
+      {/* Kids Closet books its own appointments — see KidsClosetForm. */}
+      {ministry.slug === "kids-closet" ? (
+        <section className="mx-auto max-w-[1100px] px-5 pb-10 lg:px-14 lg:pb-16">
+          <KidsClosetForm />
+        </section>
+      ) : null}
 
       {/* CTA band */}
       <section className="bg-primary-deep px-5 py-10 text-white lg:px-14 lg:py-16">

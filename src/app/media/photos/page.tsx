@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ImageSlot } from "@/components/ImageSlot";
+import { mediaPlaceholder } from "@/content/photos";
 
 export const metadata: Metadata = {
   title: "Photo Gallery",
@@ -57,7 +58,7 @@ export default function PhotoGalleryPage() {
           const inner = (
             <>
               <ImageSlot
-                src={album.cover}
+                src={album.cover ?? mediaPlaceholder}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 92vw"
                 alt=""
                 label="album cover"

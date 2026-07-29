@@ -31,8 +31,13 @@ export function PersonCard({ person }: { person: Person }) {
       {person.bio ? (
         <p className="m-0 text-[15.5px] leading-[1.6] text-body">{person.bio}</p>
       ) : null}
-      <ArrowLink href="/plan-a-visit#contact" className="mt-auto text-[15px]">
-        Contact
+      {/* Straight to their mailbox. Elders have no email by design — theirs
+          falls back to the contact form. */}
+      <ArrowLink
+        href={person.email ? `mailto:${person.email}` : "/plan-a-visit#contact"}
+        className="mt-auto text-[15px]"
+      >
+        {person.email ? `Email ${person.name.split(" ")[0]}` : "Contact"}
       </ArrowLink>
     </div>
   );
@@ -66,6 +71,14 @@ export function PersonTile({
           <span className="text-[13.5px] leading-snug text-muted">
             {person.role}
           </span>
+        ) : null}
+        {person.email ? (
+          <a
+            href={`mailto:${person.email}`}
+            className="mt-1 text-[13.5px] font-bold text-primary no-underline hover:text-primary-deep"
+          >
+            Email {person.name.split(" ")[0]} →
+          </a>
         ) : null}
       </div>
     </div>

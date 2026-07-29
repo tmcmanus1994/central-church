@@ -9,6 +9,9 @@ import { site, fullAddress } from "@/lib/site";
 const navItems = [
   { label: "This Week", href: "/events" },
   { label: "About", href: "/about" },
+  // Who to talk to is one of the most-asked things on a church site, so it
+  // gets its own item rather than sitting a click deep under About.
+  { label: "Leadership", href: "/about/leadership" },
   { label: "Ministries", href: "/ministries" },
   { label: "Media", href: "/media" },
 ];
@@ -39,6 +42,14 @@ function Logo() {
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  /**
+   * The longest matching nav href wins, so /about/leadership highlights
+   * Leadership rather than lighting up both it and About.
+   */
+  const activeHref = navItems
+    .map((i) => i.href)
+    .filter((h) => pathname === h || pathname.startsWith(`${h}/`))
+    .sort((a, b) => b.length - a.length)[0];
 
   useEffect(() => {
     setOpen(false);
@@ -82,14 +93,15 @@ export function SiteHeader() {
         <Logo />
         <nav
           aria-label="Primary"
-          className="hidden items-center gap-8 text-[15.5px] font-semibold lg:flex"
+          className="hidden items-center gap-5 text-[15.5px] font-semibold lg:flex xl:gap-8"
         >
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
+              aria-current={item.href === activeHref ? "page" : undefined}
               className={`no-underline transition-colors hover:text-primary ${
-                pathname.startsWith(item.href) ? "text-primary" : "text-[#2A2622]"
+                item.href === activeHref ? "text-primary" : "text-[#2A2622]"
               }`}
             >
               {item.label}

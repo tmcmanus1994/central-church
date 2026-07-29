@@ -196,6 +196,23 @@ fields, `PersonCard`, `SiteHeader` (info bar + nav + mobile sheet),
 (with a note describing the intended shot) otherwise — photography drops in
 without layout changes.
 
+### Contacting a person
+
+`src/content/people.ts` carries a staff email per person — elders deliberately
+have none, since they're volunteers and the office fields anything for them.
+`staffByName` resolves a full name *or* a first name, because bulletin copy and
+event descriptions say "Contact Matt".
+
+Three components consume it, so a staff mention anywhere becomes a real
+mailbox instead of a general contact form: `ContactButton` (ministry asides,
+event host cards), `ContactLink` (tighter spots), and `StaffMention` (inline
+prose). Unknown names fall back to the contact form or stay plain text rather
+than rendering a misleading link.
+
+Events resolve their host through the hosting ministry, falling back to
+`CONTACT_BY_TAG` for tags with no ministry page — Outreach events show Matt
+that way. All Church events show no host, because no one person owns them.
+
 ### Ministry colors
 
 A month of events all wearing the same teal reads as one undifferentiated

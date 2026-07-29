@@ -40,7 +40,14 @@ export default function LeadershipPage() {
           <p className="m-0 max-w-[680px] text-[15.5px] leading-[1.65] text-body text-pretty-wrap lg:text-[17.5px] lg:leading-[1.7]">
             {leadMinister.bio}
           </p>
-          <ArrowLink href="/media/live">Watch recent services</ArrowLink>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <ArrowLink href="/media/live">Watch recent services</ArrowLink>
+            {leadMinister.email ? (
+              <ArrowLink href={`mailto:${leadMinister.email}`}>
+                Email Steven
+              </ArrowLink>
+            ) : null}
+          </div>
         </div>
       </div>
 

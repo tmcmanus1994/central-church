@@ -98,10 +98,10 @@ export default function PlanAVisitPage() {
             </div>
           </div>
           <ImageSlot
-            photoKey="visit.worship"
+            photoKey="visit.what-to-expect"
             sizes="(min-width: 1024px) 50vw, 100vw"
-            alt="The congregation singing during Sunday worship"
-            label="worship photo · wide, warm"
+            alt="Two members of the congregation together in the pews before worship"
+            label="what to expect · people, not architecture"
             className="aspect-[16/10] w-full rounded-2xl"
           />
         </div>

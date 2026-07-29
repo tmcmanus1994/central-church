@@ -5,6 +5,7 @@ import { bulletin, bulletinPolicy } from "@/content/bulletin";
 import { getCalendar } from "@/lib/calendar";
 import { eventWhen } from "@/lib/format";
 import Link from "next/link";
+import { StaffMention } from "@/components/ContactButton";
 
 export const metadata: Metadata = {
   title: "Weekly Bulletin",
@@ -162,7 +163,7 @@ export default async function BulletinPage() {
                   <span className="block text-body">{o.detail}</span>
                   {o.contact ? (
                     <span className="block text-[14px] text-muted">
-                      Contact {o.contact}.
+                      Contact <StaffMention name={o.contact} />.
                     </span>
                   ) : null}
                 </li>
