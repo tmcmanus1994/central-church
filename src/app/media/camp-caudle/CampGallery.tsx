@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import type { CampVideo } from "@/content/camp-caudle";
+import { campCaudleAlbumForYear } from "@/content/photo-albums";
+import { Button } from "@/components/Button";
 
 /**
  * Videos load their Vimeo iframe only once played — 39 embeds on one page
@@ -63,6 +65,9 @@ export function CampGallery({
 }) {
   const [activeYear, setActiveYear] = useState<string>(years[0]);
   const shown = videos.filter((v) => v.year === activeYear);
+  // Matched by year inside the album title ("Camp Caudle 2024") — a year
+  // with no album yet just means no button, not a crash.
+  const album = campCaudleAlbumForYear(activeYear);
 
   return (
     <>
@@ -91,10 +96,18 @@ export function CampGallery({
         })}
       </div>
 
-      <p className="mt-5 text-[15px] text-muted">
-        {shown.length} {shown.length === 1 ? "video" : "videos"} from{" "}
-        {activeYear}
-      </p>
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+        <p className="m-0 text-[15px] text-muted">
+          {shown.length} {shown.length === 1 ? "video" : "videos"} from{" "}
+          {activeYear}
+        </p>
+        {/* Just a link out to Google Photos, not an embed — same as the main gallery. */}
+        {album ? (
+          <Button href={album.href} variant="outline" size="md">
+            Photos from {activeYear} ({album.count})
+          </Button>
+        ) : null}
+      </div>
 
       <div className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
         {shown.map((video) => (
