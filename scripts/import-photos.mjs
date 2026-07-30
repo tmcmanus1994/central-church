@@ -101,6 +101,21 @@ const MAP = {
   James: ["leadership-james-mosley", "portrait"],
   Matt: ["leadership-matt-thomas", "portrait"],
 
+  // Google Photos album covers — see src/content/photo-albums.ts, which
+  // matches these to albums by filename.
+  "Camp Caudle 2022": ["album-camp-caudle-2022", "card"],
+  "Camp Caudle 2023": ["album-camp-caudle-2023", "card"],
+  "Camp Caudle 2024": ["album-camp-caudle-2024", "card"],
+  "Camp Caudle 2025": ["album-camp-caudle-2025", "card"],
+  "Camp Caudle 2026": ["album-camp-caudle-2026", "card"],
+  "Easter 2026": ["album-easter-sunday-2026", "card"],
+  "Easter hunt 2026": ["album-easter-egg-hunt-2026", "card"],
+  // No year in this one's album title — it's the earlier Easter Egg Hunt.
+  "Easter hunt 2022": ["album-easter-egg-hunt", "card"],
+  "Family Day 2026": ["album-family-day-2026", "card"],
+  "Mentorship 2026": ["album-mentorship-2026", "card"],
+  "Trunk or Treat 2025": ["album-trunk-or-treat-2025", "card"],
+
   "igelsia - photo 1": ["iglesia-gallery-1", "card"],
   "igelsia - photo 2": ["iglesia-gallery-2", "card"],
   "igelsia - photo 3": ["iglesia-gallery-3", "card"],
