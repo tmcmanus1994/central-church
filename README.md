@@ -287,6 +287,42 @@ Env overrides: `BASE_URL`, `OUT_DIR`, `CHROME_PATH`.
 as events and blog posts bring their own images — so the real outstanding
 list is short. See `npm run shots` output for the current state.
 
+## YouTube Live
+
+The homepage "Latest from Central" card and `/media/live` both show one of
+three states — **LIVE** (embedded player), **UPCOMING** (poster + next
+service time), **REPLAY** (last Sunday's service, always shown underneath) —
+sourced from a `livestream_state` row in Supabase that a poller keeps fresh.
+
+Run `supabase/schema.sql` once in the Supabase SQL Editor to create the two
+tables it needs (`livestream_state`, `sermons`).
+
+Env vars are documented in `.env.example`; with none set, the Live section
+falls back to the same static content the site always had — no broken build.
+
+- **`src/lib/youtube-live.ts`** — `pollYouTubeLive()` talks to the YouTube
+  Data API and upserts Supabase; `getLivestreamState()` is the
+  `unstable_cache`-wrapped version (180s) that page renders actually call. No
+  cron: the first visitor after the cache window expires pays for a fresh
+  poll, everyone else gets what's cached — works on Vercel's free Hobby tier.
+  `isSundayLiveWindow()` gates the (expensive) live-search API call to
+  Sun 9:30 AM–12:30 PM America/Chicago, using `Intl.DateTimeFormat` rather
+  than hand-rolled UTC offsets — verified against the DST boundary.
+- **`src/app/api/youtube/poll/route.ts`** — manual refresh, protected by
+  `Authorization: Bearer $CRON_SECRET`. Also the ready-to-use target if this
+  ever moves to Vercel Cron (GET + that same header is exactly what Vercel
+  Cron sends) — add a schedule to `vercel.json` and nothing else changes.
+- **`src/components/LiveEmbed.tsx`** — click-to-load YouTube embed (same
+  pattern as the Camp Caudle video cards, applied to YouTube instead of
+  Vimeo); shared by the live player and the "Last Sunday" replay.
+
+**Known tradeoff:** the homepage already had `revalidate = 900` (15 min) for
+calendar data; adding a 180s data source to the same page means Next uses the
+*lower* of the two for the whole page, so the homepage now regenerates every
+3 minutes instead of 15. Harmless — it just means slightly fresher calendar
+data as a side effect — but worth knowing if page-generation cost ever
+matters.
+
 ## Still to wire up
 
 - **Photography** — the big ones still open: homepage hero (congregation in
