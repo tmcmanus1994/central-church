@@ -1,5 +1,8 @@
+"use client";
+
 import { SelectField, TextArea, TextField } from "./Field";
 import { ContactLink } from "./ContactButton";
+import { useFormPost } from "@/lib/use-form-post";
 
 /**
  * Booking a Friday slot at Kids Closet.
@@ -14,6 +17,28 @@ import { ContactLink } from "./ContactButton";
  * email link at the bottom is the same path, always available.
  */
 export function KidsClosetForm() {
+  const { status, errorMessage, onSubmit } = useFormPost("/api/kids-closet");
+
+  if (status === "success") {
+    return (
+      <section
+        id="schedule"
+        className="scroll-mt-24 flex flex-col items-start gap-3 rounded-[18px] border border-line bg-surface p-8 lg:p-9"
+      >
+        <span className="inline-flex size-12 items-center justify-center rounded-full bg-accent-tint text-2xl">
+          ✓
+        </span>
+        <h2 className="m-0 font-display text-[22px] tracking-[-.02em]">
+          We&rsquo;ll see you then
+        </h2>
+        <p className="m-0 text-[15.5px] leading-[1.6] text-body">
+          Thanks — Lacey has your request and we&rsquo;ll have things ready
+          for you.
+        </p>
+      </section>
+    );
+  }
+
   return (
     <section
       id="schedule"
@@ -35,6 +60,7 @@ export function KidsClosetForm() {
         className="grid grid-cols-1 gap-5 lg:grid-cols-2"
         action="/api/kids-closet"
         method="post"
+        onSubmit={onSubmit}
       >
         <TextField
           id="kc-name"
@@ -78,11 +104,17 @@ export function KidsClosetForm() {
             label="Anything specific you're looking for? Diapers, shoes, school clothes"
           />
         </div>
+        {status === "error" && errorMessage ? (
+          <p className="m-0 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[14.5px] text-red-700 lg:col-span-2">
+            {errorMessage}
+          </p>
+        ) : null}
         <button
           type="submit"
-          className="flex h-14 items-center justify-center rounded-full bg-primary text-base font-bold text-white transition-colors hover:bg-primary-deep lg:col-span-2"
+          disabled={status === "submitting"}
+          className="flex h-14 items-center justify-center rounded-full bg-primary text-base font-bold text-white transition-colors hover:bg-primary-deep disabled:opacity-60 lg:col-span-2"
         >
-          Request this time
+          {status === "submitting" ? "Sending…" : "Request this time"}
         </button>
       </form>
 

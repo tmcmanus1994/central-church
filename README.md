@@ -292,9 +292,12 @@ list is short. See `npm run shots` output for the current state.
 - **Photography** — the big ones still open: homepage hero (congregation in
   worship), the lobby-welcome and greeter shots, six ministry banners, and
   Tammy Beck's portrait. Run `npm run shots` to see them all in context.
-- **Visit form backend** — markup/validation is final; submission endpoint TBD.
-  The Kids Closet form already has one (`/api/kids-closet` → Lacey, via
-  Resend); the visit form can follow the same pattern once a key is set.
+- **Forms** — Kids Closet (`/api/kids-closet`) and Plan a Visit
+  (`/api/plan-a-visit`) both email through Resend; see `.env.example`. Plan a
+  Visit currently sends to Travelle's address while it's being tested — point
+  it at the office (or a distribution address) once it's approved. Both forms
+  submit via `fetch` (see `src/lib/use-form-post.ts`) so a submission shows an
+  inline confirmation instead of navigating to the raw API response.
 - **Bulletin automation** — `src/content/bulletin.ts` is hand-edited until
   the weekly PDF parser is wired up; `/bulletin` and `/hub` both read it.
 - **Blog migration** — ~30 posts from the current site, existing URLs preserved.
