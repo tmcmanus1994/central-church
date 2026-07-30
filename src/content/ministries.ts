@@ -301,6 +301,99 @@ export const ministries: Ministry[] = [
     },
   },
   {
+    slug: "outreach",
+    name: "Outreach in Downtown Little Rock",
+    shortName: "Outreach",
+    eyebrow: "Ministries · Outreach",
+    metaTitle: "Outreach Ministry | Central Church of Christ – Little Rock",
+    metaDescription:
+      "Central Church of Christ serves downtown Little Rock and the 72202 neighborhood — Kids Closet, the Canvas Community meal, a food pantry, ESL classes, and mentoring.",
+    tileBlurb: "Loving our neighbors in 72202 and downtown.",
+    intro:
+      "Central has sat on West 6th Street for generations, and the neighborhood around us is the ministry. Downtown Little Rock and the 72202 zip code just south of us hold some of the highest poverty rates in Arkansas — and also some of the city's most resilient families, hardest-working parents, and best neighbors. We're not here to fix them. We're here because we're part of the same few blocks.",
+    intro2:
+      "Everything below runs year-round, mostly out of our own building, and almost all of it is staffed by volunteers from the congregation. If you live nearby and need something, come get it — there's no membership test and no paperwork. If you want to help, there's a job waiting.",
+    weeklyHeading: "What Runs Every Week",
+    weekly: [
+      {
+        eyebrow: "Wed & Fri",
+        title: "Kids Closet",
+        blurb:
+          "Free clothing, shoes, and baby essentials for any family who needs them, 9–11 AM.",
+      },
+      {
+        eyebrow: "Any time",
+        title: "Free Little Food Pantry",
+        blurb:
+          "Stocked in the foyer with Mt. Zion. Take what you need, leave what you can.",
+      },
+      {
+        eyebrow: "Bi-weekly",
+        title: "ESL Classes",
+        blurb:
+          "English lessons for families we've met through Kids Closet. Volunteers welcome.",
+      },
+    ],
+    annualHeading: "Through the Year",
+    annual: [
+      {
+        eyebrow: "Second Wednesday, monthly",
+        title: "Canvas Community Meal",
+        blurb:
+          "An evening meal served alongside Canvas Community for our unhoused neighbors downtown. It's a meal at a table, not a handout through a window.",
+      },
+      {
+        eyebrow: "Tuesday evenings, school year",
+        title: "OnRamp Mentoring",
+        blurb:
+          "One evening a week, one adult and one student. It follows the school calendar, and there is always a waiting list of kids — the shortage is mentors, never mentees.",
+      },
+      {
+        eyebrow: "Early August",
+        title: "Back to School Event",
+        blurb:
+          "Supplies, backpacks, and a Friends & Family Meal before the first day. Families pick what their kids actually need for their grade.",
+      },
+      {
+        eyebrow: "Sunday before Halloween",
+        title: "Trunk-or-Treat",
+        blurb:
+          "The west lot fills with decorated cars and the whole neighborhood turns out. One of the largest nights we host.",
+      },
+    ],
+    listHeading: "Where We Focus",
+    list: [
+      "The 72202 neighborhood immediately south and east of the building",
+      "Downtown families needing clothing, shoes, and baby supplies",
+      "Neighbors experiencing homelessness in the downtown core",
+      "Students who benefit from one consistent adult in their week",
+      "Spanish-speaking and newly arrived families across central Arkansas",
+      "Anyone who walks up to our door on a weekday",
+    ],
+    notice: {
+      eyebrow: "Want to help?",
+      body: "Most of what we do needs hands more than money — an hour sorting clothes, an evening serving a meal, a Tuesday with a student. Tell Matt what you have time for and he'll find the right spot.",
+      label: "Email Matt",
+      href: "mailto:matt@arcentralchurch.org",
+    },
+    contact: {
+      name: "Matt Thomas",
+      role: "Outreach Minister",
+      ctaLabel: "Contact Matt",
+    },
+    related: [
+      { label: "Visit our Kids Closet", href: "/ministries/kids-closet" },
+      { label: "Our missionaries around the world", href: "/about/missionaries" },
+      { label: "Servicio en Español", href: "/iglesia" },
+    ],
+    cta: {
+      title: "Come be a neighbor",
+      body: "Outreach at Central isn't a program you sign up for once a year — it's a handful of standing commitments that need people every week. Start with whichever one fits your schedule.",
+      label: "See upcoming events",
+      href: "/events",
+    },
+  },
+  {
     slug: "freedom-prayer",
     name: "Freedom Prayer",
     shortName: "Freedom Prayer",

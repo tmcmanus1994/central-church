@@ -6,6 +6,7 @@ import { recurringWhen } from "@/lib/format";
 import { ArrowLink, Button } from "./Button";
 import { ContactButton } from "./ContactButton";
 import { KidsClosetForm } from "./KidsClosetForm";
+import { MinistryBanner } from "./MinistryBanner";
 import { ImageSlot } from "./ImageSlot";
 
 /** Narrows a built-up string to a PhotoKey only when the registry has it. */
@@ -44,26 +45,11 @@ export function MinistryPage({
 
   return (
     <article lang={ministry.lang}>
-      {/* Hero */}
-      <section className="relative flex w-full aspect-[16/9] max-h-[420px] min-h-[250px] items-end sm:aspect-[21/9]">
-        <ImageSlot
-          photoKey={key(`ministry.${ministry.slug}.hero`)}
-          priority
-          sizes="100vw"
-          alt=""
-          label="ministry hero photo · slot"
-          variant="dark"
-          className="absolute inset-0"
-        />
-        <div className="relative flex w-full flex-col gap-2 bg-gradient-to-t from-[#101315]/90 via-[#101315]/55 to-transparent px-5 pt-20 pb-5 lg:gap-3 lg:px-14 lg:pb-12">
-          <span className="on-photo text-[11px] font-bold tracking-[.16em] uppercase text-white/90 lg:text-xs">
-            {ministry.eyebrow}
-          </span>
-          <h1 className="on-photo m-0 max-w-[1000px] font-display text-[34px] leading-[1] tracking-[-.035em] text-white text-pretty-wrap lg:text-[64px] lg:tracking-[-.04em]">
-            {ministry.name}
-          </h1>
-        </div>
-      </section>
+      <MinistryBanner
+        slug={ministry.slug}
+        eyebrow={ministry.eyebrow}
+        name={ministry.name}
+      />
 
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-5 py-10 lg:grid-cols-[1.5fr_1fr] lg:gap-14 lg:px-14 lg:py-16">
         <div className="flex flex-col gap-5">

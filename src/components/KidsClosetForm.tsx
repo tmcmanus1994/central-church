@@ -8,9 +8,10 @@ import { ContactLink } from "./ContactButton";
  * than on the general contact form, because what Lacey needs to know is
  * specific — which Friday, how many children, and what sizes to have out.
  *
- * Submission wiring is shared with the visit form and still open; the fields,
- * validation, and focus states are final. Until an endpoint exists the email
- * link below is a working path, so nobody hits a dead end.
+ * Submissions POST to /api/kids-closet, which emails Lacey. That route needs
+ * RESEND_API_KEY and FORMS_FROM_EMAIL set; without them it returns a message
+ * telling the visitor to email her directly rather than failing silently. The
+ * email link at the bottom is the same path, always available.
  */
 export function KidsClosetForm() {
   return (
@@ -32,7 +33,7 @@ export function KidsClosetForm() {
 
       <form
         className="grid grid-cols-1 gap-5 lg:grid-cols-2"
-        action="#"
+        action="/api/kids-closet"
         method="post"
       >
         <TextField

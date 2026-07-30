@@ -213,6 +213,19 @@ Events resolve their host through the hosting ministry, falling back to
 `CONTACT_BY_TAG` for tags with no ministry page — Outreach events show Matt
 that way. All Church events show no host, because no one person owns them.
 
+### Ministry banners are drawn, not photographed
+
+`MinistryBanner` builds each banner from the ministry's own color plus an arch
+motif — concentric arcs, the arch from Central's mark, drawn with a repeating
+radial gradient (`.ministry-arches`) so it scales with the banner instead of
+being cropped. It weighs nothing, is sharp at any width, and can't crop badly
+the way a 21:9 slice of a group photo does.
+
+Two pairs share a hue because they genuinely are siblings — Central Kids with
+Kids Closet, Iglesia with Freedom Prayer. `COMPOSITION` in `MinistryBanner.tsx`
+moves the arches to a different corner on each page so no two banners read as
+the same image twice.
+
 ### Ministry colors
 
 A month of events all wearing the same teal reads as one undifferentiated
@@ -280,6 +293,8 @@ list is short. See `npm run shots` output for the current state.
   worship), the lobby-welcome and greeter shots, six ministry banners, and
   Tammy Beck's portrait. Run `npm run shots` to see them all in context.
 - **Visit form backend** — markup/validation is final; submission endpoint TBD.
+  The Kids Closet form already has one (`/api/kids-closet` → Lacey, via
+  Resend); the visit form can follow the same pattern once a key is set.
 - **Bulletin automation** — `src/content/bulletin.ts` is hand-edited until
   the weekly PDF parser is wired up; `/bulletin` and `/hub` both read it.
 - **Blog migration** — ~30 posts from the current site, existing URLs preserved.

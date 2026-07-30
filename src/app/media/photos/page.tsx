@@ -10,32 +10,100 @@ export const metadata: Metadata = {
 };
 
 /**
- * Albums live in Google Photos. Set `href` on each to the shared album link;
- * an album without one renders as "Album coming soon" rather than a dead link.
+ * The albums, newest first, exactly as the office keeps them in Google Photos.
+ *
+ * Each links out to its shared album rather than mirroring thousands of
+ * photos into the repo — Camp Caudle 2026 alone is 1,630. Covers reuse the
+ * event photography already on the site, falling back to the branded
+ * placeholder for albums with no matching shot.
  */
 const albums: {
   title: string;
+  count: string;
   blurb: string;
   href?: string;
   cover?: string;
 }[] = [
   {
-    title: "Camp Caudle",
-    blurb:
-      "A week in Hector, Arkansas with Central Teens. Videos live on their own page.",
+    title: "Camp Caudle 2026",
+    count: "1,630 photos",
+    blurb: "A week in Hector, Arkansas with Central Teens.",
+    href: "https://photos.app.goo.gl/Po9aM3z62oCBjFV76",
     cover: "/photos/teens-camp-caudle.webp",
   },
   {
-    title: "Trunk or Treat",
-    blurb:
-      "Decorated cars, candy, and the whole neighbourhood in the parking lot the Sunday before Halloween.",
+    title: "Mentorship Program Graduation",
+    count: "12 photos",
+    blurb: "Closing out a year of OnRamp Mentoring.",
+    href: "https://photos.app.goo.gl/hLBpDiqKJvnaUhqi7",
+  },
+  {
+    title: "Easter Sunday 2026",
+    count: "61 photos",
+    blurb: "One of the fullest Sundays of the year.",
+    href: "https://photos.app.goo.gl/f3tk3PBpbRKqBu696",
+  },
+  {
+    title: "Easter Egg Hunt 2026",
+    count: "68 photos",
+    blurb: "Central Kids and half the neighbourhood on the lawn.",
+    href: "https://photos.app.goo.gl/UapAG99PmHvxz9Fe6",
+    cover: "/photos/kids-easter-egg-hunt.webp",
+  },
+  {
+    title: "Central Family Day 2026",
+    count: "54 photos",
+    blurb: "The whole church together for the afternoon.",
+    href: "https://photos.app.goo.gl/vLykCWfNbUVFnq7D6",
+  },
+  {
+    title: "Trunk-or-Treat 2025",
+    count: "53 photos",
+    blurb: "Decorated cars and candy in the parking lot.",
+    href: "https://photos.app.goo.gl/JCYCmXsxezenvZbd9",
     cover: "/photos/kids-trunk-or-treat.webp",
   },
   {
-    title: "Easter",
-    blurb:
-      "The Easter Egg Hunt and Easter Sunday together — one of the biggest weekends on the calendar.",
-    cover: "/photos/kids-easter-egg-hunt.webp",
+    title: "Camp Caudle 2025",
+    count: "555 photos",
+    blurb: "Another week on the Illinois Bayou.",
+    href: "https://photos.app.goo.gl/fAL3bwwLo49CNzWA7",
+  },
+  {
+    title: "Trunk-or-Treat 2024",
+    count: "145 photos",
+    blurb: "The Sunday before Halloween, west lot.",
+    href: "https://photos.app.goo.gl/88SucPyQt4nQ6Gsw7",
+  },
+  {
+    title: "Camp Caudle 2024",
+    count: "1,378 photos",
+    blurb: "Camp week, top to bottom.",
+    href: "https://photos.app.goo.gl/JaCyvshWxGk4rDCc8",
+  },
+  {
+    title: "Camp Caudle 2023",
+    count: "320 photos",
+    blurb: "Camp week, top to bottom.",
+    href: "https://photos.app.goo.gl/vPQMdjL7yRbzC7y39",
+  },
+  {
+    title: "Camp Caudle 2022",
+    count: "1,039 photos",
+    blurb: "Camp week, top to bottom.",
+    href: "https://photos.app.goo.gl/VqmhFmFMa38ipiaU8",
+  },
+  {
+    title: "Easter Egg Hunt",
+    count: "63 photos",
+    blurb: "An earlier year on the lawn.",
+    href: "https://photos.app.goo.gl/XeFr2qX9V3R4CaLF8",
+  },
+  {
+    title: "Trunk-or-Treat 2022",
+    count: "80 photos",
+    blurb: "Where the tradition picked up steam.",
+    href: "https://photos.app.goo.gl/rZAjUHrQut3kNo1fA",
   },
 ];
 
@@ -49,8 +117,9 @@ export default function PhotoGalleryPage() {
         Photo Gallery
       </h1>
       <p className="m-0 max-w-[720px] text-base leading-[1.65] text-body text-pretty-wrap lg:text-[19px]">
-        Albums from life at Central. Each one opens in Google Photos, where you
-        can browse the full set and download anything you&rsquo;re in.
+        Albums from life at Central, newest first. Each one opens in Google
+        Photos, where you can browse the full set and download anything
+        you&rsquo;re in.
       </p>
 
       <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-6">
@@ -64,8 +133,11 @@ export default function PhotoGalleryPage() {
                 label="album cover"
                 className="aspect-[4/3] w-full rounded-xl"
               />
-              <span className="font-display text-[22px] tracking-[-.02em] text-ink">
+              <span className="font-display text-[22px] leading-[1.15] tracking-[-.02em] text-ink">
                 {album.title}
+              </span>
+              <span className="text-[13px] font-bold tracking-[.08em] uppercase text-muted">
+                {album.count}
               </span>
               <span className="text-[15px] leading-[1.6] text-body">
                 {album.blurb}

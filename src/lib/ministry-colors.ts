@@ -29,6 +29,8 @@ export interface MinistryPalette {
   solid: string;
   /** Tinted background for an inactive filter chip on hover. */
   hoverChip: string;
+  /** Diagonal gradient for the ministry banner, in the ministry's own hue. */
+  bannerFlat: string;
 }
 
 const PALETTES: Record<EventTag, MinistryPalette> = {
@@ -41,6 +43,7 @@ const PALETTES: Record<EventTag, MinistryPalette> = {
     hover: "hover:border-church-solid/40 hover:bg-church-tint/50",
     solid: "bg-church-solid text-white",
     hoverChip: "hover:bg-church-tint",
+    bannerFlat: "from-church-deep to-church-solid",
   },
   Outreach: {
     chip: "bg-outreach-tint text-outreach-deep",
@@ -51,6 +54,7 @@ const PALETTES: Record<EventTag, MinistryPalette> = {
     hover: "hover:border-outreach-solid/40 hover:bg-outreach-tint/50",
     solid: "bg-outreach-solid text-white",
     hoverChip: "hover:bg-outreach-tint",
+    bannerFlat: "from-outreach-deep to-outreach-solid",
   },
   "Central Kids": {
     chip: "bg-kids-tint text-kids-deep",
@@ -61,6 +65,7 @@ const PALETTES: Record<EventTag, MinistryPalette> = {
     hover: "hover:border-kids-solid/40 hover:bg-kids-tint/50",
     solid: "bg-kids-solid text-white",
     hoverChip: "hover:bg-kids-tint",
+    bannerFlat: "from-kids-deep to-kids-solid",
   },
   "Central Teens": {
     chip: "bg-teens-tint text-teens-deep",
@@ -71,6 +76,7 @@ const PALETTES: Record<EventTag, MinistryPalette> = {
     hover: "hover:border-teens-solid/40 hover:bg-teens-tint/50",
     solid: "bg-teens-solid text-white",
     hoverChip: "hover:bg-teens-tint",
+    bannerFlat: "from-teens-deep to-teens-solid",
   },
   "Life Groups": {
     chip: "bg-groups-tint text-groups-deep",
@@ -81,6 +87,7 @@ const PALETTES: Record<EventTag, MinistryPalette> = {
     hover: "hover:border-groups-solid/40 hover:bg-groups-tint/50",
     solid: "bg-groups-solid text-white",
     hoverChip: "hover:bg-groups-tint",
+    bannerFlat: "from-groups-deep to-groups-solid",
   },
 };
 

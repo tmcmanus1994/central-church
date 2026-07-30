@@ -113,6 +113,21 @@ textarea:focus {
     0 2px 14px rgb(16 19 21 / 0.45);
 }
 
+/*
+  Ministry banner texture: concentric arches, the arch from Central's mark
+  repeated. Drawn with a repeating radial gradient rather than an SVG so it
+  scales with the banner instead of being cropped — the centre sits below the
+  bottom edge, so what shows is a set of arcs sweeping up out of the corner.
+*/
+.ministry-arches {
+  background-image: repeating-radial-gradient(
+    circle at var(--arch-x, 82%) var(--arch-y, 155%),
+    transparent 0 var(--arch-gap, 92px),
+    rgb(255 255 255 / 0.1) var(--arch-gap, 92px)
+      calc(var(--arch-gap, 92px) + 2px)
+  );
+}
+
 /* Photo slots awaiting real photography — striped placeholder from the mockup. */
 .img-slot {
   background-image: repeating-linear-gradient(

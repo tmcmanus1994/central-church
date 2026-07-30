@@ -37,7 +37,7 @@ import { parseIcs, type IcsEvent } from "./ics";
 /** Calendar → the tag its events carry through the UI. */
 const FEEDS: { env: string; tag: EventTag; ministrySlug?: string }[] = [
   { env: "CALENDAR_ICS_CENTRAL_CHURCH", tag: "All Church" },
-  { env: "CALENDAR_ICS_OUTREACH", tag: "Outreach" },
+  { env: "CALENDAR_ICS_OUTREACH", tag: "Outreach", ministrySlug: "outreach" },
   { env: "CALENDAR_ICS_CENTRAL_TEENS", tag: "Central Teens", ministrySlug: "teens" },
   { env: "CALENDAR_ICS_CENTRAL_KIDS", tag: "Central Kids", ministrySlug: "children" },
 ];

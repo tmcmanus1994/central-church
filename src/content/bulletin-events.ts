@@ -114,6 +114,7 @@ export const bulletinEvents: BulletinEvent[] = [
     description:
       "Central's annual Back to School Event, together with the Friends & Family Meal. Bring school supply donations to the building any time before August 2, or give through the online portal and we'll shop for you. Amazon and Walmart wish lists are posted on Facebook.",
     tag: "Outreach",
+    ministrySlug: "outreach",
     aliases: [
       "Back to School Event/Friends & Family Meal",
       "Friends & Family Meal",
@@ -149,6 +150,7 @@ export const bulletinEvents: BulletinEvent[] = [
     description:
       "Serving the homeless community an evening meal, as we do the second Wednesday of every month.",
     tag: "Outreach",
+    ministrySlug: "outreach",
     aliases: ["Canvas", "Canvas Community", "Canvas Meal"],
   },
   {
@@ -168,6 +170,7 @@ export const bulletinEvents: BulletinEvent[] = [
     description:
       "Interested in mentoring this year? OnRamp Mentoring follows the school year and meets one evening a week on Tuesdays. There's already a waiting list of mentees, so come find out what's involved.",
     tag: "Outreach",
+    ministrySlug: "outreach",
     aliases: ["Mentor Interest Meeting", "OnRamp Info Meeting"],
   },
   {
@@ -179,6 +182,7 @@ export const bulletinEvents: BulletinEvent[] = [
     description:
       "Mentoring starts back for the school year, meeting Tuesday evenings.",
     tag: "Outreach",
+    ministrySlug: "outreach",
     aliases: ["Mentorship Kickoff", "OnRamp Kickoff", "Mentoring Kickoff"],
   },
   {

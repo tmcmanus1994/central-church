@@ -50,18 +50,13 @@ export const photos = {
   "missionaries.daggetts": "/photos/missionaries-daggetts.webp",
 
   // ── Ministry pages (one per ministry slug) ──────────────────────────────
-  /** Ultra-wide banner. Ministry name sits bottom-left in white. */
-  "ministry.children.hero": "/photos/ministry-children-hero.webp",
-  "ministry.teens.hero": "/photos/ministry-teens-hero.webp",
-  /** The banner is the first gallery photo — no separate crop to maintain. */
-  "ministry.life-groups.hero": "/photos/life-groups-gallery-1.webp",
-  "ministry.kids-closet.hero": "/photos/ministry-kids-closet-hero.webp",
-  "ministry.freedom-prayer.hero": "/photos/ministry-freedom-prayer-hero.webp",
-  "ministry.iglesia.hero": "/photos/iglesia-gallery-2.webp",
+  // Ministry banners are drawn, not photographed — see MinistryBanner.tsx.
+  // The photos that used to fill them moved into the galleries below.
   /** Square headshot for the ministry contact block. */
   "ministry.children.contact": "/photos/leadership-tammy-beck.webp",
   "ministry.teens.contact": "/photos/leadership-james-mosley.webp",
   "ministry.kids-closet.contact": "/photos/leadership-lacey-hines.webp",
+  "ministry.outreach.contact": "/photos/leadership-matt-thomas.webp",
   "ministry.iglesia.contact": "/photos/leadership-matt-thomas.webp",
   "ministry.life-groups.contact": "/photos/leadership-shannon-cooper.webp",
 
@@ -78,12 +73,14 @@ export const photos = {
  */
 export const galleries: Record<string, string[]> = {
   children: [
+    "/photos/ministry-children-hero.webp",
     "/photos/kids-gallery-1.webp",
     "/photos/kids-gallery-2.webp",
     "/photos/kids-gallery-3.webp",
     "/photos/kids-gallery-4.webp",
   ],
   teens: [
+    "/photos/ministry-teens-hero.webp",
     "/photos/teens-gallery-1.webp",
     "/photos/teens-gallery-2.webp",
     "/photos/teens-gallery-3.webp",
@@ -97,12 +94,13 @@ export const galleries: Record<string, string[]> = {
     "/photos/life-groups-gallery-5.webp",
   ],
   "kids-closet": [
+    "/photos/ministry-kids-closet-hero.webp",
     "/photos/kids-closet-gallery-1.webp",
     "/photos/kids-closet-gallery-2.webp",
     "/photos/kids-closet-gallery-3.webp",
     "/photos/kids-closet-gallery-4.webp",
   ],
-  "freedom-prayer": [],
+  "freedom-prayer": ["/photos/ministry-freedom-prayer-hero.webp"],
   iglesia: [
     "/photos/iglesia-gallery-1.webp",
     "/photos/iglesia-gallery-2.webp",
