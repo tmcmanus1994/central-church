@@ -2,8 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // Blog images still live on Framer's CDN. Migrate them into public/blog/
-    // before the Framer site is decommissioned, then drop this entry.
+    // Two blog posts (see src/content/blog.ts's header comment for which)
+    // still have an image on Framer's CDN — everything else has been
+    // migrated into public/blog/. Drop this entry once those two are in too.
     remotePatterns: [
       { protocol: "https", hostname: "framerusercontent.com" },
     ],

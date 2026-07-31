@@ -5,7 +5,34 @@
  *
  * Re-run whenever a fresh export lands; it overwrites the generated files.
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+
+/**
+ * Framer CDN images already migrated into public/blog/ (named `{hash}.webp`
+ * — see that directory's contents), so a re-run of this script doesn't
+ * reintroduce framerusercontent.com URLs for files we already have locally.
+ */
+let localBlogImages;
+try {
+  localBlogImages = new Set(
+    readdirSync("public/blog").map((f) => f.replace(/\.webp$/, "")),
+  );
+} catch {
+  localBlogImages = new Set();
+}
+
+function localizeFramerUrl(url) {
+  const m = url?.match(/^https:\/\/framerusercontent\.com\/images\/([A-Za-z0-9]+)\.[a-zA-Z]+$/);
+  if (!m) return url;
+  return localBlogImages.has(m[1]) ? `/blog/${m[1]}.webp` : url;
+}
+
+function localizeHtmlImages(html) {
+  return (html || "").replace(
+    /https:\/\/framerusercontent\.com\/images\/([A-Za-z0-9]+)\.[a-zA-Z]+/g,
+    (full, hash) => (localBlogImages.has(hash) ? `/blog/${hash}.webp` : full),
+  );
+}
 
 /** Minimal RFC-4180 parser — handles quoted fields containing commas/newlines. */
 function parseCsv(text) {
@@ -49,9 +76,9 @@ const posts = blogRows
   .map((r) => ({
     slug: r.Slug,
     title: r["Blog Title"],
-    html: r["Blog Text"],
+    html: localizeHtmlImages(r["Blog Text"]),
     excerpt: (r["Blog Introduction"] || "").trim(),
-    image: r["Blog Picture"] || undefined,
+    image: localizeFramerUrl(r["Blog Picture"]) || undefined,
     imageAlt: r["Blog Picture:alt"] || "",
     date: r.Date ? r.Date.slice(0, 10) : "",
     author: r.Author || "Central Church",
@@ -65,8 +92,10 @@ writeFileSync(
  * Blog posts, generated from the CMS export by scripts/import-cms.mjs.
  * Do not hand-edit — re-run the script against a fresh export instead.
  *
- * \`image\` still points at Framer's CDN. Those files should be migrated into
- * public/blog/ before the Framer site is decommissioned.
+ * \`image\` and inline body images are rewritten to /blog/{hash}.webp when a
+ * matching file exists in public/blog/ (see that script). A URL still
+ * pointing at framerusercontent.com means that file hasn't been uploaded
+ * there yet — drop it in as public/blog/{hash}.webp and re-run the script.
  */
 
 export interface BlogPost {
