@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowLink, Button } from "@/components/Button";
 import { EventCard } from "@/components/EventCard";
 import { ImageSlot } from "@/components/ImageSlot";
+import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SpotlightBanner } from "@/components/SpotlightBanner";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
@@ -122,7 +123,7 @@ export default async function HomePage() {
       <SpotlightBanner event={spotlight} />
 
       {/* Welcome */}
-      <section className="mx-auto max-w-[1440px] px-5 pt-10 pb-7 lg:px-14 lg:pt-[88px] lg:pb-8">
+      <Reveal as="section" className="mx-auto max-w-[1440px] px-5 pt-10 pb-7 lg:px-14 lg:pt-[88px] lg:pb-8">
         <span className="text-xs font-bold tracking-[.14em] uppercase text-primary">
           Welcome
         </span>
@@ -137,10 +138,10 @@ export default async function HomePage() {
           midweek classes Wednesdays at 6:30 PM. Whoever you are and wherever
           you&rsquo;re starting from, there&rsquo;s a place for you here.
         </p>
-      </section>
+      </Reveal>
 
       {/* This Week at Central — automation-fed */}
-      <section className="mx-auto max-w-[1440px] px-5 pt-7 pb-10 lg:px-14 lg:pt-14 lg:pb-[88px]">
+      <Reveal as="section" className="mx-auto max-w-[1440px] px-5 pt-7 pb-10 lg:px-14 lg:pt-14 lg:pb-[88px]">
         <SectionHeader
           eyebrow="Automation-fed"
           title="This Week at Central"
@@ -149,19 +150,23 @@ export default async function HomePage() {
         />
         {/* Mobile: horizontal snap carousel · Desktop: 4-up grid — same card */}
         <div className="snap-row no-scrollbar -mx-5 mt-6 flex gap-3.5 overflow-x-auto px-5 lg:mx-0 lg:mt-8 lg:grid lg:grid-cols-4 lg:gap-6 lg:overflow-visible lg:px-0">
-          {thisWeek.map((event) => (
-            <div key={event.slug} className="w-[250px] shrink-0 lg:w-auto">
+          {thisWeek.map((event, i) => (
+            <Reveal
+              key={event.slug}
+              delay={i * 80}
+              className="w-[250px] shrink-0 lg:w-auto"
+            >
               <EventCard event={event} />
-            </div>
+            </Reveal>
           ))}
         </div>
         <div className="mt-6 lg:mt-10">
           <WeeklyRhythm events={recurring} columns />
         </div>
-      </section>
+      </Reveal>
 
       {/* New here? */}
-      <section className="grid grid-cols-1 bg-primary-deep text-white lg:grid-cols-2">
+      <Reveal as="section" className="grid grid-cols-1 bg-primary-deep text-white lg:grid-cols-2">
         <ImageSlot
           photoKey="home.welcome"
           sizes="(min-width: 1024px) 50vw, 100vw"
@@ -195,71 +200,73 @@ export default async function HomePage() {
             </Button>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* Ministries strip */}
-      <section className="mx-auto max-w-[1440px] px-5 py-10 lg:px-14 lg:py-[88px]">
+      <Reveal as="section" className="mx-auto max-w-[1440px] px-5 py-10 lg:px-14 lg:py-[88px]">
         <SectionHeader
           title="Find your place"
           action={{ label: "All ministries", href: "/ministries" }}
         />
         <div className="mt-5 grid grid-cols-2 gap-3 lg:mt-8 lg:grid-cols-3 lg:gap-5">
-          {ministryTiles.map((tile) => {
+          {ministryTiles.map((tile, i) => {
             const ministry = ministries.find((m) => m.slug === tile.slug)!;
             const href =
               ministry.slug === "iglesia" ? "/iglesia" : `/ministries/${ministry.slug}`;
             return tile.photo ? (
-              <Link
-                key={ministry.slug}
-                href={href}
-                className="relative flex h-[120px] items-end overflow-hidden rounded-[14px] p-3.5 no-underline lg:h-[260px] lg:rounded-2xl lg:p-6"
-              >
-                <ImageSlot
-                  photoKey={tile.photoKey}
-                  sizes="(min-width: 1024px) 33vw, 50vw"
-                  alt=""
-                  className="absolute inset-0"
-                />
-                <span
-                  aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-coal/70 to-transparent"
-                />
-                <span className="relative flex flex-col gap-1">
-                  <span className="font-display text-lg tracking-[-.02em] text-white lg:text-2xl">
+              <Reveal key={ministry.slug} delay={i * 60}>
+                <Link
+                  href={href}
+                  className="relative flex h-[120px] items-end overflow-hidden rounded-[14px] p-3.5 no-underline lg:h-[260px] lg:rounded-2xl lg:p-6"
+                >
+                  <ImageSlot
+                    photoKey={tile.photoKey}
+                    sizes="(min-width: 1024px) 33vw, 50vw"
+                    alt=""
+                    className="absolute inset-0"
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-t from-coal/70 to-transparent"
+                  />
+                  <span className="relative flex flex-col gap-1">
+                    <span className="font-display text-lg tracking-[-.02em] text-white lg:text-2xl">
+                      {ministry.shortName}
+                    </span>
+                    <span className="hidden text-[14.5px] text-[#DCD6CC] lg:block">
+                      {ministry.tileBlurb}
+                    </span>
+                  </span>
+                </Link>
+              </Reveal>
+            ) : (
+              <Reveal key={ministry.slug} delay={i * 60}>
+                <Link
+                  href={href}
+                  className={`flex h-[120px] flex-col gap-2 rounded-[14px] border p-3.5 no-underline lg:h-[260px] lg:rounded-2xl lg:p-6 ${
+                    ministry.slug === "kids-closet"
+                      ? "border-teal-border bg-teal-50"
+                      : "border-line bg-surface"
+                  }`}
+                >
+                  <span className="font-display text-lg tracking-[-.02em] text-ink lg:text-[22px]">
                     {ministry.shortName}
                   </span>
-                  <span className="hidden text-[14.5px] text-[#DCD6CC] lg:block">
+                  <span className="hidden text-[14.5px] leading-[1.5] text-body lg:block">
                     {ministry.tileBlurb}
                   </span>
-                </span>
-              </Link>
-            ) : (
-              <Link
-                key={ministry.slug}
-                href={href}
-                className={`flex h-[120px] flex-col gap-2 rounded-[14px] border p-3.5 no-underline lg:h-[260px] lg:rounded-2xl lg:p-6 ${
-                  ministry.slug === "kids-closet"
-                    ? "border-teal-border bg-teal-50"
-                    : "border-line bg-surface"
-                }`}
-              >
-                <span className="font-display text-lg tracking-[-.02em] text-ink lg:text-[22px]">
-                  {ministry.shortName}
-                </span>
-                <span className="hidden text-[14.5px] leading-[1.5] text-body lg:block">
-                  {ministry.tileBlurb}
-                </span>
-                <span className="mt-auto hidden text-[14.5px] font-bold text-primary lg:block">
-                  {ministry.lang === "es" ? "Conócenos" : "Learn more"} →
-                </span>
-              </Link>
+                  <span className="mt-auto hidden text-[14.5px] font-bold text-primary lg:block">
+                    {ministry.lang === "es" ? "Conócenos" : "Learn more"} →
+                  </span>
+                </Link>
+              </Reveal>
             );
           })}
         </div>
-      </section>
+      </Reveal>
 
       {/* Latest media */}
-      <section className="mx-auto max-w-[1440px] px-5 pb-12 lg:px-14 lg:pb-24">
+      <Reveal as="section" className="mx-auto max-w-[1440px] px-5 pb-12 lg:px-14 lg:pb-24">
         <SectionHeader title="Latest from Central" rule />
         <div className="mt-6 grid grid-cols-1 gap-4 lg:mt-8 lg:grid-cols-[1.6fr_1fr] lg:gap-6">
           <div className="flex flex-col gap-4 rounded-2xl border border-line p-4 lg:flex-row lg:gap-6 lg:p-6">
@@ -310,7 +317,7 @@ export default async function HomePage() {
             </ArrowLink>
           </div>
         </div>
-      </section>
+      </Reveal>
     </>
   );
 }

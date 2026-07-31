@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Button } from "@/components/Button";
+import { Reveal } from "@/components/Reveal";
 import { site, youtubeLiveUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ export default function LivePage() {
         Sunday. Pull up a chair — you&rsquo;re part of the family either way.
       </p>
 
-      <div className="relative mt-8 flex flex-col items-start gap-5 overflow-hidden rounded-[18px] border border-line bg-coal p-6 text-white lg:mt-10 lg:p-10">
+      <Reveal className="relative mt-8 flex flex-col items-start gap-5 overflow-hidden rounded-[18px] border border-line bg-coal p-6 text-white lg:mt-10 lg:p-10">
         <Image
           src="/photos/media-live-bg.webp"
           alt=""
@@ -64,7 +65,7 @@ export default function LivePage() {
             Watch on YouTube
           </Button>
         </span>
-      </div>
+      </Reveal>
     </div>
   );
 }

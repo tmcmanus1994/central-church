@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLink, Button } from "@/components/Button";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
+import { Reveal } from "@/components/Reveal";
 import { bulletin } from "@/content/bulletin";
 import { getCalendar, getCalendarSpotlight } from "@/lib/calendar";
 import { blogPosts } from "@/content/blog";
@@ -85,7 +86,7 @@ export default async function HubPage() {
       </a>
 
       {/* Announcements lead — same content as the bulletin */}
-      <section className="mt-7 rounded-2xl border border-line p-5 lg:p-6">
+      <Reveal as="section" className="mt-7 rounded-2xl border border-line p-5 lg:p-6">
         <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
           Announcements
         </h2>
@@ -100,10 +101,10 @@ export default async function HubPage() {
             </li>
           ))}
         </ul>
-      </section>
+      </Reveal>
 
       {/* What's on */}
-      <section className="mt-4 rounded-2xl border border-line p-5 lg:p-6">
+      <Reveal as="section" className="mt-4 rounded-2xl border border-line p-5 lg:p-6">
         <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
           What&rsquo;s on
         </h2>
@@ -124,10 +125,10 @@ export default async function HubPage() {
         <div className="mt-4">
           <ArrowLink href="/events">See the full calendar</ArrowLink>
         </div>
-      </section>
+      </Reveal>
 
       {/* Prayer — named requests stay in the printed bulletin, not on a public URL */}
-      <section className="mt-4 rounded-2xl border border-teal-border bg-teal-50 p-5 lg:p-6">
+      <Reveal as="section" className="mt-4 rounded-2xl border border-teal-border bg-teal-50 p-5 lg:p-6">
         <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
           Prayer
         </h2>
@@ -150,10 +151,10 @@ export default async function HubPage() {
             </div>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* Times, directions, giving */}
-      <section className="mt-4 rounded-2xl border border-line p-5 lg:p-6">
+      <Reveal as="section" className="mt-4 rounded-2xl border border-line p-5 lg:p-6">
         <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
           Service times
         </h2>
@@ -179,7 +180,7 @@ export default async function HubPage() {
             Give
           </Button>
         </div>
-      </section>
+      </Reveal>
 
       {/* Weekly rhythm */}
       <h2 className="mt-9 mb-4 font-display text-[24px] tracking-[-.025em]">

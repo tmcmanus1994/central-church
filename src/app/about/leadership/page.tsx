@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
 import { PersonCard, PersonTile } from "@/components/PersonCard";
+import { Reveal } from "@/components/Reveal";
 import { elders, leadMinister, ministryLeaders, staff } from "@/content/people";
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default function LeadershipPage() {
       </h1>
 
       {/* Lead Minister feature */}
-      <div className="flex flex-col gap-6 rounded-[18px] border border-line bg-surface p-5 lg:flex-row lg:items-center lg:gap-12 lg:p-8">
+      <Reveal className="flex flex-col gap-6 rounded-[18px] border border-line bg-surface p-5 lg:flex-row lg:items-center lg:gap-12 lg:p-8">
         <ImageSlot
           src={leadMinister.photo}
           sizes="(min-width: 1024px) 360px, 100vw"
@@ -49,15 +50,17 @@ export default function LeadershipPage() {
             ) : null}
           </div>
         </div>
-      </div>
+      </Reveal>
 
       {/* Ministry leaders */}
       <h2 className="mt-10 mb-5 font-display text-[24px] tracking-[-.025em] lg:mt-14 lg:text-[28px]">
         Ministry Leaders
       </h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-        {ministryLeaders.map((person) => (
-          <PersonCard key={person.name} person={person} />
+        {ministryLeaders.map((person, i) => (
+          <Reveal key={person.name} delay={i * 60}>
+            <PersonCard person={person} />
+          </Reveal>
         ))}
       </div>
 
@@ -66,8 +69,10 @@ export default function LeadershipPage() {
         Elders
       </h2>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6">
-        {elders.map((person) => (
-          <PersonTile key={person.name} person={person} showRole={false} />
+        {elders.map((person, i) => (
+          <Reveal key={person.name} delay={i * 40}>
+            <PersonTile person={person} showRole={false} />
+          </Reveal>
         ))}
       </div>
 
@@ -76,8 +81,10 @@ export default function LeadershipPage() {
         Staff
       </h2>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6">
-        {staff.map((person) => (
-          <PersonTile key={person.name} person={person} />
+        {staff.map((person, i) => (
+          <Reveal key={person.name} delay={i * 40}>
+            <PersonTile person={person} />
+          </Reveal>
         ))}
       </div>
     </div>

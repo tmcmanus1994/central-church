@@ -5,6 +5,7 @@ import { Faq } from "@/components/Faq";
 import { ImageSlot } from "@/components/ImageSlot";
 import { RemindSignup } from "@/components/RemindSignup";
 import { VisitForm } from "@/components/VisitForm";
+import { Reveal } from "@/components/Reveal";
 import { remindClasses } from "@/lib/remind";
 import { site, fullAddress } from "@/lib/site";
 
@@ -43,7 +44,7 @@ export default function PlanAVisitPage() {
   return (
     <>
       {/* Hero — image first on mobile, split on desktop */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 lg:items-stretch">
+      <Reveal as="section" className="grid grid-cols-1 lg:grid-cols-2 lg:items-stretch">
         <ImageSlot
           photoKey="visit.hero"
           sizes="(min-width: 1024px) 50vw, 100vw"
@@ -71,10 +72,10 @@ export default function PlanAVisitPage() {
             </Button>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* What to expect */}
-      <section className="border-y border-line bg-surface px-5 py-10 lg:px-14 lg:py-20">
+      <Reveal as="section" className="border-y border-line bg-surface px-5 py-10 lg:px-14 lg:py-20">
         <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
           <div className="flex flex-col gap-3.5 lg:gap-[18px]">
             <span className="text-xs font-bold tracking-[.14em] uppercase text-primary">
@@ -107,10 +108,10 @@ export default function PlanAVisitPage() {
             className="aspect-[16/10] w-full rounded-2xl"
           />
         </div>
-      </section>
+      </Reveal>
 
       {/* Service times & location */}
-      <section className="mx-auto max-w-[1440px] px-5 py-10 lg:px-14 lg:py-20">
+      <Reveal as="section" className="mx-auto max-w-[1440px] px-5 py-10 lg:px-14 lg:py-20">
         <h2 className="m-0 mb-6 font-display text-[26px] tracking-[-.025em] lg:mb-8 lg:text-[40px] lg:tracking-[-.03em]">
           Service Times &amp; Location
         </h2>
@@ -177,10 +178,10 @@ export default function PlanAVisitPage() {
             <ArrowLink href={site.mapsUrl}>Open in Maps</ArrowLink>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* Kids & accessibility */}
-      <section className="mx-auto max-w-[1440px] px-5 pb-10 lg:px-14 lg:pb-20">
+      <Reveal as="section" className="mx-auto max-w-[1440px] px-5 pb-10 lg:px-14 lg:pb-20">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
           <div className="flex flex-col gap-5 rounded-2xl border border-line bg-surface p-6 sm:flex-row lg:p-8">
             <ImageSlot
@@ -227,12 +228,12 @@ export default function PlanAVisitPage() {
             </div>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* Text alerts — hidden until a churchwide Remind class is set up in
           src/lib/remind.ts */}
       {remindClasses.churchwide.code ? (
-        <section className="mx-auto max-w-[1440px] px-5 pb-10 lg:px-14 lg:pb-20">
+        <Reveal as="section" className="mx-auto max-w-[1440px] px-5 pb-10 lg:px-14 lg:pb-20">
           <div className="rounded-2xl border border-teal-border bg-teal-50 p-6 text-teal-ink lg:p-8">
             <span className="text-xs font-bold tracking-[.14em] uppercase text-teal-muted">
               Want text updates?
@@ -243,21 +244,21 @@ export default function PlanAVisitPage() {
             </p>
             <RemindSignup code={remindClasses.churchwide.code} />
           </div>
-        </section>
+        </Reveal>
       ) : null}
 
       {/* FAQ */}
-      <section className="border-t border-line bg-surface px-5 py-10 lg:px-14 lg:py-20">
+      <Reveal as="section" className="border-t border-line bg-surface px-5 py-10 lg:px-14 lg:py-20">
         <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-6 lg:grid-cols-[.85fr_1.15fr] lg:gap-16">
           <h2 className="m-0 font-display text-[26px] leading-[1.08] tracking-[-.025em] lg:text-[40px] lg:tracking-[-.03em]">
             Frequently Asked Questions
           </h2>
           <Faq items={faqItems} />
         </div>
-      </section>
+      </Reveal>
 
       {/* Contact form */}
-      <section id="contact" className="bg-primary-deep px-5 py-10 text-white lg:px-14 lg:py-20">
+      <Reveal as="section" id="contact" className="bg-primary-deep px-5 py-10 text-white lg:px-14 lg:py-20">
         <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-start gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <div className="flex flex-col gap-3.5 lg:gap-4">
             <span className="text-[11px] font-bold tracking-[.14em] uppercase text-teal-light lg:text-xs">
@@ -273,7 +274,7 @@ export default function PlanAVisitPage() {
           </div>
           <VisitForm />
         </div>
-      </section>
+      </Reveal>
     </>
   );
 }

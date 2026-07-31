@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Reveal } from "@/components/Reveal";
 import { ministries } from "@/content/ministries";
 
 export const metadata: Metadata = {
@@ -22,29 +23,30 @@ export default function MinistriesPage() {
         every age and stage — and our neighbors across Little Rock.
       </p>
       <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-5">
-        {ministries.map((ministry) => (
-          <Link
-            key={ministry.slug}
-            href={
-              ministry.slug === "iglesia"
-                ? "/iglesia"
-                : `/ministries/${ministry.slug}`
-            }
-            className="flex min-h-[180px] flex-col gap-2 rounded-2xl border border-line bg-surface p-6 no-underline transition-colors hover:border-teal-border hover:bg-teal-50/60"
-          >
-            <span className="font-display text-[22px] tracking-[-.02em] text-ink">
-              {ministry.shortName}
-            </span>
-            <span
-              lang={ministry.lang}
-              className="text-[14.5px] leading-[1.5] text-body"
+        {ministries.map((ministry, i) => (
+          <Reveal key={ministry.slug} delay={i * 60}>
+            <Link
+              href={
+                ministry.slug === "iglesia"
+                  ? "/iglesia"
+                  : `/ministries/${ministry.slug}`
+              }
+              className="flex min-h-[180px] flex-col gap-2 rounded-2xl border border-line bg-surface p-6 no-underline transition-colors hover:border-teal-border hover:bg-teal-50/60"
             >
-              {ministry.tileBlurb}
-            </span>
-            <span className="mt-auto text-[14.5px] font-bold text-primary">
-              {ministry.lang === "es" ? "Conócenos" : "Learn more"} →
-            </span>
-          </Link>
+              <span className="font-display text-[22px] tracking-[-.02em] text-ink">
+                {ministry.shortName}
+              </span>
+              <span
+                lang={ministry.lang}
+                className="text-[14.5px] leading-[1.5] text-body"
+              >
+                {ministry.tileBlurb}
+              </span>
+              <span className="mt-auto text-[14.5px] font-bold text-primary">
+                {ministry.lang === "es" ? "Conócenos" : "Learn more"} →
+              </span>
+            </Link>
+          </Reveal>
         ))}
       </div>
     </div>

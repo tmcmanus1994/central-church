@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ImageSlot } from "@/components/ImageSlot";
+import { Reveal } from "@/components/Reveal";
 import { mediaPlaceholder } from "@/content/photos";
 import { photoAlbums as albums } from "@/content/photo-albums";
 
@@ -25,7 +26,7 @@ export default function PhotoGalleryPage() {
         you&rsquo;re in.
       </p>
 
-      <div className="mt-8 rounded-2xl border border-teal-border bg-teal-50 p-6 lg:mt-10 lg:p-8">
+      <Reveal className="mt-8 rounded-2xl border border-teal-border bg-teal-50 p-6 lg:mt-10 lg:p-8">
         <span className="text-xs font-bold tracking-[.14em] uppercase text-teal-muted">
           Looking for Camp Caudle videos?
         </span>
@@ -39,10 +40,10 @@ export default function PhotoGalleryPage() {
         >
           Watch Camp Caudle videos →
         </Link>
-      </div>
+      </Reveal>
 
       <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-6">
-        {albums.map((album) => {
+        {albums.map((album, i) => {
           const inner = (
             <>
               <ImageSlot
@@ -72,20 +73,21 @@ export default function PhotoGalleryPage() {
           );
           const cls =
             "flex flex-col gap-3 rounded-2xl border border-line p-4 no-underline transition-colors hover:border-teal-border hover:bg-teal-50/40 lg:p-5";
-          return album.href ? (
-            <a
-              key={album.title}
-              href={album.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cls}
-            >
-              {inner}
-            </a>
-          ) : (
-            <div key={album.title} className={cls}>
-              {inner}
-            </div>
+          return (
+            <Reveal key={album.title} delay={(i % 6) * 60}>
+              {album.href ? (
+                <a
+                  href={album.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cls}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <div className={cls}>{inner}</div>
+              )}
+            </Reveal>
           );
         })}
       </div>

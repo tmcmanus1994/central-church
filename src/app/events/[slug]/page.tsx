@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLink, Button } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
+import { Reveal } from "@/components/Reveal";
 import { RemindSignup } from "@/components/RemindSignup";
 import { Tag } from "@/components/Tag";
 import { ContactButton } from "@/components/ContactButton";
@@ -147,7 +148,7 @@ export default async function EventDetailPage({
           )}
 
           {host || ministry ? (
-            <div className="flex flex-col gap-4 rounded-2xl border border-line bg-surface p-4 sm:flex-row sm:items-center lg:p-6">
+            <Reveal className="flex flex-col gap-4 rounded-2xl border border-line bg-surface p-4 sm:flex-row sm:items-center lg:p-6">
               {/*
                 The person to ask, with their face. Someone reading a Teens
                 event should recognise James before they turn up, and be able
@@ -193,7 +194,7 @@ export default async function EventDetailPage({
                   />
                 </div>
               ) : null}
-            </div>
+            </Reveal>
           ) : null}
 
           {/*
@@ -201,7 +202,7 @@ export default async function EventDetailPage({
             parent finding a trip here is exactly who needs the join link.
           */}
           {ministry?.slug === "teens" && remindClasses.teens.code ? (
-            <div className="flex flex-col gap-2.5 rounded-2xl border border-teens-solid/30 bg-teens-tint p-4 text-teens-deep lg:p-6">
+            <Reveal className="flex flex-col gap-2.5 rounded-2xl border border-teens-solid/30 bg-teens-tint p-4 text-teens-deep lg:p-6">
               <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teens-deep">
                 Don&rsquo;t miss an update
               </span>
@@ -210,7 +211,7 @@ export default async function EventDetailPage({
                 times through Remind before anywhere else.
               </p>
               <RemindSignup code={remindClasses.teens.code} className="mt-1" />
-            </div>
+            </Reveal>
           ) : null}
         </div>
 
@@ -267,7 +268,7 @@ export default async function EventDetailPage({
           </div>
 
           {alsoThisMonth.length > 0 ? (
-            <div className="flex flex-col gap-3 rounded-[18px] border border-teal-border bg-teal-50 p-6">
+            <Reveal className="flex flex-col gap-3 rounded-[18px] border border-teal-border bg-teal-50 p-6">
               <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teal-muted">
                 Also this month
               </span>
@@ -280,11 +281,11 @@ export default async function EventDetailPage({
                   {e.title} · {eventWhen(e).split(" · ")[0]}
                 </Link>
               ))}
-            </div>
+            </Reveal>
           ) : null}
 
           {isRecurring ? (
-            <div className="flex flex-col gap-3 rounded-[18px] border border-teal-border bg-teal-50 p-6">
+            <Reveal className="flex flex-col gap-3 rounded-[18px] border border-teal-border bg-teal-50 p-6">
               <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teal-muted">
                 Every week at Central
               </span>
@@ -300,7 +301,7 @@ export default async function EventDetailPage({
                     {e.title} · {recurringWhen(e)}
                   </Link>
                 ))}
-            </div>
+            </Reveal>
           ) : null}
         </aside>
       </div>

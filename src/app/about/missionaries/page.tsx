@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ImageSlot } from "@/components/ImageSlot";
+import { Reveal } from "@/components/Reveal";
 import type { PhotoKey } from "@/content/photos";
 import { missionaries } from "@/content/people";
 
@@ -26,7 +27,7 @@ export default function MissionariesPage() {
 
       <div className="mt-8 flex flex-col gap-8 lg:mt-12 lg:gap-12">
         {missionaries.map((team, i) => (
-          <section
+          <Reveal as="section"
             key={team.slug}
             className={`grid grid-cols-1 gap-6 rounded-[18px] border border-line p-5 lg:grid-cols-2 lg:items-center lg:gap-12 lg:p-10 ${
               i % 2 === 1 ? "bg-surface" : ""
@@ -67,7 +68,7 @@ export default function MissionariesPage() {
                 ))}
               </div>
             </div>
-          </section>
+          </Reveal>
         ))}
       </div>
     </div>

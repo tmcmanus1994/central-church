@@ -10,6 +10,7 @@ import { KidsClosetForm } from "./KidsClosetForm";
 import { MinistryBanner } from "./MinistryBanner";
 import { RemindSignup } from "./RemindSignup";
 import { ImageSlot } from "./ImageSlot";
+import { Reveal } from "@/components/Reveal";
 
 /** Narrows a built-up string to a PhotoKey only when the registry has it. */
 function key(candidate: string): PhotoKey | undefined {
@@ -284,7 +285,7 @@ export function MinistryPage({
 
       {/* Video and gallery are independent — Kids Closet has both. */}
       {ministry.video ? (
-        <section className="mx-auto max-w-[1100px] px-5 pb-10 lg:px-14 lg:pb-16">
+        <Reveal as="section" className="mx-auto max-w-[1100px] px-5 pb-10 lg:px-14 lg:pb-16">
           <h2 className="m-0 mb-5 font-display text-[24px] tracking-[-.025em] lg:text-[32px]">
             {ministry.video.caption}
           </h2>
@@ -306,11 +307,11 @@ export function MinistryPage({
           >
             Watch on Vimeo →
           </a>
-        </section>
+        </Reveal>
       ) : null}
 
       {galleries[ministry.slug]?.length || !ministry.video ? (
-      <section className="mx-auto max-w-[1440px] px-5 pb-10 lg:px-14 lg:pb-16">
+      <Reveal as="section" className="mx-auto max-w-[1440px] px-5 pb-10 lg:px-14 lg:pb-16">
         <h2 className="mb-5 font-display text-[24px] tracking-[-.025em] lg:text-[32px]">
           {labels.gallery}
         </h2>
@@ -329,19 +330,19 @@ export function MinistryPage({
             />
           ))}
         </div>
-      </section>
+      </Reveal>
       ) : null}
 
       {/* Kids Closet books its own appointments — see KidsClosetForm. */}
       {ministry.slug === "kids-closet" ? (
-        <section className="mx-auto max-w-[1100px] px-5 pb-10 lg:px-14 lg:pb-16">
+        <Reveal as="section" className="mx-auto max-w-[1100px] px-5 pb-10 lg:px-14 lg:pb-16">
           <KidsClosetForm />
-        </section>
+        </Reveal>
       ) : null}
 
       {/* CTA band — Iglesia gets its own form (routed to Matt Thomas) instead
           of a link out to the English Plan a Visit page. */}
-      <section
+      <Reveal as="section"
         id={ministry.slug === "iglesia" ? "contact" : undefined}
         className={`bg-primary-deep px-5 py-10 text-white lg:px-14 lg:py-16 ${
           ministry.slug === "iglesia" ? "scroll-mt-24" : ""
@@ -372,7 +373,7 @@ export function MinistryPage({
             </div>
           )}
         </div>
-      </section>
+      </Reveal>
     </article>
   );
 }

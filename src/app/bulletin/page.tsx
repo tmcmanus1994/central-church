@@ -6,6 +6,7 @@ import { getCalendar } from "@/lib/calendar";
 import { eventWhen } from "@/lib/format";
 import Link from "next/link";
 import { StaffMention } from "@/components/ContactButton";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Weekly Bulletin",
@@ -25,7 +26,7 @@ function Card({
   tone?: "plain" | "teal";
 }) {
   return (
-    <section
+    <Reveal as="section"
       className={
         tone === "teal"
           ? "rounded-2xl border border-teal-border bg-teal-50 p-6 lg:p-7"
@@ -36,7 +37,7 @@ function Card({
         {title}
       </h2>
       {children}
-    </section>
+    </Reveal>
   );
 }
 

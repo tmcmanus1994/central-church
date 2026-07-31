@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ImageSlot } from "@/components/ImageSlot";
+import { Reveal } from "@/components/Reveal";
 import { blogPosts, getBlogPost } from "@/content/blog";
 
 export function generateStaticParams() {
@@ -74,17 +75,19 @@ export default async function BlogPostPage({
       />
 
       {next ? (
-        <Link
-          href={`/blog/${next.slug}`}
-          className="mt-12 flex flex-col gap-1 rounded-2xl border border-line bg-surface p-5 no-underline transition-colors hover:border-teal-border lg:p-6"
-        >
-          <span className="text-[11px] font-bold tracking-[.1em] uppercase text-muted">
-            Next post
-          </span>
-          <span className="font-display text-[20px] tracking-[-.015em] text-ink">
-            {next.title}
-          </span>
-        </Link>
+        <Reveal className="mt-12">
+          <Link
+            href={`/blog/${next.slug}`}
+            className="flex flex-col gap-1 rounded-2xl border border-line bg-surface p-5 no-underline transition-colors hover:border-teal-border lg:p-6"
+          >
+            <span className="text-[11px] font-bold tracking-[.1em] uppercase text-muted">
+              Next post
+            </span>
+            <span className="font-display text-[20px] tracking-[-.015em] text-ink">
+              {next.title}
+            </span>
+          </Link>
+        </Reveal>
       ) : null}
     </article>
   );

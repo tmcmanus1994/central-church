@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "About Central Church of Christ | Our History & Mission",
@@ -26,17 +27,17 @@ const mission = [
 export default function AboutPage() {
   return (
     <>
-      <section className="mx-auto max-w-[1440px] border-b border-line px-5 pt-8 pb-8 lg:px-14 lg:pt-[72px] lg:pb-14">
+      <Reveal as="section" className="mx-auto max-w-[1440px] border-b border-line px-5 pt-8 pb-8 lg:px-14 lg:pt-[72px] lg:pb-14">
         <span className="text-xs font-bold tracking-[.14em] uppercase text-primary">
           About
         </span>
         <h1 className="mt-2.5 mb-0 max-w-[900px] font-display text-[34px] leading-[1.02] tracking-[-.035em] lg:mt-3.5 lg:text-[64px] lg:leading-none lg:tracking-[-.04em]">
           About Central Church of Christ
         </h1>
-      </section>
+      </Reveal>
 
       {/* Our story */}
-      <section className="mx-auto grid max-w-[1440px] grid-cols-1 gap-6 px-5 py-10 lg:grid-cols-[.7fr_1.3fr] lg:gap-14 lg:px-14 lg:py-16">
+      <Reveal as="section" className="mx-auto grid max-w-[1440px] grid-cols-1 gap-6 px-5 py-10 lg:grid-cols-[.7fr_1.3fr] lg:gap-14 lg:px-14 lg:py-16">
         <h2 className="m-0 font-display text-[26px] leading-[1.08] tracking-[-.025em] lg:text-4xl lg:tracking-[-.03em]">
           Our Story
         </h2>
@@ -65,10 +66,10 @@ export default function AboutPage() {
             className="mt-2 aspect-[16/9] w-full rounded-2xl lg:mt-3"
           />
         </div>
-      </section>
+      </Reveal>
 
       {/* FOLLOW / JESUS / TOGETHER — the strongest brand element, kept as a designed moment */}
-      <section className="bg-primary-deep px-5 py-10 text-white lg:px-14 lg:py-20">
+      <Reveal as="section" className="bg-primary-deep px-5 py-10 text-white lg:px-14 lg:py-20">
         <div className="mx-auto max-w-[1440px]">
           <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teal-light lg:text-xs">
             Our mission
@@ -93,10 +94,10 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* Go deeper */}
-      <section className="mx-auto grid max-w-[1440px] grid-cols-1 gap-4 px-5 py-10 sm:grid-cols-3 lg:gap-6 lg:px-14 lg:py-16">
+      <Reveal as="section" className="mx-auto grid max-w-[1440px] grid-cols-1 gap-4 px-5 py-10 sm:grid-cols-3 lg:gap-6 lg:px-14 lg:py-16">
         {[
           {
             title: "Our Leadership",
@@ -133,7 +134,7 @@ export default function AboutPage() {
             </ArrowLink>
           </div>
         ))}
-      </section>
+      </Reveal>
     </>
   );
 }

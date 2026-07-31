@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
+import { Reveal } from "@/components/Reveal";
 import { blogPosts } from "@/content/blog";
 import { mediaPlaceholder } from "@/content/photos";
 
@@ -32,7 +33,7 @@ export default function MediaHubPage() {
       </p>
 
       <div className="mt-8 grid grid-cols-1 gap-4 lg:mt-12 lg:grid-cols-3 lg:gap-6">
-        <div className="flex flex-col gap-3 rounded-2xl border border-line p-6">
+        <Reveal className="flex flex-col gap-3 rounded-2xl border border-line p-6">
           <ImageSlot
             src="/photos/kids-trunk-or-treat.webp"
             sizes="(min-width: 1024px) 33vw, 100vw"
@@ -52,8 +53,8 @@ export default function MediaHubPage() {
           <ArrowLink href="/media/photos" className="mt-auto text-[15px]">
             Browse albums
           </ArrowLink>
-        </div>
-        <div className="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6">
+        </Reveal>
+        <Reveal delay={60} className="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6">
           <ImageSlot
             photoKey="media.live"
             sizes="(min-width: 1024px) 33vw, 100vw"
@@ -74,8 +75,8 @@ export default function MediaHubPage() {
           <ArrowLink href="/media/live" className="mt-auto text-[15px]">
             Watch live
           </ArrowLink>
-        </div>
-        <div className="flex flex-col gap-3 rounded-2xl border border-line p-6">
+        </Reveal>
+        <Reveal delay={120} className="flex flex-col gap-3 rounded-2xl border border-line p-6">
           <ImageSlot
             src={latestPost.image ?? mediaPlaceholder}
             sizes="(min-width: 1024px) 33vw, 100vw"
@@ -93,10 +94,10 @@ export default function MediaHubPage() {
           <ArrowLink href="/blog" className="mt-auto text-[15px]">
             Read the blog
           </ArrowLink>
-        </div>
+        </Reveal>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-teal-border bg-teal-50 p-6 lg:mt-8 lg:p-8">
+      <Reveal className="mt-6 rounded-2xl border border-teal-border bg-teal-50 p-6 lg:mt-8 lg:p-8">
         <span className="text-xs font-bold tracking-[.14em] uppercase text-teal-muted">
           This week&rsquo;s bulletin
         </span>
@@ -105,7 +106,7 @@ export default function MediaHubPage() {
           every Sunday.
         </p>
         <ArrowLink href="/bulletin">Read the bulletin</ArrowLink>
-      </div>
+      </Reveal>
     </div>
   );
 }

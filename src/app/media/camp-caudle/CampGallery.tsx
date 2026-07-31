@@ -5,6 +5,7 @@ import Image from "next/image";
 import type { CampVideo } from "@/content/camp-caudle";
 import { campCaudleAlbumForYear } from "@/content/photo-albums";
 import { Button } from "@/components/Button";
+import { Reveal } from "@/components/Reveal";
 
 /**
  * Videos load their Vimeo iframe only once played — 39 embeds on one page
@@ -135,12 +136,10 @@ export function CampGallery({
       </div>
 
       <div className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
-        {shown.map((video) => (
-          <VideoCard
-            key={video.slug}
-            video={video}
-            hasThumbnail={thumbnails.has(video.slug)}
-          />
+        {shown.map((video, i) => (
+          <Reveal key={video.slug} delay={(i % 6) * 60}>
+            <VideoCard video={video} hasThumbnail={thumbnails.has(video.slug)} />
+          </Reveal>
         ))}
       </div>
     </>
