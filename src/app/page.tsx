@@ -50,24 +50,41 @@ export default async function HomePage() {
           {/* Headline and service times stack, centred on both axes. */}
           <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-7 text-center lg:gap-8">
             <div className="flex max-w-[760px] flex-col items-center gap-4 lg:gap-[22px]">
-              <p className="m-0 text-[11px] font-bold tracking-[.16em] uppercase text-teal-light lg:text-xs">
+              <Reveal
+                as="p"
+                className="m-0 text-[11px] font-bold tracking-[.16em] uppercase text-teal-light lg:text-xs"
+              >
                 Downtown Little Rock, Arkansas
-              </p>
-              <h1 className="m-0 font-display text-[42px] leading-[.98] font-bold tracking-[-.035em] text-white lg:text-[82px] lg:tracking-[-.04em]">
+              </Reveal>
+              <Reveal
+                as="h1"
+                delay={100}
+                className="m-0 font-display text-[42px] leading-[.98] font-bold tracking-[-.035em] text-white lg:text-[82px] lg:tracking-[-.04em]"
+              >
                 {site.tagline}
-              </h1>
-              <p className="m-0 max-w-[600px] text-base leading-[1.5] text-[#DCE4E7] text-pretty-wrap lg:text-xl">
+              </Reveal>
+              <Reveal
+                as="p"
+                delay={200}
+                className="m-0 max-w-[600px] text-base leading-[1.5] text-[#DCE4E7] text-pretty-wrap lg:text-xl"
+              >
                 A downtown Little Rock church made of imperfect people striving
                 to love God and love others every day.
-              </p>
-              <div className="mt-1 flex w-full flex-col gap-2.5 sm:w-auto sm:flex-row sm:gap-3">
+              </Reveal>
+              <Reveal
+                delay={300}
+                className="mt-1 flex w-full flex-col gap-2.5 sm:w-auto sm:flex-row sm:gap-3"
+              >
                 <Button href="/plan-a-visit">Plan a Visit</Button>
                 <Button href="/media/live" variant="outline-light">
                   Watch Live
                 </Button>
-              </div>
+              </Reveal>
             </div>
-            <div className="hidden w-full max-w-[400px] flex-col gap-3 rounded-[14px] border border-white/20 bg-white/10 px-6 py-5 text-left backdrop-blur-sm lg:flex">
+            <Reveal
+              delay={420}
+              className="hidden w-full max-w-[400px] flex-col gap-3 rounded-[14px] border border-white/20 bg-white/10 px-6 py-5 text-left backdrop-blur-sm lg:flex"
+            >
               <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teal-light">
                 This Sunday
               </span>
@@ -88,13 +105,13 @@ export default async function HomePage() {
                 <br />
                 {site.address.city}, {site.address.state} {site.address.zip}
               </span>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* Mobile service-times card (the desktop hero card, stacked) */}
-      <section className="flex flex-col gap-2.5 border-b border-teal-border bg-teal-50 p-5 lg:hidden">
+      <Reveal as="section" className="flex flex-col gap-2.5 border-b border-teal-border bg-teal-50 p-5 lg:hidden">
         <span className="text-[11px] font-bold tracking-[.14em] uppercase text-primary-deep">
           This Sunday
         </span>
@@ -117,7 +134,7 @@ export default async function HomePage() {
         >
           Directions to {site.address.street} →
         </a>
-      </section>
+      </Reveal>
 
       {/* Spotlight — automation-fed; renders nothing when there's no feature */}
       <SpotlightBanner event={spotlight} />
