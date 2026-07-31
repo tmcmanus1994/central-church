@@ -1,0 +1,68 @@
+name: Weekly bulletin update
+
+on:
+  schedule:
+    # ~6 AM CDT / 5 AM CST — hours of buffer before the 9:15 service, and
+    # well after Jessica's bulletin email typically goes out Saturday.
+    - cron: "0 11 * * SUN"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install html2text
+
+      # inbox/ is gitignored and only ever lives on this runner's disk for
+      # the few minutes this job runs — the PDF and email both carry things
+      # (named prayer requests, giving figures, phone numbers) that don't
+      # belong in git history.
+      - name: Ingest this week's bulletin email
+        id: ingest
+        run: python automation/ingest.py
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+
+      - name: Alert on missing bulletin
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "No bulletin email found for $(date +%F)" \
+            --body "The weekly agent looked for this week's bulletin email (from jessica@arcentralchurch.org, subject containing \"Weekly Bulletin\") in the automation mailbox and didn't find one. Nothing was changed on the site.
+
+          Check:
+          - Did Jessica send this week's bulletin email yet?
+          - Is the Gmail filter still forwarding jessica@arcentralchurch.org to the automation mailbox?
+          - Re-run this workflow manually once the email has arrived: Actions tab -> Weekly bulletin update -> Run workflow."
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+
+      - name: Configure git identity for the agent's commits
+        run: |
+          git config --global user.name "central-bulletin-bot"
+          git config --global user.email "bot@users.noreply.github.com"
+
+      - name: Run the update agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          prompt: "Read automation/AGENT.md and execute this week's update run."
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--max-turns 40"
+        env:
+          GH_TOKEN: ${{ github.token }}

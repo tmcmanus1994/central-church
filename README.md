@@ -165,6 +165,15 @@ announcements route to a staff contact instead. `withheldFromBulletin` in
 silently lost. `content-drafts/` is gitignored for the same reason: the raw
 parse contains all of it.
 
+### The manual process above is now automated on Sundays
+
+`/automation` runs the same PDF-parsing script from an email, on a schedule,
+and opens a pull request instead of leaving it for someone to run by hand —
+see `automation/README.md` for the full setup and how it behaves. It follows
+the exact same rules as the manual process above (same withholding policy,
+same "email wins over PDF" precedence) and only ever proposes a change via
+PR; nothing reaches the live site without a human merging it.
+
 ## Content & data
 
 - `src/lib/site.ts` — **the** source of NAP facts (name, address, phone,

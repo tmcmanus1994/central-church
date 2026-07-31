@@ -25,6 +25,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# python (automation/)
+__pycache__/
+*.pyc
+
 # generated photo-slot screenshots (npm run shots)
 /photo-slots/
 
@@ -32,3 +36,10 @@ next-env.d.ts
 # list, member phone numbers, and giving figures straight out of the PDF.
 # Curated copy goes in src/content/bulletin.ts; the raw draft stays local.
 /content-drafts/
+
+# weekly bulletin automation's raw inbox (automation/ingest.py) — same
+# reasoning as content-drafts/ above: the email and PDF carry things that
+# don't belong in git history. Only lives on the Actions runner for the
+# length of one workflow run. runs/*-summary.md (the human-readable output)
+# is committed on purpose — it never contains what this carries.
+/inbox/
