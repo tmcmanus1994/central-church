@@ -1,6 +1,6 @@
 "use client";
 
-import { SelectField, TextArea, TextField } from "./Field";
+import { CheckboxField, SelectField, TextArea, TextField } from "./Field";
 import { useFormPost } from "@/lib/use-form-post";
 
 /**
@@ -57,6 +57,9 @@ export function VisitForm() {
             "Wednesday Classes · 6:30 PM",
           ]}
         />
+      </div>
+      <div className="lg:col-span-2">
+        <CheckboxField id="has-kids" label="We're bringing kids with us" />
       </div>
       <div className="lg:col-span-2">
         <TextArea

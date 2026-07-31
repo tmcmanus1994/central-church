@@ -11,6 +11,7 @@ export interface Submission {
   email: string;
   phone?: string;
   service?: string;
+  hasKids?: boolean;
   notes?: string;
 }
 
@@ -21,6 +22,7 @@ export function formatSubmission(s: Submission) {
     `Email:     ${s.email}`,
     s.phone ? `Phone:     ${s.phone}` : null,
     s.service ? `\nPlanning to attend: ${s.service}` : null,
+    s.hasKids ? `\nBringing kids: Yes` : null,
     s.notes ? `\nNotes:\n${s.notes}` : null,
     "",
     "—",

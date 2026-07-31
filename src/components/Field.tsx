@@ -73,6 +73,30 @@ export function SelectField({
   );
 }
 
+export function CheckboxField({
+  id,
+  label,
+}: {
+  id: string;
+  label: string;
+}) {
+  return (
+    <label
+      htmlFor={id}
+      className="flex items-center gap-2.5 text-[15.5px] text-ink"
+    >
+      <input
+        id={id}
+        name={id}
+        type="checkbox"
+        value="yes"
+        className="size-[18px] rounded border-line-dark accent-primary"
+      />
+      {label}
+    </label>
+  );
+}
+
 export function TextArea({
   id,
   label,

@@ -14,15 +14,13 @@ import { formatSubmission, type Submission } from "@/lib/kids-closet-request";
  *   FORMS_FROM_EMAIL — the verified sender, e.g. website@arcentralchurch.org
  *
  * With those unset the request is logged and the caller is told to email
- * TO directly, so the form degrades to a clear instruction rather than a
- * silent failure. Nothing is ever dropped without saying so.
- *
- * TO is Travelle's address for now, while every form on the site is being
- * tested — swap it for lacey@arcentralchurch.org once that's confirmed
- * working.
+ * lacey@arcentralchurch.org directly, so the form degrades to a clear
+ * instruction rather than a silent failure. Nothing is ever dropped without
+ * saying so.
  */
 
-const TO = "travelle@arcentralchurch.org";
+const RECIPIENTS = ["tammy@arcentralchurch.org", "lacey@arcentralchurch.org"];
+const FALLBACK_CONTACT = "lacey@arcentralchurch.org";
 
 function missing(form: FormData, field: string) {
   const value = form.get(field);
@@ -64,7 +62,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         ok: false,
-        error: `Our form isn't connected yet — please email ${TO} and we'll get you scheduled.`,
+        error: `Our form isn't connected yet — please email ${FALLBACK_CONTACT} and we'll get you scheduled.`,
       },
       { status: 503 },
     );
@@ -79,7 +77,7 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         from,
-        to: [TO],
+        to: RECIPIENTS,
         // Replies go to the family, not to the website.
         reply_to: submission.email || undefined,
         subject,
@@ -92,7 +90,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           ok: false,
-          error: `Something went wrong sending that. Please email ${TO} directly.`,
+          error: `Something went wrong sending that. Please email ${FALLBACK_CONTACT} directly.`,
         },
         { status: 502 },
       );
@@ -102,7 +100,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         ok: false,
-        error: `Something went wrong sending that. Please email ${TO} directly.`,
+        error: `Something went wrong sending that. Please email ${FALLBACK_CONTACT} directly.`,
       },
       { status: 502 },
     );

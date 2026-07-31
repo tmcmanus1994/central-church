@@ -13,11 +13,11 @@ import { formatSubmission, type Submission } from "@/lib/visit-request";
  *   FORMS_FROM_EMAIL — the verified sender, e.g. website@arcentralchurch.org
  *
  * With those unset the request is logged and the caller is told to email
- * TO directly, so the form degrades to a clear instruction rather than a
- * silent failure.
+ * FALLBACK_CONTACT directly, so the form degrades to a clear instruction
+ * rather than a silent failure.
  *
- * TO is Travelle's address for now, while the form is being tested — swap
- * it for the office's or a distribution address once it's live.
+ * Goes to Shannon and Steven always; if the visitor checked "bringing kids",
+ * Tammy (Children's Minister) is added so she knows to expect a family.
  *
  * Every submission is also saved to Supabase (`visit_requests`) when
  * NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY are set — see
@@ -26,7 +26,9 @@ import { formatSubmission, type Submission } from "@/lib/visit-request";
  * a human to respond.
  */
 
-const TO = "travelle@arcentralchurch.org";
+const RECIPIENTS = ["shannon@arcentralchurch.org", "steven@arcentralchurch.org"];
+const KIDS_RECIPIENT = "tammy@arcentralchurch.org";
+const FALLBACK_CONTACT = "office@arcentralchurch.org";
 
 function missing(form: FormData, field: string) {
   const value = form.get(field);
@@ -52,8 +54,12 @@ export async function POST(request: Request) {
     email: str("email"),
     phone: str("phone") || undefined,
     service: str("service") || undefined,
+    hasKids: form.get("has-kids") === "yes",
     notes: str("notes") || undefined,
   };
+  const recipients = submission.hasKids
+    ? [...RECIPIENTS, KIDS_RECIPIENT]
+    : RECIPIENTS;
 
   if (supabaseAdmin) {
     const { error } = await supabaseAdmin.from("visit_requests").insert({
@@ -62,6 +68,7 @@ export async function POST(request: Request) {
       email: submission.email,
       phone: submission.phone ?? null,
       service: submission.service ?? null,
+      has_kids: submission.hasKids ?? false,
       notes: submission.notes ?? null,
     });
     if (error) console.error("visit_requests insert failed:", error.message);
@@ -78,7 +85,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         ok: false,
-        error: `Our form isn't connected yet — please email ${TO} directly and we'll be looking for you.`,
+        error: `Our form isn't connected yet — please email ${FALLBACK_CONTACT} directly and we'll be looking for you.`,
       },
       { status: 503 },
     );
@@ -93,7 +100,7 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         from,
-        to: [TO],
+        to: recipients,
         // Replies go to the visitor, not to the website.
         reply_to: submission.email,
         subject,
@@ -106,7 +113,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           ok: false,
-          error: `Something went wrong sending that. Please email ${TO} directly.`,
+          error: `Something went wrong sending that. Please email ${FALLBACK_CONTACT} directly.`,
         },
         { status: 502 },
       );
@@ -116,7 +123,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         ok: false,
-        error: `Something went wrong sending that. Please email ${TO} directly.`,
+        error: `Something went wrong sending that. Please email ${FALLBACK_CONTACT} directly.`,
       },
       { status: 502 },
     );
