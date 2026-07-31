@@ -5,6 +5,7 @@ import { annualPhotos, galleries, photos, type PhotoKey } from "@/content/photos
 import { recurringWhen } from "@/lib/format";
 import { ArrowLink, Button } from "./Button";
 import { ContactButton } from "./ContactButton";
+import { IglesiaForm } from "./IglesiaForm";
 import { KidsClosetForm } from "./KidsClosetForm";
 import { MinistryBanner } from "./MinistryBanner";
 import { RemindSignup } from "./RemindSignup";
@@ -338,9 +339,21 @@ export function MinistryPage({
         </section>
       ) : null}
 
-      {/* CTA band */}
-      <section className="bg-primary-deep px-5 py-10 text-white lg:px-14 lg:py-16">
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+      {/* CTA band — Iglesia gets its own form (routed to Matt Thomas) instead
+          of a link out to the English Plan a Visit page. */}
+      <section
+        id={ministry.slug === "iglesia" ? "contact" : undefined}
+        className={`bg-primary-deep px-5 py-10 text-white lg:px-14 lg:py-16 ${
+          ministry.slug === "iglesia" ? "scroll-mt-24" : ""
+        }`}
+      >
+        <div
+          className={`mx-auto flex max-w-[1440px] flex-col gap-6 lg:gap-12 ${
+            ministry.slug === "iglesia"
+              ? "lg:grid lg:grid-cols-[1fr_1.1fr] lg:items-start"
+              : "lg:flex-row lg:items-center lg:justify-between"
+          }`}
+        >
           <div className="flex flex-col gap-3">
             <h2 className="m-0 font-display text-[24px] leading-[1.08] tracking-[-.025em] text-pretty-wrap lg:text-[40px] lg:tracking-[-.03em]">
               {ministry.cta.title}
@@ -349,11 +362,15 @@ export function MinistryPage({
               {ministry.cta.body}
             </p>
           </div>
-          <div className="shrink-0">
-            <Button href={ministry.cta.href} variant="white">
-              {ministry.cta.label}
-            </Button>
-          </div>
+          {ministry.slug === "iglesia" ? (
+            <IglesiaForm lang={ministry.lang} />
+          ) : (
+            <div className="shrink-0">
+              <Button href={ministry.cta.href} variant="white">
+                {ministry.cta.label}
+              </Button>
+            </div>
+          )}
         </div>
       </section>
     </article>

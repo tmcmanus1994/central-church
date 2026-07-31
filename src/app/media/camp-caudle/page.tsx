@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
 import { campVideos, campYears } from "@/content/camp-caudle";
@@ -9,7 +11,20 @@ export const metadata: Metadata = {
     "Every Camp Caudle video from Central Teens — daily recaps, Thunderdome, Paint War, and Slip 'n Slide, gathered by year.",
 };
 
+/**
+ * Thumbnails live in public/photos/camp-caudle/{slug}.jpg — dropping one in
+ * with the right slug is all it takes to give a video a poster image; a
+ * video with no matching file just keeps the flat placeholder, so a future
+ * CMS import never breaks this page.
+ */
+function readThumbnailSlugs(): string[] {
+  const dir = path.join(process.cwd(), "public/photos/camp-caudle");
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).map((f) => f.replace(/\.[^.]+$/, ""));
+}
+
 export default function CampCaudlePage() {
+  const thumbnailSlugs = readThumbnailSlugs();
   return (
     <div className="mx-auto max-w-[1440px] px-5 py-8 lg:px-14 lg:py-16">
       <span className="text-xs font-bold tracking-[.14em] uppercase text-primary">
@@ -27,7 +42,11 @@ export default function CampCaudlePage() {
         <ArrowLink href="/ministries/teens">About Central Teens</ArrowLink>
       </div>
 
-      <CampGallery years={campYears} videos={campVideos} />
+      <CampGallery
+        years={campYears}
+        videos={campVideos}
+        thumbnailSlugs={thumbnailSlugs}
+      />
     </div>
   );
 }

@@ -465,7 +465,7 @@ export const ministries: Ministry[] = [
       title: "¡Déjanos saber que vienes!",
       body: "Si sientes curiosidad por esta familia de creyentes, ven y comprueba por ti mismo que el Señor es bueno y que Su pueblo es bendecido. 823 W 6th St, Little Rock, AR 72201 · (501) 374-2039",
       label: "Planea tu visita",
-      href: "/plan-a-visit",
+      href: "#contact",
     },
   },
 ];
@@ -493,7 +493,7 @@ export const iglesiaEnglish: Ministry = {
     title: "Let us know you're coming!",
     body: "If you're curious about this family of believers, come and see for yourself that the Lord is good and His people are blessed. 823 W 6th St, Little Rock, AR 72201 · (501) 374-2039",
     label: "Plan your visit",
-    href: "/plan-a-visit",
+    href: "#contact",
   },
 };
 

@@ -16,12 +16,13 @@ const navItems = [
   { label: "Media", href: "/media" },
 ];
 
-const sheetItems = [
+const sheetItems: { label: string; href: string; external?: boolean }[] = [
   { label: "Hub", href: "/hub" },
   { label: "Plan a Visit", href: "/plan-a-visit" },
   ...navItems,
   { label: "Bulletin", href: "/bulletin" },
   { label: "Iglesia · En Español", href: "/iglesia" },
+  { label: "Member Directory", href: site.memberDirectoryUrl, external: true },
 ];
 
 function Logo() {
@@ -109,6 +110,28 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="flex items-center gap-2.5 lg:gap-3">
+          <a
+            href={site.memberDirectoryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Member Directory (opens the directory PDF)"
+            title="Member Directory"
+            className="hidden size-11 items-center justify-center rounded-full border border-line text-[#2A2622] no-underline hover:border-primary hover:text-primary lg:inline-flex lg:size-[46px]"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden
+              className="size-5 fill-none stroke-current"
+              strokeWidth={1.75}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </a>
           <Link
             href="/plan-a-visit"
             className="hidden h-[46px] items-center rounded-full border-[1.5px] border-primary px-[22px] text-[15px] font-bold text-primary no-underline hover:bg-teal-50 lg:inline-flex"
@@ -152,16 +175,29 @@ export function SiteHeader() {
           className="border-t border-line bg-white px-5 pt-2 pb-5 lg:hidden"
         >
           <ul className="m-0 list-none p-0">
-            {sheetItems.map((item) => (
-              <li key={item.href} className="border-b border-line last:border-0">
-                <Link
-                  href={item.href}
-                  className="block py-4 font-display text-lg tracking-[-.01em] text-ink no-underline"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {sheetItems.map((item) =>
+              item.external ? (
+                <li key={item.href} className="border-b border-line last:border-0">
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block py-4 font-display text-lg tracking-[-.01em] text-ink no-underline"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ) : (
+                <li key={item.href} className="border-b border-line last:border-0">
+                  <Link
+                    href={item.href}
+                    className="block py-4 font-display text-lg tracking-[-.01em] text-ink no-underline"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ),
+            )}
           </ul>
           <div className="mt-4 flex flex-col gap-2 text-[14.5px] text-muted">
             <span>Sun 9:15 Classes · 10:15 Worship · 1:30 Español</span>

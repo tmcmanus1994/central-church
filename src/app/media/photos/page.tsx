@@ -25,6 +25,22 @@ export default function PhotoGalleryPage() {
         you&rsquo;re in.
       </p>
 
+      <div className="mt-8 rounded-2xl border border-teal-border bg-teal-50 p-6 lg:mt-10 lg:p-8">
+        <span className="text-xs font-bold tracking-[.14em] uppercase text-teal-muted">
+          Looking for Camp Caudle videos?
+        </span>
+        <p className="mt-2 mb-3 max-w-[640px] text-[15.5px] leading-[1.6] text-teal-ink">
+          Every Camp Caudle video from 2022 onward is gathered by year on its
+          own page.
+        </p>
+        <Link
+          href="/media/camp-caudle"
+          className="text-[15.5px] font-bold text-primary-deep no-underline"
+        >
+          Watch Camp Caudle videos →
+        </Link>
+      </div>
+
       <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-6">
         {albums.map((album) => {
           const inner = (
@@ -72,22 +88,6 @@ export default function PhotoGalleryPage() {
             </div>
           );
         })}
-      </div>
-
-      <div className="mt-8 rounded-2xl border border-teal-border bg-teal-50 p-6 lg:mt-10 lg:p-8">
-        <span className="text-xs font-bold tracking-[.14em] uppercase text-teal-muted">
-          Looking for Camp Caudle videos?
-        </span>
-        <p className="mt-2 mb-3 max-w-[640px] text-[15.5px] leading-[1.6] text-teal-ink">
-          Every Camp Caudle video from 2022 onward is gathered by year on its
-          own page.
-        </p>
-        <Link
-          href="/media/camp-caudle"
-          className="text-[15.5px] font-bold text-primary-deep no-underline"
-        >
-          Watch Camp Caudle videos →
-        </Link>
       </div>
     </div>
   );

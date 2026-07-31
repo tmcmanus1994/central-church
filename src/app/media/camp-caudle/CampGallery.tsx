@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import type { CampVideo } from "@/content/camp-caudle";
 import { campCaudleAlbumForYear } from "@/content/photo-albums";
 import { Button } from "@/components/Button";
@@ -9,7 +10,13 @@ import { Button } from "@/components/Button";
  * Videos load their Vimeo iframe only once played — 39 embeds on one page
  * would be punishing on mobile data, and most visitors watch one or two.
  */
-function VideoCard({ video }: { video: CampVideo }) {
+function VideoCard({
+  video,
+  hasThumbnail,
+}: {
+  video: CampVideo;
+  hasThumbnail: boolean;
+}) {
   const [playing, setPlaying] = useState(false);
 
   return (
@@ -24,19 +31,34 @@ function VideoCard({ video }: { video: CampVideo }) {
             className="absolute inset-0 size-full border-0"
           />
         ) : (
-          <button
-            type="button"
-            onClick={() => setPlaying(true)}
-            aria-label={`Play ${video.title}`}
-            className="group absolute inset-0 flex size-full items-center justify-center bg-primary-deep/90 transition-colors hover:bg-primary-deep"
-          >
-            <span className="flex size-16 items-center justify-center rounded-full bg-white/95 transition-transform group-hover:scale-105">
-              <span
-                aria-hidden
-                className="ml-1 border-y-[11px] border-l-[18px] border-y-transparent border-l-primary-deep"
+          <>
+            {hasThumbnail ? (
+              <Image
+                src={`/photos/camp-caudle/${video.slug}.jpg`}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover"
               />
-            </span>
-          </button>
+            ) : null}
+            <button
+              type="button"
+              onClick={() => setPlaying(true)}
+              aria-label={`Play ${video.title}`}
+              className={`group absolute inset-0 flex size-full items-center justify-center transition-colors ${
+                hasThumbnail
+                  ? "bg-coal/30 hover:bg-coal/45"
+                  : "bg-primary-deep/90 hover:bg-primary-deep"
+              }`}
+            >
+              <span className="flex size-16 items-center justify-center rounded-full bg-white/95 transition-transform group-hover:scale-105">
+                <span
+                  aria-hidden
+                  className="ml-1 border-y-[11px] border-l-[18px] border-y-transparent border-l-primary-deep"
+                />
+              </span>
+            </button>
+          </>
         )}
       </div>
       <figcaption className="flex flex-col gap-0.5">
@@ -59,12 +81,15 @@ function VideoCard({ video }: { video: CampVideo }) {
 export function CampGallery({
   years,
   videos,
+  thumbnailSlugs,
 }: {
   years: string[];
   videos: CampVideo[];
+  thumbnailSlugs: string[];
 }) {
   const [activeYear, setActiveYear] = useState<string>(years[0]);
   const shown = videos.filter((v) => v.year === activeYear);
+  const thumbnails = new Set(thumbnailSlugs);
   // Matched by year inside the album title ("Camp Caudle 2024") — a year
   // with no album yet just means no button, not a crash.
   const album = campCaudleAlbumForYear(activeYear);
@@ -111,7 +136,11 @@ export function CampGallery({
 
       <div className="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
         {shown.map((video) => (
-          <VideoCard key={video.slug} video={video} />
+          <VideoCard
+            key={video.slug}
+            video={video}
+            hasThumbnail={thumbnails.has(video.slug)}
+          />
         ))}
       </div>
     </>

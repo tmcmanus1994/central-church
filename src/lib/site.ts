@@ -17,6 +17,9 @@ export const site = {
   phoneHref: "tel:+15013742039",
   email: "office@arcentralchurch.org",
   giveUrl: "https://pushpay.com/g/arcentralchurch",
+  /** Members-only directory PDF, hosted on Dropbox — linked from the header. */
+  memberDirectoryUrl:
+    "https://www.dropbox.com/scl/fi/axs346ch938wpnxnd78p9/Directory-May-2026.pdf?rlkey=m2cdjnqk2b18wjkqlbrncxd7q&st=1va59a5d&e=1&dl=0",
   /** Embeddable map for the address — keyless Google Maps embed. */
   mapEmbedUrl:
     "https://www.google.com/maps?q=823+W+6th+St,+Little+Rock,+AR+72201&output=embed",

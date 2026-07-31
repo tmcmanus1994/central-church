@@ -18,6 +18,9 @@ import { formatSubmission, type Submission } from "@/lib/visit-request";
  *
  * Goes to Shannon and Steven always; if the visitor checked "bringing kids",
  * Tammy (Children's Minister) is added so she knows to expect a family.
+ * Exception: picking the Spanish service routes to Matt Thomas alone — he
+ * leads that service and is the one who'll actually follow up, so Shannon
+ * and Steven don't need to be copied.
  *
  * Every submission is also saved to Supabase (`visit_requests`) when
  * NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY are set — see
@@ -28,6 +31,8 @@ import { formatSubmission, type Submission } from "@/lib/visit-request";
 
 const RECIPIENTS = ["shannon@arcentralchurch.org", "steven@arcentralchurch.org"];
 const KIDS_RECIPIENT = "tammy@arcentralchurch.org";
+const IGLESIA_SERVICE = "Adoración en Español · 1:30 PM";
+const IGLESIA_RECIPIENT = "matt@arcentralchurch.org";
 const FALLBACK_CONTACT = "office@arcentralchurch.org";
 
 function missing(form: FormData, field: string) {
@@ -57,9 +62,12 @@ export async function POST(request: Request) {
     hasKids: form.get("has-kids") === "yes",
     notes: str("notes") || undefined,
   };
-  const recipients = submission.hasKids
-    ? [...RECIPIENTS, KIDS_RECIPIENT]
-    : RECIPIENTS;
+  const recipients =
+    submission.service === IGLESIA_SERVICE
+      ? [IGLESIA_RECIPIENT]
+      : submission.hasKids
+        ? [...RECIPIENTS, KIDS_RECIPIENT]
+        : RECIPIENTS;
 
   if (supabaseAdmin) {
     const { error } = await supabaseAdmin.from("visit_requests").insert({
