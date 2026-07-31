@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { supabaseAdmin } from "@/lib/supabase";
 import { formatSubmission, type Submission } from "@/lib/visit-request";
 
 /**
@@ -17,6 +18,12 @@ import { formatSubmission, type Submission } from "@/lib/visit-request";
  *
  * TO is Travelle's address for now, while the form is being tested — swap
  * it for the office's or a distribution address once it's live.
+ *
+ * Every submission is also saved to Supabase (`visit_requests`) when
+ * NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY are set — see
+ * supabase/schema.sql. That save is best-effort: a Supabase failure is
+ * logged but never blocks the email, which is the path that actually gets
+ * a human to respond.
  */
 
 const TO = "travelle@arcentralchurch.org";
@@ -47,6 +54,18 @@ export async function POST(request: Request) {
     service: str("service") || undefined,
     notes: str("notes") || undefined,
   };
+
+  if (supabaseAdmin) {
+    const { error } = await supabaseAdmin.from("visit_requests").insert({
+      first_name: submission.firstName,
+      last_name: submission.lastName,
+      email: submission.email,
+      phone: submission.phone ?? null,
+      service: submission.service ?? null,
+      notes: submission.notes ?? null,
+    });
+    if (error) console.error("visit_requests insert failed:", error.message);
+  }
 
   const { subject, text } = formatSubmission(submission);
   const apiKey = process.env.RESEND_API_KEY;

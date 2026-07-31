@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLink, Button } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
+import { RemindSignup } from "@/components/RemindSignup";
 import { Tag } from "@/components/Tag";
 import { ContactButton } from "@/components/ContactButton";
 import { CONTACT_BY_TAG, staffByName } from "@/content/people";
@@ -11,7 +12,8 @@ import {
   getCalendar,
   getCalendarEvent,
 } from "@/lib/calendar";
-import { getMinistry, REMIND_JOIN_URL } from "@/content/ministries";
+import { getMinistry } from "@/content/ministries";
+import { remindClasses } from "@/lib/remind";
 import {
   addToCalendarUrl,
   eventDateLong,
@@ -198,8 +200,8 @@ export default async function EventDetailPage({
             Teens comms run through Remind, so every Teens event says so — a
             parent finding a trip here is exactly who needs the join link.
           */}
-          {ministry?.slug === "teens" ? (
-            <div className="flex flex-col gap-2.5 rounded-2xl border border-teens-solid/30 bg-teens-tint p-4 lg:p-6">
+          {ministry?.slug === "teens" && remindClasses.teens.code ? (
+            <div className="flex flex-col gap-2.5 rounded-2xl border border-teens-solid/30 bg-teens-tint p-4 text-teens-deep lg:p-6">
               <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teens-deep">
                 Don&rsquo;t miss an update
               </span>
@@ -207,11 +209,7 @@ export default async function EventDetailPage({
                 Central Teens sends class changes, trip details, and pickup
                 times through Remind before anywhere else.
               </p>
-              <div className="mt-1">
-                <Button href={REMIND_JOIN_URL} size="md">
-                  Sign up for Remind alerts
-                </Button>
-              </div>
+              <RemindSignup code={remindClasses.teens.code} className="mt-1" />
             </div>
           ) : null}
         </div>

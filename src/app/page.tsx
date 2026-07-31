@@ -9,9 +9,7 @@ import { getCalendar, getCalendarSpotlight } from "@/lib/calendar";
 import { ministries } from "@/content/ministries";
 import { blogPosts } from "@/content/blog";
 import { latestSermon } from "@/content/media";
-import { site } from "@/lib/site";
-import { getLivestreamState, watchLiveUrl } from "@/lib/youtube-live";
-import { LiveEmbed } from "@/components/LiveEmbed";
+import { site, youtubeLiveUrl } from "@/lib/site";
 
 const ministryTiles = [
   { slug: "children", photo: true, photoKey: "home.tile.children" },
@@ -26,17 +24,10 @@ const ministryTiles = [
 export const revalidate = 900;
 
 export default async function HomePage() {
-  const [{ recurring, upcoming }, spotlight, liveState] = await Promise.all([
+  const [{ recurring, upcoming }, spotlight] = await Promise.all([
     getCalendar(),
     getCalendarSpotlight(),
-    getLivestreamState(),
   ]);
-  const isLive = liveState.status === "LIVE" && liveState.live_video_id;
-  const watchUrl = isLive
-    ? (watchLiveUrl() ?? site.socials.youtube)
-    : liveState.latest_vod_id
-      ? `https://www.youtube.com/watch?v=${liveState.latest_vod_id}`
-      : site.socials.youtube;
   const thisWeek = upcoming.filter((e) => e.slug !== spotlight?.slug).slice(0, 4);
   const latestPost = blogPosts[0];
 
@@ -272,47 +263,30 @@ export default async function HomePage() {
         <SectionHeader title="Latest from Central" rule />
         <div className="mt-6 grid grid-cols-1 gap-4 lg:mt-8 lg:grid-cols-[1.6fr_1fr] lg:gap-6">
           <div className="flex flex-col gap-4 rounded-2xl border border-line p-4 lg:flex-row lg:gap-6 lg:p-6">
-            {isLive ? (
-              <LiveEmbed
-                videoId={liveState.live_video_id!}
-                title="Central Church of Christ — Live"
-                badge="LIVE NOW"
-                className="aspect-[16/10] w-full shrink-0 rounded-xl lg:w-[300px]"
-              />
-            ) : (
-              <ImageSlot
-                photoKey="home.sermon"
-                sizes="(min-width: 1024px) 300px, 100vw"
-                alt=""
-                label="sermon thumbnail"
-                className="aspect-[16/10] w-full shrink-0 rounded-xl lg:w-[300px]"
-              />
-            )}
+            <ImageSlot
+              photoKey="home.sermon"
+              sizes="(min-width: 1024px) 300px, 100vw"
+              alt=""
+              label="sermon thumbnail"
+              className="aspect-[16/10] w-full shrink-0 rounded-xl lg:w-[300px]"
+            />
             <div className="flex flex-col gap-2.5">
               <span className="text-[11px] font-bold tracking-[.1em] uppercase text-primary lg:text-xs">
-                {isLive
-                  ? "Live now"
-                  : liveState.latest_vod_date
-                    ? `Latest service · ${new Intl.DateTimeFormat("en-US", { timeZone: "America/Chicago", month: "long", day: "numeric" }).format(new Date(liveState.latest_vod_date))}`
-                    : "Latest service · July 26"}
+                Latest service ·{" "}
+                {new Intl.DateTimeFormat("en-US", {
+                  timeZone: "America/Chicago",
+                  month: "long",
+                  day: "numeric",
+                }).format(new Date(latestSermon.date))}
               </span>
               <h3 className="m-0 font-display text-[21px] leading-[1.15] tracking-[-.02em] lg:text-[26px]">
-                {isLive
-                  ? "Worship is live right now"
-                  : (liveState.latest_vod_title ?? latestSermon.title)}
+                {latestSermon.title}
               </h3>
               <span className="text-[14.5px] text-muted lg:text-[15px]">
-                {isLive
-                  ? "Join us — the service is streaming now."
-                  : liveState.latest_vod_title
-                    ? "Watch the full service"
-                    : `${latestSermon.speaker} · ${latestSermon.duration}`}
+                {latestSermon.speaker} · {latestSermon.duration}
               </span>
               <div className="mt-auto flex flex-col gap-2.5 pt-2 sm:flex-row">
-                <Button href={watchUrl} size="md">
-                  {isLive ? "Watch live" : "Listen"}
-                </Button>
-                <Button href={watchUrl} variant="outline" size="md">
+                <Button href={youtubeLiveUrl} size="md">
                   Watch on YouTube
                 </Button>
               </div>

@@ -27,6 +27,14 @@ export const site = {
     facebook: "https://www.facebook.com/profile.php?id=61590750088497",
     youtube: "https://www.youtube.com/@CentralChurchLR",
   },
+  /**
+   * The channel's numeric ID (starts with "UC") — YouTube Studio → Settings
+   * → Channel → Advanced settings. Powers `youtubeLiveUrl` below, the
+   * permanent link that always resolves to whatever's live right now, or
+   * the channel's Live tab when nothing is. Falls back to the handle URL
+   * until this is filled in, so a missing ID never breaks a link.
+   */
+  youtubeChannelId: "UCbDfIXVdizmmKNeiN7kazjw",
   serviceTimes: [
     { label: "Sunday Bible Classes", short: "Bible Classes", when: "9:15 AM" },
     { label: "Sunday Worship", short: "Worship", when: "10:15 AM" },
@@ -44,3 +52,14 @@ export const site = {
 } as const;
 
 export const fullAddress = `${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.zip}`;
+
+/**
+ * Every "Watch Live" CTA on the site points here instead of embedding a
+ * player — people engage with the stream better on YouTube itself
+ * (comments, likes, subscriptions). `/channel/{id}/live` always resolves to
+ * the current stream when Central is live, and to the channel's Live tab
+ * otherwise, so no scheduling data or polling is needed for it to work.
+ */
+export const youtubeLiveUrl = site.youtubeChannelId
+  ? `https://www.youtube.com/channel/${site.youtubeChannelId}/live`
+  : site.socials.youtube;

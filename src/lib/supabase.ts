@@ -1,14 +1,14 @@
 import { createClient } from "@supabase/supabase-js";
 
 /**
- * Two clients, matching the schema's RLS split (public read / service-role
- * write — see supabase/schema.sql): `supabasePublic` for reads under RLS,
- * `supabaseAdmin` for the poller's writes, which need to bypass it.
+ * Two clients: `supabasePublic` for reads under RLS (anon key), `supabaseAdmin`
+ * for server-side writes that need to bypass it (service role key) — see
+ * supabase/schema.sql for the current schema.
  *
- * Both are `null` until all three Supabase env vars are set, so importing
- * this file never breaks a build that hasn't configured Supabase yet — every
- * caller checks for null and falls back, the same pattern as the calendar
- * feeds and the Resend-backed forms.
+ * Both are `null` until their env vars are set, so importing this file never
+ * breaks a build that hasn't configured Supabase yet — every caller checks
+ * for null and falls back, the same pattern as the calendar feeds and the
+ * Resend-backed forms.
  */
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;

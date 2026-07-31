@@ -1,37 +1,27 @@
--- YouTube Live integration schema.
+-- Plan a Visit form storage.
 --
 -- Run this once in the Supabase SQL Editor (Project → SQL Editor → New query
--- → paste → Run) after creating the project. src/lib/youtube-live.ts is the
--- only thing that talks to these tables — see that file for how they're used.
+-- → paste → Run). src/app/api/plan-a-visit/route.ts is the only thing that
+-- writes here, using the service-role key — see that file for how it's used.
 
--- Single-row state table: the current answer to "what should the Live
--- section show?" The site reads this row; it never queries YouTube directly.
-create table livestream_state (
-  id int primary key default 1 check (id = 1),
-  status text not null check (status in ('LIVE','UPCOMING','REPLAY')),
-  live_video_id text,          -- set when status = LIVE
-  upcoming_video_id text,      -- set when a public stream is scheduled
-  upcoming_start timestamptz,  -- scheduled start, if known
-  latest_vod_id text,          -- most recent completed stream (always kept fresh)
-  latest_vod_title text,
-  latest_vod_date timestamptz,
-  updated_at timestamptz default now()
-);
+-- If this project previously ran the YouTube Live integration schema, drop
+-- those tables — that feature has been cut in favor of linking straight to
+-- YouTube (see .env.example and src/lib/site.ts).
+drop table if exists livestream_state;
+drop table if exists sermons;
 
--- Auto-archived past streams → powers the homepage "Latest media" card and
--- the Live Stream page's "Last Sunday at Central" section.
-create table sermons (
-  video_id text primary key,
-  title text not null,
-  description text,
-  streamed_at timestamptz,
-  thumbnail_url text,
+create table visit_requests (
+  id uuid primary key default gen_random_uuid(),
+  first_name text not null,
+  last_name text not null,
+  email text not null,
+  phone text,
+  service text,
+  notes text,
   created_at timestamptz default now()
 );
 
--- RLS: public read (the site's anon key can read both tables), service-role
--- write only (the poller is the only writer, using the secret key).
-alter table livestream_state enable row level security;
-alter table sermons enable row level security;
-create policy "public read" on livestream_state for select using (true);
-create policy "public read" on sermons for select using (true);
+-- RLS enabled with no policies: only the service-role key (server-only, used
+-- by the route handler) can read or write. The site's public anon key never
+-- touches this table, so visit requests aren't publicly readable.
+alter table visit_requests enable row level security;

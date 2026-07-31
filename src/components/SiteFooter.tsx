@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { remindClasses, remindJoinUrl } from "@/lib/remind";
 import { site, fullAddress } from "@/lib/site";
 
 const columns = [
@@ -141,6 +142,16 @@ export function SiteFooter() {
           <Link href="/events" className="text-muted no-underline hover:text-white">
             Subscribe to Calendar
           </Link>
+          {remindClasses.churchwide.code ? (
+            <a
+              href={remindJoinUrl(remindClasses.churchwide.code)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted no-underline hover:text-white"
+            >
+              Text Alerts
+            </a>
+          ) : null}
         </div>
       </div>
       <span className="sr-only">{fullAddress}</span>

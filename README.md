@@ -287,41 +287,42 @@ Env overrides: `BASE_URL`, `OUT_DIR`, `CHROME_PATH`.
 as events and blog posts bring their own images — so the real outstanding
 list is short. See `npm run shots` output for the current state.
 
-## YouTube Live
+## Watch Live (YouTube, no embed)
 
-The homepage "Latest from Central" card and `/media/live` both show one of
-three states — **LIVE** (embedded player), **UPCOMING** (poster + next
-service time), **REPLAY** (last Sunday's service, always shown underneath) —
-sourced from a `livestream_state` row in Supabase that a poller keeps fresh.
+Every "Watch Live" CTA — homepage, `/media/live`, nav/footer — links straight
+to `youtubeLiveUrl` in `src/lib/site.ts`:
+`https://www.youtube.com/channel/{youtubeChannelId}/live`. That permanent
+link always resolves to whatever's live right now, or the channel's Live tab
+otherwise, so there's no polling, no scheduling data, and no Supabase state
+to keep fresh — people just land on YouTube, where they can comment, like,
+and subscribe. `youtubeChannelId` falls back to the `@handle` URL in
+`site.socials.youtube` if it's ever cleared.
 
-Run `supabase/schema.sql` once in the Supabase SQL Editor to create the two
-tables it needs (`livestream_state`, `sermons`).
+(An earlier version of this feature polled the YouTube Data API and embedded
+a player with LIVE/UPCOMING/REPLAY states. That's been cut in favor of the
+simple outbound link above — engagement lives on YouTube, not on the site.)
 
-Env vars are documented in `.env.example`; with none set, the Live section
-falls back to the same static content the site always had — no broken build.
+## Plan a Visit storage
 
-- **`src/lib/youtube-live.ts`** — `pollYouTubeLive()` talks to the YouTube
-  Data API and upserts Supabase; `getLivestreamState()` is the
-  `unstable_cache`-wrapped version (180s) that page renders actually call. No
-  cron: the first visitor after the cache window expires pays for a fresh
-  poll, everyone else gets what's cached — works on Vercel's free Hobby tier.
-  `isSundayLiveWindow()` gates the (expensive) live-search API call to
-  Sun 9:30 AM–12:30 PM America/Chicago, using `Intl.DateTimeFormat` rather
-  than hand-rolled UTC offsets — verified against the DST boundary.
-- **`src/app/api/youtube/poll/route.ts`** — manual refresh, protected by
-  `Authorization: Bearer $CRON_SECRET`. Also the ready-to-use target if this
-  ever moves to Vercel Cron (GET + that same header is exactly what Vercel
-  Cron sends) — add a schedule to `vercel.json` and nothing else changes.
-- **`src/components/LiveEmbed.tsx`** — click-to-load YouTube embed (same
-  pattern as the Camp Caudle video cards, applied to YouTube instead of
-  Vimeo); shared by the live player and the "Last Sunday" replay.
+"Let us know you're coming" submissions always email the office through
+Resend (see `.env.example`), and are also saved to Supabase
+(`visit_requests` table) when `NEXT_PUBLIC_SUPABASE_URL` and
+`SUPABASE_SERVICE_ROLE_KEY` are set — run `supabase/schema.sql` once in the
+Supabase SQL Editor to create the table. The Supabase write is best-effort:
+a failure is logged but never blocks the email.
 
-**Known tradeoff:** the homepage already had `revalidate = 900` (15 min) for
-calendar data; adding a 180s data source to the same page means Next uses the
-*lower* of the two for the whole page, so the homepage now regenerates every
-3 minutes instead of 15. Harmless — it just means slightly fresher calendar
-data as a side effect — but worth knowing if page-generation cost ever
-matters.
+## Remind (text alerts)
+
+`src/lib/remind.ts` maps each audience (Teens, Central Kids, churchwide) to
+its Remind class code — Remind has no public signup API, so every alert
+CTA on the site is one of two links built from that code:
+join (`remind.com/join/{code}`) or text-to-join (`@{code}` to `81010`).
+`src/components/RemindSignup.tsx` renders both from a code and renders
+nothing for a class that isn't set up yet (empty code), so filling in a code
+in `remind.ts` is the only step needed to turn a signup on. Currently wired
+into the Central Teens ministry page, Central Kids ministry page (once its
+code is set), the site footer, and `/plan-a-visit` (once the churchwide code
+is set).
 
 ## Still to wire up
 

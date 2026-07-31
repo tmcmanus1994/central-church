@@ -3,7 +3,9 @@ import { Button } from "@/components/Button";
 import { ArrowLink } from "@/components/Button";
 import { Faq } from "@/components/Faq";
 import { ImageSlot } from "@/components/ImageSlot";
+import { RemindSignup } from "@/components/RemindSignup";
 import { VisitForm } from "@/components/VisitForm";
+import { remindClasses } from "@/lib/remind";
 import { site, fullAddress } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -226,6 +228,23 @@ export default function PlanAVisitPage() {
           </div>
         </div>
       </section>
+
+      {/* Text alerts — hidden until a churchwide Remind class is set up in
+          src/lib/remind.ts */}
+      {remindClasses.churchwide.code ? (
+        <section className="mx-auto max-w-[1440px] px-5 pb-10 lg:px-14 lg:pb-20">
+          <div className="rounded-2xl border border-teal-border bg-teal-50 p-6 text-teal-ink lg:p-8">
+            <span className="text-xs font-bold tracking-[.14em] uppercase text-teal-muted">
+              Want text updates?
+            </span>
+            <p className="m-0 mt-2 mb-4 max-w-[520px] text-[15.5px] leading-[1.6] text-teal-ink">
+              Join Central&rsquo;s text alerts for churchwide news, weather
+              closures, and reminders before Sunday.
+            </p>
+            <RemindSignup code={remindClasses.churchwide.code} />
+          </div>
+        </section>
+      ) : null}
 
       {/* FAQ */}
       <section className="border-t border-line bg-surface px-5 py-10 lg:px-14 lg:py-20">

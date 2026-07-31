@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/Button";
-import { ImageSlot } from "@/components/ImageSlot";
-import { LiveEmbed } from "@/components/LiveEmbed";
-import { site } from "@/lib/site";
-import { getLivestreamState, watchLiveUrl } from "@/lib/youtube-live";
+import { site, youtubeLiveUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Live Stream",
@@ -11,23 +8,13 @@ export const metadata: Metadata = {
     "Watch Central Church of Christ live from downtown Little Rock — Sunday worship streams at 10:15 AM Central on YouTube.",
 };
 
-/** "Sunday, August 2 at 10:15 AM" — the format matches events elsewhere. */
-function formatScheduled(iso: string) {
-  return new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/Chicago",
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-  }).format(new Date(iso));
-}
-
-export default async function LivePage() {
-  const state = await getLivestreamState();
-  const watchUrl = watchLiveUrl() ?? site.socials.youtube;
-  const isLive = state.status === "LIVE" && state.live_video_id;
-
+/**
+ * A pure outbound moment, not an embedded player — people engage with the
+ * stream better on YouTube itself (comments, likes, subscriptions), and a
+ * poster/iframe that's dark most of the week reads as broken. This page's
+ * only job is to get a visitor onto YouTube at the right place.
+ */
+export default function LivePage() {
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-8 lg:px-14 lg:py-16">
       <span className="text-xs font-bold tracking-[.14em] uppercase text-primary">
@@ -41,59 +28,30 @@ export default async function LivePage() {
         Sunday. Pull up a chair — you&rsquo;re part of the family either way.
       </p>
 
-      <div className="mt-8 overflow-hidden rounded-[18px] border border-line lg:mt-10">
-        {isLive ? (
-          <LiveEmbed
-            videoId={state.live_video_id!}
-            title="Central Church of Christ — Live"
-            badge="LIVE NOW"
-            className="aspect-video w-full"
-          />
-        ) : (
-          <ImageSlot
-            photoKey="media.live"
-            alt="Live stream player"
-            label="youtube live embed"
-            variant="dark"
-            className="aspect-video w-full"
-          />
-        )}
-        <div className="flex flex-col gap-4 bg-surface p-5 sm:flex-row sm:items-center sm:justify-between lg:p-6">
-          <div className="flex flex-col gap-1">
-            <span className="text-xs font-bold tracking-[.14em] uppercase text-primary">
-              {isLive ? "Live now" : "Next stream"}
-            </span>
-            <span className="font-display text-[21px] tracking-[-.015em]">
-              {!isLive && state.status === "UPCOMING" && state.upcoming_start
-                ? formatScheduled(state.upcoming_start)
-                : "Sunday Worship · 10:15 AM Central"}
-            </span>
-          </div>
-          <Button href={watchUrl} variant="primary">
-            Watch on YouTube
-          </Button>
-        </div>
-      </div>
-
-      {state.latest_vod_id ? (
-        <div className="mt-10">
-          <span className="text-xs font-bold tracking-[.14em] uppercase text-primary">
-            Last Sunday at Central
+      <div className="mt-8 flex flex-col items-start gap-5 rounded-[18px] border border-line bg-coal p-6 text-white lg:mt-10 lg:p-10">
+        <span className="inline-flex items-center gap-2 rounded-full bg-red-600 px-3 py-1 text-[11px] font-bold tracking-[.08em] text-white uppercase">
+          <svg viewBox="0 0 24 24" aria-hidden className="size-3.5 fill-white">
+            <path d="M21.6 7.2s-.2-1.5-.9-2.2c-.8-.9-1.7-.9-2.1-1C15.9 3.8 12 3.8 12 3.8h0s-3.9 0-6.6.2c-.4 0-1.3.1-2.1 1-.7.7-.9 2.2-.9 2.2S2.2 9 2.2 10.7v1.6c0 1.8.2 3.6.2 3.6s.2 1.5.9 2.2c.8.9 1.9.8 2.4.9 1.7.2 7.3.2 7.3.2s3.9 0 6.6-.2c.4 0 1.3-.1 2.1-1 .7-.7.9-2.2.9-2.2s.2-1.8.2-3.6v-1.6c0-1.8-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.8 2.9-5.8 2.8z" />
+          </svg>
+          Opens on YouTube
+        </span>
+        <div className="flex flex-col gap-1.5">
+          <span className="font-display text-[26px] tracking-[-.015em] lg:text-[32px]">
+            Sunday Worship
           </span>
-          <div className="mt-3 max-w-[640px]">
-            <LiveEmbed
-              videoId={state.latest_vod_id}
-              title={state.latest_vod_title ?? "Last Sunday's service"}
-              className="aspect-video w-full"
-            />
-          </div>
-          {state.latest_vod_title ? (
-            <p className="m-0 mt-3 font-display text-[19px] tracking-[-.015em]">
-              {state.latest_vod_title}
-            </p>
-          ) : null}
+          <span className="text-[16px] text-[#C9C3B8]">
+            10:15 AM Central · {site.address.street}, {site.address.city},{" "}
+            {site.address.state}
+          </span>
         </div>
-      ) : null}
+        <p className="m-0 max-w-[520px] text-[15px] leading-[1.6] text-[#B8B2A6]">
+          The stream goes live shortly before 10:15 and stays up as a replay
+          afterward — comment, like, and subscribe while you&rsquo;re there.
+        </p>
+        <Button href={youtubeLiveUrl} variant="white">
+          Watch on YouTube
+        </Button>
+      </div>
     </div>
   );
 }

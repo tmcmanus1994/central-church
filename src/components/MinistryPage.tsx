@@ -7,6 +7,7 @@ import { ArrowLink, Button } from "./Button";
 import { ContactButton } from "./ContactButton";
 import { KidsClosetForm } from "./KidsClosetForm";
 import { MinistryBanner } from "./MinistryBanner";
+import { RemindSignup } from "./RemindSignup";
 import { ImageSlot } from "./ImageSlot";
 
 /** Narrows a built-up string to a PhotoKey only when the registry has it. */
@@ -182,19 +183,26 @@ export function MinistryPage({
             </>
           ) : null}
 
-          {ministry.notice ? (
-            <div className="mt-5 flex flex-col gap-2.5 rounded-[18px] border border-teal-border bg-teal-50 p-5 lg:p-6">
+          {/* A `remindCode` notice with no code yet (not set up in remind.ts)
+              stays hidden rather than rendering a broken join link. */}
+          {ministry.notice &&
+          (ministry.notice.remindCode === undefined || ministry.notice.remindCode) ? (
+            <div className="mt-5 flex flex-col gap-2.5 rounded-[18px] border border-teal-border bg-teal-50 p-5 lg:p-6 text-teal-ink">
               <span className="text-[11px] font-bold tracking-[.16em] uppercase text-teal-muted">
                 {ministry.notice.eyebrow}
               </span>
               <p className="m-0 text-[15.5px] leading-[1.6] text-teal-ink">
                 {ministry.notice.body}
               </p>
-              <div className="mt-1">
-                <Button href={ministry.notice.href} size="md">
-                  {ministry.notice.label}
-                </Button>
-              </div>
+              {ministry.notice.remindCode ? (
+                <RemindSignup code={ministry.notice.remindCode} className="mt-1" />
+              ) : (
+                <div className="mt-1">
+                  <Button href={ministry.notice.href} size="md">
+                    {ministry.notice.label}
+                  </Button>
+                </div>
+              )}
             </div>
           ) : null}
 

@@ -1,16 +1,14 @@
+import { remindClasses, remindJoinUrl } from "@/lib/remind";
+
 /**
  * One flexible ministry template drives every ministry page — each entry here
  * is a content object rendered by src/components/MinistryPage.tsx.
  * Iglesia renders fully in Spanish (lang="es") at /iglesia.
+ *
+ * Remind class codes live in src/lib/remind.ts, not here — a `notice` with
+ * `remindCode` set renders the full RemindSignup (join button + text-to-join)
+ * instead of a plain link button. See Central Teens below.
  */
-
-/**
- * Central Teens runs its parent and student comms through Remind, so the join
- * link appears on every Teens surface — the ministry page, its events, and the
- * alert call-out.
- */
-export const REMIND_JOIN_URL =
-  "https://www.remind.com/join/ymcentral?utm_medium=ios";
 
 /** Freedom Prayer sessions are booked through Breeze. */
 export const FREEDOM_PRAYER_SIGNUP_URL =
@@ -52,8 +50,19 @@ export interface Ministry {
     phone?: string;
   }[];
   contact?: MinistryContact;
-  /** Highlighted call-out above the utility buttons. */
-  notice?: { eyebrow: string; body: string; label: string; href: string };
+  /**
+   * Highlighted call-out above the utility buttons. Set `remindCode` to
+   * render a full RemindSignup (join button + text-to-join) instead of the
+   * plain label/href button — `label`/`href` still act as the fallback link
+   * text for anything reusing this object outside MinistryPage.
+   */
+  notice?: {
+    eyebrow: string;
+    body: string;
+    label: string;
+    href: string;
+    remindCode?: string;
+  };
   /** Vimeo embed shown in place of the photo gallery. */
   video?: { embedUrl: string; url: string; caption: string };
   related?: { label: string; href: string }[];
@@ -114,6 +123,13 @@ export const ministries: Ministry[] = [
           "A safe, exciting evening of creatively decorated cars, candy, and community fun for Little Rock families.",
       },
     ],
+    notice: {
+      eyebrow: "Parents",
+      body: "Central Kids runs on Remind too — pickup changes, weather closures, and event reminders go out there first.",
+      label: "Sign up for Remind alerts",
+      href: remindJoinUrl(remindClasses.kids.code),
+      remindCode: remindClasses.kids.code,
+    },
     contact: {
       name: "Tammy Beck",
       role: "Children's Minister",
@@ -172,13 +188,13 @@ export const ministries: Ministry[] = [
         label: "Update Info",
         href: "https://lrcentralchurch.breezechms.com/form/3b8ea469",
       },
-      { label: "Sign Up for Alerts", href: REMIND_JOIN_URL },
     ],
     notice: {
       eyebrow: "Parents & students",
       body: "Central Teens runs on Remind. Class changes, trip details, and pickup times all go out there first — join and you won't miss anything.",
       label: "Sign up for Remind alerts",
-      href: REMIND_JOIN_URL,
+      href: remindJoinUrl(remindClasses.teens.code),
+      remindCode: remindClasses.teens.code,
     },
     contact: {
       name: "James Mosley",
