@@ -63,7 +63,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           prompt: "Read automation/AGENT.md and execute this week's update run."
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: "--max-turns 40"
           # Temporary while we're debugging the first few runs — shows the
           # actual failure reason instead of a redacted summary. Safe to
