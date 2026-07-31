@@ -14,11 +14,15 @@ import { formatSubmission, type Submission } from "@/lib/kids-closet-request";
  *   FORMS_FROM_EMAIL — the verified sender, e.g. website@arcentralchurch.org
  *
  * With those unset the request is logged and the caller is told to email
- * Lacey directly, so the form degrades to a clear instruction rather than a
+ * TO directly, so the form degrades to a clear instruction rather than a
  * silent failure. Nothing is ever dropped without saying so.
+ *
+ * TO is Travelle's address for now, while every form on the site is being
+ * tested — swap it for lacey@arcentralchurch.org once that's confirmed
+ * working.
  */
 
-const TO = "lacey@arcentralchurch.org";
+const TO = "travelle@arcentralchurch.org";
 
 function missing(form: FormData, field: string) {
   const value = form.get(field);
