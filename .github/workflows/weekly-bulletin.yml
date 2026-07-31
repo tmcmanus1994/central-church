@@ -64,7 +64,13 @@ jobs:
         with:
           prompt: "Read automation/AGENT.md and execute this week's update run."
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--max-turns 40"
+          # Without this, every Bash call (git, gh, node scripts/import-bulletin.mjs)
+          # sits waiting for an interactive approval that can never come in
+          # CI and gets auto-denied — confirmed in run #8's permission_denials.
+          # AGENT.md's own hard rules (never push to the default branch,
+          # only touch the two content files, stop on failure) are the real
+          # safety boundary here, not tool-approval prompts.
+          claude_args: "--max-turns 40 --allowedTools \"Bash Read Edit Write Glob Grep\""
           # Temporary while we're debugging the first few runs — shows the
           # actual failure reason instead of a redacted summary. Safe to
           # drop back out once this is running cleanly week to week.
