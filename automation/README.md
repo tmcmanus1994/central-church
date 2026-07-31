@@ -53,7 +53,7 @@ already-public-safe result reaches a PR.
    |---|---|
    | `GMAIL_ADDRESS` | the dedicated agent mailbox's address |
    | `GMAIL_APP_PASSWORD` | the App Password from step 1 |
-   | `CLAUDE_CODE_OAUTH_TOKEN` | generate locally with `claude setup-token` (bills against the existing Claude subscription) — or use `ANTHROPIC_API_KEY` instead and update the workflow's `with:` block to match |
+   | `ANTHROPIC_API_KEY` | from console.anthropic.com -> Settings -> API Keys. Bills pay-as-you-go against that Console account's balance (separate from any claude.ai subscription) — make sure it has credits/a payment method loaded. Alternative: `CLAUDE_CODE_OAUTH_TOKEN`, generated locally with `claude setup-token`, which bills against a Claude subscription instead — if you switch to that, update the workflow's `with:` block to use `claude_code_oauth_token` in place of `anthropic_api_key` |
 
 Everything else — permissions, the cron schedule — is already set in
 `.github/workflows/weekly-bulletin.yml`.
