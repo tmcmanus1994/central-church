@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { MobileTabBar } from "@/components/MobileTabBar";
 import { ChurchJsonLd } from "@/components/JsonLd";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { site } from "@/lib/site";
 // Self-hosted fonts (fontsource) — no external font requests at runtime.
 import "@fontsource/poppins/400.css";
@@ -57,6 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans">
+        <GoogleAnalytics />
         <ChurchJsonLd />
         <SiteHeader />
         {/* pb clears the fixed mobile tab bar */}
