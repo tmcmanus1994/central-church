@@ -65,5 +65,9 @@ jobs:
           prompt: "Read automation/AGENT.md and execute this week's update run."
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: "--max-turns 40"
+          # Temporary while we're debugging the first few runs — shows the
+          # actual failure reason instead of a redacted summary. Safe to
+          # drop back out once this is running cleanly week to week.
+          show_full_output: true
         env:
           GH_TOKEN: ${{ github.token }}
