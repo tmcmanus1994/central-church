@@ -70,7 +70,12 @@ jobs:
           # AGENT.md's own hard rules (never push to the default branch,
           # only touch the two content files, stop on failure) are the real
           # safety boundary here, not tool-approval prompts.
-          claude_args: "--max-turns 40 --allowedTools \"Bash Read Edit Write Glob Grep\""
+          # 40 wasn't enough for a real content week: run #10 (2026-08-01) got
+          # all the way through parsing the PDF and editing both content files
+          # and was killed one step from done, mid-way through writing the run
+          # summary, before it could commit/push/open the PR. Nothing was
+          # committed since it never got that far — bumped for headroom.
+          claude_args: "--max-turns 80 --allowedTools \"Bash Read Edit Write Glob Grep\""
           # Temporary while we're debugging the first few runs — shows the
           # actual failure reason instead of a redacted summary. Safe to
           # drop back out once this is running cleanly week to week.
