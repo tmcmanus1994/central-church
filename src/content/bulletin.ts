@@ -78,18 +78,22 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "July 26, 2026",
+  weekOf: "August 2, 2026",
 
   announcements: [
     {
       title: "Back to School Event — August 5",
-      body: "Central's annual Back to School Event and Friends & Family Meal is Wednesday, August 5. Bring school supply donations to the building any time before August 2, or give through the online portal and we'll shop for you. Amazon and Walmart wish lists are posted on Facebook and printed in the bulletin.",
+      body: "Central's annual Back to School Event and Friends & Family Meal is Wednesday, August 5. Bring school supply donations to the building any time before August 2, or give through the online portal and we'll shop for you. Amazon and Walmart wish lists are posted on Facebook and printed in the bulletin. Come pray with each family participating — consider this your invitation to connect with these Central friends.",
       href: "/events",
     },
     {
       title: "Promotion Sunday — August 2",
       body: "Every elementary student moves up to their new grade level class on Sunday morning, August 2. Rising 6th graders are the exception: they'll have a special promotion on Wednesday, August 5. Watch your email for details from Tammy and James.",
       contact: { name: "Tammy Beck", email: "tammy@arcentralchurch.org" },
+    },
+    {
+      title: "See you later to the Bentley family",
+      body: "The Bentleys are moving to Kenya for three years to work with a non-profit and whatever missional work they find along the way. We'll be praying for their departure and transition in the coming weeks — happy and sad, all wrapped into one.",
     },
     {
       title: "Online Bible Study — Wednesdays, 11 AM",
@@ -179,7 +183,7 @@ export const bulletin: Bulletin = {
   sundayClasses: [
     {
       name: "Adult Classes",
-      detail: "Adult classes are studying 1 Corinthians.",
+      detail: "Adult classes are studying Ecclesiastes during the month of August.",
       room: "Fellowship East & West, SGC Upstairs",
     },
     {
@@ -235,21 +239,19 @@ export const bulletin: Bulletin = {
   ],
 
   orderOfWorship: [
-    "Step by Step (15)",
-    "Welcome",
-    "King of My Heart",
-    "Seeking the Lost (624)",
-    "Behold Our God",
-    "Communion",
-    "Do Not Fear",
+    "Welcome / Kids Promotion",
+    "Let God Arise",
+    "Victory in Jesus (470)",
+    "How Deep the Father's Love for Us",
+    "Communion: Josh Searcy",
+    "Nearer Still Nearer (478)",
     "Prayer for the Lost",
     "Dismiss Children's Church",
-    "I Will Never Be the Same Again",
+    "Hymn of Heaven",
     "Scripture Reading",
-    "Sermon: Steven Hovater",
-    "He Leadeth Me (410)",
+    "Sermon: Santiago Torres",
+    "Living for Jesus (594)",
     "Family News",
-    "Greatest Commands (448)",
     "Sending Blessing",
   ],
 
@@ -287,5 +289,11 @@ export const bulletin: Bulletin = {
     },
   ],
 
-  archive: ["July 19, 2026", "July 12, 2026", "July 5, 2026", "June 28, 2026"],
+  archive: [
+    "July 26, 2026",
+    "July 19, 2026",
+    "July 12, 2026",
+    "July 5, 2026",
+    "June 28, 2026",
+  ],
 };

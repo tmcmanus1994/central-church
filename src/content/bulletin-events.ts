@@ -45,7 +45,7 @@ export const bulletinEvents: BulletinEvent[] = [
     title: "Men's Challenge",
     start: "2026-08-01T16:00:00-05:00",
     end: "2026-08-01T19:00:00-05:00",
-    location: "823 W 6th St, Little Rock",
+    location: "Central Gym",
     description: "Chili and pushups. Men of Central, come hungry.",
     tag: "All Church",
     aliases: ["Mens Challenge", "Men's Challenge - Chili and Pushups"],
@@ -98,11 +98,10 @@ export const bulletinEvents: BulletinEvent[] = [
   {
     slug: "ice-cream-social",
     title: "Ice Cream Social",
-    start: "2026-08-02T09:00:00-05:00",
-    allDay: true,
-    location: "Fellowship Hall",
+    start: "2026-08-02T18:30:00-05:00",
+    location: "Central Gym",
     description:
-      "Cold treats and good company, and a thank-you and see-you-later to this summer's interns.",
+      "Bring a pint of your favorite flavor — toppings and water are complimentary. A thank-you and see-you-later to this summer's interns.",
     tag: "All Church",
   },
   {
@@ -199,6 +198,25 @@ export const bulletinEvents: BulletinEvent[] = [
     ministrySlug: "teens",
     aliases: ["Teens STL trip", "STL Trip"],
   },
+  {
+    slug: "encouragers-kickoff",
+    title: "Encouragers Kickoff",
+    start: "2026-08-27T10:30:00-05:00",
+    location: "Fellowship East",
+    description:
+      "Encouragers Class starts back for the 2026-27 season, meeting Thursdays at 10:30 AM in Fellowship East.",
+    tag: "All Church",
+    aliases: ["Encouragers Returns", "Encouragers Class"],
+  },
+  {
+    slug: "area-wide-worship",
+    title: "Area Wide Worship Night",
+    start: "2026-08-30T09:00:00-05:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    tag: "All Church",
+    aliases: ["Area Wide Worship"],
+  },
 ];
 
 /**
@@ -212,7 +230,7 @@ export const bulletinEvents: BulletinEvent[] = [
 export const withheldFromBulletin: { item: string; reason: string }[] = [
   { item: "Logan Patillo — wedding shower, August 9", reason: "member-personal" },
   { item: "Madison Allen — baby shower, August 30", reason: "member-personal" },
-  { item: "Sarah Laffoon — baby shower, September 13", reason: "member-personal" },
+  { item: "Sarah Laffoon — baby shower, September 14", reason: "member-personal" },
   {
     item: "Virgie Reese-Dobson memorial service, August 8, Augusta, GA",
     reason: "private family service, out of state",
