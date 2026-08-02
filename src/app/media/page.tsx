@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
-import { LiveNowChip } from "@/components/LiveNowBadge";
+import { LiveNowBadge } from "@/components/LiveNowBadge";
 import { Reveal } from "@/components/Reveal";
 import { blogPosts } from "@/content/blog";
 import { mediaPlaceholder } from "@/content/photos";
@@ -65,9 +65,7 @@ export default function MediaHubPage() {
               variant="dark"
               className="aspect-[16/10] w-full rounded-xl"
             />
-            {/* PREVIEW: always-on LiveNowChip — swap for the gated
-                LiveNowBadge once Travelle approves how this looks. */}
-            <LiveNowChip className="absolute left-3 top-3" />
+            <LiveNowBadge className="absolute left-3 top-3" />
           </div>
           <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
             Live Stream

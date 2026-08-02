@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLink, Button } from "@/components/Button";
 import { EventCard } from "@/components/EventCard";
 import { ImageSlot } from "@/components/ImageSlot";
-import { LiveNowChip } from "@/components/LiveNowBadge";
+import { LiveNowBadge } from "@/components/LiveNowBadge";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SpotlightBanner } from "@/components/SpotlightBanner";
@@ -51,9 +51,7 @@ export default async function HomePage() {
           {/* Headline and service times stack, centred on both axes. */}
           <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-7 text-center lg:gap-8">
             <div className="flex max-w-[760px] flex-col items-center gap-4 lg:gap-[22px]">
-              {/* PREVIEW: always-on LiveNowChip — swap for the gated
-                  LiveNowBadge once Travelle approves how this looks. */}
-              <LiveNowChip />
+              <LiveNowBadge />
               <Reveal
                 as="p"
                 className="m-0 text-[11px] font-bold tracking-[.16em] uppercase text-teal-light lg:text-xs"

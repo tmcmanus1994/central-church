@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Button } from "@/components/Button";
+import { LiveNowBadge } from "@/components/LiveNowBadge";
 import { Reveal } from "@/components/Reveal";
 import { site, youtubeLiveUrl } from "@/lib/site";
 
@@ -22,9 +23,12 @@ export default function LivePage() {
       <span className="text-xs font-bold tracking-[.14em] uppercase text-primary">
         Media · Live
       </span>
-      <h1 className="mt-2.5 mb-3 font-display text-[36px] leading-[1] tracking-[-.035em] lg:mb-4 lg:text-[56px] lg:tracking-[-.04em]">
-        Watch Central Live
-      </h1>
+      <div className="mt-2.5 mb-3 flex flex-wrap items-center gap-3 lg:mt-3 lg:mb-4">
+        <h1 className="m-0 font-display text-[36px] leading-[1] tracking-[-.035em] lg:text-[56px] lg:tracking-[-.04em]">
+          Watch Central Live
+        </h1>
+        <LiveNowBadge />
+      </div>
       <p className="m-0 max-w-[680px] text-base leading-[1.65] text-body lg:text-[19px]">
         Can&rsquo;t be with us in person? Worship streams live on YouTube every
         Sunday. Pull up a chair — you&rsquo;re part of the family either way.
