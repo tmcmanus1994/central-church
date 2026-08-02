@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLink, Button } from "@/components/Button";
-import { PrayerRequestForm } from "@/components/PrayerRequestForm";
+import { GuestSignInButton } from "@/components/GuestSignInButton";
+import { PrayerRequestButton } from "@/components/PrayerRequestButton";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
 import { Reveal } from "@/components/Reveal";
 import { bulletin } from "@/content/bulletin";
@@ -64,27 +65,11 @@ export default async function HubPage() {
 
       {/* Guest sign-in — first thing on the page on purpose, for anyone
           landing here Sunday morning without a "Central Hub" login yet. */}
-      <a
-        href="https://lrcentralchurch.breezechms.com/form/eea89d"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-7 flex items-center justify-between gap-4 rounded-2xl bg-primary-deep px-5 py-5 no-underline lg:px-6 lg:py-6"
-      >
-        <div className="flex flex-col gap-1">
-          <span className="text-[11px] font-bold tracking-[.14em] uppercase text-teal-light">
-            First time here?
-          </span>
-          <span className="font-display text-[21px] tracking-[-.015em] text-white">
-            Guest Sign-In
-          </span>
-          <span className="text-[14.5px] text-teal-pale">
-            Let us know you&rsquo;re here — takes 30 seconds
-          </span>
-        </div>
-        <span aria-hidden className="shrink-0 font-display text-2xl text-white">
-          →
-        </span>
-      </a>
+      <GuestSignInButton />
+
+      {/* Prayer request — kept up with guest sign-in since both are the
+          "do something now" actions; the prayer list itself stays below. */}
+      <PrayerRequestButton />
 
       {/* Announcements lead — same content as the bulletin */}
       <Reveal as="section" className="mt-7 rounded-2xl border border-line p-5 lg:p-6">
@@ -151,9 +136,6 @@ export default async function HubPage() {
               </ul>
             </div>
           ))}
-        </div>
-        <div className="mt-4">
-          <PrayerRequestForm />
         </div>
       </Reveal>
 
