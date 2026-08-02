@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowLink } from "@/components/Button";
 import { ImageSlot } from "@/components/ImageSlot";
+import { LiveNowChip } from "@/components/LiveNowBadge";
 import { Reveal } from "@/components/Reveal";
 import { blogPosts } from "@/content/blog";
 import { mediaPlaceholder } from "@/content/photos";
@@ -55,14 +56,19 @@ export default function MediaHubPage() {
           </ArrowLink>
         </Reveal>
         <Reveal delay={60} className="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6">
-          <ImageSlot
-            photoKey="media.live"
-            sizes="(min-width: 1024px) 33vw, 100vw"
-            alt=""
-            label="live stream still"
-            variant="dark"
-            className="aspect-[16/10] w-full rounded-xl"
-          />
+          <div className="relative">
+            <ImageSlot
+              photoKey="media.live"
+              sizes="(min-width: 1024px) 33vw, 100vw"
+              alt=""
+              label="live stream still"
+              variant="dark"
+              className="aspect-[16/10] w-full rounded-xl"
+            />
+            {/* PREVIEW: always-on LiveNowChip — swap for the gated
+                LiveNowBadge once Travelle approves how this looks. */}
+            <LiveNowChip className="absolute left-3 top-3" />
+          </div>
           <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
             Live Stream
           </span>
