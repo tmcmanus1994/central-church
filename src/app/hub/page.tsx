@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLink, Button } from "@/components/Button";
+import { PrayerRequestForm } from "@/components/PrayerRequestForm";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
 import { Reveal } from "@/components/Reveal";
 import { bulletin } from "@/content/bulletin";
@@ -150,6 +151,9 @@ export default async function HubPage() {
               </ul>
             </div>
           ))}
+        </div>
+        <div className="mt-4">
+          <PrayerRequestForm />
         </div>
       </Reveal>
 
