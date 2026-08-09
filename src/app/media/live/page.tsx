@@ -6,9 +6,9 @@ import { Reveal } from "@/components/Reveal";
 import { site, youtubeLiveUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Live Stream",
+  title: "Livestreams",
   description:
-    "Watch Central Church of Christ live from downtown Little Rock — Sunday worship streams at 10:15 AM Central on YouTube.",
+    "Watch Sunday worship live or catch up on a past service — Central Church of Christ streams every week on YouTube from downtown Little Rock.",
 };
 
 /**
@@ -16,6 +16,11 @@ export const metadata: Metadata = {
  * stream better on YouTube itself (comments, likes, subscriptions), and a
  * poster/iframe that's dark most of the week reads as broken. This page's
  * only job is to get a visitor onto YouTube at the right place.
+ *
+ * Framed as an archive, not a "join us live right now" page — the hero and
+ * the Live Now badge already send anyone visiting during the actual live
+ * window straight to YouTube, so most visitors here land outside it,
+ * browsing this week's stream or catching up on one they missed.
  */
 export default function LivePage() {
   return (
@@ -25,13 +30,14 @@ export default function LivePage() {
       </span>
       <div className="mt-2.5 mb-3 flex flex-wrap items-center gap-3 lg:mt-3 lg:mb-4">
         <h1 className="m-0 font-display text-[36px] leading-[1] tracking-[-.035em] lg:text-[56px] lg:tracking-[-.04em]">
-          Watch Central Live
+          Sunday Livestreams
         </h1>
         <LiveNowBadge />
       </div>
       <p className="m-0 max-w-[680px] text-base leading-[1.65] text-body lg:text-[19px]">
-        Can&rsquo;t be with us in person? Worship streams live on YouTube every
-        Sunday. Pull up a chair — you&rsquo;re part of the family either way.
+        Every Sunday&rsquo;s worship streams live and stays posted afterward
+        as a replay — follow along from home, catch a service you missed,
+        or revisit one that meant something to you.
       </p>
 
       <Reveal className="relative mt-8 flex flex-col items-start gap-5 overflow-hidden rounded-[18px] border border-line bg-coal p-6 text-white lg:mt-10 lg:p-10">
@@ -56,13 +62,13 @@ export default function LivePage() {
             Sunday Worship
           </span>
           <span className="text-[16px] text-[#C9C3B8]">
-            10:15 AM Central · {site.address.street}, {site.address.city},{" "}
-            {site.address.state}
+            New streams every week, 10:15 AM Central · {site.address.street},{" "}
+            {site.address.city}, {site.address.state}
           </span>
         </div>
         <p className="relative m-0 max-w-[520px] text-[15px] leading-[1.6] text-[#B8B2A6]">
-          The stream goes live shortly before 10:15 and stays up as a replay
-          afterward — comment, like, and subscribe while you&rsquo;re there.
+          Browse the channel for this week&rsquo;s service or one from the
+          archive — comment, like, and subscribe while you&rsquo;re there.
         </p>
         <span className="relative">
           <Button href={youtubeLiveUrl} variant="white">
