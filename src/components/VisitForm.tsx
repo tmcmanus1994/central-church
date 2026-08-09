@@ -53,7 +53,7 @@ export function VisitForm() {
           options={[
             "Sunday Worship · 10:15 AM",
             "Sunday Bible Classes · 9:15 AM",
-            "Adoración en Español · 1:30 PM",
+            "Adoración en Español · 1:00 PM",
             "Wednesday Classes · 6:30 PM",
           ]}
         />

@@ -444,13 +444,13 @@ export const ministries: Ministry[] = [
     lang: "es",
     metaTitle: "Iglesia de Cristo Central | Servicio en Español – Little Rock, AR",
     metaDescription:
-      "Adoración en español todos los domingos a la 1:30 PM en Central Church of Christ, en el centro de Little Rock. Todos son bienvenidos.",
-    tileBlurb: "Adoración en español, domingos a la 1:30 PM.",
+      "Adoración en español todos los domingos a la 1:00 PM en Central Church of Christ, en el centro de Little Rock. Todos son bienvenidos.",
+    tileBlurb: "Adoración en español, domingos a la 1:00 PM.",
     intro:
       "Sabemos que conocer a alguien por primera vez puede dar miedo, y asistir a una iglesia nueva puede poner nervioso a cualquiera. ¡Queremos ayudarte a que tu primera experiencia en Central, en el centro de Little Rock, sea excelente!",
     listHeading: "Qué esperar",
     list: [
-      "Un servicio en español que comienza a la 1:30 PM y dura aproximadamente una hora.",
+      "Un servicio en español que comienza a la 1:00 PM y dura aproximadamente una hora.",
       "Cantamos canciones significativas, oramos por necesidades específicas, aprendemos de la Palabra de Dios y participamos en la Santa Cena.",
       "Nos cuidamos unos a otros y atendemos necesidades durante la semana. Se recoge una ofrenda para apoyar este esfuerzo — dar es voluntario.",
       "Nos integramos con nuestros hermanos de habla inglesa en Central Church para adorar juntos como una familia unida de Dios.",
@@ -483,7 +483,7 @@ export const iglesiaEnglish: Ministry = {
     "We know meeting someone for the first time can be daunting, and visiting a new church can make anyone nervous. We want to help make your first experience at Central, in downtown Little Rock, a great one!",
   listHeading: "What to expect",
   list: [
-    "A Spanish-language service that begins at 1:30 PM and runs about an hour.",
+    "A Spanish-language service that begins at 1:00 PM and runs about an hour.",
     "We sing meaningful songs, pray for specific needs, learn from God's Word, and share communion.",
     "We look after one another and meet needs through the week. An offering supports that work — giving is voluntary.",
     "We join our English-speaking brothers and sisters at Central to worship together as one united family of God.",

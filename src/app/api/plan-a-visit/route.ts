@@ -31,7 +31,7 @@ import { formatSubmission, type Submission } from "@/lib/visit-request";
 
 const RECIPIENTS = ["shannon@arcentralchurch.org", "steven@arcentralchurch.org"];
 const KIDS_RECIPIENT = "tammy@arcentralchurch.org";
-const IGLESIA_SERVICE = "Adoración en Español · 1:30 PM";
+const IGLESIA_SERVICE = "Adoración en Español · 1:00 PM";
 const IGLESIA_RECIPIENT = "matt@arcentralchurch.org";
 const FALLBACK_CONTACT = "office@arcentralchurch.org";
 

@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { youtubeLiveUrl } from "@/lib/site";
 
 /** Sunday, 10:15–11:30 AM Central — the one weekly window worth flagging. */
-function isLiveWindow(date: Date) {
+export function isLiveWindow(date: Date) {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/Chicago",
     weekday: "short",
@@ -18,9 +18,11 @@ function isLiveWindow(date: Date) {
   return minutes >= 10 * 60 + 15 && minutes <= 11 * 60 + 30;
 }
 
-/** The visual chip itself — a red recording dot plus "Live Now", linking to
- *  the live-stream page. Exported on its own so a preview page can render it
- *  unconditionally without waiting for Sunday morning. */
+/** The visual chip itself — a red recording dot plus "Live Now", linking
+ *  straight to the YouTube stream (not the /media/live page — someone
+ *  clicking this while it's actually live shouldn't have to click again).
+ *  Exported on its own so a preview page can render it unconditionally
+ *  without waiting for Sunday morning. */
 export function LiveNowChip({ className = "" }: { className?: string }) {
   const [shown, setShown] = useState(false);
   useEffect(() => {
@@ -29,8 +31,10 @@ export function LiveNowChip({ className = "" }: { className?: string }) {
   }, []);
 
   return (
-    <Link
-      href="/media/live"
+    <a
+      href={youtubeLiveUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-2 text-[12px] font-bold tracking-[.1em] text-white uppercase no-underline transition-[opacity,transform,background-color] duration-500 ease-out hover:bg-red-700 ${
         shown ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
       } ${className}`}
@@ -40,7 +44,7 @@ export function LiveNowChip({ className = "" }: { className?: string }) {
         <span className="relative inline-flex size-2.5 rounded-full bg-white" />
       </span>
       Live Now
-    </Link>
+    </a>
   );
 }
 

@@ -63,7 +63,7 @@ export function SiteHeader() {
         <div className="mx-auto flex h-9 max-w-[1440px] items-center justify-between gap-4 px-5 lg:h-11 lg:px-14">
           <p className="m-0 truncate">
             <span className="hidden lg:inline">
-              Sun 9:15 Classes · 10:15 Worship · 1:30 Español
+              Sun 9:15 Classes · 10:15 Worship · 1:00 Español
               <span className="mx-3 opacity-50">|</span>
               Wed 6:30 Classes
             </span>
@@ -200,7 +200,7 @@ export function SiteHeader() {
             )}
           </ul>
           <div className="mt-4 flex flex-col gap-2 text-[14.5px] text-muted">
-            <span>Sun 9:15 Classes · 10:15 Worship · 1:30 Español</span>
+            <span>Sun 9:15 Classes · 10:15 Worship · 1:00 Español</span>
             <span>Wed 6:30 Classes</span>
             <a href={site.phoneHref} className="font-bold text-primary no-underline">
               {site.phone}

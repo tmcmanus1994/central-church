@@ -44,7 +44,7 @@ export const site = {
     {
       label: "Spanish Worship",
       short: "Adoración en Español",
-      when: "1:30 PM",
+      when: "1:00 PM",
     },
     {
       label: "Wednesday Classes",

@@ -38,7 +38,7 @@ export function ChurchJsonLd() {
         opens: "09:15",
         closes: "14:30",
         description:
-          "Bible Classes 9:15 AM · Worship 10:15 AM · Spanish Worship 1:30 PM",
+          "Bible Classes 9:15 AM · Worship 10:15 AM · Spanish Worship 1:00 PM",
       },
       {
         "@type": "OpeningHoursSpecification",

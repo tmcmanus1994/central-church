@@ -74,8 +74,8 @@ export const recurringEvents: ChurchEvent[] = [
   {
     slug: "spanish-worship",
     title: "Iglesia",
-    start: "2026-08-02T13:30:00-05:00",
-    end: "2026-08-02T14:30:00-05:00",
+    start: "2026-08-02T13:00:00-05:00",
+    end: "2026-08-02T14:00:00-05:00",
     location: "Worship Center",
     recurring: true,
     rrule: "FREQ=WEEKLY;BYDAY=SU",

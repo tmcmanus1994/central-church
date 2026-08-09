@@ -3,6 +3,7 @@ import { ArrowLink, Button } from "@/components/Button";
 import { EventCard } from "@/components/EventCard";
 import { ImageSlot } from "@/components/ImageSlot";
 import { LiveNowBadge } from "@/components/LiveNowBadge";
+import { WatchLiveButton } from "@/components/WatchLiveButton";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SpotlightBanner } from "@/components/SpotlightBanner";
@@ -78,9 +79,7 @@ export default async function HomePage() {
                 className="mt-1 flex w-full flex-col gap-2.5 sm:w-auto sm:flex-row sm:gap-3"
               >
                 <Button href="/plan-a-visit">Plan a Visit</Button>
-                <Button href="/media/live" variant="outline-light">
-                  Watch Live
-                </Button>
+                <WatchLiveButton />
               </Reveal>
             </div>
             <Reveal
@@ -153,7 +152,7 @@ export default async function HomePage() {
           Welcome to Central Church of Christ in downtown Little Rock, Arkansas.
           Our mission is to follow Jesus together as a diverse congregation that
           reflects our community. Join us for Bible classes Sunday mornings at
-          9:15, worship at 10:15 AM, Spanish-language worship at 1:30 PM, and
+          9:15, worship at 10:15 AM, Spanish-language worship at 1:00 PM, and
           midweek classes Wednesdays at 6:30 PM. Whoever you are and wherever
           you&rsquo;re starting from, there&rsquo;s a place for you here.
         </p>
