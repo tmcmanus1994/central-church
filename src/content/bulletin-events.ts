@@ -155,10 +155,31 @@ export const bulletinEvents: BulletinEvent[] = [
   {
     slug: "shannabration",
     title: "Shannabration",
-    start: "2026-08-23T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
+    start: "2026-08-23T17:00:00-05:00",
+    location: "Central Gym",
+    description:
+      "A 25th work-anniversary celebration honoring Shannon Cooper — wear Kelly green if you've got it, there'll be good food, and a few friendly quandaries to answer.",
     tag: "All Church",
+  },
+  {
+    slug: "central-discovery",
+    title: "Central Discovery",
+    start: "2026-08-23T09:00:00-05:00",
+    location: "Worship Center Lobby",
+    description:
+      "A quarterly \"get to know Central\" class. If you're new around here, this is for you.",
+    tag: "All Church",
+  },
+  {
+    slug: "mix-bentonville-trip",
+    title: "Mix Trip to Bentonville",
+    start: "2026-08-15T09:00:00-05:00",
+    allDay: true,
+    location: "Bentonville, AR",
+    offsite: true,
+    description: "A trip to Bentonville for The Mix, Central's young adult community.",
+    tag: "All Church",
+    aliases: ["Mix trip to Bentonville"],
   },
   {
     slug: "mentor-info-meeting",
@@ -232,6 +253,10 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
   { item: "Madison Allen — baby shower, August 30", reason: "member-personal" },
   { item: "Sarah Laffoon — baby shower, September 14", reason: "member-personal" },
   {
+    item: "Caylie Mosley — expecting, January",
+    reason: "member-personal, no public shower date given yet",
+  },
+  {
     item: "Virgie Reese-Dobson memorial service, August 8, Augusta, GA",
     reason: "private family service, out of state",
   },
@@ -240,4 +265,14 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "health information about named individuals",
   },
   { item: "Weekly offering and budget figures", reason: "internal finances" },
+  {
+    item: "Service members list — Tevin Patillo, Chris McNair, Cornelius Hood, Kyla Jeter",
+    reason:
+      "names members' family relations (incl. Travelle's own sister); held back for his call on whether to publish",
+  },
+  {
+    item: "Sanchez Adoption Celebration, August 20",
+    reason:
+      "adoption involves a minor's privacy on a permanently public, indexable page; held back for a human call rather than publishing by default",
+  },
 ];

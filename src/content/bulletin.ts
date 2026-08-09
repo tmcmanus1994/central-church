@@ -78,18 +78,29 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "August 2, 2026",
+  weekOf: "August 9, 2026",
 
   announcements: [
     {
-      title: "Back to School Event — August 5",
-      body: "Central's annual Back to School Event and Friends & Family Meal is Wednesday, August 5. Bring school supply donations to the building any time before August 2, or give through the online portal and we'll shop for you. Amazon and Walmart wish lists are posted on Facebook and printed in the bulletin. Come pray with each family participating — consider this your invitation to connect with these Central friends.",
-      href: "/events",
+      title: "Welcome, Steven Swible",
+      body: "We're so happy to welcome Steven Swible to our staff as our new head of building and maintenance. He's got a week under his belt and it's going great — be sure to meet and greet Steven these next few weeks while he's getting to know Central.",
     },
     {
-      title: "Promotion Sunday — August 2",
-      body: "Every elementary student moves up to their new grade level class on Sunday morning, August 2. Rising 6th graders are the exception: they'll have a special promotion on Wednesday, August 5. Watch your email for details from Tammy and James.",
-      contact: { name: "Tammy Beck", email: "tammy@arcentralchurch.org" },
+      title: "Back to School Event — thank you",
+      body: "Thank you to everyone who supported the Back to School Event in every way! 150 backpacks were packed and given out last week. Continue to pray for each of these families as they prepare for another school year.",
+    },
+    {
+      title: "A busy, wonderful Sunday",
+      body: "Last Sunday was one of the busiest yet — the 30's class fed about 100 people at their potluck, and the Ice Cream Social had a great turnout with no shortage of toppings. Thanks to everyone who came out.",
+    },
+    {
+      title: "Donut Sale for Peru — goal met!",
+      body: "Thank you for enjoying donuts on Sunday mornings to support a month of tutoring at the children's home in Peru that the Daggetts work closely with. $230 was raised — goal met, family!",
+    },
+    {
+      title: "Central Teens — fall events are up",
+      body: "Fall teen events have been shared — check your email to fill up your calendar! Share your student's schedule with James so he can cheer them on at their school activities.",
+      contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
     },
     {
       title: "See you later to the Bentley family",
@@ -99,10 +110,6 @@ export const bulletin: Bulletin = {
       title: "Online Bible Study — Wednesdays, 11 AM",
       body: "Jane Estes is hosting a weekly online Bible study beginning Wednesday, July 29, meeting Wednesdays from 11 AM to noon. RSVP so Jane can send you the meeting link. Details are on Facebook and in the weekly email.",
       contact: { name: "the church office", email: "office@arcentralchurch.org" },
-    },
-    {
-      title: "Donut Sale for Peru — August 2",
-      body: "The Kids Ministry sells donuts again on Sunday, August 2. Proceeds fund a month of a tutor's salary at Casa Hogar El Amor de Dios — the Love of God Children's Home — in Arequipa, Peru.",
     },
     {
       title: "OnRamp Mentoring starts back this fall",
@@ -239,27 +246,25 @@ export const bulletin: Bulletin = {
   ],
 
   orderOfWorship: [
-    "Welcome / Kids Promotion",
-    "Let God Arise",
-    "Victory in Jesus (470)",
-    "How Deep the Father's Love for Us",
-    "Communion: Josh Searcy",
-    "Nearer Still Nearer (478)",
+    "Welcome / Prayer for Back to School",
+    "Hear O Israel (446)",
+    "Awesome God (He Is Faithful)",
+    "His Grace Reaches Me (113)",
+    "It Is Well with My Soul (490)",
+    "Communion: Kevin Young",
+    "Arms of Love",
     "Prayer for the Lost",
     "Dismiss Children's Church",
-    "Hymn of Heaven",
+    "Lord, Speak to Me",
     "Scripture Reading",
-    "Sermon: Santiago Torres",
-    "Living for Jesus (594)",
+    "Sermon: Steven Hovater",
+    "Break My Heart",
     "Family News",
+    "Thank You Lord (781)",
     "Sending Blessing",
   ],
 
-  kidsClosetNeeds: [
-    "Summer clothes — all kid sizes",
-    "Children's shoes",
-    "Diapers, sizes 5, 6 and 7",
-  ],
+  kidsClosetNeeds: ["Summer clothes — all kid sizes", "Children's shoes"],
 
   giving: {
     lastWeek: "$16,757",
@@ -290,6 +295,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "August 2, 2026",
     "July 26, 2026",
     "July 19, 2026",
     "July 12, 2026",
