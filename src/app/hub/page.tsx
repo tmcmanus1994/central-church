@@ -71,8 +71,11 @@ export default async function HubPage() {
           "do something now" actions; the prayer list itself stays below. */}
       <PrayerRequestButton />
 
-      {/* Announcements lead — same content as the bulletin */}
-      <Reveal as="section" className="mt-7 rounded-2xl border border-line p-5 lg:p-6">
+      {/* Announcements lead — same content as the bulletin. Not a Reveal:
+          it's the very next thing after Guest Sign-In/Prayer Request, so a
+          scroll-gated fade-in reads as "the page ends here" before anyone
+          scrolls. Everything further down still animates in on scroll. */}
+      <section className="mt-7 rounded-2xl border border-line p-5 lg:p-6">
         <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
           Announcements
         </h2>
@@ -87,7 +90,7 @@ export default async function HubPage() {
             </li>
           ))}
         </ul>
-      </Reveal>
+      </section>
 
       {/* What's on */}
       <Reveal as="section" className="mt-4 rounded-2xl border border-line p-5 lg:p-6">
