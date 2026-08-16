@@ -30,27 +30,6 @@ export interface BulletinEvent extends ChurchEvent {
 
 export const bulletinEvents: BulletinEvent[] = [
   {
-    slug: "online-bible-study",
-    title: "Online Bible Study",
-    start: "2026-07-29T11:00:00-05:00",
-    end: "2026-07-29T12:00:00-05:00",
-    location: "Online",
-    offsite: true,
-    description:
-      "Jane Estes hosts a weekly online Bible study beginning July 29, meeting Wednesdays from 11 AM to noon. RSVP so Jane can send you the meeting link — details are on Facebook and in the weekly email.",
-    tag: "All Church",
-  },
-  {
-    slug: "mens-challenge",
-    title: "Men's Challenge",
-    start: "2026-08-01T16:00:00-05:00",
-    end: "2026-08-01T19:00:00-05:00",
-    location: "Central Gym",
-    description: "Chili and pushups. Men of Central, come hungry.",
-    tag: "All Church",
-    aliases: ["Mens Challenge", "Men's Challenge - Chili and Pushups"],
-  },
-  {
     slug: "promotion-sunday",
     title: "Promotion Sunday",
     start: "2026-08-02T09:00:00-05:00",
@@ -158,7 +137,7 @@ export const bulletinEvents: BulletinEvent[] = [
     start: "2026-08-23T17:00:00-05:00",
     location: "Central Gym",
     description:
-      "A 25th work-anniversary celebration honoring Shannon Cooper — wear Kelly green if you've got it, there'll be good food, and a few friendly quandaries to answer.",
+      "A 25th work-anniversary celebration honoring Shannon Cooper — wear Kelly green if you've got it, and bring a side or dessert to share (green beans are popular, but feel free to branch out).",
     tag: "All Church",
   },
   {
@@ -206,37 +185,47 @@ export const bulletinEvents: BulletinEvent[] = [
     aliases: ["Mentorship Kickoff", "OnRamp Kickoff", "Mentoring Kickoff"],
   },
   {
-    slug: "st-louis-trip",
-    title: "St. Louis Trip",
-    start: "2026-07-30T09:00:00-05:00",
-    end: "2026-08-01T09:00:00-05:00",
-    allDay: true,
-    location: "St. Louis, MO",
-    offsite: true,
-    description:
-      "A weekend away for Central Teens — service, sightseeing, and time together on the road.",
-    tag: "Central Teens",
-    ministrySlug: "teens",
-    aliases: ["Teens STL trip", "STL Trip"],
-  },
-  {
     slug: "encouragers-kickoff",
     title: "Encouragers Kickoff",
     start: "2026-08-27T10:30:00-05:00",
     location: "Fellowship East",
     description:
-      "Encouragers Class starts back for the 2026-27 season, meeting Thursdays at 10:30 AM in Fellowship East.",
+      "Encouragers Class starts back for the 2026-27 season, resuming the study of Job, meeting Thursdays at 10:30 AM in Fellowship East.",
     tag: "All Church",
     aliases: ["Encouragers Returns", "Encouragers Class"],
   },
   {
     slug: "area-wide-worship",
     title: "Area Wide Worship Night",
-    start: "2026-08-30T09:00:00-05:00",
-    allDay: true,
+    start: "2026-08-30T18:00:00-05:00",
     location: "823 W 6th St, Little Rock",
+    description:
+      "Central hosts the central Arkansas family of churches for an evening of song and prayer. No childcare is provided, though the kids area will be open for movers and shakers.",
     tag: "All Church",
     aliases: ["Area Wide Worship"],
+  },
+  {
+    slug: "sunday-funday-5-6",
+    title: "Sunday Funday (5th/6th)",
+    start: "2026-08-16T09:00:00-05:00",
+    allDay: true,
+    location: "Central Kids Wing",
+    description: "For 5th and 6th graders.",
+    tag: "Central Kids",
+    ministrySlug: "children",
+    aliases: ["Sunday Funday (5/6th)"],
+  },
+  {
+    slug: "small-group-info-fair",
+    title: "Small Group Informational Fair",
+    start: "2026-08-23T09:00:00-05:00",
+    allDay: true,
+    location: "Worship Center Lobby",
+    description:
+      "Questions about how small groups work at Central — by age and location? Stop by the lobby after worship. A sign-up form is also on Facebook, the HUB, or with your class leader. Groups kick off September 13.",
+    tag: "Life Groups",
+    ministrySlug: "life-groups",
+    aliases: ["Small Group fair", "Small Groups Info Fair"],
   },
 ];
 
