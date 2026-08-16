@@ -78,48 +78,45 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "August 9, 2026",
+  weekOf: "August 16, 2026",
 
   announcements: [
     {
-      title: "Welcome, Steven Swible",
-      body: "We're so happy to welcome Steven Swible to our staff as our new head of building and maintenance. He's got a week under his belt and it's going great — be sure to meet and greet Steven these next few weeks while he's getting to know Central.",
+      title: "Gustavo Perez was baptized!",
+      body: "We're celebrating with the Perez family — Gustavo put on Christ this past Wednesday night. Matt is studying with his wife, Lupita, and we're praying she'll take that same step soon. Gustavo, Lupita, and their three kids are part of Central Iglesia.",
     },
     {
-      title: "Back to School Event — thank you",
-      body: "Thank you to everyone who supported the Back to School Event in every way! 150 backpacks were packed and given out last week. Continue to pray for each of these families as they prepare for another school year.",
+      title: "Missions Update — Mexico City",
+      body: "Gonzalo sent this week's update on the work in Mexico City, along with a prayer list — check your email for the full newsletter.",
     },
     {
-      title: "A busy, wonderful Sunday",
-      body: "Last Sunday was one of the busiest yet — the 30's class fed about 100 people at their potluck, and the Ice Cream Social had a great turnout with no shortage of toppings. Thanks to everyone who came out.",
+      title: "Kids Closet needs extra hands",
+      body: "There's been a wonderful wave of clothing and shoe donations, and Kids Closet could use help hanging it all — Wednesday mornings, 9–11 AM. Come one week a month or every week, whatever works.",
     },
     {
-      title: "Donut Sale for Peru — goal met!",
-      body: "Thank you for enjoying donuts on Sunday mornings to support a month of tutoring at the children's home in Peru that the Daggetts work closely with. $230 was raised — goal met, family!",
+      title: "Small Groups — sign up now",
+      body: "A survey form for this year's small groups is on Facebook, the HUB, or with your class leader — fill it out so we know where you fit. Not connected to a class yet? This means you too. Stop by the informational fair in the lobby next Sunday, August 23, and groups kick off September 13.",
+    },
+    {
+      title: "Shannabration — bring a side",
+      body: "Central members are asked to bring a side or dessert for Shannon Cooper's 25th work-anniversary celebration on August 23 — green beans are a fan favorite, but feel free to branch out.",
+    },
+    {
+      title: "Encouragers resumes — studying Job",
+      body: "The Thursday morning Encouragers class starts back August 27 with a study of Job. Class begins at 10:30 in Fellowship East — all are welcome.",
+    },
+    {
+      title: "Area Wide Worship — August 30",
+      body: "Central hosts our central Arkansas family of churches for an evening of song and prayer on August 30. No childcare is provided, though the kids area will be open for movers and shakers — bring your own plan for little ones.",
     },
     {
       title: "Central Teens — fall events are up",
-      body: "Fall teen events have been shared — check your email to fill up your calendar! Share your student's schedule with James so he can cheer them on at their school activities.",
+      body: "Fall teen events have been shared on Remind and GroupMe — check there to fill up your calendar. Share your student's schedule with James so he can cheer them on at their school activities.",
       contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
     },
     {
-      title: "See you later to the Bentley family",
-      body: "The Bentleys are moving to Kenya for three years to work with a non-profit and whatever missional work they find along the way. We'll be praying for their departure and transition in the coming weeks — happy and sad, all wrapped into one.",
-    },
-    {
-      title: "Online Bible Study — Wednesdays, 11 AM",
-      body: "Jane Estes is hosting a weekly online Bible study beginning Wednesday, July 29, meeting Wednesdays from 11 AM to noon. RSVP so Jane can send you the meeting link. Details are on Facebook and in the weekly email.",
-      contact: { name: "the church office", email: "office@arcentralchurch.org" },
-    },
-    {
-      title: "OnRamp Mentoring starts back this fall",
-      body: "Mentoring follows the school year and meets one night a week on Tuesday evenings. There's an interest meeting on August 25, and mentorship kicks off September 1. There's already a waiting list of mentees, so no need to wonder whether you'd be matched — dedicate an hour on Tuesdays and you will be.",
-      contact: { name: "the church office", email: "office@arcentralchurch.org" },
-    },
-    {
-      title: "ESL classes are starting",
-      body: "Bi-weekly English classes are starting to support families we've met through Kids Closet. If you'd like to help facilitate lessons, get in touch.",
-      contact: { name: "Matt Thomas", email: "matt@arcentralchurch.org" },
+      title: "City Connections hygiene drive — coming in September",
+      body: "Starting in September, we're partnering with City Connections to collect hygiene products for students and families in local schools. Look for a collection bin in the coming weeks.",
     },
     {
       title: "Reserving a room",
@@ -162,7 +159,7 @@ export const bulletin: Bulletin = {
     {
       name: "Kids Closet",
       detail:
-        "Donate items in the foyer any time. Appointments can be made for large donations.",
+        "Donate items in the foyer any time. Appointments can be made for large donations. Extra hands are needed hanging donations Wednesday mornings, 9–11 AM — come one week a month or every week.",
       contact: "Lacey Hines or Lizzie Wolhuter",
       href: "/ministries/kids-closet",
     },
@@ -246,25 +243,29 @@ export const bulletin: Bulletin = {
   ],
 
   orderOfWorship: [
-    "Welcome / Prayer for Back to School",
-    "Hear O Israel (446)",
-    "Awesome God (He Is Faithful)",
-    "His Grace Reaches Me (113)",
-    "It Is Well with My Soul (490)",
-    "Communion: Kevin Young",
-    "Arms of Love",
+    "Doxology (66)",
+    "Welcome",
+    "No Other Gods",
+    "Standing on the Promises (452)",
+    "Wonderful, Merciful Savior",
+    "Communion",
+    "Sweet Adoration",
     "Prayer for the Lost",
     "Dismiss Children's Church",
-    "Lord, Speak to Me",
+    "Shout to the Lord",
     "Scripture Reading",
     "Sermon: Steven Hovater",
-    "Break My Heart",
+    "How Sweet, How Heavenly (709)",
     "Family News",
-    "Thank You Lord (781)",
     "Sending Blessing",
   ],
 
-  kidsClosetNeeds: ["Summer clothes — all kid sizes", "Children's shoes"],
+  kidsClosetNeeds: [
+    "Summer clothes — all kid sizes",
+    "Children's shoes",
+    "Diapers — sizes 5 & 6, and pull-ups 4T & 5T",
+    "Wipes — always needed",
+  ],
 
   giving: {
     lastWeek: "$16,757",
@@ -295,6 +296,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "August 9, 2026",
     "August 2, 2026",
     "July 26, 2026",
     "July 19, 2026",
