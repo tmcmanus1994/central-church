@@ -132,6 +132,18 @@ export const bulletinEvents: BulletinEvent[] = [
     aliases: ["Canvas", "Canvas Community", "Canvas Meal"],
   },
   {
+    slug: "river-city-revival",
+    title: "Revive Us Again — River City Ministry Revival",
+    start: "2026-08-22T18:00:00-05:00",
+    end: "2026-08-22T20:00:00-05:00",
+    location: "River City Ministry, 1021 E Washington Ave, North Little Rock, AR 72114",
+    offsite: true,
+    description:
+      "A summer revival and gospel meeting hosted by River City Ministry in North Little Rock, themed around 2 Chronicles 7:14. Speakers: Harold Young (5th St. Church of Christ, Newport), Keith Lape (River City Church, North Little Rock), and John Armstrong (River City Ministry). Refreshments served — come as you are, all are welcome.",
+    tag: "All Church",
+    aliases: ["Revive Us Again", "River City Revival", "Summer Revival"],
+  },
+  {
     slug: "shannabration",
     title: "Shannabration",
     start: "2026-08-23T17:00:00-05:00",
