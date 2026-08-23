@@ -147,9 +147,10 @@ export const bulletinEvents: BulletinEvent[] = [
     slug: "shannabration",
     title: "Shannabration",
     start: "2026-08-23T17:00:00-05:00",
+    end: "2026-08-23T20:00:00-05:00",
     location: "Central Gym",
     description:
-      "A 25th work-anniversary celebration honoring Shannon Cooper — wear Kelly green if you've got it, and bring a side or dessert to share (green beans are popular, but feel free to branch out).",
+      "A 25th work-anniversary celebration honoring Shannon Cooper, with indoor and outdoor seating and two lines of food. Wear Kelly green if you've got it, and bring a side or dessert to share (green beans are popular, but feel free to branch out) — or a card of appreciation if a public toast isn't your thing. The SGC and Worship Center will be closed for the event.",
     tag: "All Church",
   },
   {
@@ -175,11 +176,10 @@ export const bulletinEvents: BulletinEvent[] = [
   {
     slug: "mentor-info-meeting",
     title: "Mentor Info Meeting",
-    start: "2026-08-25T09:00:00-05:00",
-    allDay: true,
+    start: "2026-08-25T18:00:00-05:00",
     location: "823 W 6th St, Little Rock",
     description:
-      "Interested in mentoring this year? OnRamp Mentoring follows the school year and meets one evening a week on Tuesdays. There's already a waiting list of mentees, so come find out what's involved.",
+      "OnRamp Mentoring's informational meeting — for mentors only this week. The program starts back September 1, meeting one evening a week on Tuesdays through the school year.",
     tag: "Outreach",
     ministrySlug: "outreach",
     aliases: ["Mentor Interest Meeting", "OnRamp Info Meeting"],
@@ -228,6 +228,51 @@ export const bulletinEvents: BulletinEvent[] = [
     aliases: ["Sunday Funday (5/6th)"],
   },
   {
+    slug: "sunday-funday-sept-6",
+    title: "Sunday Funday",
+    start: "2026-09-06T09:00:00-05:00",
+    allDay: true,
+    location: "Central Kids Wing",
+    description: "A morning of games and fun for Central Kids.",
+    tag: "Central Kids",
+    ministrySlug: "children",
+  },
+  {
+    slug: "canvas-community-meal-sept9",
+    title: "Canvas Community Meal",
+    start: "2026-09-09T18:00:00-05:00",
+    location: "823 W 6th St, Little Rock",
+    description:
+      "Serving the homeless community an evening meal, as we do the second Wednesday of every month.",
+    tag: "Outreach",
+    ministrySlug: "outreach",
+    aliases: ["Canvas", "Canvas Community", "Canvas Meal"],
+  },
+  {
+    slug: "mens-golf-tournament",
+    title: "Men's Annual Golf Tournament — Driving for Diapers",
+    start: "2026-09-19T07:30:00-05:00",
+    location: "Rebsamen Golf Course, Little Rock, AR",
+    offsite: true,
+    description:
+      "Fellowship, fun, and a little friendly frustration on the course. Bring a pack of size 5 diapers for Kids Closet — extra strokes come off your score for every additional pack, and yes, there's a trophy. RSVP by September 8.",
+    tag: "All Church",
+    aliases: ["Driving for Diapers"],
+  },
+  {
+    slug: "mens-retreat",
+    title: "Central Men's Retreat — Roots Run Deep",
+    start: "2026-09-25T00:00:00-05:00",
+    end: "2026-09-26T23:59:00-05:00",
+    allDay: true,
+    location: "Corin Read Christian Camp, Bauxite, AR",
+    offsite: true,
+    description:
+      "A weekend of faith, fellowship, community, and adventure for the men of Central. $20 covers lodging and meals. RSVP by September 20.",
+    tag: "All Church",
+    aliases: ["Roots Run Deep"],
+  },
+  {
     slug: "small-group-info-fair",
     title: "Small Group Informational Fair",
     start: "2026-08-23T09:00:00-05:00",
@@ -251,10 +296,23 @@ export const bulletinEvents: BulletinEvent[] = [
  */
 export const withheldFromBulletin: { item: string; reason: string }[] = [
   { item: "Logan Patillo — wedding shower, August 9", reason: "member-personal" },
-  { item: "Madison Allen — baby shower, August 30", reason: "member-personal" },
-  { item: "Sarah Laffoon — baby shower, September 14", reason: "member-personal" },
+  { item: "Madison Allen — baby shower, August 30, 1 PM, Gym Alcove", reason: "member-personal" },
+  {
+    item: "Sarah Laffoon — baby shower, September 13",
+    reason:
+      "member-personal; date corrected from September 14 — this week's bulletin says the 13th",
+  },
   {
     item: "Caylie Mosley — expecting, January",
+    reason: "member-personal, no public shower date given yet",
+  },
+  {
+    item: "Bailey McManus — expecting, January",
+    reason:
+      "member-personal; shares a surname with Travelle — flagged in case it's his own family, for his call on whether to publish",
+  },
+  {
+    item: "Emelia Duréy — expecting, January",
     reason: "member-personal, no public shower date given yet",
   },
   {
@@ -264,6 +322,19 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
   {
     item: "Named prayer requests (health, surgery, bereavement)",
     reason: "health information about named individuals",
+  },
+  {
+    item: "Mo Brown — hospitalized with a serious infection, now home; meal train for the family",
+    reason:
+      "health information; the meal train sign-up is also withheld since publishing it would out the same hospitalization",
+  },
+  {
+    item: "Matt McJunkins (friend of Scott & Amy Dutile) — recent back surgery",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Carson Brown (young son of Paden & Keith) — radiation treatment following tumor removal",
+    reason: "health information naming a minor — extra caution beyond the usual policy",
   },
   { item: "Weekly offering and budget figures", reason: "internal finances" },
   {

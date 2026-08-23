@@ -78,41 +78,47 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "August 16, 2026",
+  weekOf: "August 23, 2026",
 
   announcements: [
     {
-      title: "Gustavo Perez was baptized!",
-      body: "We're celebrating with the Perez family — Gustavo put on Christ this past Wednesday night. Matt is studying with his wife, Lupita, and we're praying she'll take that same step soon. Gustavo, Lupita, and their three kids are part of Central Iglesia.",
+      title: "Shannabration — tonight!",
+      body: "Tonight's the night — 5 to 8 in the gym, with indoor and outdoor seating and two lines of food to work through. Bring a card of appreciation for Shannon if a public toast isn't your thing (a firm one minute is allotted for those brave enough). Wear Kelly green if you've got it. Note: the SGC and Worship Center will be closed for the event.",
     },
     {
-      title: "Missions Update — Mexico City",
-      body: "Gonzalo sent this week's update on the work in Mexico City, along with a prayer list — check your email for the full newsletter.",
+      title: "Small Group Informational Fair — today",
+      body: "Stop by the lobby after worship today to learn how small groups work at Central — by age and location. A sign-up form is also on Facebook, the HUB, or with your class leader. Groups kick off September 13.",
     },
     {
-      title: "Kids Closet needs extra hands",
-      body: "There's been a wonderful wave of clothing and shoe donations, and Kids Closet could use help hanging it all — Wednesday mornings, 9–11 AM. Come one week a month or every week, whatever works.",
+      title: "Kevin Cedillios was baptized!",
+      body: "Kevin Cedillios was baptized last week! He and his family are members of Central Iglesia, and Kevin has become an active part of the Central Teens crew. Welcome to the family, Kevin!",
     },
     {
-      title: "Small Groups — sign up now",
-      body: "A survey form for this year's small groups is on Facebook, the HUB, or with your class leader — fill it out so we know where you fit. Not connected to a class yet? This means you too. Stop by the informational fair in the lobby next Sunday, August 23, and groups kick off September 13.",
+      title: "Men's Golf Tournament — Driving for Diapers",
+      body: "Central's annual golf tournament is September 19 at 7:30 AM at Rebsamen Golf Course. Bring a pack of size 5 diapers for Kids Closet — extra strokes come off your score for every additional pack, and yes, there's a trophy. RSVP by September 8.",
+      contact: { name: "Josh Ward" },
     },
     {
-      title: "Shannabration — bring a side",
-      body: "Central members are asked to bring a side or dessert for Shannon Cooper's 25th work-anniversary celebration on August 23 — green beans are a fan favorite, but feel free to branch out.",
+      title: "Men's Retreat — Roots Run Deep",
+      body: "A weekend of faith, fellowship, community, and adventure for the men of Central, September 25–26 at Corin Read Christian Camp in Bauxite. $20 covers lodging and meals. RSVP by September 20 for details.",
+      contact: { name: "Ben Thomas" },
+    },
+    {
+      title: "New classes coming this fall",
+      body: "New Wednesday night classes start September 2 — ladies, mark your calendars, Abbie Miller is teaching. Sunday morning adult classes shift from Ecclesiastes to a study of Luke for the fall months leading into Advent, and a Bible 101 class is coming soon on Sundays too — official date to be announced.",
+    },
+    {
+      title: "Central Teens — fall events are up",
+      body: "Fall teen events have been shared on Remind and GroupMe — check there to fill up your calendar. Share your student's schedule with James so he can cheer them on at their school activities. Also: SDC is waitlist only now — pay today to confirm your spot.",
+      contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
+    },
+    {
+      title: "Area Wide Worship — August 30",
+      body: "Central hosts our central Arkansas family of churches for an evening of song and prayer on August 30 at 6 PM, right here in the auditorium. No childcare is provided, though the kids area will be open for movers and shakers.",
     },
     {
       title: "Encouragers resumes — studying Job",
       body: "The Thursday morning Encouragers class starts back August 27 with a study of Job. Class begins at 10:30 in Fellowship East — all are welcome.",
-    },
-    {
-      title: "Area Wide Worship — August 30",
-      body: "Central hosts our central Arkansas family of churches for an evening of song and prayer on August 30. No childcare is provided, though the kids area will be open for movers and shakers — bring your own plan for little ones.",
-    },
-    {
-      title: "Central Teens — fall events are up",
-      body: "Fall teen events have been shared on Remind and GroupMe — check there to fill up your calendar. Share your student's schedule with James so he can cheer them on at their school activities.",
-      contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
     },
     {
       title: "City Connections hygiene drive — coming in September",
@@ -243,19 +249,19 @@ export const bulletin: Bulletin = {
   ],
 
   orderOfWorship: [
-    "Doxology (66)",
+    "Pierce My Ear",
     "Welcome",
-    "No Other Gods",
-    "Standing on the Promises (452)",
-    "Wonderful, Merciful Savior",
+    "Let God Arise",
+    "Beautiful One",
+    "Gratitude",
     "Communion",
-    "Sweet Adoration",
+    "In Christ Alone",
     "Prayer for the Lost",
     "Dismiss Children's Church",
-    "Shout to the Lord",
+    "Kum Ba Yah",
     "Scripture Reading",
-    "Sermon: Steven Hovater",
-    "How Sweet, How Heavenly (709)",
+    "Sermon: Meech Geter",
+    "Do Not Fear",
     "Family News",
     "Sending Blessing",
   ],
@@ -264,7 +270,6 @@ export const bulletin: Bulletin = {
     "Summer clothes — all kid sizes",
     "Children's shoes",
     "Diapers — sizes 5 & 6, and pull-ups 4T & 5T",
-    "Wipes — always needed",
   ],
 
   giving: {
@@ -296,6 +301,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "August 16, 2026",
     "August 9, 2026",
     "August 2, 2026",
     "July 26, 2026",
