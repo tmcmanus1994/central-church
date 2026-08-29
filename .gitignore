@@ -43,3 +43,8 @@ __pycache__/
 # length of one workflow run. runs/*-summary.md (the human-readable output)
 # is committed on purpose — it never contains what this carries.
 /inbox/
+
+# OAuth client secret downloaded from Google Cloud Console for
+# get_refresh_token.py's one-time setup — never belongs in git regardless
+# of where it's saved.
+client_secret*.json

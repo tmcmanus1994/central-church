@@ -7,7 +7,7 @@ pull request updating `src/content/bulletin.ts` and
 reaches the live site without that review.
 
 ```
-Sun ~6 AM CT   weekly-bulletin.yml   Gmail (IMAP) -> inbox/{date}/
+Sun ~6 AM CT   weekly-bulletin.yml   Gmail (API, OAuth) -> inbox/{date}/
                                       -> Claude reads AGENT.md
                                       -> opens a PR against bulletin.ts /
                                          bulletin-events.ts
@@ -26,10 +26,12 @@ already-public-safe result reaches a PR.
   behaves.
 - **`config.json`** — which sender/subject to match, and how many days back
   to search.
-- **`ingest.py`** — logs into the dedicated automation Gmail mailbox via
-  IMAP, finds this week's bulletin email, and writes it to `inbox/{date}/`
-  (`email.md`, `bulletin.pdf`, `meta.json`). Exits nonzero if nothing
-  matches, which the workflow turns into a GitHub issue.
+- **`ingest.py`** — reads the dedicated automation Gmail mailbox via the
+  Gmail API (OAuth, not IMAP), finds this week's bulletin email, and writes
+  it to `inbox/{date}/` (`email.md`, `bulletin.pdf`, `meta.json`). Exits
+  nonzero if nothing matches, which the workflow turns into a GitHub issue.
+- **`get_refresh_token.py`** — one-time, run locally (not in CI) to mint the
+  OAuth refresh token `ingest.py` needs. See "One-time setup" below.
 - **`../scripts/import-bulletin.mjs`** — already existed before this
   automation (built for the manual bulletin process); the agent reuses it to
   parse the PDF and flag sensitive lines, rather than re-implementing PDF
@@ -37,26 +39,57 @@ already-public-safe result reaches a PR.
 
 ## One-time setup
 
-1. **Create a dedicated Gmail mailbox** for this — nothing else should ever
-   use it. Turn on 2-Step Verification, then generate an App Password
-   (Google Account -> Security -> App passwords). A regular password won't
-   work with IMAP.
+1. **Create a dedicated Gmail mailbox** for this, if one doesn't already
+   exist — nothing else should ever use it.
 2. **Set up the forward**, in the account where Jessica's bulletin email
    currently arrives: Gmail Settings -> Filters and Blocked Addresses ->
    Create a new filter -> From `jessica@arcentralchurch.org`, Subject
-   contains `Weekly Bulletin` -> Forward it to the new agent mailbox. Gmail
-   will send a one-time confirmation code to the agent mailbox to verify the
+   contains `Weekly Bulletin` -> Forward it to the dedicated mailbox. Gmail
+   will send a one-time confirmation code to that mailbox to verify the
    forwarding address.
-3. **Add repo secrets** (Settings -> Secrets and variables -> Actions):
+3. **Create a Google Cloud project and OAuth credentials** — this can be
+   done from any Google account, it doesn't have to be the dedicated
+   mailbox:
+   - console.cloud.google.com -> create a new project (any name, e.g.
+     "Central Bulletin Automation").
+   - APIs & Services -> Library -> search "Gmail API" -> Enable.
+   - APIs & Services -> OAuth consent screen -> User type **External** ->
+     fill in an app name and your own email for support/developer contact.
+     Add scope `https://www.googleapis.com/auth/gmail.readonly`. Under
+     **Test users**, add the dedicated mailbox's address — the app stays in
+     "Testing" mode (no Google verification review needed) since it's only
+     ever used by that one address.
+   - APIs & Services -> Credentials -> Create Credentials -> OAuth client ID
+     -> Application type **Desktop app** -> Create, then **Download JSON**.
+4. **Run the one-time consent flow locally** (not in CI — this step needs a
+   real browser and a human to click Allow):
+   ```
+   pip install google-auth-oauthlib
+   python automation/get_refresh_token.py path/to/the/downloaded.json
+   ```
+   A browser opens. Sign in **as the dedicated mailbox**, not your personal
+   account, and allow read-only Gmail access. The script prints three
+   values.
+5. **Add repo secrets** (Settings -> Secrets and variables -> Actions) with
+   those three printed values, plus the existing Claude token:
 
    | Secret | Value |
    |---|---|
-   | `GMAIL_ADDRESS` | the dedicated agent mailbox's address |
-   | `GMAIL_APP_PASSWORD` | the App Password from step 1 |
+   | `GMAIL_OAUTH_CLIENT_ID` | printed by `get_refresh_token.py` |
+   | `GMAIL_OAUTH_CLIENT_SECRET` | printed by `get_refresh_token.py` |
+   | `GMAIL_OAUTH_REFRESH_TOKEN` | printed by `get_refresh_token.py` |
    | `CLAUDE_CODE_OAUTH_TOKEN` | generate locally with `claude setup-token` — bills against the existing Claude subscription, no separate balance to fund. Alternative: an `ANTHROPIC_API_KEY` from console.anthropic.com instead, which bills pay-as-you-go against that Console account's own balance — if you switch to that, update the workflow's `with:` block to use `anthropic_api_key` in place of `claude_code_oauth_token` |
 
 Everything else — permissions, the cron schedule — is already set in
 `.github/workflows/weekly-bulletin.yml`.
+
+This replaced an earlier IMAP + App Password setup, which Google's
+account-safety system kept silently flagging: a static password logging in
+from a different GitHub-assigned cloud region on basically every run reads
+as suspicious, especially against a low-activity, single-purpose mailbox
+with no other usage pattern to offset it. OAuth doesn't hit that trip-wire
+— it's a registered app with a scoped, revocable grant, not an
+unfamiliar-looking login attempt.
 
 ## What happens on a normal Sunday
 
@@ -77,9 +110,14 @@ Everything else — permissions, the cron schedule — is already set in
 
 ## When something goes wrong
 
-- **No email found** -> a GitHub issue opens automatically; the run stops
-  before touching anything. Re-run manually (Actions tab -> Weekly bulletin
-  update -> Run workflow) once the email has arrived.
+- **No email found, or the OAuth token stopped working** -> a GitHub issue
+  opens automatically; the run stops before touching anything. Check the
+  ingest step's log — an auth error means the refresh token was revoked
+  (Google Account -> Security -> Third-party access for the dedicated
+  mailbox) and needs `get_refresh_token.py` re-run to mint a new one. A
+  plain "no email matched" means Jessica's email hasn't arrived yet. Either
+  way, re-run manually once fixed (Actions tab -> Weekly bulletin update ->
+  Run workflow).
 - **PDF won't parse** -> the run continues email-only; noted in the PR
   summary.
 - **Email and PDF disagree on a fact** -> the email wins; the contradiction

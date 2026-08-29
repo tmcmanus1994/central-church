@@ -22,7 +22,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install html2text
+      # google-auth/google-api-python-client replaced imaplib: a static app
+      # password logging in from a different GitHub-assigned cloud region
+      # on basically every run kept getting silently flagged as suspicious
+      # by Google's account-safety system. OAuth doesn't hit that trip-wire
+      # — see automation/get_refresh_token.py for the one-time setup.
+      - run: pip install html2text google-auth google-api-python-client
 
       # inbox/ is gitignored and only ever lives on this runner's disk for
       # the few minutes this job runs — the PDF and email both carry things
@@ -32,8 +37,9 @@ jobs:
         id: ingest
         run: python automation/ingest.py
         env:
-          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          GMAIL_OAUTH_CLIENT_ID: ${{ secrets.GMAIL_OAUTH_CLIENT_ID }}
+          GMAIL_OAUTH_CLIENT_SECRET: ${{ secrets.GMAIL_OAUTH_CLIENT_SECRET }}
+          GMAIL_OAUTH_REFRESH_TOKEN: ${{ secrets.GMAIL_OAUTH_REFRESH_TOKEN }}
 
       - name: Alert on missing bulletin
         if: failure()
@@ -42,12 +48,13 @@ jobs:
         run: |
           gh issue create \
             --title "No bulletin email found for $(date +%F)" \
-            --body "The weekly agent looked for this week's bulletin email (from jessica@arcentralchurch.org, subject containing \"Weekly Bulletin\") in the automation mailbox and didn't find one. Nothing was changed on the site.
+            --body "The weekly agent looked for this week's bulletin email (from jessica@arcentralchurch.org, subject containing \"Weekly Bulletin\") in the automation mailbox and didn't find one, or couldn't authenticate to check. Nothing was changed on the site.
 
           Check:
           - Did Jessica send this week's bulletin email yet?
           - Is the Gmail filter still forwarding jessica@arcentralchurch.org to the automation mailbox?
-          - Re-run this workflow manually once the email has arrived: Actions tab -> Weekly bulletin update -> Run workflow."
+          - Open this run's log (Actions tab -> this run -> Ingest this week's bulletin email) — an auth error there means the OAuth refresh token was revoked (Google Account -> Security -> Third-party access for that mailbox) and automation/get_refresh_token.py needs a re-run to mint a new one.
+          - Re-run this workflow manually once fixed: Actions tab -> Weekly bulletin update -> Run workflow."
 
       - uses: actions/setup-node@v4
         with:

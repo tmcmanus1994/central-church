@@ -4,7 +4,17 @@ Fetches this week's bulletin email from the dedicated automation mailbox
 and lays it out under inbox/{date}/ for the agent step that follows in the
 same workflow run.
 
-    GMAIL_ADDRESS=... GMAIL_APP_PASSWORD=... python automation/ingest.py
+    GMAIL_OAUTH_CLIENT_ID=... GMAIL_OAUTH_CLIENT_SECRET=... \
+    GMAIL_OAUTH_REFRESH_TOKEN=... python automation/ingest.py
+
+Uses the Gmail API with an OAuth refresh token, not IMAP + an app
+password — a static password logging in from a different GitHub Actions
+runner (different cloud region, basically every run) is exactly the
+pattern Google's account-safety system treats as suspicious, and it kept
+silently revoking the app password every few weeks. OAuth doesn't hit
+that trip-wire: it's a registered app with a scoped, revocable grant, not
+an unfamiliar-looking login. See automation/get_refresh_token.py for the
+one-time setup that produces the refresh token above.
 
 inbox/ is gitignored and never committed — the PDF and email both carry
 things that don't belong in git history (named prayer requests, giving
@@ -15,20 +25,23 @@ Exits nonzero when no matching email is found, so the workflow's next step
 can open an alert issue and skip the agent run cleanly.
 """
 
+import base64
 import email
 import email.utils
-import imaplib
 import json
 import os
 import re
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 from pathlib import Path
 
 import html2text
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG = json.loads((ROOT / "automation" / "config.json").read_text())
+SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
 # A manual "Fwd:" forward (like the test email) quotes the original message
 # under a line like "---------- Forwarded message ---------" followed by
@@ -136,32 +149,45 @@ def get_body_markdown(msg) -> str:
     return strip_forward_boilerplate(markdown)
 
 
+def gmail_service():
+    creds = Credentials(
+        token=None,
+        refresh_token=os.environ["GMAIL_OAUTH_REFRESH_TOKEN"],
+        token_uri="https://oauth2.googleapis.com/token",
+        client_id=os.environ["GMAIL_OAUTH_CLIENT_ID"],
+        client_secret=os.environ["GMAIL_OAUTH_CLIENT_SECRET"],
+        scopes=SCOPES,
+    )
+    return build("gmail", "v1", credentials=creds, cache_discovery=False)
+
+
 def main() -> int:
-    gmail_address = os.environ["GMAIL_ADDRESS"]
-    gmail_password = os.environ["GMAIL_APP_PASSWORD"]
+    service = gmail_service()
 
-    imap = imaplib.IMAP4_SSL("imap.gmail.com")
-    imap.login(gmail_address, gmail_password)
-    imap.select("INBOX")
-
-    since = (datetime.now(timezone.utc) - timedelta(days=CONFIG["lookback_days"]))
-    since_str = since.strftime("%d-%b-%Y")
-    # SUBJECT search is a substring match, so this catches both a clean
-    # forward ("Weekly Bulletin 07.26.26") and a manual one
-    # ("Fwd: Weekly Bulletin 07.26.26").
-    criteria = f'(SINCE "{since_str}" SUBJECT "{CONFIG["subject_contains"]}")'
-    status, data = imap.search(None, criteria)
-    if status != "OK" or not data or not data[0]:
-        print(f"No email matched {criteria!r} in the last {CONFIG['lookback_days']} days.")
+    # Gmail's own search operators, not IMAP's — `subject:"..."` phrase-
+    # matches (catching both a clean forward, "Weekly Bulletin 07.26.26",
+    # and a manual one, "Fwd: Weekly Bulletin 07.26.26") and `newer_than:Nd`
+    # covers the lookback window.
+    query = f'subject:"{CONFIG["subject_contains"]}" newer_than:{CONFIG["lookback_days"]}d'
+    resp = service.users().messages().list(userId="me", q=query).execute()
+    refs = resp.get("messages", [])
+    if not refs:
+        print(f"No email matched {query!r} in the last {CONFIG['lookback_days']} days.")
         return 1
 
-    ids = data[0].split()
+    # format="raw" hands back the same RFC822 bytes IMAP used to — reusing
+    # email.message_from_bytes here means every parsing helper below
+    # (forward-stripping, PDF-finding) works unchanged from the IMAP days.
     messages = []
-    for msg_id in ids:
-        status, msg_data = imap.fetch(msg_id, "(RFC822)")
-        if status != "OK":
-            continue
-        msg = email.message_from_bytes(msg_data[0][1])
+    for ref in refs:
+        raw = service.users().messages().get(userId="me", id=ref["id"], format="raw").execute()
+        # Gmail's base64url isn't always padded to a multiple of 4, which
+        # Python's decoder insists on — pad it out rather than risk a
+        # "Incorrect padding" error on some messages and not others.
+        raw_data = raw["raw"]
+        raw_data += "=" * (-len(raw_data) % 4)
+        msg_bytes = base64.urlsafe_b64decode(raw_data)
+        msg = email.message_from_bytes(msg_bytes)
         date = email.utils.parsedate_to_datetime(msg["Date"])
         messages.append((date, msg))
 
@@ -197,7 +223,6 @@ def main() -> int:
     )
 
     print(f"Saved {out_dir.relative_to(ROOT)} from {newest_msg['From']!r}, subject {newest_msg['Subject']!r}.")
-    imap.logout()
     return 0
 
 
