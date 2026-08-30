@@ -181,6 +181,14 @@ export const bulletinEvents: BulletinEvent[] = [
     description: "Central's annual Ladies Day, hosted at the Adkisons'. Save the date!",
     tag: "All Church",
   },
+  {
+    slug: "ministry-leader-meeting",
+    title: "Ministry Leader Meeting",
+    start: "2026-09-21T09:00:00-05:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    tag: "All Church",
+  },
 ];
 
 /**
@@ -213,6 +221,14 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "member-personal, no public shower date given yet",
   },
   {
+    item: "Katie Watson — expecting, January",
+    reason: "member-personal, no public shower date given yet",
+  },
+  {
+    item: "Brooke Money — expecting, February",
+    reason: "member-personal, no public shower date given yet",
+  },
+  {
     item: "Virgie Reese-Dobson memorial service, August 8, Augusta, GA",
     reason: "private family service, out of state",
   },
@@ -221,7 +237,7 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "health information about named individuals",
   },
   {
-    item: "Mo Brown — hospitalized with a serious infection, now home; meal train for the family",
+    item: "Mo Brown — hospitalized for a second time this week, now home; meal train for the family",
     reason:
       "health information; the meal train sign-up is also withheld since publishing it would out the same hospitalization",
   },
@@ -232,6 +248,14 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
   {
     item: "Carson Brown (young son of Paden & Keith) — radiation treatment following tumor removal",
     reason: "health information naming a minor — extra caution beyond the usual policy",
+  },
+  {
+    item: "Janet Hall — health struggles, improving",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Mark Adkison & Pam Stamper — back issues",
+    reason: "health information about named individuals",
   },
   { item: "Weekly offering and budget figures", reason: "internal finances" },
   {
