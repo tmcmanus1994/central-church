@@ -78,24 +78,24 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "August 23, 2026",
+  weekOf: "August 30, 2026",
 
   announcements: [
     {
-      title: "Shannabration — tonight!",
-      body: "Tonight's the night — 5 to 8 in the gym, with indoor and outdoor seating and two lines of food to work through. Bring a card of appreciation for Shannon if a public toast isn't your thing (a firm one minute is allotted for those brave enough). Wear Kelly green if you've got it. Note: the SGC and Worship Center will be closed for the event.",
+      title: "Area Wide Worship — tonight!",
+      body: "Central hosts our central Arkansas family of churches for an evening of song and prayer, right here in the auditorium, starting at 6 tonight. Parking assistance will be available (we won't call it valet, but ask nicely). No childcare is provided, though the kids area will be open for movers and shakers. Help us have the building looking nice for our guests — a glance at your row for any trash before you head out this morning goes a long way.",
     },
     {
-      title: "Small Group Informational Fair — today",
-      body: "Stop by the lobby after worship today to learn how small groups work at Central — by age and location. A sign-up form is also on Facebook, the HUB, or with your class leader. Groups kick off September 13.",
+      title: "City Connections hygiene drive — starts today",
+      body: "This week officially kicks off our month-long partnership with City Connections, collecting hygiene products for Little Rock students and their families. Drop items in the collection bins in the lobby — you've got four Sundays to fill them.",
     },
     {
-      title: "Kevin Cedillios was baptized!",
-      body: "Kevin Cedillios was baptized last week! He and his family are members of Central Iglesia, and Kevin has become an active part of the Central Teens crew. Welcome to the family, Kevin!",
+      title: "OnRamp Mentoring starts back Tuesday",
+      body: "Tuesday is the first day of Mentoring for 2026–2027. Pray for our friends who are mentoring and our friends who are being mentored, that they'd build relationship with each other and with Jesus — and check in with them from week to week. They'd love to share how it's going.",
     },
     {
       title: "Men's Golf Tournament — Driving for Diapers",
-      body: "Central's annual golf tournament is September 19 at 7:30 AM at Rebsamen Golf Course. Bring a pack of size 5 diapers for Kids Closet — extra strokes come off your score for every additional pack, and yes, there's a trophy. RSVP by September 8.",
+      body: "Central's annual golf tournament is September 19 at 7:30 AM at Rebsamen Golf Course. Entry fee includes a pack of size 5 diapers for Kids Closet, and additional packs shave strokes off the score of the golfer you're supporting — label your pack with their name to get the credit. Not playing? Drop diapers in the lobby bin leading up to the tournament. RSVP by September 8.",
       contact: { name: "Josh Ward" },
     },
     {
@@ -104,25 +104,17 @@ export const bulletin: Bulletin = {
       contact: { name: "Ben Thomas" },
     },
     {
-      title: "New classes coming this fall",
-      body: "New Wednesday night classes start September 2 — ladies, mark your calendars, Abbie Miller is teaching. Sunday morning adult classes shift from Ecclesiastes to a study of Luke for the fall months leading into Advent, and a Bible 101 class is coming soon on Sundays too — official date to be announced.",
+      title: "New classes starting in September",
+      body: "Sunday morning Adult classes begin a study of Luke this month, running through the end of November — handy pre-work heading into Advent season. A new Sunday class, Bible 101, is starting too: no expertise needed, just questions. Find it upstairs in the SGC Library, facilitated by Shannon Cooper — seats are limited. Wednesday nights, a new women's class, Wrestling with God, starts in Fellowship West with Abbie Miller leading a practical guide to abiding with God through seasons of wrestling with Him. Helping Hands is on pause for the month while the women's class meets, and expects to pick back up in October.",
     },
     {
-      title: "Central Teens — fall events are up",
-      body: "Fall teen events have been shared on Remind and GroupMe — check there to fill up your calendar. Share your student's schedule with James so he can cheer them on at their school activities. Also: SDC is waitlist only now — pay today to confirm your spot.",
-      contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
+      title: "A new fall workout class is coming",
+      body: "A class for anyone who wants to intentionally build strength in mind and body starts in the gym in mid-September — six weeks, wrapping up at the end of October. Name still being workshopped. Reach out to Josh Ward for details or to donate equipment.",
+      contact: { name: "Josh Ward" },
     },
     {
-      title: "Area Wide Worship — August 30",
-      body: "Central hosts our central Arkansas family of churches for an evening of song and prayer on August 30 at 6 PM, right here in the auditorium. No childcare is provided, though the kids area will be open for movers and shakers.",
-    },
-    {
-      title: "Encouragers resumes — studying Job",
-      body: "The Thursday morning Encouragers class starts back August 27 with a study of Job. Class begins at 10:30 in Fellowship East — all are welcome.",
-    },
-    {
-      title: "City Connections hygiene drive — coming in September",
-      body: "Starting in September, we're partnering with City Connections to collect hygiene products for students and families in local schools. Look for a collection bin in the coming weeks.",
+      title: "Ladies Day — October 24",
+      body: "The annual Ladies Day at the Adkisons' is October 24 — mark your calendar, save the date. Guys, that Saturday is officially a Dadurday.",
     },
     {
       title: "Reserving a room",
@@ -193,8 +185,15 @@ export const bulletin: Bulletin = {
   sundayClasses: [
     {
       name: "Adult Classes",
-      detail: "Adult classes are studying Ecclesiastes during the month of August.",
+      detail:
+        "Adult classes begin a study of Luke this September, running through the end of November — pre-work for Advent season.",
       room: "Fellowship East & West, SGC Upstairs",
+    },
+    {
+      name: "Bible 101",
+      detail: "Got a question? Come as you are — no need to be an expert. Limited seating.",
+      room: "SGC Library",
+      teacher: "Shannon Cooper",
     },
     {
       name: "The Mix",
@@ -224,8 +223,15 @@ export const bulletin: Bulletin = {
     {
       name: "Helping Hands",
       detail:
-        "An actionable opportunity to offer support and assistance to existing Central ministries.",
+        "An actionable opportunity to offer support and assistance to existing Central ministries. On pause for September while the women's class meets; expected back in October.",
       room: "SGC Upstairs, Kids Closet hallway",
+    },
+    {
+      name: "Wrestling with God",
+      detail:
+        "A women's class working through a practical guide to abiding with God through seasons of wrestling with Him.",
+      room: "Fellowship West",
+      teacher: "Abbie Miller",
     },
     {
       name: "Share",
@@ -301,6 +307,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "August 23, 2026",
     "August 16, 2026",
     "August 9, 2026",
     "August 2, 2026",
