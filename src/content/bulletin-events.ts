@@ -30,108 +30,6 @@ export interface BulletinEvent extends ChurchEvent {
 
 export const bulletinEvents: BulletinEvent[] = [
   {
-    slug: "promotion-sunday",
-    title: "Promotion Sunday",
-    start: "2026-08-02T09:00:00-05:00",
-    allDay: true,
-    location: "Central Kids Wing",
-    description:
-      "Every elementary student moves up to their new grade level class. Rising 6th graders are the exception — they promote on Wednesday, August 5.",
-    tag: "Central Kids",
-    ministrySlug: "children",
-    aliases: ["Promotions Sunday", "Promotion Sunday (K-5th)"],
-  },
-  {
-    slug: "sunday-funday",
-    title: "Sunday Funday",
-    start: "2026-08-02T09:00:00-05:00",
-    allDay: true,
-    location: "Central Kids Wing",
-    description: "For kindergarten and first grade.",
-    tag: "Central Kids",
-    ministrySlug: "children",
-    aliases: ["Central Kids Sunday Funday", "Sunday Funday (K&1st gr.)"],
-  },
-  {
-    slug: "thirties-potluck",
-    title: "30s Potluck",
-    start: "2026-08-02T09:00:00-05:00",
-    allDay: true,
-    location: "Fellowship East",
-    description: "A potluck for the 30s class after morning worship.",
-    tag: "All Church",
-    aliases: ["30's potluck", "30s potluck"],
-  },
-  {
-    slug: "donut-sale",
-    title: "Donut Sale for Peru",
-    start: "2026-08-02T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
-    description:
-      "The Kids Ministry sells donuts to fund a month of a tutor's salary at Casa Hogar El Amor de Dios — the Love of God Children's Home — in Arequipa, Peru.",
-    tag: "Central Kids",
-    ministrySlug: "children",
-    aliases: ["Donuts", "Donut Sale"],
-  },
-  {
-    slug: "ice-cream-social",
-    title: "Ice Cream Social",
-    start: "2026-08-02T18:30:00-05:00",
-    location: "Central Gym",
-    description:
-      "Bring a pint of your favorite flavor — toppings and water are complimentary. A thank-you and see-you-later to this summer's interns.",
-    tag: "All Church",
-  },
-  {
-    slug: "back-to-school-event",
-    title: "Back to School Event",
-    start: "2026-08-05T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Central's annual Back to School Event, together with the Friends & Family Meal. Bring school supply donations to the building any time before August 2, or give through the online portal and we'll shop for you. Amazon and Walmart wish lists are posted on Facebook.",
-    tag: "Outreach",
-    ministrySlug: "outreach",
-    aliases: [
-      "Back to School Event/Friends & Family Meal",
-      "Friends & Family Meal",
-      "Back to School",
-    ],
-  },
-  {
-    slug: "sixth-grade-promotion",
-    title: "6th Grade Promotion",
-    start: "2026-08-05T18:30:00-05:00",
-    location: "Central Kids Wing",
-    description:
-      "Rising 6th graders have their own promotion on Wednesday night. Watch your email for details from Tammy and James.",
-    tag: "Central Kids",
-    ministrySlug: "children",
-  },
-  {
-    slug: "fun-with-stephen",
-    title: "Fun with Stephen",
-    start: "2026-08-07T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
-    description: "A Central Teens night with Stephen.",
-    tag: "Central Teens",
-    ministrySlug: "teens",
-    aliases: ["with Stephen", "Fun w/ Stephen"],
-  },
-  {
-    slug: "canvas-community-meal",
-    title: "Canvas Community Meal",
-    start: "2026-08-12T18:00:00-05:00",
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Serving the homeless community an evening meal, as we do the second Wednesday of every month.",
-    tag: "Outreach",
-    ministrySlug: "outreach",
-    aliases: ["Canvas", "Canvas Community", "Canvas Meal"],
-  },
-  {
     slug: "river-city-revival",
     title: "Revive Us Again — River City Ministry Revival",
     start: "2026-08-22T18:00:00-05:00",
@@ -161,17 +59,6 @@ export const bulletinEvents: BulletinEvent[] = [
     description:
       "A quarterly \"get to know Central\" class. If you're new around here, this is for you.",
     tag: "All Church",
-  },
-  {
-    slug: "mix-bentonville-trip",
-    title: "Mix Trip to Bentonville",
-    start: "2026-08-15T09:00:00-05:00",
-    allDay: true,
-    location: "Bentonville, AR",
-    offsite: true,
-    description: "A trip to Bentonville for The Mix, Central's young adult community.",
-    tag: "All Church",
-    aliases: ["Mix trip to Bentonville"],
   },
   {
     slug: "mentor-info-meeting",
@@ -255,7 +142,7 @@ export const bulletinEvents: BulletinEvent[] = [
     location: "Rebsamen Golf Course, Little Rock, AR",
     offsite: true,
     description:
-      "Fellowship, fun, and a little friendly frustration on the course. Bring a pack of size 5 diapers for Kids Closet — extra strokes come off your score for every additional pack, and yes, there's a trophy. RSVP by September 8.",
+      "Fellowship, fun, and a little friendly frustration on the course. Entry fee includes a pack of size 5 diapers for Kids Closet, and additional packs shave strokes off the score of the golfer you're supporting — label your pack with their name to get the credit. Not playing? Drop diapers in the lobby bin leading up to the tournament. RSVP by September 8.",
     tag: "All Church",
     aliases: ["Driving for Diapers"],
   },
@@ -283,6 +170,16 @@ export const bulletinEvents: BulletinEvent[] = [
     tag: "Life Groups",
     ministrySlug: "life-groups",
     aliases: ["Small Group fair", "Small Groups Info Fair"],
+  },
+  {
+    slug: "ladies-day",
+    title: "Ladies Day",
+    start: "2026-10-24T09:00:00-05:00",
+    allDay: true,
+    location: "The Adkisons' Home",
+    offsite: true,
+    description: "Central's annual Ladies Day, hosted at the Adkisons'. Save the date!",
+    tag: "All Church",
   },
 ];
 
