@@ -10,7 +10,13 @@ you never push to the default branch directly. A human reviews and merges.
 1. `inbox/{today}/email.md` — THE source of truth. Its wording, dates, times,
    and instructions override everything else. `{today}` is this run's date
    (`date +%F`) — the ingest step that ran immediately before you wrote it.
-2. `inbox/{today}/bulletin.pdf` — supporting detail only. Run
+2. `inbox/{today}/bulletin.pdf` — supporting detail only, **when present**.
+   Some weeks the email arrives with no PDF attached at all (check
+   `inbox/{today}/meta.json`'s `original_pdf_filename` — `null` means there
+   isn't one, and `bulletin.pdf` won't exist on disk either). That's not a
+   failure: proceed on `email.md` alone and say so plainly in your summary,
+   since there's no PDF to cross-check details or names against this week.
+   When a PDF is present, run
    `node scripts/import-bulletin.mjs inbox/{today}/bulletin.pdf` to get a
    structured draft (written to `content-drafts/`, which is gitignored —
    never add it with `git add -A` or any wildcard) plus a console report
@@ -34,9 +40,10 @@ you never push to the default branch directly. A human reviews and merges.
    ("this Wednesday", "next Sunday") against today's actual date. **Never
    invent a date the sources don't support** — if a date is genuinely
    ambiguous, leave that event out and say so in your summary.
-3. Run the PDF parser (step 1 above) and use its output only to fill gaps
-   the email left open (a location, a class description). Read its flagged-
-   lines report before writing anything.
+3. If a PDF is present this week, run the parser (step 1 above) and use its
+   output only to fill gaps the email left open (a location, a class
+   description). Read its flagged-lines report before writing anything. If
+   there's no PDF this week, skip straight to step 4 on `email.md` alone.
 4. **Never write any of the following into `bulletin.ts` or
    `bulletin-events.ts`**, even if the email or PDF states it plainly:
    named health/medical/bereavement details, wedding or baby showers,

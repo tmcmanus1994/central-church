@@ -118,8 +118,8 @@ unfamiliar-looking login attempt.
   plain "no email matched" means Jessica's email hasn't arrived yet. Either
   way, re-run manually once fixed (Actions tab -> Weekly bulletin update ->
   Run workflow).
-- **PDF won't parse** -> the run continues email-only; noted in the PR
-  summary.
+- **No PDF attached, or the PDF won't parse** -> either way, the run
+  continues email-only; noted in the PR summary.
 - **Email and PDF disagree on a fact** -> the email wins; the contradiction
   is noted in the PR summary so you can flag it to the office.
 - **Anything else fails partway** (git, GitHub API, Claude itself) -> the

@@ -198,17 +198,21 @@ def main() -> int:
     messages.sort(key=lambda pair: pair[0])
     newest_date, newest_msg = messages[-1]
 
+    # A missing PDF isn't fatal — AGENT.md already treats the email as THE
+    # source of truth and the PDF as supporting detail only, so a bulletin
+    # week that arrives email-only should still get processed, not block
+    # the whole run the way it used to.
     pdf = find_bulletin_pdf(newest_msg)
+    pdf_filename, pdf_bytes = pdf if pdf is not None else (None, None)
     if pdf is None:
-        print(f"Found the email (subject: {newest_msg['Subject']!r}) but it has no PDF attachment.")
-        return 1
-    pdf_filename, pdf_bytes = pdf
+        print(f"Found the email (subject: {newest_msg['Subject']!r}) with no PDF attachment — proceeding email-only.")
 
     out_dir = ROOT / "inbox" / datetime.now().strftime("%Y-%m-%d")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     (out_dir / "email.md").write_text(get_body_markdown(newest_msg), encoding="utf-8")
-    (out_dir / "bulletin.pdf").write_bytes(pdf_bytes)
+    if pdf_bytes is not None:
+        (out_dir / "bulletin.pdf").write_bytes(pdf_bytes)
     (out_dir / "meta.json").write_text(
         json.dumps(
             {
