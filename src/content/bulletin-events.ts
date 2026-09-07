@@ -30,37 +30,6 @@ export interface BulletinEvent extends ChurchEvent {
 
 export const bulletinEvents: BulletinEvent[] = [
   {
-    slug: "river-city-revival",
-    title: "Revive Us Again — River City Ministry Revival",
-    start: "2026-08-22T18:00:00-05:00",
-    end: "2026-08-22T20:00:00-05:00",
-    location: "River City Ministry, 1021 E Washington Ave, North Little Rock, AR 72114",
-    offsite: true,
-    description:
-      "A summer revival and gospel meeting hosted by River City Ministry in North Little Rock, themed around 2 Chronicles 7:14. Speakers: Harold Young (5th St. Church of Christ, Newport), Keith Lape (River City Church, North Little Rock), and John Armstrong (River City Ministry). Refreshments served — come as you are, all are welcome.",
-    tag: "All Church",
-    aliases: ["Revive Us Again", "River City Revival", "Summer Revival"],
-  },
-  {
-    slug: "shannabration",
-    title: "Shannabration",
-    start: "2026-08-23T17:00:00-05:00",
-    end: "2026-08-23T20:00:00-05:00",
-    location: "Central Gym",
-    description:
-      "A 25th work-anniversary celebration honoring Shannon Cooper, with indoor and outdoor seating and two lines of food. Wear Kelly green if you've got it, and bring a side or dessert to share (green beans are popular, but feel free to branch out) — or a card of appreciation if a public toast isn't your thing. The SGC and Worship Center will be closed for the event.",
-    tag: "All Church",
-  },
-  {
-    slug: "central-discovery",
-    title: "Central Discovery",
-    start: "2026-08-23T09:00:00-05:00",
-    location: "Worship Center Lobby",
-    description:
-      "A quarterly \"get to know Central\" class. If you're new around here, this is for you.",
-    tag: "All Church",
-  },
-  {
     slug: "mentor-info-meeting",
     title: "Mentor Info Meeting",
     start: "2026-08-25T18:00:00-05:00",
@@ -102,17 +71,6 @@ export const bulletinEvents: BulletinEvent[] = [
       "Central hosts the central Arkansas family of churches for an evening of song and prayer. No childcare is provided, though the kids area will be open for movers and shakers.",
     tag: "All Church",
     aliases: ["Area Wide Worship"],
-  },
-  {
-    slug: "sunday-funday-5-6",
-    title: "Sunday Funday (5th/6th)",
-    start: "2026-08-16T09:00:00-05:00",
-    allDay: true,
-    location: "Central Kids Wing",
-    description: "For 5th and 6th graders.",
-    tag: "Central Kids",
-    ministrySlug: "children",
-    aliases: ["Sunday Funday (5/6th)"],
   },
   {
     slug: "sunday-funday-sept-6",
@@ -160,16 +118,64 @@ export const bulletinEvents: BulletinEvent[] = [
     aliases: ["Roots Run Deep"],
   },
   {
-    slug: "small-group-info-fair",
-    title: "Small Group Informational Fair",
-    start: "2026-08-23T09:00:00-05:00",
+    slug: "small-groups-kickoff",
+    title: "Small Groups Kickoff",
+    start: "2026-09-13T09:00:00-05:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description:
+      "Small Groups kick off for the year. If you're on the fence or need some direction, fill out the sign-up form on Facebook or the HUB.",
+    tag: "Life Groups",
+    ministrySlug: "life-groups",
+  },
+  {
+    slug: "teens-small-group-kickoff",
+    title: "Central Teens Small Group Kickoff",
+    start: "2026-09-13T09:00:00-05:00",
+    allDay: true,
+    location: "The Mosley's",
+    offsite: true,
+    description: "Central Teens' small group kicks off at the Mosley's — RSVP for a food headcount.",
+    tag: "Central Teens",
+    ministrySlug: "teens",
+  },
+  {
+    slug: "teens-sdc-trip",
+    title: "Teens SDC Trip",
+    start: "2026-09-26T09:00:00-05:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description: "SDC is waitlist only — pay now to confirm your spot before it fills up.",
+    tag: "Central Teens",
+    ministrySlug: "teens",
+    aliases: ["SDC"],
+  },
+  {
+    slug: "harvest-month",
+    title: "Harvest Month",
+    start: "2026-10-01T09:00:00-05:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    tag: "All Church",
+  },
+  {
+    slug: "central-discovery-oct",
+    title: "Central Discovery",
+    start: "2026-10-11T09:00:00-05:00",
     allDay: true,
     location: "Worship Center Lobby",
     description:
-      "Questions about how small groups work at Central — by age and location? Stop by the lobby after worship. A sign-up form is also on Facebook, the HUB, or with your class leader. Groups kick off September 13.",
-    tag: "Life Groups",
-    ministrySlug: "life-groups",
-    aliases: ["Small Group fair", "Small Groups Info Fair"],
+      "A quarterly \"get to know Central\" class. If you're new around here, this is for you.",
+    tag: "All Church",
+  },
+  {
+    slug: "teen-area-wide",
+    title: "Teen Area Wide",
+    start: "2026-10-04T09:00:00-05:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    tag: "Central Teens",
+    ministrySlug: "teens",
   },
   {
     slug: "ladies-day",
@@ -187,6 +193,7 @@ export const bulletinEvents: BulletinEvent[] = [
     start: "2026-09-21T09:00:00-05:00",
     allDay: true,
     location: "823 W 6th St, Little Rock",
+    description: "Pushed back a week, to September 21 — check your email for details.",
     tag: "All Church",
   },
 ];
@@ -250,12 +257,36 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "health information naming a minor — extra caution beyond the usual policy",
   },
   {
-    item: "Janet Hall — health struggles, improving",
-    reason: "health information about a named individual",
+    item: "Janet Hall — health improving, back at the rehab center",
+    reason: "health information about a named individual; status updated from this week's bulletin",
   },
   {
     item: "Mark Adkison & Pam Stamper — back issues",
     reason: "health information about named individuals",
+  },
+  {
+    item: "Mark Adkison's dad, Ralph — cancer treatment",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Shelby Lillard (former member) — family prayer, her father passed away",
+    reason: "bereavement information about a named individual",
+  },
+  {
+    item: "Wilma Wilcox — family grieving her death",
+    reason: "bereavement information about a named individual",
+  },
+  {
+    item: "Graciella (Iglesia member) — mini stroke, prayers for her medical plan",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Gary Low — health struggles",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Roger Baker — health struggles",
+    reason: "health information about a named individual",
   },
   { item: "Weekly offering and budget figures", reason: "internal finances" },
   {
