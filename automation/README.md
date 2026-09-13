@@ -12,12 +12,25 @@ Sun ~6 AM CT   weekly-bulletin.yml   Gmail (API, OAuth) -> inbox/{date}/
                                       -> opens a PR against bulletin.ts /
                                          bulletin-events.ts
                                       -> commits runs/{date}-summary.md
+
+Sun ~9 AM CT   weekly-bulletin-watchdog.yml
+                                      -> checks whether the run above
+                                         actually happened today
+                                      -> if not, triggers it and files an
+                                         issue
 ```
 
 One workflow, one run, entirely on the Actions runner's disk — the raw
 email and PDF (which carry named prayer requests, phone numbers, and giving
 figures) are never committed to git or uploaded anywhere. Only the curated,
 already-public-safe result reaches a PR.
+
+The watchdog exists because GitHub's own cron scheduler occasionally skips a
+run under load — no error, nothing in the logs, it simply never starts
+(happened 2026-09-13). Three hours after the primary schedule, it checks
+whether `weekly-bulletin.yml` actually ran today; if not, it triggers it
+itself and opens an issue so the miss is visible instead of silent. It's a
+no-op most weeks.
 
 ## Files
 

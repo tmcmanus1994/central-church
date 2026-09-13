@@ -1,0 +1,50 @@
+name: Weekly bulletin update — watchdog
+
+# GitHub's own scheduler occasionally skips a cron-triggered run under load —
+# no error, no log, it just never starts (happened 2026-09-13). This runs a
+# few hours after the primary 11:00 UTC schedule, checks whether that run
+# actually happened today, and if not, triggers it itself and files an issue
+# so the miss doesn't go unnoticed.
+on:
+  schedule:
+    - cron: "0 14 * * SUN"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  issues: write
+
+jobs:
+  check-and-recover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check whether today's scheduled run happened
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          today=$(date -u +%F)
+          count=$(gh api "repos/${{ github.repository }}/actions/workflows/weekly-bulletin.yml/runs" \
+            -f "created=>=${today}T00:00:00Z" \
+            --jq '.total_count')
+          echo "Runs of weekly-bulletin.yml created today: $count"
+          echo "runs_today=$count" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger the missed run
+        if: steps.check.outputs.runs_today == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run weekly-bulletin.yml \
+            --repo "${{ github.repository }}" \
+            --ref "${{ github.ref_name }}"
+
+      - name: File an issue noting the primary schedule was missed
+        if: steps.check.outputs.runs_today == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --repo "${{ github.repository }}" \
+            --title "Weekly bulletin cron didn't fire on $(date -u +%F)" \
+            --body "The 11:00 UTC scheduled run of *Weekly bulletin update* never started today. This is GitHub's own scheduler occasionally skipping a cron trigger under load — not an automation bug, and not the OAuth setup. This watchdog caught the gap and triggered the run itself just now; a PR should follow the usual way. No action needed unless that triggered run also fails."
