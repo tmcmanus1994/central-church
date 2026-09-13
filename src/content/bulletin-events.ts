@@ -30,17 +30,6 @@ export interface BulletinEvent extends ChurchEvent {
 
 export const bulletinEvents: BulletinEvent[] = [
   {
-    slug: "mentor-info-meeting",
-    title: "Mentor Info Meeting",
-    start: "2026-08-25T18:00:00-05:00",
-    location: "823 W 6th St, Little Rock",
-    description:
-      "OnRamp Mentoring's informational meeting — for mentors only this week. The program starts back September 1, meeting one evening a week on Tuesdays through the school year.",
-    tag: "Outreach",
-    ministrySlug: "outreach",
-    aliases: ["Mentor Interest Meeting", "OnRamp Info Meeting"],
-  },
-  {
     slug: "mentorship-kickoff",
     title: "OnRamp Mentoring Kickoff",
     start: "2026-09-01T09:00:00-05:00",
@@ -51,16 +40,6 @@ export const bulletinEvents: BulletinEvent[] = [
     tag: "Outreach",
     ministrySlug: "outreach",
     aliases: ["Mentorship Kickoff", "OnRamp Kickoff", "Mentoring Kickoff"],
-  },
-  {
-    slug: "encouragers-kickoff",
-    title: "Encouragers Kickoff",
-    start: "2026-08-27T10:30:00-05:00",
-    location: "Fellowship East",
-    description:
-      "Encouragers Class starts back for the 2026-27 season, resuming the study of Job, meeting Thursdays at 10:30 AM in Fellowship East.",
-    tag: "All Church",
-    aliases: ["Encouragers Returns", "Encouragers Class"],
   },
   {
     slug: "area-wide-worship",
@@ -100,7 +79,7 @@ export const bulletinEvents: BulletinEvent[] = [
     location: "Rebsamen Golf Course, Little Rock, AR",
     offsite: true,
     description:
-      "Fellowship, fun, and a little friendly frustration on the course. Entry fee includes a pack of size 5 diapers for Kids Closet, and additional packs shave strokes off the score of the golfer you're supporting — label your pack with their name to get the credit. Not playing? Drop diapers in the lobby bin leading up to the tournament. RSVP by September 8.",
+      "Fellowship, fun, and a little friendly frustration on the course. Entry fee includes a pack of size 5 diapers for Kids Closet, and additional packs shave strokes off the score of the golfer you're supporting — label your pack with their name to get the credit. Donations accepted through Wednesday, September 16.",
     tag: "All Church",
     aliases: ["Driving for Diapers"],
   },
@@ -156,6 +135,39 @@ export const bulletinEvents: BulletinEvent[] = [
     start: "2026-10-01T09:00:00-05:00",
     allDay: true,
     location: "823 W 6th St, Little Rock",
+    description:
+      "Weekly children's giving in the galvanized tub makes its comeback. More info as the first Sunday of the month gets closer.",
+    tag: "All Church",
+  },
+  {
+    slug: "sunday-funday-oct4",
+    title: "Sunday Funday",
+    start: "2026-10-04T09:00:00-05:00",
+    allDay: true,
+    location: "Central Kids Wing",
+    description: "A morning of games and fun for Central Kids.",
+    tag: "Central Kids",
+    ministrySlug: "children",
+  },
+  {
+    slug: "canvas-community-meal-oct14",
+    title: "Canvas Community Meal",
+    start: "2026-10-14T18:00:00-05:00",
+    location: "823 W 6th St, Little Rock",
+    description:
+      "Serving the homeless community an evening meal, as we do the second Wednesday of every month.",
+    tag: "Outreach",
+    ministrySlug: "outreach",
+    aliases: ["Canvas", "Canvas Community", "Canvas Meal"],
+  },
+  {
+    slug: "trunk-or-treat",
+    title: "Trunk or Treat",
+    start: "2026-10-25T09:00:00-05:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description:
+      "Candy donation bins will be in the lobby in the coming weeks to help supply games for the costumed ones.",
     tag: "All Church",
   },
   {
@@ -215,6 +227,14 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
       "member-personal; date corrected from September 14 — this week's bulletin says the 13th",
   },
   {
+    item: "John Ramsey Allen (son of Jack & Madison Allen) — born September 10, temporary NICU stay",
+    reason: "health information naming a minor — extra caution beyond the usual policy, per the Carson Brown precedent",
+  },
+  {
+    item: "The Longo family (Bob and Amy) — grandson passed away unexpectedly, week of September 6",
+    reason: "bereavement information about named individuals",
+  },
+  {
     item: "Caylie Mosley — expecting, January",
     reason: "member-personal, no public shower date given yet",
   },
@@ -228,8 +248,9 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "member-personal, no public shower date given yet",
   },
   {
-    item: "Katie Watson — expecting, January",
-    reason: "member-personal, no public shower date given yet",
+    item: "Katie Watson — expecting, December",
+    reason:
+      "member-personal, no public shower date given yet; month corrected from January — this week's bulletin says December",
   },
   {
     item: "Brooke Money — expecting, February",
@@ -257,8 +278,9 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "health information naming a minor — extra caution beyond the usual policy",
   },
   {
-    item: "Janet Hall — health improving, back at the rehab center",
-    reason: "health information about a named individual; status updated from this week's bulletin",
+    item: "Janet Hall — passed away the week of September 6; memorial service Thursday, September 17, 1 PM, Worship Center at Central",
+    reason:
+      "bereavement information about a named individual; per the Reese-Dobson precedent, memorial service details are withheld even when held at Central rather than off-site",
   },
   {
     item: "Mark Adkison & Pam Stamper — back issues",
