@@ -78,7 +78,7 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "September 6, 2026",
+  weekOf: "September 13, 2026",
 
   announcements: [
     {
@@ -87,11 +87,11 @@ export const bulletin: Bulletin = {
     },
     {
       title: "Ministry Leaders — meeting moved to 9/21",
-      body: "The Ministry Leaders meeting got pushed back a week, to September 21. Check your email for details.",
+      body: "The Ministry Leaders meeting got pushed back a week, to September 21. Come prepared with your 2027 dates and budgets — keep an eye out for RSVP info.",
     },
     {
-      title: "Men's Golf Tournament — Driving for Diapers — last call!",
-      body: "Last call to sign up a team for Central's annual golf tournament, September 19 at 7:30 AM at Rebsamen Golf Course. Entry fee includes a pack of size 5 diapers for Kids Closet, and additional packs shave strokes off the score of the golfer you're supporting — label your pack with their name to get the credit. Not playing? Drop diapers in the lobby or SGC through September 16. RSVP by September 8.",
+      title: "Men's Golf Tournament — Driving for Diapers — donations through Wednesday",
+      body: "Central's annual golf tournament, Driving for Diapers, is September 19 at 7:30 AM at Rebsamen Golf Course. Donations to benefit the players of your choice are being accepted through Wednesday, September 16 — write the golfer's name clearly and large on your pack of diapers so they get the credit.",
       contact: { name: "Josh Ward" },
     },
     {
@@ -101,16 +101,16 @@ export const bulletin: Bulletin = {
     },
     {
       title: "New classes starting in September",
-      body: "Sunday morning Adult classes are underway with a study of Luke this month, running through the end of November — handy pre-work heading into Advent season. The new Sunday class, Bible 101, is underway too: no expertise needed, just questions. Find it upstairs in the SGC Library, facilitated by Shannon Cooper — seats are limited. Wednesday night classes turned over this past week — it's not too late to join Wrestling with God, a new women's class in Fellowship West with Abbie Miller leading a practical guide to abiding with God through seasons of wrestling with Him. Helping Hands is on pause while the women's class meets, expected back in November.",
+      body: "Sunday morning Adult classes are underway with a study of Luke this month, running through the end of November — handy pre-work heading into Advent season. The new Sunday class, Bible 101, is underway too: no expertise needed, just questions. Find it upstairs in the SGC Library, facilitated by Shannon Cooper — seats are limited. Wednesday night classes turned over this past week — it's not too late to join Wrestling with God, a new women's class in Fellowship West with Abbie Miller leading a practical guide to abiding with God through seasons of wrestling with Him. Helping Hands is on pause while the women's class meets, expected back in October.",
     },
     {
-      title: "A new fall workout class is coming",
-      body: "A class for anyone who wants to intentionally build strength in mind and body kicks off Wednesday, September 16, at 6:30 PM in the gym — six weeks, wrapping up at the end of October. The official name's still being workshopped; for now we're going with \"Abide & Abound.\" Reach out to Josh Ward for details or to donate equipment.",
+      title: "A new fall workout class — Up in Arms — starts this week",
+      body: "Up in Arms, a class for anyone who wants to intentionally build strength in mind and body, kicks off Wednesday, September 16, at 6:30 PM in the gym — six weeks, wrapping up at the end of October. Reach out to Josh Ward for details or to donate equipment.",
       contact: { name: "Josh Ward" },
     },
     {
       title: "Central Teens — fall sign-ups are open",
-      body: "Sign-ups are live for the Campout and Fall Retreat — check the shared Google Doc for all the details. Central Teens' small group kicks off at the Mosley's on September 13 — RSVP for a food headcount. Also: SDC is waitlist only now, so pay today to confirm your spot before it spins out September 26.",
+      body: "Sign-ups are live for the Campout and Fall Retreat — check the shared Google Doc for all the details. Note: the Teen Campout location moved from Woolly Hollow to Lake Ouachita — same dates, adjusted fun. Central Teens' small group kicks off at the Mosley's on September 13 — RSVP for a food headcount. Also: SDC is waitlist only now, so pay today to confirm your spot before it spins out September 26.",
       contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
     },
     {
@@ -118,8 +118,8 @@ export const bulletin: Bulletin = {
       body: "The annual Ladies Day at the Adkisons' is October 24 — mark your calendar, save the date. Guys, that Saturday is officially a Dadurday.",
     },
     {
-      title: "Small Groups start back — next Sunday",
-      body: "Small Groups kick off September 13. If you're on the fence or need some direction for this year, fill out the sign-up form on Facebook or the HUB.",
+      title: "Small Groups — kicking off this week",
+      body: "Small Groups are kicking off this week, with more starting next week. If you've held off on signing up, there's no time like the present — fill out the sign-up form on Facebook or the HUB, or reply to the weekly email to get connected.",
     },
     {
       title: "Around the building",
@@ -149,7 +149,7 @@ export const bulletin: Bulletin = {
     {
       name: "Encouragers Class",
       when: "Thursdays at 10:30 AM, August–May",
-      detail: "Meets in Fellowship East.",
+      detail: "Wrapping up the study of Job this week; moving on to Romans next week. Meets in Fellowship East.",
     },
     {
       name: "Preschool Story Time",
@@ -196,6 +196,12 @@ export const bulletin: Bulletin = {
         "Reading Inexpressible: Hesed and the Mystery of God's Lovingkindness by Michael Card, at a member's home. Message Andrea Tappe or Mary Joy Wilson for a headcount or help getting the book.",
       contact: "Andrea Tappe or Mary Joy Wilson",
     },
+    {
+      name: "Virtual Bible Study",
+      when: "Weekly, online",
+      detail: "Jane Estes hosts a weekly virtual bible study, sharing each week's topic on the Central Facebook page.",
+      contact: "Jane Estes",
+    },
   ],
 
   sundayClasses: [
@@ -239,8 +245,15 @@ export const bulletin: Bulletin = {
     {
       name: "Helping Hands",
       detail:
-        "An actionable opportunity to offer support and assistance to existing Central ministries. On pause while the women's class meets; expected back in November.",
+        "An actionable opportunity to offer support and assistance to existing Central ministries. On pause while the women's class meets; expected back in October.",
       room: "SGC Upstairs, Kids Closet hallway",
+    },
+    {
+      name: "Up in Arms",
+      detail:
+        "Physical activity meets ministry — six weeks, for anyone who wants to intentionally build strength in mind and body. Kicks off Wednesday, September 16.",
+      room: "Gym",
+      teacher: "Josh Ward",
     },
     {
       name: "Wrestling with God",
@@ -324,6 +337,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "September 6, 2026",
     "August 30, 2026",
     "August 23, 2026",
     "August 16, 2026",
