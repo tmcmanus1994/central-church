@@ -17,12 +17,13 @@ const navItems = [
 ];
 
 const sheetItems: { label: string; href: string; external?: boolean }[] = [
-  { label: "Hub", href: "/hub" },
+  // Hub isn't repeated here — it's one of the three tabs on MobileTabBar,
+  // the sticky bottom bar already on every mobile screen.
   { label: "Plan a Visit", href: "/plan-a-visit" },
   ...navItems,
   { label: "Bulletin", href: "/bulletin" },
   { label: "Iglesia · En Español", href: "/iglesia" },
-  { label: "Member Directory", href: site.memberDirectoryUrl, external: true },
+  { label: "Directory", href: site.memberDirectoryUrl, external: true },
 ];
 
 function Logo() {
