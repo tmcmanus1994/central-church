@@ -30,28 +30,6 @@ export interface BulletinEvent extends ChurchEvent {
 
 export const bulletinEvents: BulletinEvent[] = [
   {
-    slug: "mentorship-kickoff",
-    title: "OnRamp Mentoring Kickoff",
-    start: "2026-09-01T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Mentoring starts back for the school year, meeting Tuesday evenings.",
-    tag: "Outreach",
-    ministrySlug: "outreach",
-    aliases: ["Mentorship Kickoff", "OnRamp Kickoff", "Mentoring Kickoff"],
-  },
-  {
-    slug: "area-wide-worship",
-    title: "Area Wide Worship Night",
-    start: "2026-08-30T18:00:00-05:00",
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Central hosts the central Arkansas family of churches for an evening of song and prayer. No childcare is provided, though the kids area will be open for movers and shakers.",
-    tag: "All Church",
-    aliases: ["Area Wide Worship"],
-  },
-  {
     slug: "sunday-funday-sept-6",
     title: "Sunday Funday",
     start: "2026-09-06T09:00:00-05:00",
@@ -136,7 +114,7 @@ export const bulletinEvents: BulletinEvent[] = [
     allDay: true,
     location: "823 W 6th St, Little Rock",
     description:
-      "Weekly children's giving in the galvanized tub makes its comeback. More info as the first Sunday of the month gets closer.",
+      "Weekly children's giving in the galvanized tub returns starting Sunday, October 4. More info on Harvest goals for 2026 coming soon.",
     tag: "All Church",
   },
   {
@@ -167,7 +145,7 @@ export const bulletinEvents: BulletinEvent[] = [
     allDay: true,
     location: "823 W 6th St, Little Rock",
     description:
-      "Candy donation bins will be in the lobby in the coming weeks to help supply games for the costumed ones.",
+      "Sign up to run a trunk, a game, or help with food — this is an all-hands-on-deck event. Candy donation bins will be in the lobby in the coming weeks to help supply the games and trunk-or-treating.",
     tag: "All Church",
   },
   {
@@ -202,11 +180,32 @@ export const bulletinEvents: BulletinEvent[] = [
   {
     slug: "ministry-leader-meeting",
     title: "Ministry Leader Meeting",
-    start: "2026-09-21T09:00:00-05:00",
+    start: "2026-09-21T18:00:00-05:00",
+    location: "823 W 6th St, Little Rock",
+    description: "RSVP if you haven't already — come with your 2027 dates and budgets.",
+    tag: "All Church",
+  },
+  {
+    slug: "family-style-communion",
+    title: "Family Style Communion",
+    start: "2026-09-27T09:00:00-05:00",
     allDay: true,
     location: "823 W 6th St, Little Rock",
-    description: "Pushed back a week, to September 21 — check your email for details.",
+    description: "Communion is served family style during the regular Sunday service.",
     tag: "All Church",
+  },
+  {
+    slug: "teen-campout",
+    title: "Teen Campout",
+    start: "2026-10-16T00:00:00-05:00",
+    end: "2026-10-18T23:59:00-05:00",
+    allDay: true,
+    location: "Lake Ouachita, AR",
+    offsite: true,
+    description: "Central Teens camp out at Lake Ouachita — remember to sign up if you're camping.",
+    tag: "Central Teens",
+    ministrySlug: "teens",
+    aliases: ["Camp Out", "Teens Campout"],
   },
 ];
 
@@ -222,9 +221,9 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
   { item: "Logan Patillo — wedding shower, August 9", reason: "member-personal" },
   { item: "Madison Allen — baby shower, August 30, 1 PM, Gym Alcove", reason: "member-personal" },
   {
-    item: "Sarah Laffoon — baby shower, September 13",
+    item: "Sarah Laffoon — baby shower, September 13; due October",
     reason:
-      "member-personal; date corrected from September 14 — this week's bulletin says the 13th",
+      "member-personal; date corrected from September 14 — this week's bulletin says the 13th; due month added per this week's prayer list",
   },
   {
     item: "John Ramsey Allen (son of Jack & Madison Allen) — born September 10, temporary NICU stay",
@@ -320,5 +319,25 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     item: "Sanchez Adoption Celebration, August 20",
     reason:
       "adoption involves a minor's privacy on a permanently public, indexable page; held back for a human call rather than publishing by default",
+  },
+  {
+    item: "Linda Barnes — recovering from recent surgery",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Allie Varner — recovering from an emergency appendectomy",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Ramsey — receiving extra care in the NICU",
+    reason: "health information naming a minor — extra caution beyond the usual policy",
+  },
+  {
+    item: "The Byer family, neighbors to the Dutiles — Joe died last week unexpectedly from a heart attack",
+    reason: "bereavement information about named individuals",
+  },
+  {
+    item: "Maggie Payne — expecting, January",
+    reason: "member-personal, no public shower date given yet",
   },
 ];
