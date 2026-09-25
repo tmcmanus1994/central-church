@@ -245,8 +245,8 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
       "member-personal; shares a surname with Travelle — flagged in case it's his own family, for his call on whether to publish",
   },
   {
-    item: "Emelia Duréy — expecting, January",
-    reason: "member-personal, no public shower date given yet",
+    item: "Emelia Duréy — baby shower, November 1, Central Church Alcove",
+    reason: "member-personal",
   },
   {
     item: "Katie Watson — expecting, December",
