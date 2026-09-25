@@ -128,6 +128,7 @@ export const CENTRAL_LOCATIONS: string[] = [
  */
 export const LOCATION_OVERRIDES: Record<string, string> = {
   // "silver-dollar-city-trip": "Silver Dollar City, Branson, MO",
+  "e-durey-baby-shower": "Church Alcove",
 };
 
 /**

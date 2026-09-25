@@ -201,6 +201,16 @@ export const bulletinEvents: BulletinEvent[] = [
     tag: "All Church",
   },
   {
+    slug: "e-durey-baby-shower",
+    title: "Duréy Baby Shower",
+    start: "2026-11-15T09:00:00-05:00",
+    allDay: true,
+    location: "Church Alcove",
+    description: "Baby shower for Emelia Duréy.",
+    tag: "All Church",
+    aliases: ["E. Duréy baby shower", "E. Durey baby shower"],
+  },
+  {
     slug: "ministry-leader-meeting",
     title: "Ministry Leader Meeting",
     start: "2026-09-21T09:00:00-05:00",
@@ -243,10 +253,6 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     item: "Bailey McManus — expecting, January",
     reason:
       "member-personal; shares a surname with Travelle — flagged in case it's his own family, for his call on whether to publish",
-  },
-  {
-    item: "Emelia Duréy — baby shower, November 1, Central Church Alcove",
-    reason: "member-personal",
   },
   {
     item: "Katie Watson — expecting, December",
