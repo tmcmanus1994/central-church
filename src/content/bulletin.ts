@@ -78,7 +78,7 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "September 13, 2026",
+  weekOf: "September 20, 2026",
 
   announcements: [
     {
@@ -86,13 +86,28 @@ export const bulletin: Bulletin = {
       body: "September is hygiene product collection month, partnering with City Connections to serve Little Rock students and their families. Drop items in the collection bin in the lobby any Sunday this month.",
     },
     {
-      title: "Ministry Leaders — meeting moved to 9/21",
-      body: "The Ministry Leaders meeting got pushed back a week, to September 21. Come prepared with your 2027 dates and budgets — keep an eye out for RSVP info.",
+      title: "Auditorium ceiling repairs — balcony seating unavailable",
+      body: "Repairs on the auditorium ceiling above the balcony are underway and looking better all the time. While the work continues, that area isn't suitable for seating — if you usually sit in the balcony, please sit elsewhere for now. Signs will mark off the areas to avoid.",
     },
     {
-      title: "Men's Golf Tournament — Driving for Diapers — donations through Wednesday",
-      body: "Central's annual golf tournament, Driving for Diapers, is September 19 at 7:30 AM at Rebsamen Golf Course. Donations to benefit the players of your choice are being accepted through Wednesday, September 16 — write the golfer's name clearly and large on your pack of diapers so they get the credit.",
-      contact: { name: "Josh Ward" },
+      title: "Ministry Leaders — meeting tomorrow at 6",
+      body: "The Ministry Leaders meeting is tomorrow, September 21, at 6 PM. RSVP if you haven't already!",
+    },
+    {
+      title: "Thank you — Driving for Diapers",
+      body: "Thank you to everyone who supported the Kids Closet through the Men's Ministry golf tournament, Driving for Diapers! Any boost to the Kids Closet's stock is a win — 400 families are served each week.",
+    },
+    {
+      title: "Trunk or Treat — sign up to help, October 25",
+      body: "Trunk or Treat is October 25, and it's an all-hands-on-deck event — sign up to run a trunk, run a game, or help with food (check the weekly email for the sign-up link). More than anything, be prayerful that we'll make new connections and deepen relationships with the neighbors we know. A candy donation bin will be in the lobby soon to reward the costumed ones — toss in a bag, dealer's choice.",
+    },
+    {
+      title: "Family Style Communion — September 27",
+      body: "Next Sunday, September 27, communion will be served family style during the service.",
+    },
+    {
+      title: "New Wednesday class starting in October",
+      body: "Starting the first Wednesday in October, Robert Hinojosa leads a new class, Healthy Communication in Relationships. Helping Hands also resumes that week.",
     },
     {
       title: "Men's Retreat — Roots Run Deep",
@@ -100,26 +115,13 @@ export const bulletin: Bulletin = {
       contact: { name: "Ben Thomas" },
     },
     {
-      title: "New classes starting in September",
-      body: "Sunday morning Adult classes are underway with a study of Luke this month, running through the end of November — handy pre-work heading into Advent season. The new Sunday class, Bible 101, is underway too: no expertise needed, just questions. Find it upstairs in the SGC Library, facilitated by Shannon Cooper — seats are limited. Wednesday night classes turned over this past week — it's not too late to join Wrestling with God, a new women's class in Fellowship West with Abbie Miller leading a practical guide to abiding with God through seasons of wrestling with Him. Helping Hands is on pause while the women's class meets, expected back in October.",
-    },
-    {
-      title: "A new fall workout class — Up in Arms — starts this week",
-      body: "Up in Arms, a class for anyone who wants to intentionally build strength in mind and body, kicks off Wednesday, September 16, at 6:30 PM in the gym — six weeks, wrapping up at the end of October. Reach out to Josh Ward for details or to donate equipment.",
-      contact: { name: "Josh Ward" },
-    },
-    {
       title: "Central Teens — fall sign-ups are open",
-      body: "Sign-ups are live for the Campout and Fall Retreat — check the shared Google Doc for all the details. Note: the Teen Campout location moved from Woolly Hollow to Lake Ouachita — same dates, adjusted fun. Central Teens' small group kicks off at the Mosley's on September 13 — RSVP for a food headcount. Also: SDC is waitlist only now, so pay today to confirm your spot before it spins out September 26.",
+      body: "Sign-ups are live for the Fall Retreat and Teen Campout — check the shared Google Doc for all the details. The Campout is now confirmed for October 16–18 at Lake Ouachita. Also: SDC is waitlist only, so pay today to confirm your spot before the trip on September 26.",
       contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
     },
     {
       title: "Ladies Day — October 24",
       body: "The annual Ladies Day at the Adkisons' is October 24 — mark your calendar, save the date. Guys, that Saturday is officially a Dadurday.",
-    },
-    {
-      title: "Small Groups — kicking off this week",
-      body: "Small Groups are kicking off this week, with more starting next week. If you've held off on signing up, there's no time like the present — fill out the sign-up form on Facebook or the HUB, or reply to the weekly email to get connected.",
     },
     {
       title: "Around the building",
@@ -149,7 +151,7 @@ export const bulletin: Bulletin = {
     {
       name: "Encouragers Class",
       when: "Thursdays at 10:30 AM, August–May",
-      detail: "Wrapping up the study of Job this week; moving on to Romans next week. Meets in Fellowship East.",
+      detail: "Starting a study of Romans this Thursday, September 24. Meets in Fellowship East.",
     },
     {
       name: "Preschool Story Time",
@@ -249,9 +251,9 @@ export const bulletin: Bulletin = {
       room: "SGC Upstairs, Kids Closet hallway",
     },
     {
-      name: "Up in Arms",
+      name: "3M's: Mind, Muscle, Ministry",
       detail:
-        "Physical activity meets ministry — six weeks, for anyone who wants to intentionally build strength in mind and body. Kicks off Wednesday, September 16.",
+        "Physical activity meets ministry — six weeks, for anyone who wants to intentionally build strength in mind and body.",
       room: "Gym",
       teacher: "Josh Ward",
     },
@@ -284,21 +286,21 @@ export const bulletin: Bulletin = {
   ],
 
   orderOfWorship: [
-    "Step by Step (15)",
-    "Welcome: Bell Family",
-    "Firm Foundation",
-    "Blessed Assurance (480)",
-    "We Shall Assemble",
-    "Communion: Josh Ward",
-    "As the Deer",
-    "Prayer for the Lost",
+    "As you enter the auditorium, pick up a communion packet in the lobby",
+    "Doxology (66)",
+    "Welcome",
+    "Just a Little Talk with Jesus (959)",
+    "Psalm 23 (Taste & See)",
+    "Revelation Song",
+    "Communion",
+    "Turn Your Eyes Upon Jesus (276)",
+    "Hosanna You're My King",
     "Dismiss Children's Church",
-    "10,000 Reasons",
+    "Hymn of Heaven",
     "Scripture Reading",
     "Sermon: Steven Hovater",
-    "A Common Love",
+    "Covenant of Love",
     "Family News",
-    "When We All Get to Heaven (853)",
     "Sending Blessing",
   ],
 
@@ -337,6 +339,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "September 13, 2026",
     "September 6, 2026",
     "August 30, 2026",
     "August 23, 2026",
