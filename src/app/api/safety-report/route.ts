@@ -27,6 +27,17 @@ function missing(form: FormData, field: string) {
   return typeof value !== "string" || value.trim() === "";
 }
 
+/**
+ * The contact field accepts "email or phone" as free text, but Resend's
+ * reply_to requires an actual email address — a phone number (or "Test",
+ * as one real submission had it) makes Resend reject the whole request.
+ * The contact info is already in the email body either way, so this is
+ * purely about whether it's also usable as a reply-to.
+ */
+function isEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 export async function POST(request: Request) {
   const form = await request.formData();
 
@@ -76,8 +87,12 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         from,
         to: RECIPIENTS,
-        // Replies go to the reporter, if they gave a way to reach them.
-        reply_to: submission.reporterContact || undefined,
+        // Replies go to the reporter, if they gave an actual email address —
+        // a phone number is still in the body, just not usable as reply_to.
+        reply_to:
+          submission.reporterContact && isEmail(submission.reporterContact)
+            ? submission.reporterContact
+            : undefined,
         subject,
         text,
       }),
