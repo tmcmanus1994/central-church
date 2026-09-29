@@ -37,8 +37,10 @@ no-op most weeks.
 - **`AGENT.md`** — the standing instructions Claude Code follows each run.
   This is the actual spec; read it before changing how the automation
   behaves.
-- **`config.json`** — which sender/subject to match, and how many days back
-  to search.
+- **`config.json`** — which sender to match, and how many days back to
+  search. Matched by sender only, not subject — Jessica's subject line
+  varies week to week ("Weekly Bulletin 09.20.26" one week, "Weekly
+  09.27.26" the next), so it's not something to match on reliably.
 - **`ingest.py`** — reads the dedicated automation Gmail mailbox via the
   Gmail API (OAuth, not IMAP), finds this week's bulletin email, and writes
   it to `inbox/{date}/` (`email.md`, `bulletin.pdf`, `meta.json`). Exits

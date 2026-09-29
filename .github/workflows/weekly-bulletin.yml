@@ -48,7 +48,7 @@ jobs:
         run: |
           gh issue create \
             --title "No bulletin email found for $(date +%F)" \
-            --body "The weekly agent looked for this week's bulletin email (from jessica@arcentralchurch.org, subject containing \"Weekly Bulletin\") in the automation mailbox and didn't find one, or couldn't authenticate to check. Nothing was changed on the site.
+            --body "The weekly agent looked for this week's bulletin email (from jessica@arcentralchurch.org) in the automation mailbox and didn't find one, or couldn't authenticate to check. Nothing was changed on the site.
 
           Check:
           - Did Jessica send this week's bulletin email yet?

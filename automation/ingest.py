@@ -164,11 +164,13 @@ def gmail_service():
 def main() -> int:
     service = gmail_service()
 
-    # Gmail's own search operators, not IMAP's — `subject:"..."` phrase-
-    # matches (catching both a clean forward, "Weekly Bulletin 07.26.26",
-    # and a manual one, "Fwd: Weekly Bulletin 07.26.26") and `newer_than:Nd`
-    # covers the lookback window.
-    query = f'subject:"{CONFIG["subject_contains"]}" newer_than:{CONFIG["lookback_days"]}d'
+    # Filtered by sender, not subject — the mailbox exists solely to receive
+    # Jessica's forwarded bulletin, and her subject line varies week to week
+    # ("Weekly Bulletin 09.20.26", "Weekly bulletin 09.20.26", "Weekly
+    # 09.27.26" with no "Bulletin" at all). A subject match broke on that
+    # last one and silently failed the whole run; `from:` is the one thing
+    # about this email that's actually guaranteed to be stable.
+    query = f'from:{CONFIG["sender"]} newer_than:{CONFIG["lookback_days"]}d'
     resp = service.users().messages().list(userId="me", q=query).execute()
     refs = resp.get("messages", [])
     if not refs:
