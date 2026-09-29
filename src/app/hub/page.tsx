@@ -72,6 +72,8 @@ export default async function HubPage() {
           "do something now" actions; the prayer list itself stays below. */}
       <PrayerRequestButton />
 
+      <SafetyTagline className="mt-4" />
+
       {/* Announcements lead — same content as the bulletin. Not a Reveal:
           it's the very next thing after Guest Sign-In/Prayer Request, so a
           scroll-gated fade-in reads as "the page ends here" before anyone
@@ -171,8 +173,6 @@ export default async function HubPage() {
           </Button>
         </div>
       </Reveal>
-
-      <SafetyTagline className="mt-4" />
 
       {/* Weekly rhythm */}
       <h2 className="mt-9 mb-4 font-display text-[24px] tracking-[-.025em]">
