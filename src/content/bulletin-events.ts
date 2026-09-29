@@ -30,49 +30,6 @@ export interface BulletinEvent extends ChurchEvent {
 
 export const bulletinEvents: BulletinEvent[] = [
   {
-    slug: "mentorship-kickoff",
-    title: "OnRamp Mentoring Kickoff",
-    start: "2026-09-01T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Mentoring starts back for the school year, meeting Tuesday evenings.",
-    tag: "Outreach",
-    ministrySlug: "outreach",
-    aliases: ["Mentorship Kickoff", "OnRamp Kickoff", "Mentoring Kickoff"],
-  },
-  {
-    slug: "area-wide-worship",
-    title: "Area Wide Worship Night",
-    start: "2026-08-30T18:00:00-05:00",
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Central hosts the central Arkansas family of churches for an evening of song and prayer. No childcare is provided, though the kids area will be open for movers and shakers.",
-    tag: "All Church",
-    aliases: ["Area Wide Worship"],
-  },
-  {
-    slug: "sunday-funday-sept-6",
-    title: "Sunday Funday",
-    start: "2026-09-06T09:00:00-05:00",
-    allDay: true,
-    location: "Central Kids Wing",
-    description: "A morning of games and fun for Central Kids.",
-    tag: "Central Kids",
-    ministrySlug: "children",
-  },
-  {
-    slug: "canvas-community-meal-sept9",
-    title: "Canvas Community Meal",
-    start: "2026-09-09T18:00:00-05:00",
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Serving the homeless community an evening meal, as we do the second Wednesday of every month.",
-    tag: "Outreach",
-    ministrySlug: "outreach",
-    aliases: ["Canvas", "Canvas Community", "Canvas Meal"],
-  },
-  {
     slug: "mens-golf-tournament",
     title: "Men's Annual Golf Tournament — Driving for Diapers",
     start: "2026-09-19T07:30:00-05:00",
@@ -97,28 +54,6 @@ export const bulletinEvents: BulletinEvent[] = [
     aliases: ["Roots Run Deep"],
   },
   {
-    slug: "small-groups-kickoff",
-    title: "Small Groups Kickoff",
-    start: "2026-09-13T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Small Groups kick off for the year. If you're on the fence or need some direction, fill out the sign-up form on Facebook or the HUB.",
-    tag: "Life Groups",
-    ministrySlug: "life-groups",
-  },
-  {
-    slug: "teens-small-group-kickoff",
-    title: "Central Teens Small Group Kickoff",
-    start: "2026-09-13T09:00:00-05:00",
-    allDay: true,
-    location: "The Mosley's",
-    offsite: true,
-    description: "Central Teens' small group kicks off at the Mosley's — RSVP for a food headcount.",
-    tag: "Central Teens",
-    ministrySlug: "teens",
-  },
-  {
     slug: "teens-sdc-trip",
     title: "Teens Trip — Silver Dollar City",
     start: "2026-09-26T09:00:00-05:00",
@@ -137,7 +72,7 @@ export const bulletinEvents: BulletinEvent[] = [
     allDay: true,
     location: "823 W 6th St, Little Rock",
     description:
-      "Weekly children's giving in the galvanized tub makes its comeback. More info as the first Sunday of the month gets closer.",
+      "Kids' giving in the galvanized tub at the front of the auditorium helps fund Thanksgiving meals for Central friends and neighbors. Weekly giving starts October 4.",
     tag: "All Church",
   },
   {
@@ -156,7 +91,7 @@ export const bulletinEvents: BulletinEvent[] = [
     start: "2026-10-14T18:00:00-05:00",
     location: "823 W 6th St, Little Rock",
     description:
-      "Serving the homeless community an evening meal, as we do the second Wednesday of every month.",
+      "Serving the homeless community an evening meal, as we do the second Wednesday of every month. A couple of extra helping hands are welcome for meal prep on site.",
     tag: "Outreach",
     ministrySlug: "outreach",
     aliases: ["Canvas", "Canvas Community", "Canvas Meal"],
@@ -168,7 +103,7 @@ export const bulletinEvents: BulletinEvent[] = [
     allDay: true,
     location: "823 W 6th St, Little Rock",
     description:
-      "Candy donation bins will be in the lobby in the coming weeks to help supply games for the costumed ones.",
+      "Trunks and volunteers are needed for games, food, or setup — sign up in the weekly email. A bin in the lobby collects candy donations for the friends and neighbors attending our annual fall event.",
     tag: "All Church",
   },
   {
@@ -209,6 +144,54 @@ export const bulletinEvents: BulletinEvent[] = [
     description: "Baby shower for Emelia Duréy.",
     tag: "All Church",
     aliases: ["E. Duréy baby shower", "E. Durey baby shower"],
+  },
+  {
+    slug: "small-groups-oct4",
+    title: "Small Groups Meet",
+    start: "2026-10-04T09:00:00-05:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description:
+      "Small groups meet. If you haven't signed up, fill out the sign-up form on Facebook or the HUB.",
+    tag: "Life Groups",
+    ministrySlug: "life-groups",
+    aliases: ["Small groups meet"],
+  },
+  {
+    slug: "teen-campout",
+    title: "Teen Campout",
+    start: "2026-10-16T00:00:00-05:00",
+    end: "2026-10-18T23:59:00-05:00",
+    allDay: true,
+    location: "Lake Ouachita",
+    offsite: true,
+    description:
+      "Central Teens' fall campout, now at Lake Ouachita. Sign-ups are live — remember to sign up if you're camping.",
+    tag: "Central Teens",
+    ministrySlug: "teens",
+    aliases: ["Campout", "Teens Campout"],
+  },
+  {
+    slug: "small-groups-oct18",
+    title: "Small Groups Meet",
+    start: "2026-10-18T09:00:00-05:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description:
+      "Small groups meet. If you haven't signed up, fill out the sign-up form on Facebook or the HUB.",
+    tag: "Life Groups",
+    ministrySlug: "life-groups",
+    aliases: ["Small groups meet"],
+  },
+  {
+    slug: "daylight-saving-ends",
+    title: "Daylight Saving Time Ends",
+    start: "2026-11-01T09:00:00-06:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description: "Fall back! Clocks go back one hour.",
+    tag: "All Church",
+    aliases: ["Daylight Savings"],
   },
   {
     slug: "ministry-leader-meeting",
@@ -316,6 +299,38 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
   {
     item: "Roger Baker — health struggles",
     reason: "health information about a named individual",
+  },
+  {
+    item: "The McEuen family — grieving the death of John (uncle to Matt McEuen)",
+    reason: "bereavement information about named individuals",
+  },
+  {
+    item: "Matt Thomas — hospitalized in Conway with a virus",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Nick Garlington — recovering from shoulder surgery",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Oden Moore (6, son of a friend of Becky Bell) — leukemia diagnosis",
+    reason: "health information naming a minor — extra caution beyond the usual policy",
+  },
+  {
+    item: "Emelia Duréy and Maggie Payne — expecting, January",
+    reason: "member-personal, no public shower date given",
+  },
+  {
+    item: "Barbara Hubert, Bobby Hall, Holly Perry — continued prayers",
+    reason: "named prayer requests, presumed health-related",
+  },
+  {
+    item: "Landon Dillie's personal email address (OnRamp Mentoring contact)",
+    reason: "personal email address",
+  },
+  {
+    item: "Rick and Barbara Jones's personal email address (Canvas meal prep helpers)",
+    reason: "personal email address",
   },
   { item: "Weekly offering and budget figures", reason: "internal finances" },
   {
