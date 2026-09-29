@@ -111,6 +111,25 @@ you never push to the default branch directly. A human reviews and merges.
      deliberately left out (rule 4 withholdings, ambiguous dates skipped),
      any email/PDF contradictions, and anything a human should double-check.
      Commit it in the same PR.
+   - Decide whether this week is safe to auto-merge, and say so as the very
+     last line of the PR body, exactly in this form:
+     `Safe to auto-merge: yes` or `Safe to auto-merge: no — {short reason}`.
+     A workflow step reads this line literally, so the format matters — no
+     extra wording on that line beyond the optional reason. Answer **no**
+     if any of the following are true this run:
+       - Any email/PDF contradiction (rule: the email wins, but that's still
+         a human-worth double-check).
+       - Any date left out as ambiguous.
+       - Anything that needed a judgment call beyond routinely applying rule
+         4 — e.g. an existing public item that turns out to conflict with
+         policy, a withheld category you haven't seen before, or anything
+         else you flagged for a human's call rather than resolving yourself.
+       - Any uncertainty at all about whether a change is correct.
+     Otherwise — a routine week where every change traces cleanly to the
+     sources and rule 4 covered everything without any of the above — answer
+     **yes**. Default to **no** if you're not sure which one applies; a
+     human reviewing an uneventful week costs little, an auto-merged mistake
+     on a public site costs more.
    - Push the branch and open the PR (`gh pr create`) with that summary as
      the PR body. Title: `Bulletin update — {weekOf}`.
 10. If you stopped at step 8 (no real change), still leave a trace: comment

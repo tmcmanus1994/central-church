@@ -89,3 +89,43 @@ jobs:
           show_full_output: true
         env:
           GH_TOKEN: ${{ github.token }}
+
+      # The agent decides per-week whether it's routine enough to trust (see
+      # AGENT.md step 9) — this step is the independent check before acting
+      # on that: it re-verifies the build itself rather than taking the
+      # agent's word for it, and only merges when both agree. Anything the
+      # agent flagged as needing a human call (a policy judgment, a
+      # contradiction, an ambiguous date) stays a normal PR, same as today.
+      # Turn off anytime by setting auto_merge_enabled to false in
+      # automation/config.json — no code change needed.
+      - name: Auto-merge this week's PR if the agent marked it routine
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(jq -r '.auto_merge_enabled // false' automation/config.json)" != "true" ]; then
+            echo "Auto-merge is off in automation/config.json — leaving any PR for human review."
+            exit 0
+          fi
+
+          branch="bulletin/$(date +%F)"
+          pr_number=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number // empty')
+          if [ -z "$pr_number" ]; then
+            echo "No open PR on $branch — nothing to auto-merge."
+            exit 0
+          fi
+
+          verdict=$(gh pr view "$pr_number" --json body --jq '.body' | grep -i '^Safe to auto-merge:' | tail -n1)
+          echo "Agent's verdict: ${verdict:-<none found>}"
+          if ! echo "$verdict" | grep -qi '^Safe to auto-merge: yes'; then
+            echo "Not marked safe to auto-merge — leaving PR #$pr_number for human review."
+            exit 0
+          fi
+
+          echo "Verifying the build independently before trusting the agent's verdict..."
+          git fetch origin "$branch"
+          git checkout "$branch"
+          npx tsc --noEmit
+          npm run build
+
+          echo "Build verified — merging PR #$pr_number."
+          gh pr merge "$pr_number" --merge --delete-branch

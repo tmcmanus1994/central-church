@@ -119,9 +119,14 @@ unfamiliar-looking login attempt.
    with a summary of what changed, what was withheld, and anything
    ambiguous that needs a human's read. If nothing changed, no PR — no
    noise for a re-run.
-5. You review the PR like any other change and merge it. That's what
-   actually updates the live site — the agent never pushes to the default
-   branch directly.
+5. The agent ends the PR body with its own verdict — `Safe to auto-merge:
+   yes` for a routine week (everything traced cleanly to the sources, no
+   contradictions, no judgment calls), or `no — {reason}` for anything less
+   clear-cut. A workflow step re-checks that verdict independently (runs
+   `tsc`/`build` itself against the PR branch rather than trusting the
+   agent's word) and only merges when both agree. Anything marked `no`
+   is a normal PR — you review and merge it like any other change, same as
+   before this existed.
 
 ## When something goes wrong
 
@@ -143,8 +148,14 @@ unfamiliar-looking login attempt.
 
 ## Rollout
 
-This ships already in "review everything" mode by design — every run is a
-PR, not a direct write, so there's no separate propose/apply flag to flip.
-Once you're comfortable with a run of these PRs looking right, you could
-have the agent auto-merge its own PRs after some number of clean weeks, but
-that's a deliberate future change, not a default here.
+Auto-merge is on (`automation/config.json`'s `auto_merge_enabled`), but it
+only ever applies to weeks the agent itself calls routine — anything it
+flags as needing a judgment call (a contradiction, an ambiguous date, a
+policy question it hasn't seen the shape of before) still opens a normal PR
+for a human to review, exactly as it always has. That's the actual gating
+mechanism: trust grows by more weeks turning out routine over time, not by
+a week-count switching everything over at once. A human review never goes
+away for the weeks that need one.
+
+To pause it entirely — every PR back to requiring a manual merge, no code
+change — set `auto_merge_enabled` to `false` in `automation/config.json`.

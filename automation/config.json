@@ -1,4 +1,5 @@
 {
   "sender": "jessica@arcentralchurch.org",
-  "lookback_days": 8
+  "lookback_days": 8,
+  "auto_merge_enabled": true
 }
