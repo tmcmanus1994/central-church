@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLink, Button } from "@/components/Button";
 import { GuestSignInButton } from "@/components/GuestSignInButton";
 import { PrayerRequestButton } from "@/components/PrayerRequestButton";
+import { SafetyTagline } from "@/components/SafetyTagline";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
 import { Reveal } from "@/components/Reveal";
 import { bulletin } from "@/content/bulletin";
@@ -170,6 +171,8 @@ export default async function HubPage() {
           </Button>
         </div>
       </Reveal>
+
+      <SafetyTagline className="mt-4" />
 
       {/* Weekly rhythm */}
       <h2 className="mt-9 mb-4 font-display text-[24px] tracking-[-.025em]">

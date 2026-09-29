@@ -4,6 +4,7 @@ import { ArrowLink } from "@/components/Button";
 import { Faq } from "@/components/Faq";
 import { ImageSlot } from "@/components/ImageSlot";
 import { RemindSignup } from "@/components/RemindSignup";
+import { SafetyTagline } from "@/components/SafetyTagline";
 import { VisitForm } from "@/components/VisitForm";
 import { Reveal } from "@/components/Reveal";
 import { remindClasses } from "@/lib/remind";
@@ -228,6 +229,7 @@ export default function PlanAVisitPage() {
             </div>
           </div>
         </div>
+        <SafetyTagline className="mt-4 max-w-[640px] lg:mt-6" />
       </Reveal>
 
       {/* Text alerts — hidden until a churchwide Remind class is set up in
