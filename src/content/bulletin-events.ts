@@ -163,13 +163,13 @@ export const bulletinEvents: BulletinEvent[] = [
     start: "2026-10-16T00:00:00-05:00",
     end: "2026-10-18T23:59:00-05:00",
     allDay: true,
-    location: "Lake Ouachita",
+    location: "Lake Ouachita, AR",
     offsite: true,
     description:
       "Central Teens' fall campout, now at Lake Ouachita. Sign-ups are live — remember to sign up if you're camping.",
     tag: "Central Teens",
     ministrySlug: "teens",
-    aliases: ["Campout", "Teens Campout"],
+    aliases: ["Camp Out", "Campout", "Teens Campout"],
   },
   {
     slug: "small-groups-oct18",
@@ -196,10 +196,18 @@ export const bulletinEvents: BulletinEvent[] = [
   {
     slug: "ministry-leader-meeting",
     title: "Ministry Leader Meeting",
-    start: "2026-09-21T09:00:00-05:00",
+    start: "2026-09-21T18:00:00-05:00",
+    location: "823 W 6th St, Little Rock",
+    description: "RSVP if you haven't already — come with your 2027 dates and budgets.",
+    tag: "All Church",
+  },
+  {
+    slug: "family-style-communion",
+    title: "Family Style Communion",
+    start: "2026-09-27T09:00:00-05:00",
     allDay: true,
     location: "823 W 6th St, Little Rock",
-    description: "Pushed back a week, to September 21 — check your email for details.",
+    description: "Communion is served family style during the regular Sunday service.",
     tag: "All Church",
   },
 ];
@@ -216,9 +224,9 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
   { item: "Logan Patillo — wedding shower, August 9", reason: "member-personal" },
   { item: "Madison Allen — baby shower, August 30, 1 PM, Gym Alcove", reason: "member-personal" },
   {
-    item: "Sarah Laffoon — baby shower, September 13",
+    item: "Sarah Laffoon — baby shower, September 13; due October",
     reason:
-      "member-personal; date corrected from September 14 — this week's bulletin says the 13th",
+      "member-personal; date corrected from September 14 — this week's bulletin says the 13th; due month added per this week's prayer list",
   },
   {
     item: "John Ramsey Allen (son of Jack & Madison Allen) — born September 10, temporary NICU stay",
@@ -342,5 +350,21 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     item: "Sanchez Adoption Celebration, August 20",
     reason:
       "adoption involves a minor's privacy on a permanently public, indexable page; held back for a human call rather than publishing by default",
+  },
+  {
+    item: "Linda Barnes — recovering from recent surgery",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Allie Varner — recovering from an emergency appendectomy",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Ramsey — receiving extra care in the NICU",
+    reason: "health information naming a minor — extra caution beyond the usual policy",
+  },
+  {
+    item: "The Byer family, neighbors to the Dutiles — Joe died last week unexpectedly from a heart attack",
+    reason: "bereavement information about named individuals",
   },
 ];

@@ -151,7 +151,7 @@ export const bulletin: Bulletin = {
     {
       name: "Encouragers Class",
       when: "Thursdays at 10:30 AM, August–May",
-      detail: "Wrapping up the study of Job this week; moving on to Romans next week. Meets in Fellowship East.",
+      detail: "Starting a study of Romans this Thursday, September 24. Meets in Fellowship East.",
     },
     {
       name: "Preschool Story Time",
@@ -257,9 +257,9 @@ export const bulletin: Bulletin = {
       room: "SGC Upstairs, Kids Closet hallway",
     },
     {
-      name: "Up in Arms",
+      name: "3M's: Mind, Muscle, Ministry",
       detail:
-        "Physical activity meets ministry — six weeks, for anyone who wants to intentionally build strength in mind and body. Kicks off Wednesday, September 16.",
+        "Physical activity meets ministry — six weeks, for anyone who wants to intentionally build strength in mind and body.",
       room: "Gym",
       teacher: "Josh Ward",
     },
@@ -343,6 +343,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "September 20, 2026",
     "September 13, 2026",
     "September 6, 2026",
     "August 30, 2026",
