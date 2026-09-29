@@ -9,6 +9,7 @@ import { IglesiaForm } from "./IglesiaForm";
 import { KidsClosetForm } from "./KidsClosetForm";
 import { MinistryBanner } from "./MinistryBanner";
 import { RemindSignup } from "./RemindSignup";
+import { SafetyTagline } from "./SafetyTagline";
 import { ImageSlot } from "./ImageSlot";
 import { Reveal } from "@/components/Reveal";
 
@@ -64,6 +65,8 @@ export function MinistryPage({
               {ministry.intro2}
             </p>
           ) : null}
+
+          {ministry.showSafetyNote ? <SafetyTagline /> : null}
 
           {ministry.weekly ? (
             <>

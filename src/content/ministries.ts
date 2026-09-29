@@ -65,6 +65,8 @@ export interface Ministry {
   };
   /** Vimeo embed shown in place of the photo gallery. */
   video?: { embedUrl: string; url: string; caption: string };
+  /** Shows the SafetyTagline callout — set for pages families with kids read most. */
+  showSafetyNote?: boolean;
   related?: { label: string; href: string }[];
   utilities?: { label: string; href: string }[];
   cta: { title: string; body: string; label: string; href: string };
@@ -84,6 +86,7 @@ export const ministries: Ministry[] = [
       "Central Kids is for children from birth through 5th grade and their families. Our goal is to help families teach their children about God our Creator, His plan to save the world through Jesus, and the gift of the Holy Spirit who lives in us — all within a community of faith.",
     intro2:
       "We come alongside parents to raise kids who know they are loved by God more than they can imagine.",
+    showSafetyNote: true,
     weeklyHeading: "Weekly Activities",
     weekly: [
       {
@@ -162,6 +165,7 @@ export const ministries: Ministry[] = [
     tileBlurb: "Middle & high school",
     intro:
       "Central Teens is a community where middle and high school students in Little Rock grow in faith, build lifelong friendships, and learn they are loved by God and have a place in His Kingdom.",
+    showSafetyNote: true,
     annualHeading: "Every Year with Central Teens",
     annual: [
       {

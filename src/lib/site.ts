@@ -16,6 +16,8 @@ export const site = {
   phone: "(501) 374-2039",
   phoneHref: "tel:+15013742039",
   email: "office@arcentralchurch.org",
+  /** Goes straight to the Safe Team — see /safety. */
+  safetyEmail: "safety@arcentralchurch.org",
   giveUrl: "https://pushpay.com/g/arcentralchurch",
   /** Members-only directory PDF, hosted on Dropbox — linked from the header. */
   memberDirectoryUrl:

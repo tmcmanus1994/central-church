@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/events", 0.9, "daily"],
     ["/ministries", 0.7, "monthly"],
     ["/iglesia", 0.7, "monthly"],
+    ["/safety", 0.6, "yearly"],
     ["/about", 0.6, "yearly"],
     ["/about/leadership", 0.6, "yearly"],
     ["/about/missionaries", 0.5, "yearly"],

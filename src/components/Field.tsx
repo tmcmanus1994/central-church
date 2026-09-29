@@ -28,12 +28,14 @@ export function TextField({
   type = "text",
   optional = false,
   autoComplete,
+  defaultValue,
 }: {
   id: string;
   label: string;
   type?: string;
   optional?: boolean;
   autoComplete?: string;
+  defaultValue?: string;
 }) {
   return (
     <div className="flex flex-col gap-1.5">
@@ -46,6 +48,7 @@ export function TextField({
         type={type}
         autoComplete={autoComplete}
         required={!optional}
+        defaultValue={defaultValue}
         className={inputCls}
       />
     </div>
@@ -115,6 +118,7 @@ export function TextArea({
         id={id}
         name={id}
         rows={4}
+        required={!optional}
         className="w-full rounded-[10px] border border-line-dark bg-white p-4 text-[15.5px] text-ink"
       />
     </div>

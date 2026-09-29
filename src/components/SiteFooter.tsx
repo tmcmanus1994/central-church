@@ -142,6 +142,9 @@ export function SiteFooter() {
           <Link href="/events" className="text-muted no-underline hover:text-white">
             Subscribe to Calendar
           </Link>
+          <Link href="/safety" className="text-muted no-underline hover:text-white">
+            Report a Concern
+          </Link>
           {remindClasses.churchwide.code ? (
             <a
               href={remindJoinUrl(remindClasses.churchwide.code)}
