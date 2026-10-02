@@ -7,7 +7,7 @@ import { formatSubmission, type Submission } from "@/lib/safety-report-request";
  *
  * Goes straight to the Safe Team's dedicated inbox, not any general church
  * mailbox — this is deliberately its own route rather than reusing
- * plan-a-visit's or kids-closet's pattern of multiple staff recipients.
+ * plan-a-visit's pattern of multiple staff recipients.
  * Reporting is allowed anonymously: `reporterName` and `reporterContact` are
  * both optional, everything else is required.
  *

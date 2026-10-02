@@ -6,7 +6,6 @@ import { recurringWhen } from "@/lib/format";
 import { ArrowLink, Button } from "./Button";
 import { ContactButton } from "./ContactButton";
 import { IglesiaForm } from "./IglesiaForm";
-import { KidsClosetForm } from "./KidsClosetForm";
 import { MinistryBanner } from "./MinistryBanner";
 import { RemindSignup } from "./RemindSignup";
 import { SafetyTagline } from "./SafetyTagline";
@@ -334,13 +333,6 @@ export function MinistryPage({
           ))}
         </div>
       </Reveal>
-      ) : null}
-
-      {/* Kids Closet books its own appointments — see KidsClosetForm. */}
-      {ministry.slug === "kids-closet" ? (
-        <Reveal as="section" className="mx-auto max-w-[1100px] px-5 pb-10 lg:px-14 lg:pb-16">
-          <KidsClosetForm />
-        </Reveal>
       ) : null}
 
       {/* CTA band — Iglesia gets its own form (routed to Matt Thomas) instead

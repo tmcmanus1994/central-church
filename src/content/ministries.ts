@@ -14,8 +14,13 @@ import { remindClasses, remindJoinUrl } from "@/lib/remind";
 export const FREEDOM_PRAYER_SIGNUP_URL =
   "https://lrcentralchurch.breezechms.com/form/e4c59c";
 
-/** Parents book a Friday slot at Kids Closet through the form on its page. */
-export const KIDS_CLOSET_SCHEDULE_HREF = "/ministries/kids-closet#schedule";
+/**
+ * Every Kids Closet request — scheduling a Friday visit or ordering
+ * diapers — now routes through Lacey's own Zite hub rather than a form on
+ * this site, so she has every request in one place instead of two parallel
+ * channels.
+ */
+export const KIDS_CLOSET_ZITE_URL = "http://kidscloset.zite.so";
 
 export interface MinistryContact {
   name: string;
@@ -279,10 +284,10 @@ export const ministries: Ministry[] = [
     metaTitle:
       "Kids Closet | Free Children's Clothing & Baby Items – Little Rock",
     metaDescription:
-      "Central's Kids Closet provides free gently-used children's clothing, baby items, and toys to Little Rock families in need. Open Wednesdays & Fridays 9–11 AM.",
-    tileBlurb: "Free children's clothing and baby items. Wed & Fri, 9–11 AM.",
+      "Central's Kids Closet provides free gently-used children's clothing, baby items, and toys to Little Rock families in need. Open Fridays 9–11 AM.",
+    tileBlurb: "Free children's clothing and baby items. Fridays, 9–11 AM.",
     intro:
-      "Central's Kids Closet provides gently used children's clothing, toys, and baby items free of charge to church and community members in need across Little Rock. Open Wednesday and Friday mornings, 9–11 AM — always free.",
+      "Central's Kids Closet provides gently used children's clothing, toys, and baby items free of charge to church and community members in need across Little Rock. Open Friday mornings, 9–11 AM — always free.",
     listHeading: "What You'll Find at the Kids Closet",
     list: [
       "Children's clothing (preemie–YXL)",
@@ -296,11 +301,7 @@ export const ministries: Ministry[] = [
       "Baby walkers, strollers, and car seats",
     ],
     utilities: [
-      {
-        label: "Schedule a Time to Shop (always free)",
-        href: KIDS_CLOSET_SCHEDULE_HREF,
-      },
-      { label: "Need Diapers?", href: "http://kidscloset.zite.so" },
+      { label: "Schedule a Visit or Order Diapers", href: KIDS_CLOSET_ZITE_URL },
     ],
     video: {
       embedUrl: "https://player.vimeo.com/video/1012118138",
@@ -315,9 +316,9 @@ export const ministries: Ministry[] = [
     },
     cta: {
       title: "Come shop — it's always free",
-      body: "Wednesday and Friday mornings, 9–11 AM at 823 W 6th St. No paperwork, no requirements.",
-      label: "Schedule a time",
-      href: KIDS_CLOSET_SCHEDULE_HREF,
+      body: "Friday mornings, 9–11 AM at 823 W 6th St. No paperwork, no requirements.",
+      label: "Schedule a Visit or Order Diapers",
+      href: KIDS_CLOSET_ZITE_URL,
     },
   },
   {
@@ -336,7 +337,7 @@ export const ministries: Ministry[] = [
     weeklyHeading: "What Runs Every Week",
     weekly: [
       {
-        eyebrow: "Wed & Fri",
+        eyebrow: "Fridays",
         title: "Kids Closet",
         blurb:
           "Free clothing, shoes, and baby essentials for any family who needs them, 9–11 AM.",

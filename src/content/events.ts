@@ -112,11 +112,11 @@ export const recurringEvents: ChurchEvent[] = [
   {
     slug: "kids-closet-hours",
     title: "Kids Closet",
-    start: "2026-08-05T09:00:00-05:00",
-    end: "2026-08-05T11:00:00-05:00",
+    start: "2026-08-07T09:00:00-05:00",
+    end: "2026-08-07T11:00:00-05:00",
     location: "823 W 6th St, Little Rock",
     recurring: true,
-    rrule: "FREQ=WEEKLY;BYDAY=WE,FR",
+    rrule: "FREQ=WEEKLY;BYDAY=FR",
     ministrySlug: "kids-closet",
   },
 ];

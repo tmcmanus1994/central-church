@@ -7,7 +7,7 @@ import { formatSubmission, type Submission } from "@/lib/visit-request";
  * linked from every "Contact" button that has no specific staff member to
  * reach (an elder, or a page where the right person isn't obvious).
  *
- * Delivery goes through Resend, same as the Kids Closet form:
+ * Delivery goes through Resend, same as every other form on the site:
  *
  *   RESEND_API_KEY   — from resend.com, after verifying arcentralchurch.org
  *   FORMS_FROM_EMAIL — the verified sender, e.g. website@arcentralchurch.org

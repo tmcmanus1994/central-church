@@ -10,8 +10,8 @@ type Status = "idle" | "submitting" | "success" | "error";
  *
  * Without this, a plain `<form action="/api/...">` navigates the browser to
  * the route on submit and renders the raw `{"ok":true}` JSON as a page —
- * every one of the site's mailer forms (Kids Closet, Plan a Visit) posts to
- * one of these routes, so this is shared rather than duplicated per form.
+ * every one of the site's mailer forms (Plan a Visit, Safety report) posts
+ * to one of these routes, so this is shared rather than duplicated per form.
  *
  * The form's `action`/`method` attributes stay in the markup as a no-JS
  * fallback — this only takes over once JavaScript actually runs.

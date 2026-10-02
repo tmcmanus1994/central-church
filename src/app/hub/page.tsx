@@ -34,7 +34,7 @@ const links = [
   { label: "Central Kids", href: "/ministries/children", note: "Birth–5th grade" },
   { label: "Central Teens", href: "/ministries/teens", note: "Middle & high school" },
   { label: "Life Groups", href: "/ministries/life-groups", note: "By age and stage" },
-  { label: "Kids Closet", href: "/ministries/kids-closet", note: "Wed & Fri, 9–11 AM" },
+  { label: "Kids Closet", href: "/ministries/kids-closet", note: "Fridays, 9–11 AM" },
   { label: "Iglesia", href: "/iglesia", note: "Domingos 1:00 PM" },
   { label: "Blog", href: "/blog", note: "Reflections & prayer" },
 ];
