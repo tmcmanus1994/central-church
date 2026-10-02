@@ -223,7 +223,7 @@ export function MinistryPage({
 
         <aside className="flex flex-col gap-5">
           {ministry.contact ? (
-            <div className="flex flex-col gap-3.5 rounded-[18px] border border-line p-6 lg:p-7">
+            <div className="flex flex-col items-center gap-3.5 rounded-[18px] border border-line p-6 text-center lg:p-7">
               <ImageSlot
                 photoKey={key(`ministry.${ministry.slug}.contact`)}
                 sizes="(min-width: 1024px) 200px, 40vw"
@@ -231,7 +231,7 @@ export function MinistryPage({
                 alt={`Portrait of ${ministry.contact.name}`}
                 className="aspect-[4/5] w-full max-w-[180px] rounded-xl"
               />
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col items-center gap-1">
                 <span className="text-[11px] font-bold tracking-[.16em] uppercase text-muted">
                   {labels.contact}
                 </span>
