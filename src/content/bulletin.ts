@@ -78,37 +78,33 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "September 27, 2026",
+  weekOf: "October 4, 2026",
 
   announcements: [
     {
-      title: "City Connections hygiene drive — last week",
-      body: "This is the last week to bring September hygiene items. Drop them in the collection bin in the lobby — we collect, City Connections delivers to students and families in local Little Rock schools. Donations are also welcome through our giving portal if that's easier.",
+      title: "It's Harvest Month!",
+      body: "Each Sunday brings the sweet clanging of coins in the galvanized tub as the children race to the front of the auditorium with their offering. Their collection will fund food items for Thanksgiving meals for friends and neighbors of Central. This first Sunday of Harvest focuses on a local ministry near and dear to our hearts — Kids Closet! Lacey Hines will share information and updates from this year and goals for 2027. In the next few weeks we'll hear from our mission teams from around the world and another local ministry we treasure.",
     },
     {
-      title: "Kids Harvest is coming",
-      body: "Harvest Month begins October 1, and kids' giving in the galvanized tub at the front of the auditorium starts October 4. It helps fund Thanksgiving meals for Central friends and neighbors. Keep your ears and eyes open for Harvest info — it's coming!",
+      title: "Scaffolding in the East balcony",
+      body: "Steven Swible is diligently addressing the ceiling tile replacements and repainting, so there's a new addition to the balcony: scaffolding. Pat him on the back for a job well done when you see him. Please continue to avoid the East side of the second floor.",
     },
     {
-      title: "Trunk or Treat — trunks, volunteers, and candy",
-      body: "We need trunks and volunteers for our annual fall event on Sunday, October 25 — games, food, or setup, there's a spot for you. There's also a bin in the lobby for candy donations; consider bringing a bag or two in the coming weeks.",
+      title: "Trunk or Treat — candy collection",
+      body: "The Trunk-or-Treat candy collection bin is in the lobby for a 25-day residency. Bring a bag or two in the next couple of weeks to supply the costumed ones. Trunks and volunteers are still needed for games, food, or setup at our annual fall event on Sunday, October 25.",
       href: "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2Uewf1tcPqQEO5kTANtgBiKnuZt0OMW4pla3cuasSKqaA-3D-3Dwzii_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBmCZsnQvBxp0BIrqUv5tPmnXjk9qmjuTe-2F0pBiSW4a1Q2v0IFLiRHGf1eP3ENQCi0xbxQI9JqeCVGBhbOfE2Hpk1um-2FQAWQCHnGWb4WRCD9rcfT39PlgeIrNP5AAgHoasH7u0dma-2BISShTTqVdN7Q9BCJXoaM7p5up6l6-2BGTiQBgVNHNTgMuun59fqXgpXmvJm0erT5mI7EaB5VWOMfzP3bfJxBlQWfAIRNQW43lpZWt",
     },
     {
-      title: "New 'Safe Team' signage around campus",
-      body: "Signs will start appearing in strategic locations around campus in case an unsafe situation ever arises for any person on our campus. Helpful information and a QR code for reporting and contacting the team will be featured. The Safe Team is not the same as the security team — those hard-working fellows keep an eye on things during worship, though they will work in conjunction with the Safe Team.",
+      title: "Ladies Day — October 24",
+      body: "The annual women's ministry Ladies Day at the Adkisons' farm is coming up on October 24! Courtney Hirscheider will be speaking about \"follow is a verb.\" You'll want to be there! Guys, that Saturday is officially a Dadurday.",
     },
     {
-      title: "East balcony still off limits",
-      body: "The East balcony continues to be off limits for worship. Thanks for pivoting while the ceiling is masterfully repaired!",
-    },
-    {
-      title: "Wednesday night classes turn over this week",
-      body: "This is the last week for the September Wednesday night classes. Gearing up next is a Communication in Relationships class led by Robert Hinojosa. Helping Hands will return! Acts, Fitness, and Helping Hands will continue.",
+      title: "Sunday Funday has moved",
+      body: "If you were planning to send your child to Sunday Funday, note that it has been rescheduled for October 18.",
     },
     {
       title: "Central Teens — Area Wide and Campout",
-      body: "Area Wide worship is October 4 — we can't wait to worship together. The Teen Campout is October 16–18, and the location has moved to Lake Ouachita. Sign-ups are live for the Campout and Fall Retreat, so remember to sign up if you're camping.",
+      body: "Area Wide worship is tonight — we can't wait to worship together. The Fall Campout at Lake Ouachita is almost here (October 16–18, $30). Check the Google doc for departure details and the packing list. Sign-ups are also live for the Fall Retreat.",
       contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
     },
     {
@@ -117,15 +113,15 @@ export const bulletin: Bulletin = {
     },
     {
       title: "Sewing Group — Fridays",
-      body: "Did you even know there is a sewing room? A group of skilled ladies meets every Friday morning from 9 to 11 in the sewing room. Anyone is welcome to join the fray with a project in hand or willing to take one up — they have several perpetual projects in motion, too. Nancy Lamb and Barbara Jones are your go-to ladies to contact.",
-    },
-    {
-      title: "Ladies Day — October 24",
-      body: "The annual Ladies Day at the Adkisons' is October 24 — mark your calendar, save the date. Guys, that Saturday is officially a Dadurday.",
+      body: "Did you know Central has a sewing room and some talented seamstresses, too? A group of skilled ladies meets every Friday morning from 9 to 11. Anyone is welcome — if you have an affinity for sewing, want to learn a new skill, or need the aid of a sewing connoisseur. They also have several perpetual projects in motion that anyone with some experience can join in on. Nancy Lamb and Barbara Jones are your go-to ladies to contact.",
     },
     {
       title: "Small Groups — October 4 and 18",
       body: "Small groups meet October 4 and October 18. If you've held off on signing up, there's no time like the present — fill out the sign-up form on Facebook or the HUB, or reply to the weekly email to get connected.",
+    },
+    {
+      title: "New members",
+      body: "Last week two new families were welcomed, officially, to Central: Mason & Anna Burt and Grant & Julianne Tiller. Take a minute to meet and greet them.",
     },
     {
       title: "Reserving a room",
@@ -151,7 +147,7 @@ export const bulletin: Bulletin = {
     {
       name: "Encouragers Class",
       when: "Thursdays at 10:30 AM, August–May",
-      detail: "Starting a study of Romans this Thursday, September 24. Meets in Fellowship East.",
+      detail: "Kicked off a study of Romans — come on and chat about it. Meets in Fellowship East.",
     },
     {
       name: "Preschool Story Time",
@@ -253,19 +249,19 @@ export const bulletin: Bulletin = {
     {
       name: "Helping Hands",
       detail:
-        "An actionable opportunity to offer support and assistance to existing Central ministries. Returns this week.",
+        "An actionable opportunity to offer support and assistance to existing Central ministries.",
       room: "SGC Upstairs, Kids Closet hallway",
     },
     {
-      name: "3M's: Mind, Muscle, Ministry",
-      detail:
-        "Physical activity meets ministry — six weeks, for anyone who wants to intentionally build strength in mind and body.",
+      name: "Run the Race",
+      detail: "Physical activity meets ministry. Meets for six weeks.",
       room: "Gym",
-      teacher: "Josh Ward",
+      teacher: "Andrew Cheffins & Josh Ward",
     },
     {
-      name: "Communication in Relationships",
-      detail: "Gearing up after this week's turnover of the September Wednesday night classes.",
+      name: "Healthy Communication in Relationships",
+      detail: "A class focusing on communication practices — the dos and don'ts — in relationships.",
+      room: "Fellowship West",
       teacher: "Robert Hinojosa",
     },
     {
@@ -290,21 +286,20 @@ export const bulletin: Bulletin = {
   ],
 
   orderOfWorship: [
-    "Step by Step (15)",
-    "Welcome",
-    "Shout Hallelujah",
-    "Hallelujah Praise Jehovah",
-    "Let Your Spirit Come",
-    "Communion (Family Style)",
-    "As the Deer",
-    "Wonderful Merciful Savior",
-    "Amazing Love",
-    "Dismiss Children's Church",
-    "Lord, Be There",
+    "We Shall Assemble",
+    "Welcome / Harvest Introduction — Lacey Hines",
+    "Light the Fire",
+    "Listen to Our Hearts (810)",
+    "I Stand in Awe",
+    "Communion — JaMarcus Joseph",
+    "Jesus Let Us Come to Know You",
+    "Dismiss Children's Church / Children's Giving",
+    "Heart of Worship",
     "Scripture Reading",
     "Sermon: Steven Hovater",
-    "Blessed Be the Tie",
-    "Family News / Harvest Month",
+    "Gratitude",
+    "Harvest Month: Kids Closet — Lacey Hines",
+    "Family News",
     "Sending Blessing",
   ],
 
@@ -343,6 +338,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "September 27, 2026",
     "September 20, 2026",
     "September 13, 2026",
     "September 6, 2026",

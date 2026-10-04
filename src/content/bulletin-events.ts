@@ -30,17 +30,6 @@ export interface BulletinEvent extends ChurchEvent {
 
 export const bulletinEvents: BulletinEvent[] = [
   {
-    slug: "mens-golf-tournament",
-    title: "Men's Annual Golf Tournament — Driving for Diapers",
-    start: "2026-09-19T07:30:00-05:00",
-    location: "Rebsamen Golf Course, Little Rock, AR",
-    offsite: true,
-    description:
-      "Fellowship, fun, and a little friendly frustration on the course. Entry fee includes a pack of size 5 diapers for Kids Closet, and additional packs shave strokes off the score of the golfer you're supporting — label your pack with their name to get the credit. Donations accepted through Wednesday, September 16.",
-    tag: "All Church",
-    aliases: ["Driving for Diapers"],
-  },
-  {
     slug: "mens-retreat",
     title: "Central Men's Retreat — Roots Run Deep",
     start: "2026-09-25T00:00:00-05:00",
@@ -72,13 +61,13 @@ export const bulletinEvents: BulletinEvent[] = [
     allDay: true,
     location: "823 W 6th St, Little Rock",
     description:
-      "Kids' giving in the galvanized tub at the front of the auditorium helps fund Thanksgiving meals for Central friends and neighbors. Weekly giving starts October 4.",
+      "Kids' giving in the galvanized tub at the front of the auditorium each Sunday helps fund Thanksgiving meals for Central friends and neighbors. The first Sunday, October 4, focuses on Kids Closet with Lacey Hines.",
     tag: "All Church",
   },
   {
-    slug: "sunday-funday-oct4",
+    slug: "sunday-funday-oct18",
     title: "Sunday Funday",
-    start: "2026-10-04T09:00:00-05:00",
+    start: "2026-10-18T09:00:00-05:00",
     allDay: true,
     location: "Central Kids Wing",
     description: "A morning of games and fun for Central Kids.",
@@ -130,9 +119,9 @@ export const bulletinEvents: BulletinEvent[] = [
     title: "Ladies Day",
     start: "2026-10-24T09:00:00-05:00",
     allDay: true,
-    location: "The Adkisons' Home",
+    location: "The Adkisons' Farm",
     offsite: true,
-    description: "Central's annual Ladies Day, hosted at the Adkisons'. Save the date!",
+    description: "Central's annual women's ministry Ladies Day at the Adkisons' farm. Courtney Hirscheider will speak on \"follow is a verb.\"",
     tag: "All Church",
   },
   {
@@ -341,6 +330,18 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "personal email address",
   },
   { item: "Weekly offering and budget figures", reason: "internal finances" },
+  {
+    item: "November baby showers — Bailey McManus (Nov 1, gym alcove), Caylie Mosley (Nov 7, at a member's home), Meika Pratt (Nov 8, gym alcove), Emelia Duréy (Nov 15, gym alcove)",
+    reason: "member-personal",
+  },
+  {
+    item: "Kelsey Swearengen — expecting, March",
+    reason: "member-personal, no public shower date given",
+  },
+  {
+    item: "Trace and Sarah Laffoon — baby born September 28",
+    reason: "member-personal family news, consistent with the shower and expecting-mother entries",
+  },
   {
     item: "Service members list — Tevin Patillo, Chris McNair, Cornelius Hood, Kyla Jeter",
     reason:
