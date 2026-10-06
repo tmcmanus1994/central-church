@@ -122,11 +122,11 @@ unfamiliar-looking login attempt.
 5. The agent ends the PR body with its own verdict — `Safe to auto-merge:
    yes` for a routine week (everything traced cleanly to the sources, no
    contradictions, no judgment calls), or `no — {reason}` for anything less
-   clear-cut. A workflow step re-checks that verdict independently (runs
-   `tsc`/`build` itself against the PR branch rather than trusting the
-   agent's word) and only merges when both agree. Anything marked `no`
-   is a normal PR — you review and merge it like any other change, same as
-   before this existed.
+   clear-cut. A workflow step logs that verdict and then verifies the build
+   (`tsc`/`build` against the PR branch) before merging — every PR merges
+   once the build passes, regardless of the verdict. The verdict is kept
+   purely as a record of which weeks the agent itself flagged as worth a
+   second look after the fact, not as a merge gate.
 
 ## When something goes wrong
 
@@ -148,14 +148,21 @@ unfamiliar-looking login attempt.
 
 ## Rollout
 
-Auto-merge is on (`automation/config.json`'s `auto_merge_enabled`), but it
-only ever applies to weeks the agent itself calls routine — anything it
-flags as needing a judgment call (a contradiction, an ambiguous date, a
-policy question it hasn't seen the shape of before) still opens a normal PR
-for a human to review, exactly as it always has. That's the actual gating
-mechanism: trust grows by more weeks turning out routine over time, not by
-a week-count switching everything over at once. A human review never goes
-away for the weeks that need one.
+Auto-merge is on (`automation/config.json`'s `auto_merge_enabled`) for every
+PR, not just ones the agent calls routine — as of 2026-10-06, Travelle's own
+call after watching enough weeks run correctly. The agent's "Safe to
+auto-merge: yes/no" verdict (see AGENT.md step 9) still gets written and
+logged, so there's a record of which weeks it flagged as having a
+contradiction, an ambiguous date, or a judgment call, but nothing holds the
+PR open for review anymore — the only remaining gate is the independent
+build check (`tsc`/`build`) run before merging.
 
-To pause it entirely — every PR back to requiring a manual merge, no code
-change — set `auto_merge_enabled` to `false` in `automation/config.json`.
+In other words: there is no longer a human review step in the normal path.
+If a `no`-verdict week publishes something that needs correcting, that's a
+manual follow-up fix after the fact, same as any other content correction
+on this site — not something caught before it goes live.
+
+To bring human review back for flagged weeks, or to pause auto-merge
+entirely, set `auto_merge_enabled` to `false` in `automation/config.json`
+(no code change needed) — or ask Claude to restore the verdict-gated
+version described in this file's git history.

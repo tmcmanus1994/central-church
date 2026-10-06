@@ -90,15 +90,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
-      # The agent decides per-week whether it's routine enough to trust (see
-      # AGENT.md step 9) — this step is the independent check before acting
-      # on that: it re-verifies the build itself rather than taking the
-      # agent's word for it, and only merges when both agree. Anything the
-      # agent flagged as needing a human call (a policy judgment, a
-      # contradiction, an ambiguous date) stays a normal PR, same as today.
-      # Turn off anytime by setting auto_merge_enabled to false in
-      # automation/config.json — no code change needed.
-      - name: Auto-merge this week's PR if the agent marked it routine
+      # Travelle's own call (2026-10-06): auto-merge every week's PR, not
+      # just ones the agent marks routine — he's seen enough weeks of this
+      # running correctly to drop the human-review fallback entirely. The
+      # agent's "Safe to auto-merge: yes/no" verdict (AGENT.md step 9) is
+      # still logged below for visibility into which weeks it considered
+      # routine, but it no longer gates the merge — only the independent
+      # build check does. Turn off anytime by setting auto_merge_enabled to
+      # false in automation/config.json — no code change needed.
+      - name: Auto-merge this week's PR
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -115,13 +115,9 @@ jobs:
           fi
 
           verdict=$(gh pr view "$pr_number" --json body --jq '.body' | grep -i '^Safe to auto-merge:' | tail -n1)
-          echo "Agent's verdict: ${verdict:-<none found>}"
-          if ! echo "$verdict" | grep -qi '^Safe to auto-merge: yes'; then
-            echo "Not marked safe to auto-merge — leaving PR #$pr_number for human review."
-            exit 0
-          fi
+          echo "Agent's verdict (informational only, does not gate the merge): ${verdict:-<none found>}"
 
-          echo "Verifying the build independently before trusting the agent's verdict..."
+          echo "Verifying the build independently before merging..."
           git fetch origin "$branch"
           git checkout "$branch"
           npx tsc --noEmit
