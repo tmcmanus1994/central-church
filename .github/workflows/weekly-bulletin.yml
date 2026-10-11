@@ -41,20 +41,41 @@ jobs:
           GMAIL_OAUTH_CLIENT_SECRET: ${{ secrets.GMAIL_OAUTH_CLIENT_SECRET }}
           GMAIL_OAUTH_REFRESH_TOKEN: ${{ secrets.GMAIL_OAUTH_REFRESH_TOKEN }}
 
-      - name: Alert on missing bulletin
+      # ingest.py reports *why* it failed via failure_reason, because the two
+      # causes need opposite responses: a revoked token needs a human to
+      # re-mint it (nothing will fix itself), while a missing email usually
+      # just needs the watchdog's later retry. One generic issue hid that
+      # difference and cost a week in October 2026.
+      - name: Alert on failed ingest
         if: failure()
         env:
           GH_TOKEN: ${{ github.token }}
+          FAILURE_REASON: ${{ steps.ingest.outputs.failure_reason }}
         run: |
-          gh issue create \
-            --title "No bulletin email found for $(date +%F)" \
-            --body "The weekly agent looked for this week's bulletin email (from jessica@arcentralchurch.org) in the automation mailbox and didn't find one, or couldn't authenticate to check. Nothing was changed on the site.
+          if [ "$FAILURE_REASON" = "auth" ]; then
+            gh issue create \
+              --title "Gmail OAuth token revoked — bulletin automation needs a new refresh token ($(date +%F))" \
+              --body "Gmail rejected the automation's OAuth refresh token (invalid_grant: expired or revoked). This is not a missing email — every run will fail the same way until the token is replaced, and the watchdog's retries won't help.
 
-          Check:
+          Likely causes, in order: the automation mailbox's password was changed (Google revokes all Gmail-scoped tokens when that happens), Google's account-safety system locked/restored the account again, or the app was removed under Google Account -> Security -> Third-party access.
+
+          To fix:
+          1. On your own computer: python3 automation/get_refresh_token.py <path to client_secret JSON>
+          2. Sign in as the automation mailbox and click Allow.
+          3. Paste the printed GMAIL_OAUTH_REFRESH_TOKEN into GitHub -> Settings -> Secrets and variables -> Actions (replace the existing one).
+          4. Re-run this workflow: Actions tab -> Weekly bulletin update -> Run workflow.
+
+          Full steps are in automation/README.md under One-time setup."
+          else
+            gh issue create \
+              --title "No bulletin email found for $(date +%F)" \
+              --body "The weekly agent looked for this week's bulletin email (from jessica@arcentralchurch.org) in the automation mailbox and didn't find one. Nothing was changed on the site. The watchdog retries later in the morning on its own, so no action is needed unless it's still missing by the afternoon.
+
+          Then check:
           - Did Jessica send this week's bulletin email yet?
           - Is the Gmail filter still forwarding jessica@arcentralchurch.org to the automation mailbox?
-          - Open this run's log (Actions tab -> this run -> Ingest this week's bulletin email) — an auth error there means the OAuth refresh token was revoked (Google Account -> Security -> Third-party access for that mailbox) and automation/get_refresh_token.py needs a re-run to mint a new one.
-          - Re-run this workflow manually once fixed: Actions tab -> Weekly bulletin update -> Run workflow."
+          - Re-run this workflow manually once it's there: Actions tab -> Weekly bulletin update -> Run workflow."
+          fi
 
       - uses: actions/setup-node@v4
         with:

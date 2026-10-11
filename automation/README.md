@@ -130,14 +130,18 @@ unfamiliar-looking login attempt.
 
 ## When something goes wrong
 
-- **No email found, or the OAuth token stopped working** -> a GitHub issue
-  opens automatically; the run stops before touching anything. Check the
-  ingest step's log — an auth error means the refresh token was revoked
-  (Google Account -> Security -> Third-party access for the dedicated
-  mailbox) and needs `get_refresh_token.py` re-run to mint a new one. A
-  plain "no email matched" means Jessica's email hasn't arrived yet. Either
-  way, re-run manually once fixed (Actions tab -> Weekly bulletin update ->
-  Run workflow).
+- **"Gmail OAuth token revoked" issue** -> the refresh token is dead and
+  nothing will fix itself; the watchdog's retries fail the same way. Google
+  revokes a Gmail-scoped token when the mailbox's password changes, when
+  its account-safety system locks and restores the account, or when the
+  app is removed under Google Account -> Security -> Third-party access.
+  Re-run `get_refresh_token.py` locally, replace the
+  `GMAIL_OAUTH_REFRESH_TOKEN` secret, then re-run the workflow (Actions tab
+  -> Weekly bulletin update -> Run workflow).
+- **"No bulletin email found" issue** -> Jessica's email isn't in the
+  mailbox yet. The watchdog retries at 9 AM and noon CT on its own; only
+  if it's still missing after that, check whether she sent it and whether
+  the Gmail forward is still in place, then re-run manually.
 - **No PDF attached, or the PDF won't parse** -> either way, the run
   continues email-only; noted in the PR summary.
 - **Email and PDF disagree on a fact** -> the email wins; the contradiction

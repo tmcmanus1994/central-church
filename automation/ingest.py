@@ -36,6 +36,7 @@ from datetime import datetime
 from pathlib import Path
 
 import html2text
+from google.auth.exceptions import RefreshError
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
@@ -161,6 +162,20 @@ def gmail_service():
     return build("gmail", "v1", credentials=creds, cache_discovery=False)
 
 
+def report_failure(reason: str) -> None:
+    """Tells the workflow *why* ingest failed, so the alert issue can say so.
+
+    "auth" and "no-email" need completely different fixes (re-mint the OAuth
+    token vs. wait for Jessica's email), and a generic "didn't find one, or
+    couldn't authenticate" issue made the two look the same — the 2026-10-11
+    token revocation sat behind that wording.
+    """
+    output = os.environ.get("GITHUB_OUTPUT")
+    if output:
+        with open(output, "a", encoding="utf-8") as f:
+            f.write(f"failure_reason={reason}\n")
+
+
 def main() -> int:
     service = gmail_service()
 
@@ -171,10 +186,22 @@ def main() -> int:
     # last one and silently failed the whole run; `from:` is the one thing
     # about this email that's actually guaranteed to be stable.
     query = f'from:{CONFIG["sender"]} newer_than:{CONFIG["lookback_days"]}d'
-    resp = service.users().messages().list(userId="me", q=query).execute()
+    try:
+        # The refresh token is first exercised here, so this is where a
+        # revoked one surfaces.
+        resp = service.users().messages().list(userId="me", q=query).execute()
+    except RefreshError as err:
+        print(
+            "Gmail refused the OAuth refresh token — it's been revoked or has "
+            "expired, not a missing email. Re-run automation/get_refresh_token.py "
+            f"locally and update the GMAIL_OAUTH_REFRESH_TOKEN secret. ({err})"
+        )
+        report_failure("auth")
+        return 1
     refs = resp.get("messages", [])
     if not refs:
         print(f"No email matched {query!r} in the last {CONFIG['lookback_days']} days.")
+        report_failure("no-email")
         return 1
 
     # format="raw" hands back the same RFC822 bytes IMAP used to — reusing
