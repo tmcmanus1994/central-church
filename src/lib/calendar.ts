@@ -395,12 +395,27 @@ export async function getCalendarEvent(slug: string) {
   return (await getAllCalendarEvents()).find((e) => e.slug === slug);
 }
 
+/** How soon an event has to be to win the spotlight on its photo alone. */
+const SPOTLIGHT_WINDOW_DAYS = 45;
+
 /**
  * The featured event. Google Calendar has no "spotlight" field, so the next
  * event carrying a photo is promoted — that keeps the homepage banner looking
  * intentional without asking anyone to tag events specially.
+ *
+ * "Next" is bounded to SPOTLIGHT_WINDOW_DAYS: without that, an annual event
+ * many months out (Kids Week in October, for a "first week of summer" camp)
+ * could win by default simply because it's the first thing in the whole
+ * 240-day `upcoming` list that has a registered photo, even though nothing
+ * about it is actually coming up soon. Within the window, a photo still
+ * wins; outside it, falls back to the plain next event (text-only banner,
+ * same as before this had any photo at all).
  */
 export async function getCalendarSpotlight(): Promise<ChurchEvent | undefined> {
   const { upcoming } = await getCalendar();
-  return upcoming.find((e) => e.image) ?? upcoming[0];
+  const cutoff = Date.now() + SPOTLIGHT_WINDOW_DAYS * 86_400_000;
+  const soonWithPhoto = upcoming.find(
+    (e) => e.image && new Date(e.start).getTime() <= cutoff,
+  );
+  return soonWithPhoto ?? upcoming[0];
 }
