@@ -30,55 +30,19 @@ export interface BulletinEvent extends ChurchEvent {
 
 export const bulletinEvents: BulletinEvent[] = [
   {
-    slug: "mens-golf-tournament",
-    title: "Men's Annual Golf Tournament — Driving for Diapers",
-    start: "2026-09-19T07:30:00-05:00",
-    location: "Rebsamen Golf Course, Little Rock, AR",
-    offsite: true,
-    description:
-      "Fellowship, fun, and a little friendly frustration on the course. Entry fee includes a pack of size 5 diapers for Kids Closet, and additional packs shave strokes off the score of the golfer you're supporting — label your pack with their name to get the credit. Donations accepted through Wednesday, September 16.",
-    tag: "All Church",
-    aliases: ["Driving for Diapers"],
-  },
-  {
-    slug: "mens-retreat",
-    title: "Central Men's Retreat — Roots Run Deep",
-    start: "2026-09-25T00:00:00-05:00",
-    end: "2026-09-26T23:59:00-05:00",
-    allDay: true,
-    location: "Corin Read Christian Camp, Bauxite, AR",
-    offsite: true,
-    description:
-      "A weekend of faith, fellowship, community, and adventure for the men of Central. $20 covers lodging and meals. RSVP by September 20.",
-    tag: "All Church",
-    aliases: ["Roots Run Deep"],
-  },
-  {
-    slug: "teens-sdc-trip",
-    title: "Teens Trip — Silver Dollar City",
-    start: "2026-09-26T09:00:00-05:00",
-    allDay: true,
-    location: "Silver Dollar City, Branson, MO",
-    offsite: true,
-    description: "Central Teens' trip to Silver Dollar City in Branson, Missouri.",
-    tag: "Central Teens",
-    ministrySlug: "teens",
-    aliases: ["SDC", "SDC Trip", "Teens SDC Trip"],
-  },
-  {
     slug: "harvest-month",
     title: "Harvest Month",
     start: "2026-10-01T09:00:00-05:00",
     allDay: true,
     location: "823 W 6th St, Little Rock",
     description:
-      "Kids' giving in the galvanized tub at the front of the auditorium helps fund Thanksgiving meals for Central friends and neighbors. Weekly giving starts October 4.",
+      "Central's one annual giving effort funds the missional work we support near and far, and the weekly focuses in October highlight that work. Kids' giving in the galvanized tub at the front of the auditorium each Sunday helps fund Thanksgiving meals for Central friends and neighbors.",
     tag: "All Church",
   },
   {
-    slug: "sunday-funday-oct4",
+    slug: "sunday-funday-oct18",
     title: "Sunday Funday",
-    start: "2026-10-04T09:00:00-05:00",
+    start: "2026-10-18T09:00:00-05:00",
     allDay: true,
     location: "Central Kids Wing",
     description: "A morning of games and fun for Central Kids.",
@@ -98,13 +62,15 @@ export const bulletinEvents: BulletinEvent[] = [
   },
   {
     slug: "trunk-or-treat",
-    title: "Trunk or Treat",
-    start: "2026-10-25T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
+    title: "Fall Fest (Trunk or Treat)",
+    start: "2026-10-25T16:00:00-05:00",
+    end: "2026-10-25T17:30:00-05:00",
+    location: "9th St. Park / MLK Elementary, Little Rock",
+    offsite: true,
     description:
-      "Trunks and volunteers are needed for games, food, or setup — sign up in the weekly email. A bin in the lobby collects candy donations for the friends and neighbors attending our annual fall event.",
+      "Our annual fall event, with a new name. Sign up to do a trunk for the kids to show off their costumes — candy and a friendly face are all that's really required — or help behind the scenes with games, food, or setup. A bin in the lobby collects candy donations for the friends and neighbors attending.",
     tag: "All Church",
+    aliases: ["Fall Fest", "Trunk or Treat", "Trunk-or-Treat"],
   },
   {
     slug: "central-discovery-oct",
@@ -117,22 +83,14 @@ export const bulletinEvents: BulletinEvent[] = [
     tag: "All Church",
   },
   {
-    slug: "teen-area-wide",
-    title: "Teen Area Wide",
-    start: "2026-10-04T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
-    tag: "Central Teens",
-    ministrySlug: "teens",
-  },
-  {
     slug: "ladies-day",
     title: "Ladies Day",
     start: "2026-10-24T09:00:00-05:00",
     allDay: true,
-    location: "The Adkisons' Home",
+    location: "The Adkisons' Farm",
     offsite: true,
-    description: "Central's annual Ladies Day, hosted at the Adkisons'. Save the date!",
+    description:
+      "Central's annual women's ministry Ladies Day at the Adkisons' farm. Courtney Hirscheider will speak on \"follow is a verb.\"",
     tag: "All Church",
   },
   {
@@ -146,18 +104,6 @@ export const bulletinEvents: BulletinEvent[] = [
     aliases: ["E. Duréy baby shower", "E. Durey baby shower"],
   },
   {
-    slug: "small-groups-oct4",
-    title: "Small Groups Meet",
-    start: "2026-10-04T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Small groups meet. If you haven't signed up, fill out the sign-up form on Facebook or the HUB.",
-    tag: "Life Groups",
-    ministrySlug: "life-groups",
-    aliases: ["Small groups meet"],
-  },
-  {
     slug: "teen-campout",
     title: "Teen Campout",
     start: "2026-10-16T00:00:00-05:00",
@@ -166,10 +112,10 @@ export const bulletinEvents: BulletinEvent[] = [
     location: "Lake Ouachita, AR",
     offsite: true,
     description:
-      "Central Teens' fall campout, now at Lake Ouachita. Sign-ups are live — remember to sign up if you're camping.",
+      "Central Teens' fall campout at Lake Ouachita, $30. Check the shared Google Doc for departure details and the packing list.",
     tag: "Central Teens",
     ministrySlug: "teens",
-    aliases: ["Camp Out", "Campout", "Teens Campout"],
+    aliases: ["Camp Out", "Campout", "Teens Campout", "Fall Campout"],
   },
   {
     slug: "small-groups-oct18",
@@ -184,6 +130,18 @@ export const bulletinEvents: BulletinEvent[] = [
     aliases: ["Small groups meet"],
   },
   {
+    slug: "iglesia-fall-retreat",
+    title: "Iglesia Fall Retreat",
+    start: "2026-10-30T00:00:00-05:00",
+    end: "2026-11-01T23:59:00-06:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description: "Fall retreat weekend for Iglesia, Central's Spanish-speaking congregation.",
+    tag: "All Church",
+    ministrySlug: "iglesia",
+    aliases: ["Iglesia Retreat", "Retiro de Otoño"],
+  },
+  {
     slug: "daylight-saving-ends",
     title: "Daylight Saving Time Ends",
     start: "2026-11-01T09:00:00-06:00",
@@ -194,21 +152,37 @@ export const bulletinEvents: BulletinEvent[] = [
     aliases: ["Daylight Savings"],
   },
   {
-    slug: "ministry-leader-meeting",
-    title: "Ministry Leader Meeting",
-    start: "2026-09-21T18:00:00-05:00",
-    location: "823 W 6th St, Little Rock",
-    description: "RSVP if you haven't already — come with your 2027 dates and budgets.",
-    tag: "All Church",
+    slug: "sunday-funday-nov1",
+    title: "Sunday Funday",
+    start: "2026-11-01T09:00:00-06:00",
+    allDay: true,
+    location: "Central Kids Wing",
+    description: "A morning of games and fun for Central Kids.",
+    tag: "Central Kids",
+    ministrySlug: "children",
   },
   {
-    slug: "family-style-communion",
-    title: "Family Style Communion",
-    start: "2026-09-27T09:00:00-05:00",
+    slug: "small-groups-nov1",
+    title: "Small Groups Meet",
+    start: "2026-11-01T09:00:00-06:00",
     allDay: true,
     location: "823 W 6th St, Little Rock",
-    description: "Communion is served family style during the regular Sunday service.",
-    tag: "All Church",
+    description:
+      "Small groups meet. If you haven't signed up, fill out the sign-up form on Facebook or the HUB.",
+    tag: "Life Groups",
+    ministrySlug: "life-groups",
+    aliases: ["Small groups meet"],
+  },
+  {
+    slug: "teens-trivia-night",
+    title: "Teens & 30's Trivia Night",
+    start: "2026-11-15T09:00:00-06:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description: "Save the date: a trivia night for Central Teens and the 30's group. Details to come.",
+    tag: "Central Teens",
+    ministrySlug: "teens",
+    aliases: ["Trivia Night", "Teens Trivia Night"],
   },
 ];
 
@@ -285,7 +259,11 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "health information about named individuals",
   },
   {
-    item: "Mark Adkison's dad, Ralph — cancer treatment",
+    item: "Mark Adkison's dad, Ralph Hazel — passed away (previously: cancer treatment)",
+    reason: "bereavement information about a named individual",
+  },
+  {
+    item: "Meech & TK Geter's grandmother — cancer treatment",
     reason: "health information about a named individual",
   },
   {
@@ -341,6 +319,27 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "personal email address",
   },
   { item: "Weekly offering and budget figures", reason: "internal finances" },
+  {
+    item: "Harvest 2026 goal ($170,000) and the weekly Kids Harvest tub totals",
+    reason: "giving figures — internal finances, same as the weekly offering",
+  },
+  {
+    item: "November baby showers — Bailey McManus (Nov 1), Caylie Mosley (Nov 7, at a member's home), Meika (Wilcox) Pratt (Nov 8)",
+    reason:
+      "member-personal; Emelia Duréy's Nov 15 shower is the one exception, published at Travelle's explicit request",
+  },
+  {
+    item: "Madi Davis — expecting, February",
+    reason: "member-personal, no public shower date given",
+  },
+  {
+    item: "Kelsey Swearengen — expecting, March",
+    reason: "member-personal, no public shower date given",
+  },
+  {
+    item: "Trace and Sarah Laffoon — baby born September 28",
+    reason: "member-personal family news, consistent with the shower and expecting-mother entries",
+  },
   {
     item: "Service members list — Tevin Patillo, Chris McNair, Cornelius Hood, Kyla Jeter",
     reason:
