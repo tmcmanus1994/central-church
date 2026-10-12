@@ -52,7 +52,15 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           FAILURE_REASON: ${{ steps.ingest.outputs.failure_reason }}
         run: |
+          # One issue per problem, not one per attempt: with the watchdog
+          # retrying and a human re-running by hand, a dead token filed four
+          # identical issues in twelve hours on 2026-10-11/12.
           if [ "$FAILURE_REASON" = "auth" ]; then
+            existing=$(gh issue list --state open --search "Gmail OAuth token revoked in:title" --json number --jq '.[0].number // empty')
+            if [ -n "$existing" ]; then
+              echo "Token-revoked issue #$existing is already open — not filing another."
+              exit 0
+            fi
             gh issue create \
               --title "Gmail OAuth token revoked — bulletin automation needs a new refresh token ($(date +%F))" \
               --body "Gmail rejected the automation's OAuth refresh token (invalid_grant: expired or revoked). This is not a missing email — every run will fail the same way until the token is replaced, and the watchdog's retries won't help.
