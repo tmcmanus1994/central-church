@@ -17,18 +17,90 @@ import {
 // that outside dependency. Keep the two in step when the package is upgraded.
 RuntimeLoader.setWasmUrl("/rive/rive.wasm");
 
+export interface RiveFile {
+  /** Path under /public, e.g. "/rive/Final.riv". */
+  src: string;
+  label: string;
+  /** Artboard to open first; the file's own default when omitted. */
+  artboard?: string;
+}
+
 /**
  * A bare-bones Rive viewer for trying out `.riv` exports on the real site.
  *
  * It reads whatever the file contains (artboards, timeline animations, state
  * machines, and each state machine's inputs) and puts a control on screen for
  * every one of them, so a file can be poked at without writing any code for
- * it first. Nothing here is specific to one file — swap `src` and it still
- * works.
+ * it first. Hover and click listeners inside a state machine work on the
+ * canvas directly, as they would in a real embed.
  */
-export function RivePlayground({ src }: { src: string }) {
+export function RivePlayground({ files }: { files: RiveFile[] }) {
+  const [file, setFile] = useState(files[0]);
+  // `undefined` = the file's default artboard. Changing it re-mounts the viewer,
+  // since the runtime picks the artboard once, at load.
+  const [artboard, setArtboard] = useState<string | undefined>(files[0]?.artboard);
+  const [artboards, setArtboards] = useState<string[]>([]);
+
+  return (
+    <div className="flex flex-col gap-6">
+      {files.length > 1 && (
+        <Section title="File">
+          <div className="flex flex-wrap gap-2">
+            {files.map((f) => (
+              <Button
+                key={f.src}
+                active={f.src === file.src}
+                onClick={() => {
+                  setFile(f);
+                  setArtboard(f.artboard);
+                  setArtboards([]);
+                }}
+              >
+                {f.label}
+              </Button>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {artboards.length > 1 && (
+        <Section title="Artboards">
+          <div className="flex flex-wrap gap-2">
+            {artboards.map((name, i) => (
+              <Button
+                key={name}
+                active={artboard === name || (artboard === undefined && i === 0)}
+                onClick={() => setArtboard(name)}
+              >
+                {name}
+              </Button>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      <Viewer
+        key={`${file.src}::${artboard ?? ""}`}
+        src={file.src}
+        artboard={artboard}
+        onArtboards={setArtboards}
+      />
+    </div>
+  );
+}
+
+function Viewer({
+  src,
+  artboard,
+  onArtboards,
+}: {
+  src: string;
+  artboard?: string;
+  onArtboards: (names: string[]) => void;
+}) {
   const { rive, RiveComponent } = useRive({
     src,
+    artboard,
     autoplay: true,
     layout: new Layout({ fit: Fit.Contain, alignment: Alignment.Center }),
   });
@@ -38,19 +110,23 @@ export function RivePlayground({ src }: { src: string }) {
   // Bumped after a trigger fires or a value changes, so the input list re-reads.
   const [tick, setTick] = useState(0);
 
-  const contents = rive?.contents;
-  const artboard = contents?.artboards?.[0];
-  const animations = artboard?.animations ?? [];
-  const stateMachines = artboard?.stateMachines ?? [];
+  const allArtboards = rive?.contents?.artboards ?? [];
+  const current =
+    (artboard ? allArtboards.find((a) => a.name === artboard) : undefined) ?? allArtboards[0];
+  const animations = current?.animations ?? [];
+  const stateMachines = current?.stateMachines ?? [];
 
-  // Pick a state machine by default when the file has one: that's what a
-  // real embed would run, and it's where the interactive inputs live.
   useEffect(() => {
-    if (!rive || active !== null) return;
-    const first = stateMachines[0]?.name ?? animations[0];
-    if (first) play(first);
+    if (!rive) return;
+    onArtboards(allArtboards.map((a) => a.name));
+    // Pick a state machine by default when the artboard has one: that's what a
+    // real embed would run, and it's where hover/click listeners and inputs live.
+    if (active === null) {
+      const first = stateMachines[0]?.name ?? animations[0];
+      if (first) play(first);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rive, artboard]);
+  }, [rive, current]);
 
   function play(name: string) {
     if (!rive) return;
@@ -74,10 +150,10 @@ export function RivePlayground({ src }: { src: string }) {
 
         {rive && (
           <>
-            <Section title="File">
+            <Section title="Now playing">
               <dl className="m-0 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
                 <dt className="text-ink/60">Artboard</dt>
-                <dd className="m-0 font-medium text-ink">{artboard?.name ?? "—"}</dd>
+                <dd className="m-0 font-medium text-ink">{current?.name ?? "—"}</dd>
                 <dt className="text-ink/60">Playing</dt>
                 <dd className="m-0 font-medium text-ink">{active ?? "—"}</dd>
               </dl>
@@ -97,6 +173,9 @@ export function RivePlayground({ src }: { src: string }) {
                     </Button>
                   ))}
                 </div>
+                <p className="m-0 mt-2 text-sm text-ink/60">
+                  Hover and click listeners run while a state machine is playing — try the canvas.
+                </p>
               </Section>
             )}
 
@@ -126,7 +205,10 @@ export function RivePlayground({ src }: { src: string }) {
             )}
 
             {active && stateMachines.some((sm) => sm.name === active) && inputs.length === 0 && (
-              <p className="m-0 text-ink/60">This state machine has no inputs.</p>
+              <p className="m-0 text-ink/60">
+                This state machine has no inputs — it&rsquo;s driven by listeners (hover, click) on the
+                canvas instead.
+              </p>
             )}
           </>
         )}

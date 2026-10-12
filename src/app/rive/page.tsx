@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { RivePlayground } from "@/components/RivePlayground";
+import { RivePlayground, type RiveFile } from "@/components/RivePlayground";
 
 /**
  * Travelle's private scratch page for learning Rive. Not linked from
@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const RIVE_FILE = "/rive/school_of_motion_test.riv";
+/** Drop a new export into public/rive/ and add it here. First entry loads by default. */
+const RIVE_FILES: RiveFile[] = [
+  // "Artboard 1" is the composite with all the icons; the file's own default is the lone Mail icon.
+  { src: "/rive/Final.riv", label: "Final", artboard: "Artboard 1" },
+  { src: "/rive/school_of_motion_test.riv", label: "School of Motion test" },
+];
 
 export default function RivePage() {
   return (
@@ -23,13 +28,14 @@ export default function RivePage() {
         Rive playground
       </h1>
       <p className="m-0 mt-4 max-w-[640px] text-[17px] leading-[1.6] text-body lg:mt-5">
-        Playing <code className="rounded bg-line/60 px-1.5 py-0.5 text-[15px]">{RIVE_FILE}</code>.
-        Every artboard, animation, state machine, and input in the file shows up on the right —
-        click around to see how it responds. To try a different export, replace the file in{" "}
-        <code className="rounded bg-line/60 px-1.5 py-0.5 text-[15px]">public/rive/</code>.
+        Every artboard, animation, state machine, and input in the file shows up as a control —
+        click around, and hover or click the canvas itself to trip any listeners. To try a different
+        export, drop it in{" "}
+        <code className="rounded bg-line/60 px-1.5 py-0.5 text-[15px]">public/rive/</code> and add it
+        to the list in this page.
       </p>
       <div className="mt-8 lg:mt-12">
-        <RivePlayground src={RIVE_FILE} />
+        <RivePlayground files={RIVE_FILES} />
       </div>
     </section>
   );
