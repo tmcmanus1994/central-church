@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Fit,
   Alignment,
@@ -110,23 +110,29 @@ function Viewer({
   // Bumped after a trigger fires or a value changes, so the input list re-reads.
   const [tick, setTick] = useState(0);
 
-  const allArtboards = rive?.contents?.artboards ?? [];
-  const current =
-    (artboard ? allArtboards.find((a) => a.name === artboard) : undefined) ?? allArtboards[0];
+  // `rive.contents` is rebuilt on every access, so read it once per loaded
+  // instance. Reading it per render would hand the effect below a fresh
+  // object each time and re-run it on every re-render — including the ones
+  // the runtime's own resize handling causes.
+  const contents = useMemo(() => rive?.contents, [rive]);
+  const allArtboards = useMemo(() => contents?.artboards ?? [], [contents]);
+  const current = useMemo(
+    () => (artboard ? allArtboards.find((a) => a.name === artboard) : undefined) ?? allArtboards[0],
+    [allArtboards, artboard],
+  );
   const animations = current?.animations ?? [];
   const stateMachines = current?.stateMachines ?? [];
 
+  // Runs once per loaded file: reports the artboard list up and starts the
+  // artboard's first state machine, which is what a real embed would run and
+  // where hover/click listeners and inputs live.
   useEffect(() => {
     if (!rive) return;
     onArtboards(allArtboards.map((a) => a.name));
-    // Pick a state machine by default when the artboard has one: that's what a
-    // real embed would run, and it's where hover/click listeners and inputs live.
-    if (active === null) {
-      const first = stateMachines[0]?.name ?? animations[0];
-      if (first) play(first);
-    }
+    const first = stateMachines[0]?.name ?? animations[0];
+    if (first) play(first);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rive, current]);
+  }, [rive]);
 
   function play(name: string) {
     if (!rive) return;
