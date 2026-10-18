@@ -11,6 +11,7 @@ import {
   CENTRAL_LOCATIONS,
   INCOMPLETE_PATTERNS,
   LOCATION_OVERRIDES,
+  TIME_OVERRIDES,
   PRIVATE_PATTERNS,
   TITLE_CLEANUP,
 } from "@/content/calendar-rules";
@@ -107,7 +108,7 @@ function bulletinIndex(): Map<string, BulletinEvent> {
  * it blank and took the building's address by default.
  */
 function withBulletin(event: ChurchEvent, source: BulletinEvent): ChurchEvent {
-  return {
+  return withTimeOverride({
     ...event,
     slug: source.slug,
     title: source.title,
@@ -121,6 +122,22 @@ function withBulletin(event: ChurchEvent, source: BulletinEvent): ChurchEvent {
     ministrySlug: event.ministrySlug ?? source.ministrySlug,
     ctaLabel: event.ctaLabel ?? source.ctaLabel,
     ctaHref: event.ctaHref ?? source.ctaHref,
+  });
+}
+
+/**
+ * The one case where the calendar does not win on timing: a manual entry in
+ * TIME_OVERRIDES, for a calendar entry known to be wrong. Applied after the
+ * bulletin merge so the key is the event's final slug.
+ */
+function withTimeOverride(event: ChurchEvent): ChurchEvent {
+  const fix = TIME_OVERRIDES[event.slug];
+  if (!fix) return event;
+  return {
+    ...event,
+    start: fix.start,
+    end: fix.end ?? event.end,
+    allDay: fix.allDay ?? (fix.end ? undefined : event.allDay),
   };
 }
 
@@ -290,7 +307,7 @@ export async function getCalendar(): Promise<CalendarData> {
   const matched = new Set<string>();
   const named = all.map((event) => {
     const source = bulletin.get(dedupeKey(event.title));
-    if (!source) return event;
+    if (!source) return withTimeOverride(event);
     matched.add(source.slug);
     return withBulletin(event, source);
   });

@@ -132,6 +132,18 @@ export const LOCATION_OVERRIDES: Record<string, string> = {
 };
 
 /**
+ * Start/end for events whose calendar entry has the wrong time. The calendar
+ * normally wins on timing (it's edited all week), so this is the manual
+ * override for when it's simply wrong and nobody has fixed it yet. Keyed by
+ * the event's final slug — the bulletin's slug once the two have merged.
+ * Remove the entry once the calendar is corrected.
+ */
+export const TIME_OVERRIDES: Record<string, { start: string; end?: string; allDay?: boolean }> = {
+  // Flyer says 4–5:30 PM; the calendar entry carried a different start.
+  "trunk-or-treat": { start: "2026-10-25T16:00:00-05:00", end: "2026-10-25T17:30:00-05:00" },
+};
+
+/**
  * Noise Google Calendar titles tend to carry. Applied in order; the first
  * capture group becomes the cleaned title.
  */
