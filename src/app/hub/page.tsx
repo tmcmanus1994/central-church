@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLink, Button } from "@/components/Button";
 import { GuestSignInButton } from "@/components/GuestSignInButton";
+import { HubAnnouncements } from "@/components/HubAnnouncements";
 import { PrayerRequestButton } from "@/components/PrayerRequestButton";
 import { SafetyTagline } from "@/components/SafetyTagline";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
@@ -74,26 +75,12 @@ export default async function HubPage() {
 
       <SafetyTagline className="mt-4" />
 
-      {/* Announcements lead — same content as the bulletin. Not a Reveal:
-          it's the very next thing after Guest Sign-In/Prayer Request, so a
-          scroll-gated fade-in reads as "the page ends here" before anyone
-          scrolls. Everything further down still animates in on scroll. */}
-      <section className="mt-7 rounded-2xl border border-line p-5 lg:p-6">
-        <h2 className="m-0 mb-3.5 font-display text-[21px] tracking-[-.02em]">
-          Announcements
-        </h2>
-        <ul className="m-0 flex list-none flex-col gap-3.5 p-0">
-          {bulletin.announcements.map((a) => (
-            <li
-              key={a.title}
-              className="border-b border-line pb-3.5 text-[15.5px] leading-[1.6] last:border-0 last:pb-0"
-            >
-              <span className="block font-semibold text-ink">{a.title}</span>
-              <span className="text-body">{a.body}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {/* Announcements lead — same content as the bulletin, as collapsed
+          rows so the whole list fits one screen. Not a Reveal: it's the very
+          next thing after Guest Sign-In/Prayer Request, so a scroll-gated
+          fade-in reads as "the page ends here" before anyone scrolls.
+          Everything further down still animates in on scroll. */}
+      <HubAnnouncements items={bulletin.announcements} />
 
       {/* What's on */}
       <Reveal as="section" className="mt-4 rounded-2xl border border-line p-5 lg:p-6">
