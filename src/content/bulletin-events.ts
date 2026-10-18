@@ -68,7 +68,7 @@ export const bulletinEvents: BulletinEvent[] = [
     location: "9th St. Park / MLK Elementary, Little Rock",
     offsite: true,
     description:
-      "Our annual fall event, with a new name. Sign up to do a trunk for the kids to show off their costumes — candy and a friendly face are all that's really required — or help behind the scenes with games, food, or setup. A bin in the lobby collects candy donations for the friends and neighbors attending.",
+      "Our annual fall event, with a new name: Trunk or Treat from 4–4:20, then games and fun until 5:30. Sign up to do a trunk for the kids to show off their costumes — candy and a friendly face are all that's really required — or help behind the scenes with games, food, or setup. A bin in the lobby collects candy donations for the friends and neighbors attending.",
     tag: "All Church",
     aliases: ["Fall Fest", "Trunk or Treat", "Trunk-or-Treat"],
   },
@@ -90,8 +90,11 @@ export const bulletinEvents: BulletinEvent[] = [
     location: "The Adkisons' Farm",
     offsite: true,
     description:
-      "Central's annual women's ministry Ladies Day at the Adkisons' farm. Courtney Hirscheider will speak on \"follow is a verb.\"",
+      "Central's annual fall Ladies Day at the Adkisons' farm. Courtney Hirscheider will speak on \"follow is a verb.\" Soup and sweet fellowship are on the menu, outside barring rain — check the weather, carpool if you'd like, and be prepared to park in a field. Meal sign-up is on the Facebook page.",
     tag: "All Church",
+    ctaLabel: "Meal sign-up",
+    ctaHref:
+      "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2U1SnmdZkJLrD4vcyQWxqPFnXpJ58CeGddnCt5CUDVyrQs2UvwSOLGm8WxY4lYZ7WT72cJLu9jlYHJh2NQVkYl-2Fd07khHjac50yqGz2v8aqQoj3g6WnnJgin-2BE8vXnyv96eQuirorlHfSxknf7AhG9B4i9qeRwHVnMn5gRYTO-2BABK6rw3B0Ouwd9D2f3Wo6DlUOZWzr0UG5B-2FbccmQjCF6NiTdFAFTXGtpjQ4-2FLqsneJQiD0zqGlVcFtr-2FoJUuZ0sI2Ov0-2By3n5-2Bn2jC1MzA7Y0pN-2Fmy0cjmsf8T5cyda3ZGQ-3D-3D3AGw_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBsuNuDvClcfFPnyKDwqKbJCrYx-2FDs3-2BoMKP104S45ribFDT6EXTvHArOcW38gxlxFYCNA-2B57AHccdu9m-2F9CmXZOoJj8ZDYmTU-2FyELWMpd4SihI9J1XAhUFEQMn2q60MNDqmgEUfWb8ZLHQzMLxOUCX7uuYTFBzqZCjbF7iBXHLigBlsBQsL8AwEjUAtZhUR9w35UPN-2FX-2BqPVnpraVP0-2FK-2FVvrZEnfuv9hJospyQAHxRT",
   },
   {
     slug: "e-durey-baby-shower",
@@ -135,8 +138,9 @@ export const bulletinEvents: BulletinEvent[] = [
     start: "2026-10-30T00:00:00-05:00",
     end: "2026-11-01T23:59:00-06:00",
     allDay: true,
-    location: "823 W 6th St, Little Rock",
-    description: "Fall retreat weekend for Iglesia, Central's Spanish-speaking congregation.",
+    location: "Corin Read Christian Camp, Bauxite, AR",
+    offsite: true,
+    description: "Fall retreat weekend for Iglesia, Central's Spanish-speaking congregation, at Corin Read Christian Camp.",
     tag: "All Church",
     ministrySlug: "iglesia",
     aliases: ["Iglesia Retreat", "Retiro de Otoño"],
@@ -172,6 +176,19 @@ export const bulletinEvents: BulletinEvent[] = [
     tag: "Life Groups",
     ministrySlug: "life-groups",
     aliases: ["Small groups meet"],
+  },
+  {
+    slug: "teens-fall-retreat",
+    title: "Central Teens Fall Retreat",
+    start: "2026-11-13T00:00:00-06:00",
+    end: "2026-11-15T23:59:00-06:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description:
+      "Central Teens' Fall Retreat, $50. Sign-ups are live — check the shared Google Doc for all the info.",
+    tag: "Central Teens",
+    ministrySlug: "teens",
+    aliases: ["Fall Retreat", "Teen Retreat", "Teens Fall Retreat"],
   },
   {
     slug: "teens-trivia-night",
@@ -324,9 +341,21 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "giving figures — internal finances, same as the weekly offering",
   },
   {
-    item: "November baby showers — Bailey McManus (Nov 1), Caylie Mosley (Nov 7, at a member's home), Meika (Wilcox) Pratt (Nov 8)",
+    item: "November baby showers — Bailey McManus (Nov 1, 1 PM, Gym Alcove; Babylist registry linked in the email; expecting a girl), Caylie Mosley (Nov 7, at a member's home), Meika (Wilcox) Pratt (Nov 8)",
     reason:
       "member-personal; Emelia Duréy's Nov 15 shower is the one exception, published at Travelle's explicit request",
+  },
+  {
+    item: "Vera Pollard — complicated health issues",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Lena Wilson — health issues",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Merrily Low — dealing with Alzheimer's",
+    reason: "health information about a named individual",
   },
   {
     item: "Madi Davis — expecting, February",
