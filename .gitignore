@@ -37,14 +37,12 @@ __pycache__/
 # Curated copy goes in src/content/bulletin.ts; the raw draft stays local.
 /content-drafts/
 
-# weekly bulletin automation's raw inbox (automation/ingest.py) — same
-# reasoning as content-drafts/ above: the email and PDF carry things that
-# don't belong in git history. Only lives on the Actions runner for the
-# length of one workflow run. runs/*-summary.md (the human-readable output)
-# is committed on purpose — it never contains what this carries.
+# raw bulletin email/PDF, if ever copied locally for a manual run — same
+# reasoning as content-drafts/ above: they carry things that don't belong
+# in git history. runs/*-summary.md (the human-readable output) is
+# committed on purpose — it never contains what this carries.
 /inbox/
 
-# OAuth client secret downloaded from Google Cloud Console for
-# get_refresh_token.py's one-time setup — never belongs in git regardless
-# of where it's saved.
+# Google Cloud OAuth client secrets (from the retired Gmail-API setup) —
+# never belong in git regardless of where they're saved.
 client_secret*.json

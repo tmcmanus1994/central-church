@@ -167,12 +167,13 @@ parse contains all of it.
 
 ### The manual process above is now automated on Sundays
 
-`/automation` runs the same PDF-parsing script from an email, on a schedule,
-and opens a pull request instead of leaving it for someone to run by hand —
-see `automation/README.md` for the full setup and how it behaves. It follows
-the exact same rules as the manual process above (same withholding policy,
-same "email wins over PDF" precedence) and only ever proposes a change via
-PR; nothing reaches the live site without a human merging it.
+A Claude Code Routine runs the `weekly-bulletin` skill
+(`.claude/skills/weekly-bulletin/SKILL.md`) every Sunday morning: it reads
+the week's email and PDF from the Drive folder "Central Bulletins", edits the
+two content files under the same rules as the manual process above (same
+withholding policy, same "email wins over PDF" precedence), and pushes to
+the deploy branch once `tsc` and the build pass. See `automation/README.md`
+for how the pieces fit and what to do when a week goes wrong.
 
 ## Content & data
 
@@ -344,8 +345,8 @@ is set).
   it at the office (or a distribution address) once it's approved. Both forms
   submit via `fetch` (see `src/lib/use-form-post.ts`) so a submission shows an
   inline confirmation instead of navigating to the raw API response.
-- **Bulletin automation** — `src/content/bulletin.ts` is hand-edited until
-  the weekly PDF parser is wired up; `/bulletin` and `/hub` both read it.
+- **Bulletin automation** — live; see "The manual process above is now
+  automated on Sundays". `/bulletin` and `/hub` both read `bulletin.ts`.
 - **Blog migration** — ~30 posts from the current site, existing URLs preserved.
 - **Map embeds** — placeholder slots on Plan a Visit, event detail, footer.
 

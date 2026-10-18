@@ -1,172 +1,86 @@
 # Weekly bulletin automation
 
-Every Sunday morning, an agent reads that week's bulletin email and opens a
-pull request updating `src/content/bulletin.ts` and
-`src/content/bulletin-events.ts` — the files behind `/bulletin`, `/hub`,
-`/events`, and the homepage spotlight. A human reviews and merges; nothing
-reaches the live site without that review.
+Every Sunday morning, Claude reads that week's bulletin email and updates
+`src/content/bulletin.ts` and `src/content/bulletin-events.ts` — the files
+behind `/bulletin`, `/hub`, `/events`, and the homepage spotlight — then
+pushes straight to the deploy branch once the build passes. There is no pull
+request and no review step (Travelle's call, 2026-10-06).
 
 ```
-Sun ~6 AM CT   weekly-bulletin.yml   Gmail (API, OAuth) -> inbox/{date}/
-                                      -> Claude reads AGENT.md
-                                      -> opens a PR against bulletin.ts /
-                                         bulletin-events.ts
-                                      -> commits runs/{date}-summary.md
+Fri/Sat        Jessica emails the bulletin to Travelle's Gmail
+               (jessica@arcentralchurch.org -> travelle18@gmail.com)
 
-Sun ~9 AM CT   weekly-bulletin-watchdog.yml
-                                      -> checks whether the run above
-                                         actually happened today
-                                      -> if not, triggers it and files an
-                                         issue
+within 1 hr    Google Apps Script (in Travelle's Google account)
+               -> saves the email body as HTML plus the PDF and flyer
+                  images into the Drive folder "Central Bulletins",
+                  named "YYYY-MM-DD <file>", and labels the email
+                  `bulletin-saved` so it is never filed twice
+
+Sun 5:54 AM CT Claude Code Routine "Weekly bulletin update"
+               -> wakes the long-running Claude Code session that holds
+                  this repo and the Google Drive connector
+               -> runs the `weekly-bulletin` skill
+                  (.claude/skills/weekly-bulletin/SKILL.md)
+               -> edits the two content files, writes runs/{date}-summary.md
+               -> npx tsc --noEmit && npm run build
+               -> commits and pushes to the deploy branch
+               -> Vercel deploys within about a minute
 ```
 
-One workflow, one run, entirely on the Actions runner's disk — the raw
-email and PDF (which carry named prayer requests, phone numbers, and giving
-figures) are never committed to git or uploaded anywhere. Only the curated,
-already-public-safe result reaches a PR.
-
-The watchdog exists because GitHub's own cron scheduler occasionally skips a
-run under load — no error, nothing in the logs, it simply never starts
-(happened 2026-09-13). Three hours after the primary schedule, it checks
-whether `weekly-bulletin.yml` actually ran today; if not, it triggers it
-itself and opens an issue so the miss is visible instead of silent. It's a
-no-op most weeks.
+This replaced a GitHub Actions workflow (`weekly-bulletin.yml`, retired
+2026-10-18) that pulled the email through the Gmail API with an OAuth
+refresh token. Google kept revoking that token every few weeks — first for
+an IMAP app password, then for OAuth — and each revocation cost a Sunday.
+The current path has no credentials of its own: the Apps Script runs inside
+Travelle's Google account, and Claude reads Drive through the connector he
+already has attached.
 
 ## Files
 
-- **`AGENT.md`** — the standing instructions Claude Code follows each run.
-  This is the actual spec; read it before changing how the automation
-  behaves.
-- **`config.json`** — which sender to match, and how many days back to
-  search. Matched by sender only, not subject — Jessica's subject line
-  varies week to week ("Weekly Bulletin 09.20.26" one week, "Weekly
-  09.27.26" the next), so it's not something to match on reliably.
-- **`ingest.py`** — reads the dedicated automation Gmail mailbox via the
-  Gmail API (OAuth, not IMAP), finds this week's bulletin email, and writes
-  it to `inbox/{date}/` (`email.md`, `bulletin.pdf`, `meta.json`). Exits
-  nonzero if nothing matches, which the workflow turns into a GitHub issue.
-- **`get_refresh_token.py`** — one-time, run locally (not in CI) to mint the
-  OAuth refresh token `ingest.py` needs. See "One-time setup" below.
-- **`../scripts/import-bulletin.mjs`** — already existed before this
-  automation (built for the manual bulletin process); the agent reuses it to
-  parse the PDF and flag sensitive lines, rather than re-implementing PDF
-  parsing.
+- **`../.claude/skills/weekly-bulletin/SKILL.md`** — the standing
+  instructions Claude follows each run. This is the actual spec: which Drive
+  files to read, the content rules (what never gets published and goes to
+  `withheldFromBulletin` instead), how to edit each field, and the
+  build-then-push steps. Read it before changing how the automation behaves.
+- **`../runs/`** — one summary per week that changed something, committed
+  alongside the content change. Safe to read; never contains names, health
+  details, or figures.
+- **`../scripts/import-bulletin.mjs`** — the original manual PDF parser,
+  still usable by hand (`npm run bulletin -- <pdf>`). The skill reads the PDF
+  through the Drive connector instead and does not depend on it.
 
-## One-time setup
+Nothing else lives in this folder anymore. The Apps Script is not in the
+repo: it is in Travelle's Google account at script.google.com, with a
+time-driven trigger.
 
-1. **Create a dedicated Gmail mailbox** for this, if one doesn't already
-   exist — nothing else should ever use it.
-2. **Set up the forward**, in the account where Jessica's bulletin email
-   currently arrives: Gmail Settings -> Filters and Blocked Addresses ->
-   Create a new filter -> From `jessica@arcentralchurch.org`, Subject
-   contains `Weekly Bulletin` -> Forward it to the dedicated mailbox. Gmail
-   will send a one-time confirmation code to that mailbox to verify the
-   forwarding address.
-3. **Create a Google Cloud project and OAuth credentials** — this can be
-   done from any Google account, it doesn't have to be the dedicated
-   mailbox:
-   - console.cloud.google.com -> create a new project (any name, e.g.
-     "Central Bulletin Automation").
-   - APIs & Services -> Library -> search "Gmail API" -> Enable.
-   - APIs & Services -> OAuth consent screen -> User type **External** ->
-     fill in an app name and your own email for support/developer contact.
-     Add scope `https://www.googleapis.com/auth/gmail.readonly`. Under
-     **Test users**, add the dedicated mailbox's address — the app stays in
-     "Testing" mode (no Google verification review needed) since it's only
-     ever used by that one address.
-   - APIs & Services -> Credentials -> Create Credentials -> OAuth client ID
-     -> Application type **Desktop app** -> Create, then **Download JSON**.
-4. **Run the one-time consent flow locally** (not in CI — this step needs a
-   real browser and a human to click Allow):
-   ```
-   pip install google-auth-oauthlib
-   python automation/get_refresh_token.py path/to/the/downloaded.json
-   ```
-   A browser opens. Sign in **as the dedicated mailbox**, not your personal
-   account, and allow read-only Gmail access. The script prints three
-   values.
-5. **Add repo secrets** (Settings -> Secrets and variables -> Actions) with
-   those three printed values, plus the existing Claude token:
+## The Routine
 
-   | Secret | Value |
-   |---|---|
-   | `GMAIL_OAUTH_CLIENT_ID` | printed by `get_refresh_token.py` |
-   | `GMAIL_OAUTH_CLIENT_SECRET` | printed by `get_refresh_token.py` |
-   | `GMAIL_OAUTH_REFRESH_TOKEN` | printed by `get_refresh_token.py` |
-   | `CLAUDE_CODE_OAUTH_TOKEN` | generate locally with `claude setup-token` — bills against the existing Claude subscription, no separate balance to fund. Alternative: an `ANTHROPIC_API_KEY` from console.anthropic.com instead, which bills pay-as-you-go against that Console account's own balance — if you switch to that, update the workflow's `with:` block to use `anthropic_api_key` in place of `claude_code_oauth_token` |
+Name: **Weekly bulletin update**. Schedule: Sundays 5:54 AM Central
+(`CRON_TZ=America/Chicago 54 5 * * 0`). It fires into the existing Claude
+Code session named "Central Church" (the one that built this site) because a
+Routine created from a cloud session cannot carry the repo or connectors into
+a fresh session. Consequences:
 
-Everything else — permissions, the cron schedule — is already set in
-`.github/workflows/weekly-bulletin.yml`.
+- Keep that session around. Deleting it orphans the Routine.
+- There is no push or email notification when a run finishes; the report
+  lands in that session. To get notifications, recreate the Routine from the
+  Cowork desktop app with Google Drive and this repo attached, as a
+  fresh-session Routine, using the same prompt.
 
-This replaced an earlier IMAP + App Password setup, which Google's
-account-safety system kept silently flagging: a static password logging in
-from a different GitHub-assigned cloud region on basically every run reads
-as suspicious, especially against a low-activity, single-purpose mailbox
-with no other usage pattern to offset it. OAuth doesn't hit that trip-wire
-— it's a registered app with a scoped, revocable grant, not an
-unfamiliar-looking login attempt.
-
-## What happens on a normal Sunday
-
-1. `ingest.py` finds the email, saves it + the PDF to `inbox/{date}/`.
-2. Claude reads `email.md` (source of truth), parses `bulletin.pdf` for
-   supporting detail, and diffs both against the current content files.
-3. Anything health/bereavement/shower/phone/personal-email/giving-related
-   gets kept out of the public files and instead tracked in
-   `withheldFromBulletin` (`bulletin-events.ts`) — same as the existing
-   manual process already does.
-4. If there's a real change, it opens a PR: `Bulletin update — {weekOf}`,
-   with a summary of what changed, what was withheld, and anything
-   ambiguous that needs a human's read. If nothing changed, no PR — no
-   noise for a re-run.
-5. The agent ends the PR body with its own verdict — `Safe to auto-merge:
-   yes` for a routine week (everything traced cleanly to the sources, no
-   contradictions, no judgment calls), or `no — {reason}` for anything less
-   clear-cut. A workflow step logs that verdict and then verifies the build
-   (`tsc`/`build` against the PR branch) before merging — every PR merges
-   once the build passes, regardless of the verdict. The verdict is kept
-   purely as a record of which weeks the agent itself flagged as worth a
-   second look after the fact, not as a merge gate.
+To run a week by hand: in that session, say "run this week's bulletin
+update", or in Claude Code on the repo run `/weekly-bulletin`.
 
 ## When something goes wrong
 
-- **"Gmail OAuth token revoked" issue** -> the refresh token is dead and
-  nothing will fix itself; the watchdog's retries fail the same way. Google
-  revokes a Gmail-scoped token when the mailbox's password changes, when
-  its account-safety system locks and restores the account, or when the
-  app is removed under Google Account -> Security -> Third-party access.
-  Re-run `get_refresh_token.py` locally, replace the
-  `GMAIL_OAUTH_REFRESH_TOKEN` secret, then re-run the workflow (Actions tab
-  -> Weekly bulletin update -> Run workflow).
-- **"No bulletin email found" issue** -> Jessica's email isn't in the
-  mailbox yet. The watchdog retries at 9 AM and noon CT on its own; only
-  if it's still missing after that, check whether she sent it and whether
-  the Gmail forward is still in place, then re-run manually.
-- **No PDF attached, or the PDF won't parse** -> either way, the run
-  continues email-only; noted in the PR summary.
-- **Email and PDF disagree on a fact** -> the email wins; the contradiction
-  is noted in the PR summary so you can flag it to the office.
-- **Anything else fails partway** (git, GitHub API, Claude itself) -> the
-  agent is instructed to stop and open an issue rather than leave a
-  half-finished branch or commit. A stale site is fine; a wrong one isn't.
-
-## Rollout
-
-Auto-merge is on (`automation/config.json`'s `auto_merge_enabled`) for every
-PR, not just ones the agent calls routine — as of 2026-10-06, Travelle's own
-call after watching enough weeks run correctly. The agent's "Safe to
-auto-merge: yes/no" verdict (see AGENT.md step 9) still gets written and
-logged, so there's a record of which weeks it flagged as having a
-contradiction, an ambiguous date, or a judgment call, but nothing holds the
-PR open for review anymore — the only remaining gate is the independent
-build check (`tsc`/`build`) run before merging.
-
-In other words: there is no longer a human review step in the normal path.
-If a `no`-verdict week publishes something that needs correcting, that's a
-manual follow-up fix after the fact, same as any other content correction
-on this site — not something caught before it goes live.
-
-To bring human review back for flagged weeks, or to pause auto-merge
-entirely, set `auto_merge_enabled` to `false` in `automation/config.json`
-(no code change needed) — or ask Claude to restore the verdict-gated
-version described in this file's git history.
+- **No file for this week in "Central Bulletins"** -> the run changes nothing
+  and says so. Check that Jessica sent the email, that it reached
+  travelle18@gmail.com, and that the Apps Script trigger is still enabled
+  (script.google.com -> Triggers). Once the files appear, run it by hand.
+- **Build fails** -> nothing is pushed; the site stays on last week. The
+  report says what broke; fix and re-run.
+- **Email and PDF disagree on a fact** -> the email wins and the summary notes
+  the contradiction so it can be flagged to the office.
+- **A week publishes something that needs correcting** -> it's a manual
+  content fix after the fact, same as any other edit to the content files.
+  To bring back a review step, change the skill's step 10 to stop before the
+  push and say so.
