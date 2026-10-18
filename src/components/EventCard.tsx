@@ -52,7 +52,10 @@ export function EventCard({
         </h3>
         <span className="text-[14.5px] text-muted">{event.location}</span>
         {event.description ? (
-          <p className="text-[14.5px] leading-[1.55] text-body text-pretty-wrap">
+          // Three lines, then an ellipsis: a card is a teaser, and the detail
+          // page carries the full write-up. Without the clamp a long bulletin
+          // description made one card twice the height of its neighbours.
+          <p className="line-clamp-3 text-[14.5px] leading-[1.55] text-body text-pretty-wrap">
             {event.description.split("\n")[0]}
           </p>
         ) : null}

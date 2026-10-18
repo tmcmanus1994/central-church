@@ -62,15 +62,28 @@ export const bulletinEvents: BulletinEvent[] = [
   },
   {
     slug: "trunk-or-treat",
-    title: "Fall Fest (Trunk or Treat)",
+    title: "Fall Festival & Trunk or Treat",
     start: "2026-10-25T16:00:00-05:00",
     end: "2026-10-25T17:30:00-05:00",
-    location: "9th St. Park / MLK Elementary, Little Rock",
+    location: "MLK Elementary School Playground / 9th St. Park, Little Rock",
     offsite: true,
     description:
-      "Our annual fall event, with a new name: Trunk or Treat from 4–4:20, then games and fun until 5:30. Sign up to do a trunk for the kids to show off their costumes — candy and a friendly face are all that's really required — or help behind the scenes with games, food, or setup. A bin in the lobby collects candy donations for the friends and neighbors attending.",
+      "Wear your costume! Trunk or Treating 4–4:20 PM, then games and fun until 5:30. Everything's free: hot dogs, games, face painting, tattoos, and a hayride. Want to help? Sign up to do a trunk — candy and a friendly face are all that's really required — or pitch in with games, food, or setup. A bin in the lobby collects candy donations for the friends and neighbors attending.",
     tag: "All Church",
-    aliases: ["Fall Fest", "Trunk or Treat", "Trunk-or-Treat"],
+    ctaLabel: "Sign up to help",
+    ctaHref:
+      "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2Uewf1tcPqQEO5kTANtgBiKnuZt0OMW4pla3cuasSKqaA-3D-3Dwzii_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBmCZsnQvBxp0BIrqUv5tPmnXjk9qmjuTe-2F0pBiSW4a1Q2v0IFLiRHGf1eP3ENQCi0xbxQI9JqeCVGBhbOfE2Hpk1um-2FQAWQCHnGWb4WRCD9rcfT39PlgeIrNP5AAgHoasH7u0dma-2BISShTTqVdN7Q9BCJXoaM7p5up6l6-2BGTiQBgVNHNTgMuun59fqXgpXmvJm0erT5mI7EaB5VWOMfzP3bfJxBlQWfAIRNQW43lpZWt",
+    // The Google Calendar entry is titled "Fall Festival & Trunk or Treat";
+    // without that alias it sat on the site as a second, bare copy.
+    aliases: [
+      "Fall Fest",
+      "Fall Festival",
+      "Fall Festival & Trunk or Treat",
+      "Fall Festival and Trunk or Treat",
+      "Fall Fest & Trunk or Treat",
+      "Trunk or Treat",
+      "Trunk-or-Treat",
+    ],
   },
   {
     slug: "central-discovery-oct",

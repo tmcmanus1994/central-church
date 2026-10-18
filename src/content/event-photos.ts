@@ -23,5 +23,6 @@ export const eventPhotos: Record<string, string> = {
   uplift: "/photos/teens-uplift.webp",
   "easter-egg-hunt": "/photos/kids-easter-egg-hunt.webp",
   "kids-week": "/photos/kids-week.webp",
-  "trunk-or-treat": "/photos/kids-trunk-or-treat.webp",
+  // 2026 flyer, padded to 16:9 on its own purple so no slot crops the text.
+  "trunk-or-treat": "/photos/event-fall-fest-2026.webp",
 };
