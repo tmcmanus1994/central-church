@@ -78,44 +78,39 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "October 18, 2026",
+  weekOf: "October 25, 2026",
 
   announcements: [
     {
-      title: "Harvest Month — week three",
-      body: "This week we hear from Ian Miller in the sermon space, along with Carson Miller, who handles our benevolence ministry. Will Hogg and Jenni Carmona will also share about the work happening with Iglesia, and in Mexico City with the Cerecedos. Kids' Harvest giving continues every Sunday in the galvanized tub up front — be prayerful in the coming weeks for our mission teams far away and the community we joyfully serve.",
-    },
-    {
-      title: "Fall Fest (featuring Trunk or Treat) — next Sunday, October 25",
-      body: "Next week is Fall Fest, 4–5:30 PM at 9th St. Park / MLK Elementary: Trunk or Treat from 4–4:20, then games and fun until 5:30. Sign up to participate in any or every capacity — there is no such thing as too many trunks, nor too many helpers. Peruse where help is needed most and sign on the dotted line. A bin in the lobby is collecting candy donations for the many friends and neighbors who attend, so consider bringing a bag or two this week. It's going to be a super fun evening!",
+      title: "Fall Fest featuring Trunk or Treat — tonight!",
+      body: "Today is Fall Fest, 4–5:30 PM at 9th St. Park / MLK Elementary: Trunk or Treat from 4–4:20, then games and fun until 5:30. Come one, come all! Those candies are going to collect themselves and those costumes are just waiting for rave reviews. Play your cards right and a cake walk could be tempted by a trade. Who can say?",
       href: "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2Uewf1tcPqQEO5kTANtgBiKnuZt0OMW4pla3cuasSKqaA-3D-3Dwzii_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBmCZsnQvBxp0BIrqUv5tPmnXjk9qmjuTe-2F0pBiSW4a1Q2v0IFLiRHGf1eP3ENQCi0xbxQI9JqeCVGBhbOfE2Hpk1um-2FQAWQCHnGWb4WRCD9rcfT39PlgeIrNP5AAgHoasH7u0dma-2BISShTTqVdN7Q9BCJXoaM7p5up6l6-2BGTiQBgVNHNTgMuun59fqXgpXmvJm0erT5mI7EaB5VWOMfzP3bfJxBlQWfAIRNQW43lpZWt",
     },
     {
-      title: "Ladies Day — this Saturday, October 24",
-      body: "Attention ladies! This Saturday is our annual fall Ladies Day at the Adkison farm. Make plans to attend, check the Facebook page for the meal sign-up, and check the weather — we'll spend the day outside, barring rain, of course. Soup and sweet fellowship are on the menu. Carpool if you'd like, and be prepared to park in a field. It's just what's done. Leave your lowriders at home.",
-      href: "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2U1SnmdZkJLrD4vcyQWxqPFnXpJ58CeGddnCt5CUDVyrQs2UvwSOLGm8WxY4lYZ7WT72cJLu9jlYHJh2NQVkYl-2Fd07khHjac50yqGz2v8aqQoj3g6WnnJgin-2BE8vXnyv96eQuirorlHfSxknf7AhG9B4i9qeRwHVnMn5gRYTO-2BABK6rw3B0Ouwd9D2f3Wo6DlUOZWzr0UG5B-2FbccmQjCF6NiTdFAFTXGtpjQ4-2FLqsneJQiD0zqGlVcFtr-2FoJUuZ0sI2Ov0-2By3n5-2Bn2jC1MzA7Y0pN-2Fmy0cjmsf8T5cyda3ZGQ-3D-3D3AGw_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBsuNuDvClcfFPnyKDwqKbJCrYx-2FDs3-2BoMKP104S45ribFDT6EXTvHArOcW38gxlxFYCNA-2B57AHccdu9m-2F9CmXZOoJj8ZDYmTU-2FyELWMpd4SihI9J1XAhUFEQMn2q60MNDqmgEUfWb8ZLHQzMLxOUCX7uuYTFBzqZCjbF7iBXHLigBlsBQsL8AwEjUAtZhUR9w35UPN-2FX-2BqPVnpraVP0-2FK-2FVvrZEnfuv9hJospyQAHxRT",
+      title: "Harvest Sunday — today",
+      body: "Today is Harvest! Baskets will be passed the traditional way to collect checks or cash offerings. Digital gifts can be made through the giving portal on the website or by scanning the QR code in the bulletin, and if you're not quite prepared to give today, pledge cards are on the offering stands at the entrance and exit of the auditorium. At the end of service, Weston Woodruff will give a wee little presentation of financials and goals for this year's Harvest giving — never take your bathroom break during this segment of worship.",
     },
     {
-      title: "Wednesday nights — gym and teen area open at 6:15",
-      body: "The gym and teen area open for business at 6:15 each Wednesday. Please stay with your student until the doors open — thanks for helping us keep everyone safe.",
-    },
-    {
-      title: "Pray, Rep, Repeat — two weeks left",
-      body: "In two short weeks the Wednesday workout class comes to a close. If you'd like to petition for an extension, or for the class to return in the near future, Josh Ward is the one to hound.",
-    },
-    {
-      title: "Central Teens — Fall Retreat sign-ups and Trivia Night",
-      body: "The teens are at Lake Ouachita this weekend for the Fall Campout. Sign-ups are live for the Fall Retreat, November 13–15 ($50) — check the Google Doc for all the info. And save the date: a Teens and 30's Trivia Night on November 15.",
+      title: "Central Teens — gym hangout tonight, Fall Retreat, Trivia Night",
+      body: "Teen parents, ICYMI: teens are invited to hang in the gym after Fall Fest tonight, 6–8 PM, for games and whatever else James has in store. Sign-ups are live for the Fall Retreat, November 13–15 ($50) — check the Google Doc for all the info. And save the date: the Teens and 30's Trivia Night is November 8.",
       contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
     },
     {
-      title: "Iglesia Fall Retreat — October 30–November 1",
-      body: "Iglesia has a retreat at Corin Read Christian Camp at the end of the month. Matt is working hard on the plans.",
-      contact: { name: "Matt Thomas", email: "matt@arcentralchurch.org" },
+      title: "Toy Store — think teens",
+      body: "It's always time for Toy Store! Donations for all ages are welcome — there are over 70 families participating. Last year we served 100 teens, and we expect that age group to be the largest one again. The ask: if you're out and about and wonder who to shop for, think teens. Hint: gift cards are great options!",
     },
     {
-      title: "Sunday Funday and Small Groups — today and November 1",
-      body: "Sunday Funday for Central Kids and small groups both meet today, October 18, and again on November 1. If you've held off on signing up for a small group, fill out the sign-up form on Facebook or the HUB.",
+      title: "November 1 — a full day of things to know",
+      body: "Daylight Saving ends — fall back! It's also Family Style Communion, and small groups meet. If you've held off on signing up for a small group, fill out the sign-up form on Facebook or the HUB.",
+    },
+    {
+      title: "Friends and Family Meal — November 18",
+      body: "November 18 is the next Friends and Family Meal. It's also a collaboration with the Kids Ministry, packing and distributing Thanksgiving food boxes. Save the date and plan to join in!",
+    },
+    {
+      title: "Iglesia Fall Retreat — this weekend, October 30–November 1",
+      body: "Iglesia's fall retreat at Corin Read Christian Camp is this coming weekend.",
+      contact: { name: "Matt Thomas", email: "matt@arcentralchurch.org" },
     },
     {
       title: "Reserving a room",
@@ -270,17 +265,17 @@ export const bulletin: Bulletin = {
 
   orderOfWorship: [
     "As you enter the auditorium, pick up a communion packet in the lobby",
-    "Doxology (66)",
-    "Welcome",
-    "I Will Call Upon the Lord (63)",
-    "King of My Heart",
-    "Communion: Carson Miller",
-    "Hosanna, You're My King",
+    "Blessed Be the Lord, God Almighty (72)",
+    "Welcome: Harvest",
+    "Days of Elijah",
+    "Hymn of Heaven",
+    "Communion",
+    "Sweet Adoration",
     "Dismiss Children's Church / Children's Giving",
-    "Thank You, Lord (474)",
+    "Lord, Reign in Me",
     "Scripture Reading",
-    "Sermon: Ian Miller",
-    "All Hail the Power of Jesus' Name (162)",
+    "Sermon: Nathan Bills",
+    "If You Say Go",
     "Harvest Highlight",
     "Family News",
     "Sending Blessing",
@@ -321,6 +316,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "October 18, 2026",
     "October 11, 2026",
     "September 27, 2026",
     "September 20, 2026",

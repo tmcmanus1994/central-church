@@ -112,12 +112,23 @@ export const bulletinEvents: BulletinEvent[] = [
   {
     slug: "e-durey-baby-shower",
     title: "Duréy Baby Shower",
-    start: "2026-11-15T09:00:00-05:00",
-    allDay: true,
+    start: "2026-11-15T13:00:00-06:00",
     location: "Church Alcove",
-    description: "Baby shower for Emelia Duréy.",
+    description: "Baby shower for Emelia Duréy, 1 PM in the alcove. Registered at Babylist.",
     tag: "All Church",
     aliases: ["E. Duréy baby shower", "E. Durey baby shower"],
+  },
+  {
+    slug: "teens-fall-fest-hangout",
+    title: "Teens Gym Hangout after Fall Fest",
+    start: "2026-10-25T18:00:00-05:00",
+    end: "2026-10-25T20:00:00-05:00",
+    location: "823 W 6th St, Little Rock",
+    description:
+      "Teens are invited to hang in the gym after Fall Fest for games and whatever else James has in store.",
+    tag: "Central Teens",
+    ministrySlug: "teens",
+    aliases: ["Teen Hangout", "Teens Hangout", "Gym Hangout"],
   },
   {
     slug: "teen-campout",
@@ -169,6 +180,16 @@ export const bulletinEvents: BulletinEvent[] = [
     aliases: ["Daylight Savings"],
   },
   {
+    slug: "family-style-communion-nov1",
+    title: "Family Style Communion",
+    start: "2026-11-01T09:00:00-06:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description: "Communion is served family style during the regular Sunday service.",
+    tag: "All Church",
+    aliases: ["Family Communion", "Family-Style Communion"],
+  },
+  {
     slug: "sunday-funday-nov1",
     title: "Sunday Funday",
     start: "2026-11-01T09:00:00-06:00",
@@ -206,13 +227,26 @@ export const bulletinEvents: BulletinEvent[] = [
   {
     slug: "teens-trivia-night",
     title: "Teens & 30's Trivia Night",
-    start: "2026-11-15T09:00:00-06:00",
+    // Oct 18 email said Nov 15; the Oct 25 PDF says Nov 8 in two places and
+    // the email is silent, so the newer source wins. Flagged in the run summary.
+    start: "2026-11-08T09:00:00-06:00",
     allDay: true,
     location: "823 W 6th St, Little Rock",
     description: "Save the date: a trivia night for Central Teens and the 30's group. Details to come.",
     tag: "Central Teens",
     ministrySlug: "teens",
-    aliases: ["Trivia Night", "Teens Trivia Night"],
+    aliases: ["Trivia Night", "Teens Trivia Night", "Teens/30's Trivia Night"],
+  },
+  {
+    slug: "friends-family-meal-nov18",
+    title: "Friends and Family Meal",
+    start: "2026-11-18T09:00:00-06:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description:
+      "The next Friends and Family Meal, in collaboration with the Kids Ministry packing and distributing Thanksgiving food boxes. Save the date and plan to join in!",
+    tag: "All Church",
+    aliases: ["Friends & Family Meal", "Friends and Family Dinner", "Thanksgiving Boxes"],
   },
 ];
 
@@ -250,9 +284,21 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
       "member-personal; shares a surname with Travelle — flagged in case it's his own family, for his call on whether to publish",
   },
   {
-    item: "Katie Watson — expecting, December",
+    item: "Katie Watson — expecting a girl, December (the Oct 18 email's shower attachment said boy; corrected in the Oct 25 email)",
     reason:
       "member-personal, no public shower date given yet; month corrected from January — this week's bulletin says December",
+  },
+  {
+    item: "Jeanie Frauenthal — recovering from hip replacement surgery",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Phil Watts — stroke last week, left eye affected",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Het and Molly — engagement (praise)",
+    reason: "member-personal family news, from the prayer list",
   },
   {
     item: "Brooke Money — expecting, February",
@@ -354,7 +400,7 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "giving figures — internal finances, same as the weekly offering",
   },
   {
-    item: "November baby showers — Bailey McManus (Nov 1, 1 PM, Gym Alcove; Babylist registry linked in the email; expecting a girl), Caylie Mosley (Nov 7, at a member's home), Meika (Wilcox) Pratt (Nov 8)",
+    item: "November baby showers — Bailey McManus (Nov 1, 1 PM, Gym Alcove; Babylist registry linked in the email; expecting a girl), Caylie Mosley (Nov 7, 10:30 AM, at a member's home, registered at Target), Meika (Wilcox) Pratt (Nov 8)",
     reason:
       "member-personal; Emelia Duréy's Nov 15 shower is the one exception, published at Travelle's explicit request",
   },
