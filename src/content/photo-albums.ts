@@ -16,6 +16,13 @@ export interface PhotoAlbum {
 
 export const photoAlbums: PhotoAlbum[] = [
   {
+    title: "Fall Festival & Trunk or Treat 2026",
+    count: "October 25, 2026",
+    blurb: "Costumes, trunks, and a hayride at 9th St. Park.",
+    href: "https://photos.google.com/u/3/album/AF1QipNY9hxGgXe1St2TbcKyTx3qC5-B_G9kycteBZzY",
+    cover: "/photos/album-fall-festival-2026.webp",
+  },
+  {
     title: "Camp Caudle 2026",
     count: "1,630 photos",
     blurb: "A week in Hector, Arkansas with Central Teens.",
