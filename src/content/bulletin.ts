@@ -78,39 +78,43 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "October 25, 2026",
+  weekOf: "November 1, 2026",
 
   announcements: [
     {
-      title: "Fall Fest featuring Trunk or Treat — tonight!",
-      body: "Today is Fall Fest, 4–5:30 PM at 9th St. Park / MLK Elementary: Trunk or Treat from 4–4:20, then games and fun until 5:30. Come one, come all! Those candies are going to collect themselves and those costumes are just waiting for rave reviews. Play your cards right and a cake walk could be tempted by a trade. Who can say?",
-      href: "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2Uewf1tcPqQEO5kTANtgBiKnuZt0OMW4pla3cuasSKqaA-3D-3Dwzii_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBmCZsnQvBxp0BIrqUv5tPmnXjk9qmjuTe-2F0pBiSW4a1Q2v0IFLiRHGf1eP3ENQCi0xbxQI9JqeCVGBhbOfE2Hpk1um-2FQAWQCHnGWb4WRCD9rcfT39PlgeIrNP5AAgHoasH7u0dma-2BISShTTqVdN7Q9BCJXoaM7p5up6l6-2BGTiQBgVNHNTgMuun59fqXgpXmvJm0erT5mI7EaB5VWOMfzP3bfJxBlQWfAIRNQW43lpZWt",
+      title: "A time to remember — today in worship",
+      body: "This week worship will give space to remember. Remember losses — losses of people who are precious to us, and grief over losses in other shapes and forms. We'll share a family style communion and pray together a prayer of losses. Index cards will be on the communion tables for anyone who would like to name a loved one or another kind of loss, and elders and their wives will be on hand to receive them. Once communion has ended, the cards will be shared with the congregation, followed by the prayer for losses. If we are a people who follow Jesus together and rejoice with each other in times of gladness, then we will also be a people who mourn and grieve together.",
     },
     {
-      title: "Harvest Sunday — today",
-      body: "Today is Harvest! Baskets will be passed the traditional way to collect checks or cash offerings. Digital gifts can be made through the giving portal on the website or by scanning the QR code in the bulletin, and if you're not quite prepared to give today, pledge cards are on the offering stands at the entrance and exit of the auditorium. At the end of service, Weston Woodruff will give a wee little presentation of financials and goals for this year's Harvest giving — never take your bathroom break during this segment of worship.",
+      title: "Today — fall back, and small groups meet",
+      body: "Daylight Saving has ended, so enjoy the extra hour. Small groups meet today — if you've held off on signing up, fill out the sign-up form on Facebook or the HUB.",
     },
     {
-      title: "Central Teens — gym hangout tonight, Fall Retreat, Trivia Night",
-      body: "Teen parents, ICYMI: teens are invited to hang in the gym after Fall Fest tonight, 6–8 PM, for games and whatever else James has in store. Sign-ups are live for the Fall Retreat, November 13–15 ($50) — check the Google Doc for all the info. And save the date: the Teens and 30's Trivia Night is November 8.",
-      contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
+      title: "Harvest — thank you",
+      body: "Thank you for your cheerful and generous giving over the month of Harvest. Continue to be in prayer about the stewardship of the funds received and the missional ways they'll be used to the glory of the Lord next year. A broader Harvest update will be shared in a couple of weeks. Still planning to give? Visit the giving portal on the website or the Central HUB.",
     },
     {
-      title: "Toy Store — think teens",
-      body: "It's always time for Toy Store! Donations for all ages are welcome — there are over 70 families participating. Last year we served 100 teens, and we expect that age group to be the largest one again. The ask: if you're out and about and wonder who to shop for, think teens. Hint: gift cards are great options!",
-    },
-    {
-      title: "November 1 — a full day of things to know",
-      body: "Daylight Saving ends — fall back! It's also Family Style Communion, and small groups meet. If you've held off on signing up for a small group, fill out the sign-up form on Facebook or the HUB.",
+      title: "Wednesday nights in November — Discernment & Decisions",
+      body: "Starting November 4, Steven Hovater leads a three-week adult Bible study on discernment and decisions: does God care what I do next? It's the one adult class option for the month of November, in Fellowship East. There will be no classes on Wednesday, November 25. Looking ahead, the annual Advent \"class\" begins December 2 and runs the following two Wednesdays (December 2, 9, and 16) — all adults are welcome for a night of worship and discussion.",
     },
     {
       title: "Friends and Family Meal — November 18",
-      body: "November 18 is the next Friends and Family Meal. It's also a collaboration with the Kids Ministry, packing and distributing Thanksgiving food boxes. Save the date and plan to join in!",
+      body: "Save the date and plan to join in! The vibe is \"Friendsgiving\": a potluck with our friends who will receive the Thanksgiving boxes the Kids Ministry is packing. Sign up to bring a dish or a side, or to help serve the meal.",
+      href: "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2UVZhyFrUShK-2Bkt6Hje6i1LB9-2Fa2-2B5e25h1xI7maeE0nGXAUea7bm1e7kKnv94zl8o-3DwSI__Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBjrlnAxGE99H5TX874T3ABIP3AuQHyMTyBKGcqQOd1DtTpEc-2BOAx9QdHSEf4WzpSMIi-2Bep9HUMS0uSRgT8zwB79nxoKiO4I2mt5GfNCjgXs8vih7lUXWCM2JEL-2BGOFgO-2FPGHFJb1zJYVP5vReDDFP1WMu7n5rzkvLNpQ6XHZTggC44W7A1tyLCSi2U-2BhSkrEp3Yv3VfXIAO4EkVWDhWY9OzNi6n7aALs3AIecuqfZb82",
     },
     {
-      title: "Iglesia Fall Retreat — this weekend, October 30–November 1",
-      body: "Iglesia's fall retreat at Corin Read Christian Camp is this coming weekend.",
-      contact: { name: "Matt Thomas", email: "matt@arcentralchurch.org" },
+      title: "Toy Store — mark your calendar for December 12",
+      body: "Toy Store is Saturday, December 12, and we'll serve 270 kids this year! A volunteer sign-up is coming your way in the next few weeks — this is an all-hands-on-deck kind of event and a great way to share a morning. Wrapping experience not required; there's something for everyone, even the young ones. For the shoppers, gift ideas (and links!) for each age group are posted in the Facebook group — every age is in need of gifts. And in these weeks leading up to Toy Store, there's a list of families who would be so grateful for you to partner with them in prayer. Contact Lacey to get paired with a family.",
+      contact: { name: "Lacey Hines", email: "lacey@arcentralchurch.org" },
+    },
+    {
+      title: "Central Teens — Trivia Night, Fall Retreat, Progressive Dinner",
+      body: "The Teens and 30's Trivia Night is Sunday, November 8 — send chips, crackers, or a drink with your student. Sign-ups are live for the Fall Retreat, November 13–15 ($50); check the Google Doc for all the info. And the Progressive Dinner is December 15 — students should bring a small ($5) gift for the gift exchange.",
+      contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
+    },
+    {
+      title: "Canvas Community Meal — November 11",
+      body: "The next Canvas meal is Wednesday, November 11. Rick and Barbara Jones are the contacts if you'd like to help.",
     },
     {
       title: "Reserving a room",
@@ -229,9 +233,9 @@ export const bulletin: Bulletin = {
 
   wednesdayClasses: [
     {
-      name: "Spiritual Formation",
+      name: "Discernment & Decisions",
       detail:
-        "A textual study from the book of Acts focused on being formed by the Holy Spirit.",
+        "Does God care what I do next? A three-week adult Bible study starting November 4 — the one adult class option for November. No classes on Wednesday, November 25.",
       room: "Fellowship East",
       teacher: "Steven Hovater",
     },
@@ -240,20 +244,6 @@ export const bulletin: Bulletin = {
       detail:
         "An actionable opportunity to offer support and assistance to existing Central ministries.",
       room: "SGC Upstairs, Kids Closet hallway",
-    },
-    {
-      name: "Healthy Communication in Relationships",
-      detail:
-        "A class focusing on communication practices — the dos and don'ts — in relationships.",
-      room: "Fellowship West",
-      teacher: "Robert Hinojosa",
-    },
-    {
-      name: "Pray, Rep, Repeat",
-      detail:
-        "Physical activity meets ministry — a six-week class wrapping up at the end of October.",
-      room: "Gym",
-      teacher: "Andrew Cheffins & Josh Ward",
     },
     {
       name: "The Mix — Making Disciples 101",
@@ -265,24 +255,27 @@ export const bulletin: Bulletin = {
 
   orderOfWorship: [
     "As you enter the auditorium, pick up a communion packet in the lobby",
-    "Blessed Be the Lord, God Almighty (72)",
-    "Welcome: Harvest",
-    "Days of Elijah",
-    "Hymn of Heaven",
-    "Communion",
-    "Sweet Adoration",
+    "Humble Yourself (745)",
+    "Welcome: Steven Hovater",
+    "Deep Calls to Deep",
+    "Be With Me, Lord (778)",
+    "I Come to the Garden Alone (595)",
+    "Communion: Peyton Tucker",
+    "Quiet My Soul",
+    "Be Still & Know (31)",
+    "Arms of Love",
+    "Prayer for Loss",
     "Dismiss Children's Church / Children's Giving",
-    "Lord, Reign in Me",
+    "What a Friend We Have in Jesus (800)",
     "Scripture Reading",
-    "Sermon: Nathan Bills",
-    "If You Say Go",
-    "Harvest Highlight",
+    "Sermon: Steven Hovater",
+    "All in All (484)",
     "Family News",
     "Sending Blessing",
   ],
 
   kidsClosetNeeds: [
-    "Summer clothes — all kid sizes",
+    "Clothes — all kid sizes",
     "Children's shoes",
     "Diapers — sizes 5 & 6, and pull-ups 4T & 5T",
   ],
@@ -316,6 +309,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "October 25, 2026",
     "October 18, 2026",
     "October 11, 2026",
     "September 27, 2026",

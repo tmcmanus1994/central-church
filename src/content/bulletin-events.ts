@@ -30,16 +30,6 @@ export interface BulletinEvent extends ChurchEvent {
 
 export const bulletinEvents: BulletinEvent[] = [
   {
-    slug: "harvest-month",
-    title: "Harvest Month",
-    start: "2026-10-01T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Central's one annual giving effort funds the missional work we support near and far, and the weekly focuses in October highlight that work. Kids' giving in the galvanized tub at the front of the auditorium each Sunday helps fund Thanksgiving meals for Central friends and neighbors.",
-    tag: "All Church",
-  },
-  {
     slug: "sunday-funday-oct18",
     title: "Sunday Funday",
     start: "2026-10-18T09:00:00-05:00",
@@ -50,12 +40,12 @@ export const bulletinEvents: BulletinEvent[] = [
     ministrySlug: "children",
   },
   {
-    slug: "canvas-community-meal-oct14",
+    slug: "canvas-community-meal-nov11",
     title: "Canvas Community Meal",
-    start: "2026-10-14T18:00:00-05:00",
+    start: "2026-11-11T18:00:00-06:00",
     location: "823 W 6th St, Little Rock",
     description:
-      "Serving the homeless community an evening meal, as we do the second Wednesday of every month. A couple of extra helping hands are welcome for meal prep on site.",
+      "Serving the homeless community an evening meal, as we do the second Wednesday of every month. Extra helping hands are welcome for meal prep on site.",
     tag: "Outreach",
     ministrySlug: "outreach",
     aliases: ["Canvas", "Canvas Community", "Canvas Meal"],
@@ -84,16 +74,6 @@ export const bulletinEvents: BulletinEvent[] = [
       "Trunk or Treat",
       "Trunk-or-Treat",
     ],
-  },
-  {
-    slug: "central-discovery-oct",
-    title: "Central Discovery",
-    start: "2026-10-11T09:00:00-05:00",
-    allDay: true,
-    location: "Worship Center Lobby",
-    description:
-      "A quarterly \"get to know Central\" class. If you're new around here, this is for you.",
-    tag: "All Church",
   },
   {
     slug: "ladies-day",
@@ -185,7 +165,8 @@ export const bulletinEvents: BulletinEvent[] = [
     start: "2026-11-01T09:00:00-06:00",
     allDay: true,
     location: "823 W 6th St, Little Rock",
-    description: "Communion is served family style during the regular Sunday service.",
+    description:
+      "A time to remember losses during worship: communion served family style, index cards on the tables to name a loved one or another kind of loss, and a prayer for losses shared together.",
     tag: "All Church",
     aliases: ["Family Communion", "Family-Style Communion"],
   },
@@ -232,7 +213,8 @@ export const bulletinEvents: BulletinEvent[] = [
     start: "2026-11-08T09:00:00-06:00",
     allDay: true,
     location: "823 W 6th St, Little Rock",
-    description: "Save the date: a trivia night for Central Teens and the 30's group. Details to come.",
+    description:
+      "A trivia night for Central Teens and the 30's group. Send chips, crackers, or a drink with your student.",
     tag: "Central Teens",
     ministrySlug: "teens",
     aliases: ["Trivia Night", "Teens Trivia Night", "Teens/30's Trivia Night"],
@@ -244,9 +226,66 @@ export const bulletinEvents: BulletinEvent[] = [
     allDay: true,
     location: "823 W 6th St, Little Rock",
     description:
-      "The next Friends and Family Meal, in collaboration with the Kids Ministry packing and distributing Thanksgiving food boxes. Save the date and plan to join in!",
+      "A \"Friendsgiving\" potluck with our friends who will receive the Thanksgiving boxes the Kids Ministry is packing. Sign up to bring a dish or a side, or to help serve the meal.",
     tag: "All Church",
-    aliases: ["Friends & Family Meal", "Friends and Family Dinner", "Thanksgiving Boxes"],
+    ctaLabel: "Sign up to bring a dish",
+    ctaHref:
+      "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2UVZhyFrUShK-2Bkt6Hje6i1LB9-2Fa2-2B5e25h1xI7maeE0nGXAUea7bm1e7kKnv94zl8o-3DwSI__Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBjrlnAxGE99H5TX874T3ABIP3AuQHyMTyBKGcqQOd1DtTpEc-2BOAx9QdHSEf4WzpSMIi-2Bep9HUMS0uSRgT8zwB79nxoKiO4I2mt5GfNCjgXs8vih7lUXWCM2JEL-2BGOFgO-2FPGHFJb1zJYVP5vReDDFP1WMu7n5rzkvLNpQ6XHZTggC44W7A1tyLCSi2U-2BhSkrEp3Yv3VfXIAO4EkVWDhWY9OzNi6n7aALs3AIecuqfZb82",
+    aliases: ["Friends & Family Meal", "Friends and Family Dinner", "Thanksgiving Boxes", "Friendsgiving"],
+  },
+  {
+    slug: "advent-class-dec2",
+    title: "Advent Wednesday",
+    start: "2026-12-02T18:30:00-06:00",
+    end: "2026-12-02T19:30:00-06:00",
+    location: "823 W 6th St, Little Rock",
+    description:
+      "The annual Advent \"class\" — a night of worship and discussion for all adults, on three consecutive Wednesdays: December 2, 9, and 16.",
+    tag: "All Church",
+    aliases: ["Advent", "Advent Class", "Advent Wednesdays"],
+  },
+  {
+    slug: "advent-class-dec9",
+    title: "Advent Wednesday",
+    start: "2026-12-09T18:30:00-06:00",
+    end: "2026-12-09T19:30:00-06:00",
+    location: "823 W 6th St, Little Rock",
+    description:
+      "The annual Advent \"class\" — a night of worship and discussion for all adults, on three consecutive Wednesdays: December 2, 9, and 16.",
+    tag: "All Church",
+  },
+  {
+    slug: "advent-class-dec16",
+    title: "Advent Wednesday",
+    start: "2026-12-16T18:30:00-06:00",
+    end: "2026-12-16T19:30:00-06:00",
+    location: "823 W 6th St, Little Rock",
+    description:
+      "The annual Advent \"class\" — a night of worship and discussion for all adults, on three consecutive Wednesdays: December 2, 9, and 16.",
+    tag: "All Church",
+  },
+  {
+    slug: "toy-store-2026",
+    title: "Toy Store",
+    start: "2026-12-12T09:00:00-06:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description:
+      "Central's Toy Store serves 270 kids this year. It's an all-hands-on-deck morning — wrapping experience not required, and there's something for everyone, even the young ones. A volunteer sign-up is coming; gift ideas and links for each age group are in the Facebook group.",
+    tag: "Outreach",
+    ministrySlug: "outreach",
+    aliases: ["Toy Store 2026", "Christmas Toy Store"],
+  },
+  {
+    slug: "teens-progressive-dinner",
+    title: "Central Teens Progressive Dinner",
+    start: "2026-12-15T18:00:00-06:00",
+    location: "823 W 6th St, Little Rock",
+    description:
+      "Central Teens' Progressive Dinner. Students should bring a small ($5) gift for the gift exchange.",
+    tag: "Central Teens",
+    ministrySlug: "teens",
+    aliases: ["Progressive Dinner", "Teen Progressive Dinner"],
   },
 ];
 
@@ -290,6 +329,10 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
   },
   {
     item: "Jeanie Frauenthal — recovering from hip replacement surgery",
+    reason: "health information about a named individual",
+  },
+  {
+    item: "Georgia Walker — multi-car accident, banged up but doing well and home",
     reason: "health information about a named individual",
   },
   {
@@ -400,7 +443,7 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "giving figures — internal finances, same as the weekly offering",
   },
   {
-    item: "November baby showers — Bailey McManus (Nov 1, 1 PM, Gym Alcove; Babylist registry linked in the email; expecting a girl), Caylie Mosley (Nov 7, 10:30 AM, at a member's home, registered at Target), Meika (Wilcox) Pratt (Nov 8)",
+    item: "November baby showers — Bailey McManus (Nov 1, 1 PM, Gym Alcove; Babylist registry linked in the email; expecting a girl), Caylie Mosley (Nov 7, 10:30 AM, at a member's home, registered at Target), Meika (Wilcox) Pratt (Nov 8), Katie Watson (Nov 14)",
     reason:
       "member-personal; Emelia Duréy's Nov 15 shower is the one exception, published at Travelle's explicit request",
   },
