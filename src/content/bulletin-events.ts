@@ -30,22 +30,12 @@ export interface BulletinEvent extends ChurchEvent {
 
 export const bulletinEvents: BulletinEvent[] = [
   {
-    slug: "sunday-funday-oct18",
-    title: "Sunday Funday",
-    start: "2026-10-18T09:00:00-05:00",
-    allDay: true,
-    location: "Central Kids Wing",
-    description: "A morning of games and fun for Central Kids.",
-    tag: "Central Kids",
-    ministrySlug: "children",
-  },
-  {
     slug: "canvas-community-meal-nov11",
     title: "Canvas Community Meal",
     start: "2026-11-11T18:00:00-06:00",
     location: "823 W 6th St, Little Rock",
     description:
-      "Serving the homeless community an evening meal, as we do the second Wednesday of every month. Extra helping hands are welcome for meal prep on site.",
+      "Serving the homeless community an evening meal, as we do the second Wednesday of every month. Meal prep is Tuesday afternoon this time — extra helping hands are welcome.",
     tag: "Outreach",
     ministrySlug: "outreach",
     aliases: ["Canvas", "Canvas Community", "Canvas Meal"],
@@ -76,20 +66,6 @@ export const bulletinEvents: BulletinEvent[] = [
     ],
   },
   {
-    slug: "ladies-day",
-    title: "Ladies Day",
-    start: "2026-10-24T09:00:00-05:00",
-    allDay: true,
-    location: "The Adkisons' Farm",
-    offsite: true,
-    description:
-      "Central's annual fall Ladies Day at the Adkisons' farm. Courtney Hirscheider will speak on \"follow is a verb.\" Soup and sweet fellowship are on the menu, outside barring rain — check the weather, carpool if you'd like, and be prepared to park in a field. Meal sign-up is on the Facebook page.",
-    tag: "All Church",
-    ctaLabel: "Meal sign-up",
-    ctaHref:
-      "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2U1SnmdZkJLrD4vcyQWxqPFnXpJ58CeGddnCt5CUDVyrQs2UvwSOLGm8WxY4lYZ7WT72cJLu9jlYHJh2NQVkYl-2Fd07khHjac50yqGz2v8aqQoj3g6WnnJgin-2BE8vXnyv96eQuirorlHfSxknf7AhG9B4i9qeRwHVnMn5gRYTO-2BABK6rw3B0Ouwd9D2f3Wo6DlUOZWzr0UG5B-2FbccmQjCF6NiTdFAFTXGtpjQ4-2FLqsneJQiD0zqGlVcFtr-2FoJUuZ0sI2Ov0-2By3n5-2Bn2jC1MzA7Y0pN-2Fmy0cjmsf8T5cyda3ZGQ-3D-3D3AGw_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBsuNuDvClcfFPnyKDwqKbJCrYx-2FDs3-2BoMKP104S45ribFDT6EXTvHArOcW38gxlxFYCNA-2B57AHccdu9m-2F9CmXZOoJj8ZDYmTU-2FyELWMpd4SihI9J1XAhUFEQMn2q60MNDqmgEUfWb8ZLHQzMLxOUCX7uuYTFBzqZCjbF7iBXHLigBlsBQsL8AwEjUAtZhUR9w35UPN-2FX-2BqPVnpraVP0-2FK-2FVvrZEnfuv9hJospyQAHxRT",
-  },
-  {
     slug: "e-durey-baby-shower",
     title: "Duréy Baby Shower",
     start: "2026-11-15T13:00:00-06:00",
@@ -109,32 +85,6 @@ export const bulletinEvents: BulletinEvent[] = [
     tag: "Central Teens",
     ministrySlug: "teens",
     aliases: ["Teen Hangout", "Teens Hangout", "Gym Hangout"],
-  },
-  {
-    slug: "teen-campout",
-    title: "Teen Campout",
-    start: "2026-10-16T00:00:00-05:00",
-    end: "2026-10-18T23:59:00-05:00",
-    allDay: true,
-    location: "Lake Ouachita, AR",
-    offsite: true,
-    description:
-      "Central Teens' fall campout at Lake Ouachita, $30. Check the shared Google Doc for departure details and the packing list.",
-    tag: "Central Teens",
-    ministrySlug: "teens",
-    aliases: ["Camp Out", "Campout", "Teens Campout", "Fall Campout"],
-  },
-  {
-    slug: "small-groups-oct18",
-    title: "Small Groups Meet",
-    start: "2026-10-18T09:00:00-05:00",
-    allDay: true,
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Small groups meet. If you haven't signed up, fill out the sign-up form on Facebook or the HUB.",
-    tag: "Life Groups",
-    ministrySlug: "life-groups",
-    aliases: ["Small groups meet"],
   },
   {
     slug: "iglesia-fall-retreat",
@@ -198,9 +148,10 @@ export const bulletinEvents: BulletinEvent[] = [
     start: "2026-11-13T00:00:00-06:00",
     end: "2026-11-15T23:59:00-06:00",
     allDay: true,
-    location: "823 W 6th St, Little Rock",
+    location: "Corin Read Christian Camp, Bauxite, AR",
+    offsite: true,
     description:
-      "Central Teens' Fall Retreat, $50. Sign-ups are live — check the shared Google Doc for all the info.",
+      "Central Teens' Fall Retreat at Corin Read Christian Camp, $50. Check the shared Google Doc for all the info.",
     tag: "Central Teens",
     ministrySlug: "teens",
     aliases: ["Fall Retreat", "Teen Retreat", "Teens Fall Retreat"],
@@ -267,14 +218,26 @@ export const bulletinEvents: BulletinEvent[] = [
   {
     slug: "toy-store-2026",
     title: "Toy Store",
-    start: "2026-12-12T09:00:00-06:00",
-    allDay: true,
+    start: "2026-12-12T07:00:00-06:00",
+    end: "2026-12-12T12:00:00-06:00",
     location: "823 W 6th St, Little Rock",
     description:
-      "Central's Toy Store serves 270 kids this year. It's an all-hands-on-deck morning — wrapping experience not required, and there's something for everyone, even the young ones. A volunteer sign-up is coming; gift ideas and links for each age group are in the Facebook group.",
+      "Central's Toy Store serves 270 kids this year, 7 AM to noon. Volunteers needed: holly jolly shoppers, wrappers, food servers, greeters, and present transporters — wrapping experience not required, and there's something for everyone, even the young ones. Gift ideas for every age are on the fliers at the front table of the foyer and in the Facebook group.",
     tag: "Outreach",
     ministrySlug: "outreach",
+    ctaLabel: "Volunteer sign-up",
+    ctaHref:
+      "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2Uewf1tcPqQEO5kTANtgBiKcof2i6S4swlmyp7YpmkU8a8aTZrWWn-2BHRSns07lRzds-3Dmbca_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBmJ-2Bo5Anxrrkp38s9EOcNI4C1R9lsjGsHoB4K8YIBUsHS6B-2Fb8l7nZNOJ3zW4uyktezVXvl-2BTdcV0JLzLv-2BvG-2Fjw-2FywPlN-2BazpaderA6rOCYT4JtOZa24wQcMdR7QR02dtG-2BIgtpVgMff6QNzfAGPGlY9XKbv2kqM-2FTPoU6kupLt-2FfQYJ9Hm6JPnMhamG6jIwXrMdp7l9fh1xcVTiHx-2FpCgv-2FDO1Djaei2GWjSr4RfYS",
     aliases: ["Toy Store 2026", "Christmas Toy Store"],
+  },
+  {
+    slug: "family-style-communion-dec6",
+    title: "Family Style Communion",
+    start: "2026-12-06T09:00:00-06:00",
+    allDay: true,
+    location: "823 W 6th St, Little Rock",
+    description: "Communion is served family style during the regular Sunday service.",
+    tag: "All Church",
   },
   {
     slug: "teens-progressive-dinner",
@@ -443,7 +406,7 @@ export const withheldFromBulletin: { item: string; reason: string }[] = [
     reason: "giving figures — internal finances, same as the weekly offering",
   },
   {
-    item: "November baby showers — Bailey McManus (Nov 1, 1 PM, Gym Alcove; Babylist registry linked in the email; expecting a girl), Caylie Mosley (Nov 7, 10:30 AM, at a member's home, registered at Target), Meika (Wilcox) Pratt (Nov 8), Katie Watson (Nov 14)",
+    item: "November baby showers — Bailey McManus (Nov 1, 1 PM, Gym Alcove; Babylist registry linked in the email; expecting a girl), Caylie Mosley (Nov 7, 10:30 AM, at a member's home, registered at Target), Meika (Wilcox) Pratt (Nov 8, 1 PM, Gym Alcove; expecting a girl; Babylist registry linked in the email), Katie Watson (Nov 14)",
     reason:
       "member-personal; Emelia Duréy's Nov 15 shower is the one exception, published at Travelle's explicit request",
   },
