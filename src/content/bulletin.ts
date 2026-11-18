@@ -78,21 +78,17 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "November 8, 2026",
+  weekOf: "November 15, 2026",
 
   announcements: [
     {
-      title: "Canvas Community Meal — this Wednesday, November 11",
-      body: "The Canvas meal is this week, Wednesday, November 11. Note that meal prep will be Tuesday afternoon. Rick and Barbara Jones are the contacts if you'd like to help.",
-    },
-    {
-      title: "Friends and Family Meal — November 18",
-      body: "The Friends and Family meal coincides with the sharing of Thanksgiving meal boxes. This is a Friendsgiving-style meal, so sign up to participate and love on our friends and neighbors — bring a dish or a side, or help serve.",
+      title: "Friends and Family Meal — this Wednesday, November 18",
+      body: "During kids' Bible classes today, our younger Central people are loading up food items for each of our friends and neighbors receiving a Thanksgiving meal bag, box, or vessel. Many thanks for supporting these friends through the Kids Harvest giving last month! Do consider signing up to bring a dish or serve food — or, best of all, share a meal with our Central friends at Wednesday's Friends & Family meal. See you in the gym!",
       href: "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2UVZhyFrUShK-2Bkt6Hje6i1LB9-2Fa2-2B5e25h1xI7maeE0nGXAUea7bm1e7kKnv94zl8o-3DwSI__Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBjrlnAxGE99H5TX874T3ABIP3AuQHyMTyBKGcqQOd1DtTpEc-2BOAx9QdHSEf4WzpSMIi-2Bep9HUMS0uSRgT8zwB79nxoKiO4I2mt5GfNCjgXs8vih7lUXWCM2JEL-2BGOFgO-2FPGHFJb1zJYVP5vReDDFP1WMu7n5rzkvLNpQ6XHZTggC44W7A1tyLCSi2U-2BhSkrEp3Yv3VfXIAO4EkVWDhWY9OzNi6n7aALs3AIecuqfZb82",
     },
     {
-      title: "Toy Store — volunteer sign-up is live for December 12",
-      body: "Check out the sign-up for Toy Store on Saturday, December 12, from 7 AM to noon. Types of volunteers needed: holly jolly shoppers, wrappers, food servers, greeters, and present transporters. Volunteers must ooh and ahh over all gift choices and wrap jobs. (The author does not make the rules, just communicates them.) There are fliers on the front table of the foyer with gift ideas for all ages, and you may notice an awesome gift tracker hanging in the lobby — it's for fun and the visually inclined. We'll serve 270 kids this year, and there's a list of families who would be grateful for a prayer partner in the weeks leading up; contact Lacey to get paired with one.",
+      title: "It's Toy Store season — December 12",
+      body: "The stocking gift visual aid in the lobby shows which age groups have the greatest need — take a look from week to week to guide your shopping. Prefer to have a personal shopper tackle the decision-making? Donations can be made through PushPay (the Give tab on the website or the HUB). Volunteers are still needed on Saturday, December 12, from 7 AM to noon: holly jolly shoppers, wrappers, food servers, greeters, and present transporters. And there's a list of families who would be grateful for a prayer partner in the weeks leading up; contact Lacey to get paired with one.",
       href: "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2Uewf1tcPqQEO5kTANtgBiKcof2i6S4swlmyp7YpmkU8a8aTZrWWn-2BHRSns07lRzds-3Dmbca_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBmJ-2Bo5Anxrrkp38s9EOcNI4C1R9lsjGsHoB4K8YIBUsHS6B-2Fb8l7nZNOJ3zW4uyktezVXvl-2BTdcV0JLzLv-2BvG-2Fjw-2FywPlN-2BazpaderA6rOCYT4JtOZa24wQcMdR7QR02dtG-2BIgtpVgMff6QNzfAGPGlY9XKbv2kqM-2FTPoU6kupLt-2FfQYJ9Hm6JPnMhamG6jIwXrMdp7l9fh1xcVTiHx-2FpCgv-2FDO1Djaei2GWjSr4RfYS",
       contact: { name: "Lacey Hines", email: "lacey@arcentralchurch.org" },
     },
@@ -102,13 +98,18 @@ export const bulletin: Bulletin = {
       href: "/safety",
     },
     {
-      title: "Central Teens — Trivia Night today, Fall Retreat next weekend",
-      body: "Teens and 30's are gathering for Trivia Night today — by their powers combined, those trivia questions don't stand a chance! The anticipation for delicious dips is also high. Next weekend, November 13–15, is the Fall Retreat at Corin Read Christian Camp ($50; check the Google Doc for the details). And the Progressive Dinner is December 15 — students should bring a small ($5) gift for the gift exchange.",
+      title: "Central Teens — Fall Retreat this weekend",
+      body: "The teen retreat is live at Corin Read Christian Camp — hopefully they didn't turn into little teen popsicles overnight, freeze warning and all. Think of that crew fondly and prayerfully, that they may come to know the Lord more through experiences in His creation and growing in relationship together. Coming up: the Progressive Dinner is December 15 — students should bring a small ($5) gift for the gift exchange.",
       contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
     },
     {
-      title: "Wednesday nights in November",
-      body: "Steven Hovater's three-week study on discernment and decisions continues in Fellowship East — the one adult class option for November. There are no classes on Wednesday, November 25. The annual Advent \"class\" begins December 2 and runs December 9 and 16 as well; all adults are welcome for a night of worship and discussion.",
+      title: "Wednesday nights",
+      body: "Steven Hovater's study on discernment and decisions continues in Fellowship East this Wednesday. There are no classes on Wednesday, November 25, and the annual Advent \"class\" runs December 2, 9, and 16 — all adults are welcome for a night of worship and discussion. Keep an eye on communications for holiday class cancellations and what's to come in the new year.",
+    },
+    {
+      title: "Year-end giving statements",
+      body: "It's time to make sure your contact info is up to date if you'd like to receive your end-of-year giving statement. If you're reading this, you're more than likely in the clear — tell your friends. Reach out to the church office with any updates.",
+      contact: { name: "Jessica Ward", email: "jessica@arcentralchurch.org" },
     },
     {
       title: "Coming up",
@@ -307,6 +308,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "November 8, 2026",
     "November 1, 2026",
     "October 25, 2026",
     "October 18, 2026",

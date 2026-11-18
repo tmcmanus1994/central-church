@@ -41,31 +41,6 @@ export const bulletinEvents: BulletinEvent[] = [
     aliases: ["Canvas", "Canvas Community", "Canvas Meal"],
   },
   {
-    slug: "trunk-or-treat",
-    title: "Fall Festival & Trunk or Treat",
-    start: "2026-10-25T16:00:00-05:00",
-    end: "2026-10-25T17:30:00-05:00",
-    location: "MLK Elementary School Playground / 9th St. Park, Little Rock",
-    offsite: true,
-    description:
-      "Wear your costume! Trunk or Treating 4–4:20 PM, then games and fun until 5:30. Everything's free: hot dogs, games, face painting, tattoos, and a hayride. Want to help? Sign up to do a trunk — candy and a friendly face are all that's really required — or pitch in with games, food, or setup. A bin in the lobby collects candy donations for the friends and neighbors attending.",
-    tag: "All Church",
-    ctaLabel: "Sign up to help",
-    ctaHref:
-      "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2Uewf1tcPqQEO5kTANtgBiKnuZt0OMW4pla3cuasSKqaA-3D-3Dwzii_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBmCZsnQvBxp0BIrqUv5tPmnXjk9qmjuTe-2F0pBiSW4a1Q2v0IFLiRHGf1eP3ENQCi0xbxQI9JqeCVGBhbOfE2Hpk1um-2FQAWQCHnGWb4WRCD9rcfT39PlgeIrNP5AAgHoasH7u0dma-2BISShTTqVdN7Q9BCJXoaM7p5up6l6-2BGTiQBgVNHNTgMuun59fqXgpXmvJm0erT5mI7EaB5VWOMfzP3bfJxBlQWfAIRNQW43lpZWt",
-    // The Google Calendar entry is titled "Fall Festival & Trunk or Treat";
-    // without that alias it sat on the site as a second, bare copy.
-    aliases: [
-      "Fall Fest",
-      "Fall Festival",
-      "Fall Festival & Trunk or Treat",
-      "Fall Festival and Trunk or Treat",
-      "Fall Fest & Trunk or Treat",
-      "Trunk or Treat",
-      "Trunk-or-Treat",
-    ],
-  },
-  {
     slug: "e-durey-baby-shower",
     title: "Duréy Baby Shower",
     start: "2026-11-15T13:00:00-06:00",
@@ -73,18 +48,6 @@ export const bulletinEvents: BulletinEvent[] = [
     description: "Baby shower for Emelia Duréy, 1 PM in the alcove. Registered at Babylist.",
     tag: "All Church",
     aliases: ["E. Duréy baby shower", "E. Durey baby shower"],
-  },
-  {
-    slug: "teens-fall-fest-hangout",
-    title: "Teens Gym Hangout after Fall Fest",
-    start: "2026-10-25T18:00:00-05:00",
-    end: "2026-10-25T20:00:00-05:00",
-    location: "823 W 6th St, Little Rock",
-    description:
-      "Teens are invited to hang in the gym after Fall Fest for games and whatever else James has in store.",
-    tag: "Central Teens",
-    ministrySlug: "teens",
-    aliases: ["Teen Hangout", "Teens Hangout", "Gym Hangout"],
   },
   {
     slug: "iglesia-fall-retreat",
@@ -177,7 +140,7 @@ export const bulletinEvents: BulletinEvent[] = [
     allDay: true,
     location: "823 W 6th St, Little Rock",
     description:
-      "A \"Friendsgiving\" potluck with our friends who will receive the Thanksgiving boxes the Kids Ministry is packing. Sign up to bring a dish or a side, or to help serve the meal.",
+      "A \"Friendsgiving\" potluck in the gym with our friends and neighbors receiving the Thanksgiving boxes Central Kids packed. Sign up to bring a dish or a side, to help serve, or best of all to share the meal.",
     tag: "All Church",
     ctaLabel: "Sign up to bring a dish",
     ctaHref:
@@ -222,7 +185,7 @@ export const bulletinEvents: BulletinEvent[] = [
     end: "2026-12-12T12:00:00-06:00",
     location: "823 W 6th St, Little Rock",
     description:
-      "Central's Toy Store serves 270 kids this year, 7 AM to noon. Volunteers needed: holly jolly shoppers, wrappers, food servers, greeters, and present transporters — wrapping experience not required, and there's something for everyone, even the young ones. Gift ideas for every age are on the fliers at the front table of the foyer and in the Facebook group.",
+      "Central's Toy Store serves 270 kids this year, 7 AM to noon. Volunteers needed: holly jolly shoppers, wrappers, food servers, greeters, and present transporters — wrapping experience not required, and there's something for everyone, even the young ones. Gift ideas for every age are on the fliers at the front table of the foyer and in the Facebook group, and the stocking banner in the lobby shows which age groups need the most. Donations can also be made through PushPay via the Give tab.",
     tag: "Outreach",
     ministrySlug: "outreach",
     ctaLabel: "Volunteer sign-up",
