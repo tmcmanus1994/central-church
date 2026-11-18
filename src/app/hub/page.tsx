@@ -32,6 +32,7 @@ const links = [
   { label: "Watch Live", href: "/media/live", note: "Sundays 10:15 AM" },
   { label: "Photo Gallery", href: "/media/photos", note: "Albums" },
   { label: "Camp Caudle", href: "/media/camp-caudle", note: "Every video by year" },
+  { label: "Central Kids Reels", href: "/media/central-kids", note: "Monthly video" },
   { label: "Central Kids", href: "/ministries/children", note: "Birth–5th grade" },
   { label: "Central Teens", href: "/ministries/teens", note: "Middle & high school" },
   { label: "Life Groups", href: "/ministries/life-groups", note: "By age and stage" },

@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
     // migrated into public/blog/. Drop this entry once those two are in too.
     remotePatterns: [
       { protocol: "https", hostname: "framerusercontent.com" },
+      // Vimeo poster images for the Central Kids reels (see lib/vimeo.ts).
+      { protocol: "https", hostname: "i.vimeocdn.com" },
     ],
   },
   async redirects() {

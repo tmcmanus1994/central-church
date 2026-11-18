@@ -70,6 +70,19 @@ export interface Ministry {
   };
   /** Vimeo embed shown in place of the photo gallery. */
   video?: { embedUrl: string; url: string; caption: string };
+  /**
+   * A single highlighted card in the main column — for something the
+   * ministry wants front and centre that isn't a weekly or annual rhythm
+   * (Central Kids' monthly reels, say). `image` is a path under /public.
+   */
+  feature?: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    label: string;
+    href: string;
+    image?: string;
+  };
   /** Shows the SafetyTagline callout — set for pages families with kids read most. */
   showSafetyNote?: boolean;
   related?: { label: string; href: string }[];
@@ -138,12 +151,21 @@ export const ministries: Ministry[] = [
       href: remindJoinUrl(remindClasses.kids.code),
       remindCode: remindClasses.kids.code,
     },
+    feature: {
+      eyebrow: "New · Monthly video",
+      title: "Central Kids Reels",
+      body: "A short video each month celebrating what our kids have been up to — the milestones, the achievements, and the everyday moments worth remembering. Watch the latest, then share it with the grandparents.",
+      label: "Watch the reels",
+      href: "/media/central-kids",
+      image: "/photos/kids-week.webp",
+    },
     contact: {
       name: "Tammy Beck",
       role: "Children's Minister",
       ctaLabel: "Contact Tammy",
     },
     related: [
+      { label: "Central Kids Reels", href: "/media/central-kids" },
       { label: "Visit our Kids Closet", href: "/ministries/kids-closet" },
       {
         label:

@@ -131,6 +131,35 @@ export function MinistryPage({
             </>
           ) : null}
 
+          {ministry.feature ? (
+            <div className="mt-4 flex flex-col overflow-hidden rounded-[18px] border border-line sm:flex-row lg:mt-6">
+              {ministry.feature.image ? (
+                <ImageSlot
+                  src={ministry.feature.image}
+                  sizes="(min-width: 640px) 260px, 100vw"
+                  alt=""
+                  className="aspect-[16/10] w-full shrink-0 sm:aspect-auto sm:w-[260px]"
+                />
+              ) : null}
+              <div className="flex flex-col gap-2 p-5 lg:p-6">
+                <span className="text-[11px] font-bold tracking-[.14em] uppercase text-primary">
+                  {ministry.feature.eyebrow}
+                </span>
+                <h3 className="m-0 font-display text-[22px] leading-[1.15] tracking-[-.02em] lg:text-[26px]">
+                  {ministry.feature.title}
+                </h3>
+                <p className="m-0 text-[15.5px] leading-[1.6] text-body">
+                  {ministry.feature.body}
+                </p>
+                <div className="mt-2">
+                  <Button href={ministry.feature.href} size="md">
+                    {ministry.feature.label}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ) : null}
+
           {ministry.list ? (
             <>
               <h2 className="mt-4 mb-0 font-display text-[24px] tracking-[-.025em] lg:mt-6 lg:text-[32px]">

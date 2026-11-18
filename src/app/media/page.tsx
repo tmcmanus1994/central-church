@@ -4,6 +4,7 @@ import { ImageSlot } from "@/components/ImageSlot";
 import { LiveNowBadge } from "@/components/LiveNowBadge";
 import { Reveal } from "@/components/Reveal";
 import { blogPosts } from "@/content/blog";
+import { latestKidsReel } from "@/content/kids-reels";
 import { mediaPlaceholder } from "@/content/photos";
 
 export const metadata: Metadata = {
@@ -33,8 +34,29 @@ export default function MediaHubPage() {
         stories from around the congregation.
       </p>
 
-      <div className="mt-8 grid grid-cols-1 gap-4 lg:mt-12 lg:grid-cols-3 lg:gap-6">
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4 lg:gap-6">
         <Reveal className="flex flex-col gap-3 rounded-2xl border border-line p-6">
+          <ImageSlot
+            src="/photos/kids-week.webp"
+            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+            alt=""
+            label="kids reel still"
+            className="aspect-[16/10] w-full rounded-xl"
+          />
+          <span className="text-xs font-bold tracking-[.1em] uppercase text-primary">
+            Central Kids Reels
+          </span>
+          <h2 className="m-0 font-display text-[22px] leading-[1.15] tracking-[-.02em] text-pretty-wrap">
+            {latestKidsReel.title.replace("Central Kids Reel — ", "")} reel
+          </h2>
+          <span className="text-[14.5px] text-muted">
+            A monthly video of what our kids have been up to
+          </span>
+          <ArrowLink href="/media/central-kids" className="mt-auto text-[15px]">
+            Watch the reels
+          </ArrowLink>
+        </Reveal>
+        <Reveal delay={30} className="flex flex-col gap-3 rounded-2xl border border-line p-6">
           <ImageSlot
             src="/photos/kids-trunk-or-treat.webp"
             sizes="(min-width: 1024px) 33vw, 100vw"

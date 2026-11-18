@@ -33,6 +33,7 @@ const columns = [
       { label: "Live Stream", href: "/media/live" },
       { label: "Photo Gallery", href: "/media/photos" },
       { label: "Camp Caudle", href: "/media/camp-caudle" },
+      { label: "Central Kids Reels", href: "/media/central-kids" },
       { label: "Blog", href: "/blog" },
     ],
   },
