@@ -78,19 +78,44 @@ export interface Bulletin {
 }
 
 export const bulletin: Bulletin = {
-  weekOf: "November 15, 2026",
+  weekOf: "November 22, 2026",
 
   announcements: [
     {
-      title: "Friends and Family Meal — this Wednesday, November 18",
-      body: "During kids' Bible classes today, our younger Central people are loading up food items for each of our friends and neighbors receiving a Thanksgiving meal bag, box, or vessel. Many thanks for supporting these friends through the Kids Harvest giving last month! Do consider signing up to bring a dish or serve food — or, best of all, share a meal with our Central friends at Wednesday's Friends & Family meal. See you in the gym!",
-      href: "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2UVZhyFrUShK-2Bkt6Hje6i1LB9-2Fa2-2B5e25h1xI7maeE0nGXAUea7bm1e7kKnv94zl8o-3DwSI__Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBjrlnAxGE99H5TX874T3ABIP3AuQHyMTyBKGcqQOd1DtTpEc-2BOAx9QdHSEf4WzpSMIi-2Bep9HUMS0uSRgT8zwB79nxoKiO4I2mt5GfNCjgXs8vih7lUXWCM2JEL-2BGOFgO-2FPGHFJb1zJYVP5vReDDFP1WMu7n5rzkvLNpQ6XHZTggC44W7A1tyLCSi2U-2BhSkrEp3Yv3VfXIAO4EkVWDhWY9OzNi6n7aALs3AIecuqfZb82",
+      title: "Thank you, Central family",
+      body: "A big, big thank you for all the ways you supported the Friends and Family meal on Wednesday! Check out the recap post on our Facebook page — and while you're perusing, be sure to watch Matt's Kids Closet video from last week. It was record breaking!",
     },
     {
-      title: "It's Toy Store season — December 12",
-      body: "The stocking gift visual aid in the lobby shows which age groups have the greatest need — take a look from week to week to guide your shopping. Prefer to have a personal shopper tackle the decision-making? Donations can be made through PushPay (the Give tab on the website or the HUB). Volunteers are still needed on Saturday, December 12, from 7 AM to noon: holly jolly shoppers, wrappers, food servers, greeters, and present transporters. And there's a list of families who would be grateful for a prayer partner in the weeks leading up; contact Lacey to get paired with one.",
+      title: "Toy Store needs you — December 12",
+      body: "Mark your calendar for Saturday, December 12, 7 AM to noon. This is an all-hands-on-deck kind of event, and a great way to share a morning! Volunteer to wrap presents, shop with a Central friend, be a wrapped-gift wheeler, or — most underestimatedly necessary — dispense tape. Never underestimate the need for efficient tape dispensers. For the shoppers, gift ideas (and links!) for each age group are posted in the Facebook group, and a printed gift guide with photos is on the lobby table. Take a peek at the stockings in the lobby to see which groups need some support, and keep an eye on Black Friday and Cyber Monday sales — there's always something! Our goal is 1,620 gifts. Thank you for loving these families in our Central community!",
       href: "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2Uewf1tcPqQEO5kTANtgBiKcof2i6S4swlmyp7YpmkU8a8aTZrWWn-2BHRSns07lRzds-3Dmbca_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBmJ-2Bo5Anxrrkp38s9EOcNI4C1R9lsjGsHoB4K8YIBUsHS6B-2Fb8l7nZNOJ3zW4uyktezVXvl-2BTdcV0JLzLv-2BvG-2Fjw-2FywPlN-2BazpaderA6rOCYT4JtOZa24wQcMdR7QR02dtG-2BIgtpVgMff6QNzfAGPGlY9XKbv2kqM-2FTPoU6kupLt-2FfQYJ9Hm6JPnMhamG6jIwXrMdp7l9fh1xcVTiHx-2FpCgv-2FDO1Djaei2GWjSr4RfYS",
       contact: { name: "Lacey Hines", email: "lacey@arcentralchurch.org" },
+    },
+    {
+      title: "Wednesday nights — no class this week, Advent starts December 2",
+      body: "There will be no Wednesday night class this week, November 25. Next week, on the 2nd, the Advent series begins and runs for three weeks (December 2, 9, and 16), hosted by Steven Hovater and company in Fellowship East. All are welcome! Helping Hands will pause for the month of December, and kids' classes continue as usual for those three weeks. Note there will be no Wednesday night class on December 23 or 30.",
+    },
+    {
+      title: "Fatherhood workshops with Every Arkansan",
+      body: "Central is partnering with Every Arkansan to host a series of workshops about fatherhood. The first workshop is Wednesday, December 2, from 5 to 7 PM in Fellowship West. If you'd like more info, contact Brian Beck or Carson Miller.",
+    },
+    {
+      title: "West balcony closing for a facelift",
+      body: "Balcony sitters, get ready for the closure of the West balcony — signs will be posted. Work will reconvene in the West balcony in the coming weeks, so if that's your chosen seat, please enjoy a change of scenery in the East balcony in the interim while ole Westie gets a facelift and new bulbs.",
+    },
+    {
+      title: "Central Teens",
+      body: "Small group tonight at the Mosleys' — let James know if you're going to be there! The Progressive Dinner is Sunday, December 13. Reminder that students should bring a small ($5) gift for the gift exchange.",
+      contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
+    },
+    {
+      title: "Ministry leaders — meeting December 7",
+      body: "Ministry leaders, mark your calendar for a meeting on Monday, December 7. An RSVP is coming your way via email — be on the lookout!",
+    },
+    {
+      title: "Year-end giving statements",
+      body: "Year-end giving statements will be sent via email again this year. Now is a good time to check that your contact info is correct on Breeze. Email Jessica if you need help.",
+      contact: { name: "Jessica Ward", email: "jessica@arcentralchurch.org" },
     },
     {
       title: "New Safe Team signage",
@@ -98,22 +123,8 @@ export const bulletin: Bulletin = {
       href: "/safety",
     },
     {
-      title: "Central Teens — Fall Retreat this weekend",
-      body: "The teen retreat is live at Corin Read Christian Camp — hopefully they didn't turn into little teen popsicles overnight, freeze warning and all. Think of that crew fondly and prayerfully, that they may come to know the Lord more through experiences in His creation and growing in relationship together. Coming up: the Progressive Dinner is December 15 — students should bring a small ($5) gift for the gift exchange.",
-      contact: { name: "James Mosley", email: "james@arcentralchurch.org" },
-    },
-    {
-      title: "Wednesday nights",
-      body: "Steven Hovater's study on discernment and decisions continues in Fellowship East this Wednesday. There are no classes on Wednesday, November 25, and the annual Advent \"class\" runs December 2, 9, and 16 — all adults are welcome for a night of worship and discussion. Keep an eye on communications for holiday class cancellations and what's to come in the new year.",
-    },
-    {
-      title: "Year-end giving statements",
-      body: "It's time to make sure your contact info is up to date if you'd like to receive your end-of-year giving statement. If you're reading this, you're more than likely in the clear — tell your friends. Reach out to the church office with any updates.",
-      contact: { name: "Jessica Ward", email: "jessica@arcentralchurch.org" },
-    },
-    {
       title: "Coming up",
-      body: "The Mix will have \"Mixgiving\" in a few weeks, and Iglesia will have a special Thanksgiving gathering at the end of the month. The first week of December is the calm before the Toy Store prep storm — and Family Style Communion is scheduled for that first Sunday, December 6.",
+      body: "Today: Sunday Funday for 2nd graders, and Mixgiving for The Mix. Family Style Communion is Sunday, December 6, and small groups meet that day too. Toy Store prep runs December 7–11, and the 30's Christmas Party is Saturday, December 12.",
     },
     {
       title: "Reserving a room",
@@ -232,16 +243,16 @@ export const bulletin: Bulletin = {
 
   wednesdayClasses: [
     {
-      name: "Discernment & Decisions",
+      name: "Advent Wednesdays",
       detail:
-        "Does God care what I do next? A three-week adult Bible study starting November 4 — the one adult class option for November. No classes on Wednesday, November 25.",
+        "No class on Wednesday, November 25. The Advent series begins December 2 and runs three weeks (December 2, 9, and 16) — all are welcome. No Wednesday night class on December 23 or 30.",
       room: "Fellowship East",
-      teacher: "Steven Hovater",
+      teacher: "Steven Hovater and company",
     },
     {
       name: "Helping Hands",
       detail:
-        "An actionable opportunity to offer support and assistance to existing Central ministries.",
+        "An actionable opportunity to offer support and assistance to existing Central ministries. Paused for the month of December.",
       room: "SGC Upstairs, Kids Closet hallway",
     },
     {
@@ -254,22 +265,20 @@ export const bulletin: Bulletin = {
 
   orderOfWorship: [
     "As you enter the auditorium, pick up a communion packet in the lobby",
-    "Humble Yourself (745)",
-    "Welcome: Steven Hovater",
-    "Deep Calls to Deep",
-    "Be With Me, Lord (778)",
-    "I Come to the Garden Alone (595)",
-    "Communion: Peyton Tucker",
-    "Quiet My Soul",
-    "Be Still & Know (31)",
-    "Arms of Love",
-    "Prayer for Loss",
-    "Dismiss Children's Church / Children's Giving",
-    "What a Friend We Have in Jesus (800)",
+    "Doxology (66)",
+    "Welcome",
+    "Awesome God (He is Faithful)",
+    "Majestic",
+    "There is a Redeemer (287)",
+    "Communion: Tommy Gault",
+    "Father God",
+    "Dismiss Children's Church",
+    "Goodness of God",
     "Scripture Reading",
     "Sermon: Steven Hovater",
-    "All in All (484)",
+    "Thank You, Lord (781)",
     "Family News",
+    "Gratitude",
     "Sending Blessing",
   ],
 
@@ -308,6 +317,7 @@ export const bulletin: Bulletin = {
   ],
 
   archive: [
+    "November 15, 2026",
     "November 8, 2026",
     "November 1, 2026",
     "October 25, 2026",
