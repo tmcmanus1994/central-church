@@ -14,6 +14,7 @@ const navItems = [
   { label: "Leadership", href: "/about/leadership" },
   { label: "Ministries", href: "/ministries" },
   { label: "Media", href: "/media" },
+  { label: "Shop", href: "/shop" },
 ];
 
 const sheetItems: { label: string; href: string; external?: boolean }[] = [

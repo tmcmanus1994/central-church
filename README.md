@@ -321,6 +321,37 @@ Resend (see `.env.example`), and are also saved to Supabase
 Supabase SQL Editor to create the table. The Supabase write is best-effort:
 a failure is logged but never blocks the email.
 
+## Shop (`/shop`)
+
+Central shirts with the skyline design. The site never takes money: a
+buyer picks items, enters a name and contact, pays through Cash App,
+Pushpay, or in cash, then uploads a screenshot of the receipt or types a
+reference, and the office gets an email with everything needed to fill
+the order.
+
+- **Data lives in Supabase**, never in code. `shop_products` (name,
+  price, sizes, image, active flag), `shop_settings` (one row: open/closed,
+  Cashtag, Pushpay link and fund, cash recipients, pickup details), and
+  `shop_orders`. Run `supabase/migrations/20261124120000_shop.sql` once in
+  the SQL Editor; it also creates the private `shop-receipts` bucket.
+  Change prices, sizes, or close the shop in the Table Editor — the page
+  revalidates every minute, no deploy needed.
+- **Orders** post to `src/app/api/shop/orders/route.ts`. Totals are
+  recomputed on the server from `shop_products`; a total from the browser
+  is never read. Receipts go to the private bucket (service role only) and
+  are attached to the notification email, with a 7-day signed link as a
+  backup. If the email fails the order is still saved and the buyer still
+  gets a confirmation; `notification_sent_at` stays null so it's visible.
+- **Env:** `ORDER_NOTIFY_EMAILS`, `ORDER_FROM_EMAIL` (falls back to
+  `FORMS_FROM_EMAIL`), `RESEND_API_KEY`, and the Supabase vars — see
+  `.env.example`. `SHOP_DEV_FIXTURE=1` serves the seed catalog locally
+  without a database.
+- **UI:** `src/components/shop/`. `HeroArt` and `ProductMedia` are the two
+  seams reserved for Rive artboards later; everything else is CSS and the
+  Web Animations API, switched off under `prefers-reduced-motion`.
+- Status (`submitted` → `payment_confirmed` → `ready` → `picked_up`) is
+  tracked by hand in the Table Editor for now.
+
 ## Remind (text alerts)
 
 `src/lib/remind.ts` maps each audience (Teens, Central Kids, churchwide) to
