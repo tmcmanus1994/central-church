@@ -36,6 +36,7 @@ export function Button({
   size = "lg",
   full = false,
   external = false,
+  className,
   children,
 }: {
   href: string;
@@ -43,9 +44,12 @@ export function Button({
   size?: keyof typeof sizes;
   full?: boolean;
   external?: boolean;
+  /** Replaces the variant's colors — for buttons on a one-off background
+   *  (the spotlight banner, the Toy Store hero). Shape and size stay. */
+  className?: string;
   children: ReactNode;
 }) {
-  const cls = `${base} ${variants[variant]} ${variant === "ghost" ? "" : sizes[size]} ${full ? "flex w-full" : ""}`;
+  const cls = `${base} ${className ?? variants[variant]} ${variant === "ghost" ? "" : sizes[size]} ${full ? "flex w-full" : ""}`;
   if (external || href.startsWith("http")) {
     return (
       <a href={href} className={cls} target="_blank" rel="noopener noreferrer">

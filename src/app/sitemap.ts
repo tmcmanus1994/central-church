@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/media/central-kids", 0.6, "monthly"],
     ["/media/live", 0.5, "weekly"],
     ["/shop", 0.6, "weekly"],
+    ["/toy-store", 0.7, "weekly"],
     ["/blog", 0.6, "weekly"],
   ];
 

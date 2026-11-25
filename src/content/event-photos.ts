@@ -25,4 +25,6 @@ export const eventPhotos: Record<string, string> = {
   "kids-week": "/photos/kids-week.webp",
   // 2026 flyer, padded to 16:9 on its own purple so no slot crops the text.
   "trunk-or-treat": "/photos/event-fall-fest-2026.webp",
+  "toy-store": "/photos/toy-store-2026.webp",
+  "toy-store-2026": "/photos/toy-store-2026.webp",
 };

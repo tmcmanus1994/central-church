@@ -198,9 +198,9 @@ export const bulletinEvents: BulletinEvent[] = [
       "Central's Toy Store serves 270 kids this year, 7 AM to noon. Volunteers needed: holly jolly shoppers, wrappers, food servers, greeters, and present transporters — wrapping experience not required, and there's something for everyone, even the young ones. Gift ideas for every age are on the fliers at the front table of the foyer and in the Facebook group, and the stocking banner in the lobby shows which age groups need the most. Donations can also be made through PushPay via the Give tab.",
     tag: "Outreach",
     ministrySlug: "outreach",
-    ctaLabel: "Volunteer sign-up",
-    ctaHref:
-      "https://links.breezechms.com/ls/click?upn=u001.I1QWnEUjRQZmeILWJHEKPU4O4vzzz8eV-2BGcq3KM7D2Uewf1tcPqQEO5kTANtgBiKcof2i6S4swlmyp7YpmkU8a8aTZrWWn-2BHRSns07lRzds-3Dmbca_Ku09AMy-2B3ZRmoeP2WV7CZI-2BJM-2Fi0nwKLi1tQUOIAw-2FicUOU25O2ryf-2BhNjP62rjZtVnPWhsN-2Fuuz253MmgKCBmJ-2Bo5Anxrrkp38s9EOcNI4C1R9lsjGsHoB4K8YIBUsHS6B-2Fb8l7nZNOJ3zW4uyktezVXvl-2BTdcV0JLzLv-2BvG-2Fjw-2FywPlN-2BazpaderA6rOCYT4JtOZa24wQcMdR7QR02dtG-2BIgtpVgMff6QNzfAGPGlY9XKbv2kqM-2FTPoU6kupLt-2FfQYJ9Hm6JPnMhamG6jIwXrMdp7l9fh1xcVTiHx-2FpCgv-2FDO1Djaei2GWjSr4RfYS",
+    // The Toy Store page carries all three links (give, gifts, volunteer).
+    ctaLabel: "Give, donate, or volunteer",
+    ctaHref: "/toy-store",
     aliases: ["Toy Store 2026", "Christmas Toy Store"],
   },
   {

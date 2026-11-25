@@ -6,9 +6,10 @@ import { LiveNowBadge } from "@/components/LiveNowBadge";
 import { WatchLiveButton } from "@/components/WatchLiveButton";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
-import { SpotlightBanner } from "@/components/SpotlightBanner";
+import { HomeSpotlight } from "@/components/HomeSpotlight";
 import { WeeklyRhythm } from "@/components/WeeklyRhythm";
-import { getCalendar, getCalendarSpotlight } from "@/lib/calendar";
+import { getCalendar } from "@/lib/calendar";
+import { activeSpotlights } from "@/content/spotlights";
 import { ministries } from "@/content/ministries";
 import { blogPosts } from "@/content/blog";
 import { latestSermon } from "@/content/media";
@@ -27,11 +28,8 @@ const ministryTiles = [
 export const revalidate = 900;
 
 export default async function HomePage() {
-  const [{ recurring, upcoming }, spotlight] = await Promise.all([
-    getCalendar(),
-    getCalendarSpotlight(),
-  ]);
-  const thisWeek = upcoming.filter((e) => e.slug !== spotlight?.slug).slice(0, 4);
+  const { recurring, upcoming } = await getCalendar();
+  const thisWeek = upcoming.slice(0, 4);
   const latestPost = blogPosts[0];
 
   return (
@@ -137,8 +135,9 @@ export default async function HomePage() {
         </a>
       </Reveal>
 
-      {/* Spotlight — automation-fed; renders nothing when there's no feature */}
-      <SpotlightBanner event={spotlight} />
+      {/* Spotlight — curated by hand in src/content/spotlights.ts; renders
+          nothing once every entry has passed its date */}
+      <HomeSpotlight items={activeSpotlights()} />
 
       {/* Welcome */}
       <Reveal as="section" className="mx-auto max-w-[1440px] px-5 pt-10 pb-7 lg:px-14 lg:pt-[88px] lg:pb-8">
