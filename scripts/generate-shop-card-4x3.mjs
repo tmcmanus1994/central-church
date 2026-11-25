@@ -66,9 +66,9 @@ h1{font-family:B;font-size:70px;line-height:.98;letter-spacing:-.04em;font-weigh
   <div class="chips"><span>T-Shirt $15</span><span>Crewneck $25</span><span>Hoodie $30</span></div>
 </div>
 <div class="art">
-  <img src="${crew}" style="left:10px;top:50px;width:330px;transform:rotate(-7deg)">
-  <img src="${tee}" style="left:200px;top:280px;width:340px;z-index:2">
-  <img src="${hoodie}" style="left:60px;top:520px;width:330px;transform:rotate(5deg)">
+  <img src="${crew}" style="left:200px;top:50px;width:330px;transform:rotate(-7deg)">
+  <img src="${tee}" style="left:10px;top:280px;width:340px;z-index:2">
+  <img src="${hoodie}" style="left:200px;top:520px;width:330px;transform:rotate(5deg)">
 </div>
 <div class="scan">
   <div class="qr"><img src="${qr}" alt="QR code to the shop"></div>
