@@ -60,7 +60,21 @@ async function load(client: SupabaseClient): Promise<ShopData> {
 
   // A missing settings row (migration not run yet) reads as "not
   // configured" rather than as an open shop with placeholder handles.
+  if (!settings && !settingsRes.error) {
+    console.warn(
+      "Shop: shop_settings has no row with id 1 — run supabase/migrations/20261124120000_shop.sql in the SQL Editor.",
+    );
+  }
   return { configured: settings !== null, products, settings };
+}
+
+/** Names only, never values — shows up in the Vercel build/function log. */
+function warnUnconfigured(which: "page" | "order") {
+  const missing = [
+    "NEXT_PUBLIC_SUPABASE_URL",
+    which === "page" ? "NEXT_PUBLIC_SUPABASE_ANON_KEY" : "SUPABASE_SERVICE_ROLE_KEY",
+  ].filter((name) => !process.env[name]);
+  console.warn(`Shop (${which}): Supabase not configured — unset: ${missing.join(", ") || "none"}`);
 }
 
 function fixture(): ShopData {
@@ -88,13 +102,19 @@ const useFixture = process.env.SHOP_DEV_FIXTURE === "1";
 /** For the page: anon key, under RLS. */
 export async function loadShopData(): Promise<ShopData> {
   if (useFixture) return fixture();
-  if (!supabasePublic) return { configured: false, products: [], settings: null };
+  if (!supabasePublic) {
+    warnUnconfigured("page");
+    return { configured: false, products: [], settings: null };
+  }
   return load(supabasePublic);
 }
 
 /** For the order route: service role, so the read can't be shaped by RLS. */
 export async function loadShopDataAdmin(): Promise<ShopData> {
   if (useFixture) return fixture();
-  if (!supabaseAdmin) return { configured: false, products: [], settings: null };
+  if (!supabaseAdmin) {
+    warnUnconfigured("order");
+    return { configured: false, products: [], settings: null };
+  }
   return load(supabaseAdmin);
 }
