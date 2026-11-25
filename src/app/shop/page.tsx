@@ -3,11 +3,18 @@ import { ShopExperience } from "@/components/shop/ShopExperience";
 import { loadShopData } from "@/lib/shop-data";
 import { site } from "@/lib/site";
 
+const SHARE_TITLE = "Central Shop — Wear Central all week long";
+const DESCRIPTION =
+  "Central Church shirts with the Little Rock skyline design — a tee, a crewneck, or a hoodie. Order online, pay with Cash App, Pushpay, or cash, and pick up at church.";
+
 export const metadata: Metadata = {
   title: "Shop",
-  description:
-    "Central Church shirts with the Little Rock skyline design — a tee, a crewneck, or a hoodie. Order online, pay with Cash App, Pushpay, or cash, and pick up at church.",
+  description: DESCRIPTION,
   alternates: { canonical: "/shop" },
+  // The share card (opengraph-image.png beside this file) is picked up by
+  // file convention; these make the text on the card match it.
+  openGraph: { title: SHARE_TITLE, description: DESCRIPTION, url: "/shop" },
+  twitter: { card: "summary_large_image", title: SHARE_TITLE, description: DESCRIPTION },
 };
 
 /**
