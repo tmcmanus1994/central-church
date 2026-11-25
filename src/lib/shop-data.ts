@@ -40,11 +40,10 @@ async function load(client: SupabaseClient): Promise<ShopData> {
       .select("id, name, price_cents, sizes, sold_out_sizes, image_path, image_alt, sort_order, is_active")
       .eq("is_active", true)
       .order("sort_order", { ascending: true }),
-    client
-      .from("shop_settings")
-      .select("is_open, cashapp_cashtag, pushpay_url, pushpay_fund, cash_recipients, pickup_details")
-      .eq("id", 1)
-      .maybeSingle(),
+    // "*" rather than a column list so a settings column added by a later
+    // migration (shipping_fee_cents) reads as missing, not as an error,
+    // on a database that hasn't run it yet.
+    client.from("shop_settings").select("*").eq("id", 1).maybeSingle(),
   ]);
 
   if (productsRes.error) {
@@ -103,6 +102,7 @@ function fixture(): ShopData {
       pushpayFund: "[Fund name]",
       cashRecipients: ["Travelle", "Jessica Ward"],
       pickupDetails: "[Pickup details]",
+      shippingFeeCents: Number(process.env.SHOP_DEV_FIXTURE_SHIPPING_CENTS ?? 0) || 0,
     },
   };
 }

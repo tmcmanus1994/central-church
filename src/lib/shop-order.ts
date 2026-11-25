@@ -1,10 +1,15 @@
 import {
   MAX_LINES,
   MAX_LINE_QTY,
+  NO_SHIP_STATES,
+  US_STATES,
+  formatAddress,
   formatMoney,
   isSoldOut,
   sizeLabel,
+  type DeliveryMethod,
   type PaymentMethod,
+  type ShippingAddress,
   type ShopProduct,
   type ShopSettings,
 } from "./shop";
@@ -68,6 +73,12 @@ export interface OrderInput {
   reference: string;
   itemsJson: string;
   file: File | null;
+  delivery: string;
+  shipStreet: string;
+  shipUnit: string;
+  shipCity: string;
+  shipState: string;
+  shipZip: string;
 }
 
 export interface ValidOrder {
@@ -77,8 +88,44 @@ export interface ValidOrder {
   cashRecipient: string | null;
   reference: string | null;
   items: OrderItem[];
+  /** Items only. */
+  itemsCents: number;
+  delivery: DeliveryMethod;
+  shippingAddress: ShippingAddress | null;
+  shippingCents: number;
+  /** Items plus shipping — what the buyer is asked to send. */
   totalCents: number;
   file: File | null;
+}
+
+export function validateShippingAddress(input: {
+  street: string;
+  unit: string;
+  city: string;
+  state: string;
+  zip: string;
+}): { ok: true; address: ShippingAddress } | { ok: false; error: string } {
+  const street = input.street.trim();
+  const unit = input.unit.trim();
+  const city = input.city.trim();
+  const state = input.state.trim().toUpperCase();
+  const zip = input.zip.trim();
+  if (street.length < 3 || street.length > 120) {
+    return { ok: false, error: "Add the street address we should ship to." };
+  }
+  if (unit.length > 40) return { ok: false, error: "Keep the apartment or unit short." };
+  if (city.length < 2 || city.length > 60) return { ok: false, error: "Add the city we should ship to." };
+  if (!US_STATES.some((s) => s.code === state)) {
+    return { ok: false, error: "Pick the state we should ship to." };
+  }
+  if (NO_SHIP_STATES.includes(state)) {
+    return {
+      ok: false,
+      error: "Shipping is only available outside Arkansas. Choose pickup at Central instead.",
+    };
+  }
+  if (!/^\d{5}(-\d{4})?$/.test(zip)) return { ok: false, error: "Add a 5-digit ZIP code." };
+  return { ok: true, address: { street, unit: unit || undefined, city, state, zip } };
 }
 
 export type ValidationResult =
@@ -166,7 +213,27 @@ export function validateOrder(
       });
     }
   }
-  const totalCents = items.reduce((sum, i) => sum + i.line_total_cents, 0);
+  const itemsCents = items.reduce((sum, i) => sum + i.line_total_cents, 0);
+
+  if (input.delivery !== "pickup" && input.delivery !== "ship") {
+    return { ok: false, error: "Choose pickup at Central or shipping." };
+  }
+  const delivery = input.delivery as DeliveryMethod;
+  let shippingAddress: ShippingAddress | null = null;
+  let shippingCents = 0;
+  if (delivery === "ship") {
+    const addr = validateShippingAddress({
+      street: input.shipStreet,
+      unit: input.shipUnit,
+      city: input.shipCity,
+      state: input.shipState,
+      zip: input.shipZip,
+    });
+    if (!addr.ok) return addr;
+    shippingAddress = addr.address;
+    shippingCents = settings.shippingFeeCents;
+  }
+  const totalCents = itemsCents + shippingCents;
 
   const reference = input.reference.trim().slice(0, 200) || null;
   const file = input.file && input.file.size > 0 ? input.file : null;
@@ -190,7 +257,20 @@ export function validateOrder(
 
   return {
     ok: true,
-    order: { name, contact, method, cashRecipient, reference, items, totalCents, file },
+    order: {
+      name,
+      contact,
+      method,
+      cashRecipient,
+      reference,
+      items,
+      itemsCents,
+      delivery,
+      shippingAddress,
+      shippingCents,
+      totalCents,
+      file,
+    },
   };
 }
 
@@ -246,6 +326,9 @@ export interface OrderEmailInput {
   contact: string;
   items: OrderItem[];
   totalCents: number;
+  delivery: DeliveryMethod;
+  shippingAddress: ShippingAddress | null;
+  shippingCents: number;
   method: PaymentMethod;
   cashRecipient: string | null;
   reference: string | null;
@@ -261,8 +344,17 @@ function escapeHtml(s: string): string {
 /** The order email to the office: a subject, plain text, and simple HTML. */
 export function formatOrderEmail(o: OrderEmailInput) {
   const via = methodPhrase(o.method, o.cashRecipient);
-  const subject = `New shirt order ${o.orderNumber} · ${o.name} · ${formatMoney(o.totalCents)} via ${via}`;
+  const ships = o.delivery === "ship" && o.shippingAddress;
+  const subject = `New shirt order ${o.orderNumber} · ${o.name} · ${formatMoney(o.totalCents)} via ${via}${
+    ships ? ` · SHIP to ${o.shippingAddress!.state}` : ""
+  }`;
   const when = centralTime(o.createdAt);
+  const deliveryText = ships
+    ? `SHIP to:\n${formatAddress(o.shippingAddress!)
+        .split("\n")
+        .map((l) => `  ${l}`)
+        .join("\n")}`
+    : "Pick up at Central";
 
   const textLines = [
     `Order:    ${o.orderNumber}`,
@@ -271,10 +363,13 @@ export function formatOrderEmail(o: OrderEmailInput) {
     `Name:     ${o.name}`,
     `Contact:  ${o.contact}`,
     "",
+    `Delivery: ${deliveryText}`,
+    "",
     "Items:",
     ...o.items.map(
       (i) => `  ${i.qty} × ${i.name} (size ${sizeLabel(i.size)}) — ${formatMoney(i.line_total_cents)}`,
     ),
+    o.shippingCents > 0 ? `  Shipping: ${formatMoney(o.shippingCents)}` : null,
     `  Total: ${formatMoney(o.totalCents)}`,
     "",
     `Paid via: ${via}`,
@@ -304,13 +399,22 @@ export function formatOrderEmail(o: OrderEmailInput) {
 <table style="border-collapse:collapse;margin:0 0 16px">
 <tr><td style="padding:4px 10px 4px 0;color:#6e6862">Name</td><td style="padding:4px 0"><strong>${escapeHtml(o.name)}</strong></td></tr>
 <tr><td style="padding:4px 10px 4px 0;color:#6e6862">Contact</td><td style="padding:4px 0">${escapeHtml(o.contact)}</td></tr>
+<tr><td style="padding:4px 10px 4px 0;color:#6e6862;vertical-align:top">Delivery</td><td style="padding:4px 0">${
+    ships
+      ? `<strong>Ship to</strong><br>${escapeHtml(formatAddress(o.shippingAddress!)).replace(/\n/g, "<br>")}`
+      : "Pick up at Central"
+  }</td></tr>
 <tr><td style="padding:4px 10px 4px 0;color:#6e6862">Paid via</td><td style="padding:4px 0">${escapeHtml(via)}</td></tr>
 ${o.reference ? `<tr><td style="padding:4px 10px 4px 0;color:#6e6862">Reference</td><td style="padding:4px 0">${escapeHtml(o.reference)}</td></tr>` : ""}
 </table>
 <table style="border-collapse:collapse;width:100%;margin:0 0 16px;background:#f7f4ef;border-radius:10px">
 <thead><tr><th style="text-align:left;padding:8px 10px;font-size:12px;color:#6e6862">Item</th><th style="text-align:left;padding:8px 10px;font-size:12px;color:#6e6862">Size</th><th style="text-align:right;padding:8px 10px;font-size:12px;color:#6e6862">Qty</th><th style="text-align:right;padding:8px 10px;font-size:12px;color:#6e6862">Line</th></tr></thead>
 <tbody>${rows}</tbody>
-<tfoot><tr><td colspan="3" style="padding:10px;text-align:right;font-weight:700">Total</td><td style="padding:10px;text-align:right;font-weight:700;font-size:18px">${formatMoney(o.totalCents)}</td></tr></tfoot>
+<tfoot>${
+    o.shippingCents > 0
+      ? `<tr><td colspan="3" style="padding:6px 10px;text-align:right;color:#6e6862">Shipping</td><td style="padding:6px 10px;text-align:right">${formatMoney(o.shippingCents)}</td></tr>`
+      : ""
+  }<tr><td colspan="3" style="padding:10px;text-align:right;font-weight:700">Total</td><td style="padding:10px;text-align:right;font-weight:700;font-size:18px">${formatMoney(o.totalCents)}</td></tr></tfoot>
 </table>
 <p style="margin:0 0 8px">${
     o.receiptFilename
@@ -335,16 +439,21 @@ export function formatCustomerEmail(o: {
   method: PaymentMethod;
   cashRecipient: string | null;
   pickupDetails: string;
+  delivery: DeliveryMethod;
+  shippingAddress: ShippingAddress | null;
 }) {
   const first = o.name.trim().split(/\s+/)[0] || "there";
   const subject = `We got your order ${o.orderNumber}`;
+  const ships = o.delivery === "ship" && o.shippingAddress;
   const text = [
     `Hi ${first},`,
     "",
     `We got your Central shirt order ${o.orderNumber} — ${o.itemCount} item${o.itemCount === 1 ? "" : "s"}, ${formatMoney(o.totalCents)} via ${methodPhrase(o.method, o.cashRecipient)}.`,
     "",
-    "We'll check your receipt and reach out when it's ready to pick up.",
-    o.pickupDetails ? `Pickup: ${o.pickupDetails}` : null,
+    ships
+      ? `We'll check your receipt and ship it to:\n${formatAddress(o.shippingAddress!)}`
+      : "We'll check your receipt and reach out when it's ready to pick up.",
+    !ships && o.pickupDetails ? `Pickup: ${o.pickupDetails}` : null,
     "",
     "— Central Church of Christ",
   ]

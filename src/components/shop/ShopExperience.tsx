@@ -188,7 +188,8 @@ export function ShopExperience({ products, settings }: { products: ShopProduct[]
             </h1>
             <p className="m-0 max-w-[34em] text-[17px] leading-[1.6] text-[#d9d3ca]">
               Our skyline design on a tee, a crewneck, or a hoodie. Pick your items, pay with Cash App,
-              Pushpay, or cash, then send us your receipt and we&rsquo;ll have your order ready at church.
+              Pushpay, or cash, then send us your receipt and we&rsquo;ll have your order ready at church, or
+              ship it if you&rsquo;re out of state.
             </p>
             <div className="flex flex-wrap gap-3">
               <a
@@ -232,7 +233,7 @@ export function ShopExperience({ products, settings }: { products: ShopProduct[]
             "Pick your items",
             "Pay with Cash App, Pushpay, or cash",
             "Send your receipt",
-            `Pick up at Central${settings.pickupDetails ? ` · ${settings.pickupDetails}` : ""}`,
+            `Pick up at Central${settings.pickupDetails ? ` · ${settings.pickupDetails}` : ""}, or we ship out of state`,
           ].map((label, i) => (
             <li key={label} className="flex items-center gap-2.5">
               <b className="grid size-7 place-items-center rounded-full border border-line-dark bg-white font-mono text-xs font-medium text-primary">

@@ -349,6 +349,13 @@ the order.
 - **UI:** `src/components/shop/`. `HeroArt` and `ProductMedia` are the two
   seams reserved for Rive artboards later; everything else is CSS and the
   Web Animations API, switched off under `prefers-reduced-motion`.
+- **Delivery:** pickup at Central, or shipping for out-of-state buyers
+  only (Arkansas is refused on both the form and the API). The address
+  goes in `shop_orders.shipping_address`; `shop_settings.shipping_fee_cents`
+  is added to the total when shipping is chosen (0 = free).
+- **Sizes and stock:** `shop_products.sizes` holds codes (youth as YS/YL…,
+  shown as "Youth Small"); `sold_out_sizes` greys a size out and the API
+  refuses it. Both are Table Editor edits.
 - Status (`submitted` → `payment_confirmed` → `ready` → `picked_up`) is
   tracked by hand in the Table Editor for now.
 

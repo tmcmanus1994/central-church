@@ -3,14 +3,18 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
+  NO_SHIP_STATES,
   PAYMENT_METHODS,
+  US_STATES,
   cartCount,
   cartTotalCents,
   firstName,
   formatMoney,
   sizeLabel,
   type CartLine,
+  type DeliveryMethod,
   type PaymentMethod,
+  type ShippingAddress,
   type ShopProduct,
   type ShopSettings,
 } from "@/lib/shop";
@@ -45,7 +49,11 @@ export interface OrderResult {
   contact: string;
   method: PaymentMethod;
   cashTo: string | null;
+  delivery: DeliveryMethod;
+  shippingAddress: ShippingAddress | null;
 }
+
+const ZIP_RE = /^\d{5}(-\d{4})?$/;
 
 /**
  * Shrinks a big photo before upload: phone camera shots run 3–8 MB, and a
@@ -116,6 +124,8 @@ export function OrderDrawer({
   const [contact, setContact] = useState("");
   const [method, setMethod] = useState<PaymentMethod | "">("");
   const [cashTo, setCashTo] = useState<string>(settings.cashRecipients[0] ?? "");
+  const [delivery, setDelivery] = useState<DeliveryMethod>("pickup");
+  const [ship, setShip] = useState({ street: "", unit: "", city: "", state: "", zip: "" });
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [reference, setReference] = useState("");
@@ -134,8 +144,19 @@ export function OrderDrawer({
 
   const count = cartCount(cart);
   const total = cartTotalCents(cart, products);
+  const shippingCents = delivery === "ship" ? settings.shippingFeeCents : 0;
+  const grand = total + shippingCents;
   const closed = !settings.isOpen;
   const byId = (id: string) => products.find((p) => p.id === id);
+  const shipStateBlocked = NO_SHIP_STATES.includes(ship.state);
+  const shipValid =
+    delivery === "pickup" ||
+    (ship.street.trim().length >= 3 &&
+      ship.city.trim().length >= 2 &&
+      US_STATES.some((s) => s.code === ship.state) &&
+      !shipStateBlocked &&
+      ZIP_RE.test(ship.zip.trim()));
+  const detailsValid = !!name.trim() && !!contact.trim() && shipValid;
 
   // Focus moves into the drawer when it opens and back to whatever opened
   // it when it closes. Escape closes. Page scroll is locked underneath.
@@ -236,6 +257,14 @@ export function OrderDrawer({
     form.set("contact", contact.trim());
     form.set("method", method);
     if (method === "cash") form.set("cashRecipient", cashTo);
+    form.set("delivery", delivery);
+    if (delivery === "ship") {
+      form.set("shipStreet", ship.street.trim());
+      form.set("shipUnit", ship.unit.trim());
+      form.set("shipCity", ship.city.trim());
+      form.set("shipState", ship.state);
+      form.set("shipZip", ship.zip.trim());
+    }
     form.set("reference", reference.trim());
     form.set("items", JSON.stringify(cart));
     if (file) form.set("receipt", file, file.name);
@@ -248,12 +277,23 @@ export function OrderDrawer({
       if (res.ok && data?.ok && data.orderNumber) {
         setResult({
           orderNumber: data.orderNumber,
-          totalCents: data.totalCents ?? total,
+          totalCents: data.totalCents ?? grand,
           itemCount: data.itemCount ?? count,
           name,
           contact,
           method,
           cashTo: method === "cash" ? cashTo : null,
+          delivery,
+          shippingAddress:
+            delivery === "ship"
+              ? {
+                  street: ship.street.trim(),
+                  unit: ship.unit.trim() || undefined,
+                  city: ship.city.trim(),
+                  state: ship.state,
+                  zip: ship.zip.trim(),
+                }
+              : null,
         });
         setStep("done");
         setFile(null);
@@ -282,8 +322,9 @@ export function OrderDrawer({
   }
 
   const stepIndex = STEPS.indexOf(step);
-  const tot = formatMoney(total);
+  const tot = formatMoney(grand);
   const first = firstName(name);
+  const fieldLabel = "flex flex-col gap-1.5 text-[13px] font-bold";
 
   return (
     <>
@@ -420,7 +461,7 @@ export function OrderDrawer({
                 noValidate
                 onSubmit={(e) => {
                   e.preventDefault();
-                  if (name.trim() && contact.trim()) setStep("pay");
+                  if (detailsValid) setStep("pay");
                 }}
               >
                 <p className="m-0">Who is this order for?</p>
@@ -452,11 +493,103 @@ export function OrderDrawer({
                     className={inputCls}
                   />
                 </label>
+
+                <div role="radiogroup" aria-label="How you'll get your order" className="flex flex-col gap-2">
+                  <span className="text-[13px] font-bold">How will you get it?</span>
+                  {(
+                    [
+                      ["pickup", "Pick up at Central", settings.pickupDetails || "We'll reach out when it's ready."],
+                      [
+                        "ship",
+                        "Ship it to me",
+                        `Out of state only${settings.shippingFeeCents > 0 ? ` · adds ${formatMoney(settings.shippingFeeCents)}` : ""}`,
+                      ],
+                    ] as const
+                  ).map(([id, title, sub]) => {
+                    const checked = delivery === id;
+                    return (
+                      <button
+                        key={id}
+                        type="button"
+                        role="radio"
+                        aria-checked={checked}
+                        onClick={() => setDelivery(id)}
+                        className={`flex items-center gap-3 rounded-[14px] border-[1.5px] p-3.5 text-left transition-[border-color,background-color] duration-200 ${
+                          checked ? "border-primary bg-teal-50" : "border-line bg-white"
+                        }`}
+                      >
+                        <span
+                          aria-hidden
+                          className={`grid size-5 shrink-0 place-items-center rounded-full border-2 ${checked ? "border-primary" : "border-line-dark"}`}
+                        >
+                          <span
+                            className={`size-2.5 rounded-full bg-primary transition-transform duration-300 ${checked ? "scale-100" : "scale-0"}`}
+                            style={{ transitionTimingFunction: "cubic-bezier(.3,1.6,.5,1)" }}
+                          />
+                        </span>
+                        <span>
+                          <b className="block">{title}</b>
+                          <small className="text-[13px] text-muted">{sub}</small>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {delivery === "ship" ? (
+                  <div className="flex flex-col gap-3 rounded-[14px] bg-surface p-4">
+                    <p className="m-0 text-[13px] text-muted">
+                      Shipping is for friends outside Arkansas. In Arkansas? Choose pickup and we&rsquo;ll have it ready at church.
+                    </p>
+                    <label className={fieldLabel} htmlFor="ship-street">
+                      Street address
+                      <input id="ship-street" type="text" autoComplete="shipping address-line1" value={ship.street} onChange={(e) => setShip({ ...ship, street: e.target.value })} maxLength={120} className={inputCls} />
+                    </label>
+                    <label className={fieldLabel} htmlFor="ship-unit">
+                      Apt, suite, or unit <span className="font-medium text-muted">(optional)</span>
+                      <input id="ship-unit" type="text" autoComplete="shipping address-line2" value={ship.unit} onChange={(e) => setShip({ ...ship, unit: e.target.value })} maxLength={40} className={inputCls} />
+                    </label>
+                    <label className={fieldLabel} htmlFor="ship-city">
+                      City
+                      <input id="ship-city" type="text" autoComplete="shipping address-level2" value={ship.city} onChange={(e) => setShip({ ...ship, city: e.target.value })} maxLength={60} className={inputCls} />
+                    </label>
+                    <div className="grid grid-cols-[1fr_120px] gap-2.5">
+                      <label className={fieldLabel} htmlFor="ship-state">
+                        State
+                        <select
+                          id="ship-state"
+                          autoComplete="shipping address-level1"
+                          value={ship.state}
+                          onChange={(e) => setShip({ ...ship, state: e.target.value })}
+                          className={`${inputCls} appearance-auto`}
+                        >
+                          <option value="">Choose…</option>
+                          {US_STATES.map((s) => (
+                            <option key={s.code} value={s.code} disabled={NO_SHIP_STATES.includes(s.code)}>
+                              {s.name}
+                              {NO_SHIP_STATES.includes(s.code) ? " (pickup only)" : ""}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label className={fieldLabel} htmlFor="ship-zip">
+                        ZIP
+                        <input id="ship-zip" type="text" inputMode="numeric" autoComplete="shipping postal-code" value={ship.zip} onChange={(e) => setShip({ ...ship, zip: e.target.value })} maxLength={10} className={inputCls} />
+                      </label>
+                    </div>
+                    {shipStateBlocked ? (
+                      <p className="m-0 text-[13px] font-semibold text-red-700" role="alert">
+                        Shipping is only available outside Arkansas. Choose pickup at Central instead.
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null}
+
                 <div className="flex gap-2.5">
                   <button type="button" onClick={() => setStep("cart")} className={pillGhost}>
                     Back
                   </button>
-                  <button type="submit" disabled={!name.trim() || !contact.trim()} className={`${pillPrimary} flex-1`}>
+                  <button type="submit" disabled={!detailsValid} className={`${pillPrimary} flex-1`}>
                     Continue to payment
                   </button>
                 </div>
@@ -489,6 +622,18 @@ export function OrderDrawer({
                     </svg>
                   </PayGlyph>
                 </div>
+                {shippingCents > 0 ? (
+                  <div className="flex flex-col gap-1 text-[14px] text-muted">
+                    <span className="flex justify-between">
+                      <span>Items</span>
+                      <span className="tabular-nums">{formatMoney(total)}</span>
+                    </span>
+                    <span className="flex justify-between">
+                      <span>Shipping</span>
+                      <span className="tabular-nums">{formatMoney(shippingCents)}</span>
+                    </span>
+                  </div>
+                ) : null}
                 <div className="flex items-baseline justify-between">
                   <span>Amount to send</span>
                   <b className="font-display text-[26px] tabular-nums">{tot}</b>
@@ -713,9 +858,12 @@ export function OrderDrawer({
                   {result.method === "cash"
                     ? `cash (${result.cashTo})`
                     : PAYMENT_METHODS.find((m) => m.id === result.method)?.title}
-                  . We&rsquo;ll check your receipt and reach out at {result.contact} when it&rsquo;s ready to pick up.
+                .{" "}
+                  {result.delivery === "ship" && result.shippingAddress
+                    ? `We'll check your receipt and ship it to ${result.shippingAddress.city}, ${result.shippingAddress.state}. We'll reach out at ${result.contact} if we have any questions.`
+                    : `We'll check your receipt and reach out at ${result.contact} when it's ready to pick up.`}
                 </p>
-                {settings.pickupDetails ? (
+                {result.delivery === "pickup" && settings.pickupDetails ? (
                   <p className="m-0 text-[14.5px] text-muted">Pickup: {settings.pickupDetails}</p>
                 ) : null}
                 <button type="button" onClick={startOver} className={`${pillOutline} self-start`}>
