@@ -34,7 +34,7 @@ async function load(client: SupabaseClient): Promise<ShopData> {
   const [productsRes, settingsRes] = await Promise.all([
     client
       .from("shop_products")
-      .select("id, name, price_cents, sizes, image_path, image_alt, sort_order, is_active")
+      .select("id, name, price_cents, sizes, sold_out_sizes, image_path, image_alt, sort_order, is_active")
       .eq("is_active", true)
       .order("sort_order", { ascending: true }),
     client
@@ -82,9 +82,9 @@ function fixture(): ShopData {
   return {
     configured: true,
     products: [
-      { id: "tee", name: "T-Shirt", priceCents: 1500, sizes, imagePath: "/shop/tee.webp", imageAlt: "Black Central Church T-shirt with the skyline stripe design", sortOrder: 1 },
-      { id: "crew", name: "Crewneck", priceCents: 2500, sizes, imagePath: "/shop/crew.webp", imageAlt: "Black Central Church crewneck sweatshirt with the skyline stripe design", sortOrder: 2 },
-      { id: "hoodie", name: "Hoodie", priceCents: 3000, sizes, imagePath: "/shop/hoodie.webp", imageAlt: "Black Central Church hoodie with the skyline stripe design", sortOrder: 3 },
+      { id: "tee", name: "T-Shirt", priceCents: 1500, sizes: ["YS", "YL", ...sizes], soldOutSizes: [], imagePath: "/shop/tee.webp", imageAlt: "Black Central Church T-shirt with the skyline stripe design", sortOrder: 1 },
+      { id: "crew", name: "Crewneck", priceCents: 2500, sizes, soldOutSizes: [], imagePath: "/shop/crew.webp", imageAlt: "Black Central Church crewneck sweatshirt with the skyline stripe design", sortOrder: 2 },
+      { id: "hoodie", name: "Hoodie", priceCents: 3000, sizes, soldOutSizes: ["M"], imagePath: "/shop/hoodie.webp", imageAlt: "Black Central Church hoodie with the skyline stripe design", sortOrder: 3 },
     ],
     settings: {
       isOpen: process.env.SHOP_DEV_FIXTURE_CLOSED !== "1",

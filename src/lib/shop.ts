@@ -12,10 +12,50 @@ export interface ShopProduct {
   id: string;
   name: string;
   priceCents: number;
+  /** Size codes in display order: S, M, L, XL, 2XL; youth as YS, YM, YL, YXL. */
   sizes: string[];
+  /** Codes from `sizes` that can't be ordered right now. */
+  soldOutSizes: string[];
   imagePath: string;
   imageAlt: string;
   sortOrder: number;
+}
+
+/** "M" → "Medium", "YS" → "Youth Small"; anything else comes back as is. */
+export function sizeLabel(code: string): string {
+  const names: Record<string, string> = {
+    XS: "XS",
+    S: "Small",
+    M: "Medium",
+    L: "Large",
+    XL: "XL",
+    "2XL": "2XL",
+    "3XL": "3XL",
+    YXS: "Youth XS",
+    YS: "Youth Small",
+    YM: "Youth Medium",
+    YL: "Youth Large",
+    YXL: "Youth XL",
+  };
+  return names[code.toUpperCase()] ?? code;
+}
+
+export function isYouthSize(code: string): boolean {
+  return /^Y/i.test(code) && code.length <= 4;
+}
+
+export function isSoldOut(product: ShopProduct, size: string): boolean {
+  return product.soldOutSizes.includes(size);
+}
+
+/** Sizes split into the rows the picker shows: youth first, then adult. */
+export function sizeGroups(sizes: string[]): { label: string; sizes: string[] }[] {
+  const youth = sizes.filter(isYouthSize);
+  const adult = sizes.filter((s) => !isYouthSize(s));
+  const groups = [];
+  if (youth.length) groups.push({ label: "Youth", sizes: youth });
+  if (adult.length) groups.push({ label: "Adult", sizes: adult });
+  return groups;
 }
 
 export interface ShopSettings {
@@ -95,6 +135,7 @@ export function sanitizeCart(raw: unknown, products: ShopProduct[]): CartLine[] 
     const { productId, size, qty } = item as Partial<CartLine>;
     const product = products.find((p) => p.id === productId);
     if (!product || typeof size !== "string" || !product.sizes.includes(size)) continue;
+    if (isSoldOut(product, size)) continue;
     const n = Math.min(MAX_LINE_QTY, Math.max(1, Math.floor(Number(qty) || 0)));
     if (n < 1) continue;
     const existing = out.find((l) => l.productId === productId && l.size === size);
@@ -111,6 +152,7 @@ export interface ShopProductRow {
   name: string;
   price_cents: number;
   sizes: string[] | null;
+  sold_out_sizes?: string[] | null;
   image_path: string;
   image_alt: string;
   sort_order: number | null;
@@ -132,6 +174,7 @@ export function productFromRow(row: ShopProductRow): ShopProduct {
     name: row.name,
     priceCents: row.price_cents,
     sizes: (row.sizes ?? []).filter((s) => typeof s === "string" && s.trim() !== ""),
+    soldOutSizes: (row.sold_out_sizes ?? []).filter((s) => typeof s === "string" && s.trim() !== ""),
     imagePath: row.image_path,
     imageAlt: row.image_alt,
     sortOrder: row.sort_order ?? 0,

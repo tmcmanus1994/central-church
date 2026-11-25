@@ -8,6 +8,7 @@ import {
   cartTotalCents,
   firstName,
   formatMoney,
+  sizeLabel,
   type CartLine,
   type PaymentMethod,
   type ShopProduct,
@@ -367,14 +368,14 @@ export function OrderDrawer({
                           <span className="flex min-w-0 flex-1 flex-col">
                             <b>{p.name}</b>
                             <small className="text-[13px] text-muted">
-                              Size {line.size} · {formatMoney(p.priceCents)} each
+                              Size {sizeLabel(line.size)} · {formatMoney(p.priceCents)} each
                             </small>
                           </span>
                           <span className="flex items-center gap-0.5">
                             <button
                               type="button"
                               onClick={() => onChangeLine(i, -1)}
-                              aria-label={`Remove one ${p.name}, size ${line.size}`}
+                              aria-label={`Remove one ${p.name}, size ${sizeLabel(line.size)}`}
                               className="size-9 rounded-full border border-line bg-white text-ink"
                             >
                               −
@@ -383,7 +384,7 @@ export function OrderDrawer({
                             <button
                               type="button"
                               onClick={() => onChangeLine(i, 1)}
-                              aria-label={`Add one ${p.name}, size ${line.size}`}
+                              aria-label={`Add one ${p.name}, size ${sizeLabel(line.size)}`}
                               className="size-9 rounded-full border border-line bg-white text-ink"
                             >
                               +

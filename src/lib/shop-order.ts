@@ -2,6 +2,8 @@ import {
   MAX_LINES,
   MAX_LINE_QTY,
   formatMoney,
+  isSoldOut,
+  sizeLabel,
   type PaymentMethod,
   type ShopProduct,
   type ShopSettings,
@@ -139,6 +141,12 @@ export function validateOrder(
     if (typeof size !== "string" || !product.sizes.includes(size)) {
       return { ok: false, error: `Pick a size for the ${product.name}.` };
     }
+    if (isSoldOut(product, size)) {
+      return {
+        ok: false,
+        error: `The ${product.name} in ${sizeLabel(size)} is sold out. Remove it from your order to continue.`,
+      };
+    }
     const n = Number(qty);
     if (!Number.isInteger(n) || n < 1 || n > MAX_LINE_QTY) {
       return { ok: false, error: `Quantities must be between 1 and ${MAX_LINE_QTY}.` };
@@ -265,7 +273,7 @@ export function formatOrderEmail(o: OrderEmailInput) {
     "",
     "Items:",
     ...o.items.map(
-      (i) => `  ${i.qty} × ${i.name} (size ${i.size}) — ${formatMoney(i.line_total_cents)}`,
+      (i) => `  ${i.qty} × ${i.name} (size ${sizeLabel(i.size)}) — ${formatMoney(i.line_total_cents)}`,
     ),
     `  Total: ${formatMoney(o.totalCents)}`,
     "",
@@ -285,7 +293,7 @@ export function formatOrderEmail(o: OrderEmailInput) {
   const rows = o.items
     .map(
       (i) =>
-        `<tr><td style="padding:6px 10px;border-bottom:1px solid #e5dfd6">${escapeHtml(i.name)}</td><td style="padding:6px 10px;border-bottom:1px solid #e5dfd6">${escapeHtml(i.size)}</td><td style="padding:6px 10px;border-bottom:1px solid #e5dfd6;text-align:right">${i.qty}</td><td style="padding:6px 10px;border-bottom:1px solid #e5dfd6;text-align:right">${formatMoney(i.line_total_cents)}</td></tr>`,
+        `<tr><td style="padding:6px 10px;border-bottom:1px solid #e5dfd6">${escapeHtml(i.name)}</td><td style="padding:6px 10px;border-bottom:1px solid #e5dfd6">${escapeHtml(sizeLabel(i.size))}</td><td style="padding:6px 10px;border-bottom:1px solid #e5dfd6;text-align:right">${i.qty}</td><td style="padding:6px 10px;border-bottom:1px solid #e5dfd6;text-align:right">${formatMoney(i.line_total_cents)}</td></tr>`,
     )
     .join("");
 
