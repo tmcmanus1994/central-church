@@ -132,7 +132,9 @@ export function ShopExperience({ products, settings }: { products: ShopProduct[]
   const clearCart = useCallback(() => setCart([]), []);
 
   return (
-    <div className="shop">
+    // -mb-16 cancels the layout's bottom padding for the mobile tab bar,
+    // which MobileTabBar doesn't render on /shop.
+    <div className="shop -mb-16 lg:mb-0">
       {/* Shop bar: the Order button lives here rather than in the global
           header, so the rest of the site is untouched. Sticks just under
           the site header (36+64px on phones, 44+82px on desktop). */}

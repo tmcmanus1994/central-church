@@ -13,6 +13,9 @@ import { CalendarIcon, HubIcon, VisitIcon } from "./TabBarIcons";
  */
 export function MobileTabBar() {
   const pathname = usePathname();
+  // The shop has its own sticky Order bar and an order drawer that fills the
+  // screen; a second fixed bar underneath just competes for the thumb.
+  if (pathname.startsWith("/shop")) return null;
   const tabs = [
     {
       label: "Plan a Visit",
