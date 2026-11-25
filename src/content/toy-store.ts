@@ -10,11 +10,11 @@ export const toyStore = {
   date: "Saturday, December 12",
   /** The full flyer — event card and link previews. */
   image: "/photos/toy-store-2026.webp",
-  /** The photo half of the flyer, no text — hero and homepage spotlight,
-   *  where the words are set in type beside it. */
-  photo: "/photos/toy-store-2026-photo.webp",
+  /** Hero and homepage spotlight photo — the words are set in type beside
+   *  it, so this one carries no text of its own. */
+  photo: "/photos/toy-store-2026-teens.webp",
   imageAlt:
-    "A volunteer and a girl in a Santa hat wrapping gifts at Central's Christmas Toy Store",
+    "Three teen volunteers in Santa hats holding a wrapped gift at Central's Christmas Toy Store",
 
   seoTitle: "Christmas Toy Store 2026",
   seoDescription:

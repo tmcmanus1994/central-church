@@ -145,7 +145,7 @@ export function HomeSpotlight({ items }: { items: Spotlight[] }) {
                         fill
                         priority={i === 0}
                         sizes="(min-width: 1024px) 50vw, 100vw"
-                        className="object-cover object-[center_30%]"
+                        className="object-cover object-[center_15%]"
                       />
                     </div>
                   ) : (
