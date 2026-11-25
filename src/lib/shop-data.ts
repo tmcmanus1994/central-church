@@ -28,6 +28,9 @@ export interface ShopData {
   configured: boolean;
   products: ShopProduct[];
   settings: ShopSettings | null;
+  /** Why `configured` is false — env var names or Supabase's error text,
+   *  never a value. Shown on preview deployments only. */
+  reason?: string;
 }
 
 async function load(client: SupabaseClient): Promise<ShopData> {
@@ -60,21 +63,28 @@ async function load(client: SupabaseClient): Promise<ShopData> {
 
   // A missing settings row (migration not run yet) reads as "not
   // configured" rather than as an open shop with placeholder handles.
-  if (!settings && !settingsRes.error) {
-    console.warn(
-      "Shop: shop_settings has no row with id 1 — run supabase/migrations/20261124120000_shop.sql in the SQL Editor.",
-    );
+  let reason: string | undefined;
+  if (settingsRes.error) {
+    reason = `shop_settings read failed: ${settingsRes.error.message}`;
+  } else if (!settings) {
+    reason =
+      "shop_settings has no row with id 1 — run supabase/migrations/20261124120000_shop.sql in the SQL Editor.";
+    console.warn(`Shop: ${reason}`);
+  } else if (productsRes.error) {
+    reason = `shop_products read failed: ${productsRes.error.message}`;
   }
-  return { configured: settings !== null, products, settings };
+  return { configured: settings !== null, products, settings, reason };
 }
 
 /** Names only, never values — shows up in the Vercel build/function log. */
-function warnUnconfigured(which: "page" | "order") {
+function warnUnconfigured(which: "page" | "order"): string {
   const missing = [
     "NEXT_PUBLIC_SUPABASE_URL",
     which === "page" ? "NEXT_PUBLIC_SUPABASE_ANON_KEY" : "SUPABASE_SERVICE_ROLE_KEY",
   ].filter((name) => !process.env[name]);
-  console.warn(`Shop (${which}): Supabase not configured — unset: ${missing.join(", ") || "none"}`);
+  const reason = `Supabase not configured — unset: ${missing.join(", ") || "none"}`;
+  console.warn(`Shop (${which}): ${reason}`);
+  return reason;
 }
 
 function fixture(): ShopData {
@@ -103,8 +113,7 @@ const useFixture = process.env.SHOP_DEV_FIXTURE === "1";
 export async function loadShopData(): Promise<ShopData> {
   if (useFixture) return fixture();
   if (!supabasePublic) {
-    warnUnconfigured("page");
-    return { configured: false, products: [], settings: null };
+    return { configured: false, products: [], settings: null, reason: warnUnconfigured("page") };
   }
   return load(supabasePublic);
 }
@@ -113,8 +122,7 @@ export async function loadShopData(): Promise<ShopData> {
 export async function loadShopDataAdmin(): Promise<ShopData> {
   if (useFixture) return fixture();
   if (!supabaseAdmin) {
-    warnUnconfigured("order");
-    return { configured: false, products: [], settings: null };
+    return { configured: false, products: [], settings: null, reason: warnUnconfigured("order") };
   }
   return load(supabaseAdmin);
 }

@@ -19,9 +19,12 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function ShopPage() {
-  const { configured, products, settings } = await loadShopData();
+  const { configured, products, settings, reason } = await loadShopData();
 
   if (!configured || !settings) {
+    // Preview deployments and local dev say why, so setup can be finished
+    // from the page itself. Production keeps the plain notice.
+    const showReason = process.env.VERCEL_ENV !== "production" && reason;
     return (
       <div className="bg-coal px-5 py-20 text-white">
         <div className="mx-auto flex max-w-[640px] flex-col gap-4">
@@ -39,6 +42,11 @@ export default async function ShopPage() {
             </a>
             .
           </p>
+          {showReason ? (
+            <p className="m-0 mt-4 rounded-xl border border-white/20 bg-white/5 px-4 py-3 font-mono text-[13px] leading-[1.6] text-[#d9d3ca]">
+              Setup (preview only): {reason}
+            </p>
+          ) : null}
         </div>
       </div>
     );
