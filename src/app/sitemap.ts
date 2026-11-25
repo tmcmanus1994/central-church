@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/media/camp-caudle", 0.6, "yearly"],
     ["/media/central-kids", 0.6, "monthly"],
     ["/media/live", 0.5, "weekly"],
+    ["/shop", 0.6, "weekly"],
     ["/blog", 0.6, "weekly"],
   ];
 
